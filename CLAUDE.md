@@ -16,4 +16,15 @@
 - Apply the rules with judgement, as section 8 of `Writing Style.md` describes. Fix what makes a
   sentence harder to read; do not churn text that already reads clearly.
 
+## Design
+
+- The look, structure and Universal Design for Learning (UDL) features of the site are in
+  **`DESIGN.md`** (Google's DESIGN.md format: tokens at the top, reasons below). Read it before
+  changing any page layout, color, component or reading tool.
+- Use the CSS custom properties, never a raw color, so the light, sepia and dark themes all keep
+  working. Check every new text and background pair for 4.5 : 1 contrast in all three themes.
+- A new feature that helps learners goes into the template (`assets/`), so every page gets it, and
+  is added to the UDL section of `DESIGN.md`.
+- Check the file with `npx @google/design.md lint DESIGN.md` after editing it.
+
 Build steps for a unit are in `UNIT-BUILD-PROCESS.md`.
