@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2.6 Life Without Oxygen — Biology</title>
+<link rel="stylesheet" href="../assets/course.css?v=330">
+<script>if('scrollRestoration' in history)history.scrollRestoration='manual';</script>
+</head>
+<body data-root="../" data-chapter="u2-fermentation">
+
+<main class="main" role="main">
+
+    <section id="overview">
+        <div class="chapter-eyebrow">Unit 2 — Energy Flows &amp; Matter Cycles</div>
+        <h1>2.6 Life Without Oxygen</h1>
+        <p class="lead">Chapter 2.5 ended with oxygen sitting at the end of the electron transport chain, accepting spent electrons. Take it away and the whole chain backs up within seconds. This chapter is about the escape route cells use when that happens — what it produces, what it costs, and why bread, beer, cheese and cramp are all the same piece of biochemistry.</p>
+
+        <div class="chapter-meta"></div>
+
+        <div data-progression></div>
+    </section>
+
+    <section id="backup" data-kind="Core" data-standards="HS-LS1-7, HS-LS2-3" data-time="9 min" data-track>
+        <h2>What actually goes wrong when the oxygen runs out</h2>
+
+        <p>The obvious answer is "the cell can't make ATP from the electron transport chain any more". True, and it misses the more urgent problem.</p>
+
+        <p>Think about what the earlier stages need. Glycolysis takes NAD⁺, loads it with electrons and hydrogen, and hands back NADH. So does pyruvate oxidation, and so does the citric acid cycle. A cell holds only a small stock of these carriers, and it works because the electron transport chain keeps unloading them and handing NAD⁺ back.</p>
+
+        <p>Stop the chain and that recycling stops. Within seconds every NAD⁺ in the cell is now NADH, loaded and with nowhere to unload. And a cell with no free NAD⁺ cannot run glycolysis either — glycolysis needs NAD⁺ as an input.</p>
+
+        <div class="callout callout-key">
+            <p>So without oxygen the cell loses not 88% of its ATP but <strong>all</strong> of it. Even glycolysis, which needs no oxygen of its own, grinds to a halt for want of empty carriers.</p>
+            <p>That is the problem <span class="term">fermentation</span> solves. Fermentation makes no ATP whatsoever. Its entire job is to <strong>dump the electrons off NADH onto something else</strong>, regenerating NAD⁺ so that glycolysis can keep running.</p>
+            <p>Every ATP a fermenting cell gets comes from glycolysis. Fermentation is not an alternative way of making ATP; it is the maintenance crew that lets the one oxygen-free ATP-making stage keep going.</p>
+        </div>
+
+        <p>Once you see fermentation that way, its products stop looking arbitrary. Ethanol and lactic acid are not useful to the cell. They are where the electrons were dumped.</p>
+    </section>
+
+    <section id="two-ways" data-kind="Core" data-standards="HS-LS1-7, HS-LS2-3" data-time="10 min" data-track>
+        <h2>Two ways to dump the electrons</h2>
+
+        <p>Both start from the pyruvate that glycolysis produced, and both hand NADH's load to it.</p>
+
+        <h3>Lactic acid fermentation</h3>
+
+        <p style="text-align:center"><strong>C₆H₁₂O₆ &rarr; 2 C₃H₆O₃ &nbsp; (2 lactate) &nbsp;+ 2 ATP</strong></p>
+
+        <p>Pyruvate is reduced directly to lactate. Nothing is released as gas, and no carbon leaves — count them: 6 carbons in the glucose, 6 in the two lactate molecules. This is what your muscle cells do when they are working harder than your blood can supply oxygen for, and what <em>Lactobacillus</em> does to milk to make yoghurt and cheese.</p>
+
+        <h3>Alcoholic fermentation</h3>
+
+        <p style="text-align:center"><strong>C₆H₁₂O₆ &rarr; 2 C₂H₅OH + 2 CO₂ + 2 ATP</strong></p>
+
+        <p>Pyruvate first loses a carbon as CO₂ and then takes the electrons, becoming ethanol. Check the atoms: 6 C = 4 + 2 ✓, 12 H = 12 ✓, 6 O = 2 + 4 ✓. This is what yeast does, and it is the reaction behind every loaf of bread and every alcoholic drink humans have ever made — the gas raises the dough, the ethanol is the drink.</p>
+
+        <figure class="diagram">
+            <svg viewBox="0 0 720 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="fp-t fp-d">
+            <title id="fp-t">Fermentation products and the organisms that make them</title>
+            <desc id="fp-d">A flow chart. Glucose leads down to pyruvate. From pyruvate, two branches. The left branch goes to Lactobacillus, which produces lactic acid, giving cheese and yoghurt. The right branch goes to Saccharomyces, which produces ethanol and carbon dioxide, giving beer and wine from the ethanol and risen bread from the carbon dioxide. A separate box at the bottom explains soy sauce, in which the mould Aspergillus oryzae first breaks starch and protein down into sugars and amino acids, and only then two other organisms ferment them: Tetragenococcus halophilus makes lactic acid and Zygosaccharomyces rouxii makes ethanol.</desc>
+            <style>
+                .fp-b{stroke-width:1.4;rx:6}
+                .fp-t{font-size:12px;font-weight:700;fill:var(--text)}
+                .fp-s{font-size:10.5px;fill:var(--text-secondary)}
+                .fp-i{font-size:12px;font-weight:700;font-style:italic;fill:var(--text)}
+                .fp-a{stroke:var(--text-secondary);stroke-width:1.8;fill:none}
+                .fp-h{fill:var(--text-secondary)}
+            </style>
+            <rect x="300" y="12" width="120" height="30" class="fp-b" fill="hsl(345 45% 88%)" stroke="hsl(345 45% 40%)"/>
+            <text x="360" y="32" class="fp-t" text-anchor="middle">Glucose</text>
+            <path d="M360 42 V64" class="fp-a"/><path d="M360 72 l-5 -10 l10 0 z" class="fp-h"/>
+            <rect x="300" y="74" width="120" height="30" class="fp-b" fill="hsl(345 45% 88%)" stroke="hsl(345 45% 40%)"/>
+            <text x="360" y="94" class="fp-t" text-anchor="middle">Pyruvate</text>
+            <text x="430" y="94" class="fp-s">glycolysis has already made 2 ATP</text>
+
+            <path d="M360 104 V122 H180 V142" class="fp-a"/><path d="M180 150 l-5 -10 l10 0 z" class="fp-h"/>
+            <path d="M360 104 V122 H540 V142" class="fp-a"/><path d="M540 150 l-5 -10 l10 0 z" class="fp-h"/>
+
+            <rect x="100" y="152" width="160" height="30" class="fp-b" fill="hsl(205 45% 88%)" stroke="hsl(205 45% 34%)"/>
+            <text x="180" y="172" class="fp-i" text-anchor="middle">Lactobacillus</text>
+            <rect x="460" y="152" width="160" height="30" class="fp-b" fill="hsl(122 38% 86%)" stroke="hsl(122 42% 30%)"/>
+            <text x="540" y="172" class="fp-i" text-anchor="middle">Saccharomyces</text>
+
+            <path d="M180 182 V204" class="fp-a"/><path d="M180 212 l-5 -10 l10 0 z" class="fp-h"/>
+            <path d="M540 182 V204" class="fp-a"/><path d="M540 212 l-5 -10 l10 0 z" class="fp-h"/>
+
+            <rect x="100" y="214" width="160" height="34" class="fp-b" fill="hsl(205 45% 94%)" stroke="hsl(205 45% 34%)"/>
+            <text x="180" y="229" class="fp-t" text-anchor="middle">Lactic acid</text>
+            <text x="180" y="243" class="fp-s" text-anchor="middle">no gas released</text>
+            <rect x="440" y="214" width="200" height="34" class="fp-b" fill="hsl(122 38% 94%)" stroke="hsl(122 42% 30%)"/>
+            <text x="540" y="229" class="fp-t" text-anchor="middle">Ethanol + CO₂</text>
+            <text x="540" y="243" class="fp-s" text-anchor="middle">the gas is the point in baking</text>
+
+            <path d="M180 248 V268" class="fp-a"/><path d="M180 276 l-5 -10 l10 0 z" class="fp-h"/>
+            <text x="180" y="292" class="fp-t" text-anchor="middle">Cheese, yoghurt</text>
+            <path d="M500 248 V268" class="fp-a"/><path d="M500 276 l-5 -10 l10 0 z" class="fp-h"/>
+            <text x="500" y="292" class="fp-t" text-anchor="middle">Beer, wine</text>
+            <path d="M600 248 V268" class="fp-a"/><path d="M600 276 l-5 -10 l10 0 z" class="fp-h"/>
+            <text x="600" y="292" class="fp-t" text-anchor="middle">Bread</text>
+
+            <rect x="40" y="316" width="640" height="72" class="fp-b" fill="none"
+                  stroke="var(--text-secondary)" stroke-dasharray="5 4"/>
+            <text x="54" y="336" class="fp-t">Soy sauce takes three organisms, not one</text>
+            <text x="54" y="354" class="fp-s">1. The mould <tspan font-style="italic">Aspergillus oryzae</tspan> (koji) digests starch and protein into sugars and amino acids. It does no fermentation.</text>
+            <text x="54" y="370" class="fp-s">2. <tspan font-style="italic">Tetragenococcus halophilus</tspan> then does the lactic acid fermentation, in brine.</text>
+            <text x="54" y="384" class="fp-s">3. <tspan font-style="italic">Zygosaccharomyces rouxii</tspan> ferments some of the remaining sugar to ethanol, adding aroma.</text>
+            </svg>
+            <figcaption><b>Figure 2.21</b> — Where fermented foods come from. <strong>Corrected.</strong> The version of this chart in the teaching deck routes soy sauce straight through <em>Aspergillus</em> to lactic acid. <em>Aspergillus oryzae</em> is the koji mould: it breaks large molecules down so that other organisms can ferment them, and it performs no lactic acid fermentation itself. The lactic acid in soy sauce comes from a salt-tolerant bacterium, <em>Tetragenococcus halophilus</em>.</figcaption>
+        </figure>
+
+        <p>One more piece of vocabulary from the anchor guide. A <span class="term">facultative anaerobe</span> uses oxygen when it is there and ferments when it is not — yeast, <em>E. coli</em>, and your own muscle cells all qualify. An <span class="term">obligate anaerobe</span> cannot use oxygen at all and is usually poisoned by it; the bacteria that cause tetanus and botulism are examples, which is why deep puncture wounds and badly sealed tins are dangerous.</p>
+    </section>
+
+    <section id="cost" data-kind="Core" data-standards="HS-LS1-7" data-time="7 min" data-track>
+        <h2>What it costs</h2>
+
+        <p>Put the two side by side and do the arithmetic.</p>
+
+        <table>
+            <thead><tr><th></th><th>Aerobic respiration</th><th>Fermentation</th></tr></thead>
+            <tbody>
+                <tr><td>Needs oxygen?</td><td>Yes</td><td>No</td></tr>
+                <tr><td>Where</td><td>Cytosol, then mitochondrion</td><td>Cytosol only</td></tr>
+                <tr><td>Glucose fully broken down?</td><td>Yes, to CO₂ and H₂O</td><td>No — stops at lactate or ethanol</td></tr>
+                <tr><td>ATP per glucose</td><td><strong>32</strong></td><td><strong>2</strong></td></tr>
+                <tr><td>Waste</td><td>CO₂ and water</td><td>Lactate, or ethanol and CO₂</td></tr>
+            </tbody>
+        </table>
+
+        <p>Aerobic respiration gets <strong>16 times</strong> as much ATP from the same molecule. Fermentation captures about <strong>6%</strong> of what aerobic respiration manages.</p>
+
+        <p>The reason is visible in the equations. Aerobic respiration takes glucose all the way down to CO₂ and water — the bottom of the energy hill from 2.1. Fermentation stops at lactate or ethanol, which are still substantial organic molecules with plenty of chemical potential energy left in them. A fermenting cell is throwing away most of its fuel unburnt.</p>
+
+        <div class="callout callout-example">
+            <p>You can prove that leftover energy is real by burning it. Ethanol is the fuel in a spirit burner, and in some countries it is the fuel in a car. A yeast cell finished with a sugar molecule and discarded something a Formula One engine will happily run on.</p>
+            <p>Lactate is the same story with a less dramatic ending. Your liver takes the lactate your muscles made, spends ATP to convert it back into glucose, and sends it round again — which is part of why you keep breathing hard after you stop running.</p>
+        </div>
+    </section>
+
+    <section id="yeast" data-kind="Practice" data-standards="HS-LS1-7, HS-LS2-3" data-time="20 min" data-track>
+        <h2>The yeast experiment</h2>
+
+        <p>Four sealed tubes of yeast, each with a different sucrose concentration, in a warm bath for ten minutes. Yeast are facultative anaerobes: they will use the small amount of dissolved oxygen in the tube first, and once that is gone they ferment. Fermentation makes carbon dioxide, the gas collects at the top of the tube and pushes the liquid down, and the height of that air space is your measurement.</p>
+
+        <p>Predict all four bars before you look at the class data.</p>
+
+        <div class="sim" data-sim="u2-fermentation-lab">
+            <div class="sim-header">
+                <h4>Yeast fermentation lab</h4>
+                <span class="sim-kind">Interactive</span>
+            </div>
+        </div>
+
+        <div class="callout callout-note" data-label="A correction to your anchor guide">
+            <p>Page 18 of Anchor Guide 2 sets the experiment at <strong>5 mL</strong> of sucrose solution per tube. The teaching deck corrects this to <strong>1 mL</strong> — slide 129 is the same table as slide 117 with the volume changed and the note "Change on anchor guide" beside it. The class data you are working with was collected with 1 mL. If your printed guide still says 5 mL, cross it out.</p>
+        </div>
+
+        <p>One question in the guide deserves its answer written down, because it is a genuinely good piece of reasoning. <strong>What evidence do we have that yeast can convert sucrose into glucose?</strong></p>
+
+        <p>Glycolysis takes glucose. It cannot take sucrose — sucrose is a disaccharide, glucose joined to fructose, and it is too big to enter the pathway. Yet the sucrose tubes bubbled, and the tube with the most sucrose bubbled most. Since the only sugar available in those tubes was sucrose, and fermentation happened anyway, the yeast must have split the sucrose first. (It does: an enzyme called invertase hydrolyses sucrose into glucose and fructose, and the reaction balances — C₁₂H₂₂O₁₁ + H₂O &rarr; 2 C₆H₁₂O₆.)</p>
+    </section>
+
+    <section id="oxygen-evidence" data-kind="Practice" data-standards="HS-LS2-3" data-time="18 min" data-track>
+        <h2>Does oxygen actually matter? Two sets of evidence</h2>
+
+        <p>The claim "aerobic respiration yields far more ATP than fermentation" has been asserted twice in this chapter. Here is evidence for it, from an experiment done on a facultative anaerobe.</p>
+
+        <p><em>Aerobacter aerogenes</em> was grown in tubes of water containing salts and various concentrations of glucose. Some tubes were sealed so no air could reach the cells. Others had air bubbled through continuously. Cells were counted at maximum growth.</p>
+
+        <table>
+            <thead>
+                <tr><th>Glucose (mg per 100 mL)</th><th>Without air<br><small>millions of cells/mL</small></th><th>With air<br><small>millions of cells/mL</small></th><th>Ratio</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>18</td><td>50</td><td>200</td><td>4.0&times;</td></tr>
+                <tr><td>36</td><td>90</td><td>500</td><td>5.6&times;</td></tr>
+                <tr><td>54</td><td>170</td><td>800</td><td>4.7&times;</td></tr>
+                <tr><td>72</td><td>220</td><td>1100</td><td>5.0&times;</td></tr>
+                <tr><td>162</td><td>450</td><td>2100</td><td>4.7&times;</td></tr>
+                <tr><td>288</td><td>650</td><td colspan="2" rowspan="4"><em>Not measured. Without air, growth flattens off here at roughly 675 million cells/mL however much more glucose is supplied.</em></td></tr>
+                <tr><td>360</td><td>675</td></tr>
+                <tr><td>432</td><td>675</td></tr>
+                <tr><td>540</td><td>670</td></tr>
+            </tbody>
+        </table>
+
+        <p>Two patterns, and both are worth stating carefully.</p>
+
+        <p><strong>Air multiplies the yield by about five.</strong> At every glucose concentration measured, the aerated tubes reached four to six times as many cells — mean 4.8&times;. Building a bacterium costs ATP, so cells per unit of glucose is a reasonable proxy for ATP per unit of glucose. Roughly a fivefold advantage is in the right region for a sixteen-fold ATP advantage, once you allow for the fact that not all the glucose goes to growth.</p>
+
+        <p><strong>Without air the culture hits a ceiling.</strong> Beyond about 288 mg of glucose the sealed tubes stop responding — 650, 675, 675, 670. Adding more sugar buys nothing. Something else has become limiting, and the most likely candidate is the ethanol and acid the cells have been dumping into their own tube.</p>
+
+        <div class="callout callout-try">
+            <p>Write a CER for this data set, the way the guide asks. Claim: one sentence, no yes or no, naming the relationship. Evidence: specific numbers from the table, enough of them to show a trend. Reasoning: the ATP arithmetic from 2.5 and this chapter, connecting the number of cells to the amount of ATP available per glucose molecule.</p>
+            <p>Note carefully that the source spells the organism "<em>Aerobacter aerogens</em>". The accepted spelling is <em>Aerobacter aerogenes</em>, and the species has since been reclassified as <em>Klebsiella aerogenes</em>.</p>
+        </div>
+
+        <h3>The same question, in an aquarium</h3>
+
+        <p>The second piece of evidence lets you set the conditions yourself. A tank of water, some fish, some plants, a lamp and a thermostat. Fish respire and consume oxygen. Plants photosynthesise and produce it — and respire and consume it, all the time, which is the part most models leave out.</p>
+
+        <p>Part A sweeps the temperature with fish only, which is the experiment the original worksheet runs. Part B is the harder and better one: find a combination that holds the dissolved oxygen steady for a full hour.</p>
+
+        <div class="sim" data-sim="u2-oxygen-balance">
+            <div class="sim-header">
+                <h4>The aquarium: find the balance point</h4>
+                <span class="sim-kind">Interactive</span>
+            </div>
+        </div>
+
+        <div class="callout callout-try">
+            <ol>
+                <li>In Part A, why does oxygen consumption rise between 15 °C and 35 °C — and why does it stop rising after that? Both halves of the answer are about enzymes.</li>
+                <li>Find three balanced combinations in Part B. What do they have in common? What single change breaks every one of them?</li>
+                <li>Set a balanced tank, then set the light to 0%. Explain what happens and how fast.</li>
+                <li>Balanced means the dissolved oxygen is not changing. Does it mean nothing is happening? Answer in terms of the two rates.</li>
+            </ol>
+        </div>
+    </section>
+
+    <section id="exercise" data-kind="Case study" data-standards="HS-LS1-7" data-time="8 min" data-track>
+        <h2>Muscles, and a model that goes one step too far</h2>
+
+        <p>The last modelling task in Anchor Guide 2 asks you to draw two muscle cells: one during light exercise, one during heavy exercise, assuming the cells are receiving <em>less oxygen than is normal</em>.</p>
+
+        <figure class="shot">
+            <img class="painting" src="../images/u2/goodsell-muscle.jpeg" alt="A painting of part of a muscle fibre: thin blue filaments and thicker red filaments lie side by side and overlap, with long yellow strands running between them." loading="lazy">
+            <figcaption><b>Figure 2.22</b> — Where the ATP goes. <strong>A painting, not a photograph.</strong> Nothing this small can be photographed, so David Goodsell paints it from real molecular data, with every molecule at its true shape and relative size, magnified about a million times. This is part of a single unit of a muscle fibre. The thin blue filaments are actin and the thicker red ones are myosin; the long yellow strands are titin, a spring that holds them in register. Every contraction is myosin pulling on actin, and every pull spends a molecule of ATP — which is why heavy exercise runs a muscle short of it. <span class="fig-credit">Credit: <a href="https://pdb101.rcsb.org/sci-art/goodsell-gallery/biosites-muscle" target="_blank" rel="noopener">Illustration by David S. Goodsell</a>, doi: <a href="https://doi.org/10.2210/rcsb_pdb/goodsell-gallery-005" target="_blank" rel="noopener">10.2210/rcsb_pdb/goodsell-gallery-005</a>, <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>.</span></figcaption>
+        </figure>
+
+        <p>During light exercise your heart and lungs keep up. Oxygen arrives fast enough, the electron transport chain runs, and your muscle cells respire aerobically at roughly 32 ATP per glucose. Waste out: CO₂ and water.</p>
+
+        <p>During heavy exercise your muscles demand ATP faster than your circulation can deliver oxygen. So:</p>
+
+        <ul>
+            <li>Aerobic respiration keeps running, at the fastest rate the available oxygen allows. It is <strong>running at its ceiling</strong>, not switched off.</li>
+            <li>The shortfall is covered by lactic acid fermentation, on top. Glycolysis speeds up, NAD⁺ is regenerated by converting pyruvate to lactate, and each glucose yields only 2 ATP through that route.</li>
+            <li>Lactate accumulates, and afterwards you keep breathing hard while your body clears it and repays the oxygen it went without.</li>
+        </ul>
+
+        <div class="callout callout-misconception">
+            <p>You may see a worked example — including one in the teacher's own answer set — that crosses out the whole mitochondrion and writes "aerobic respiration shuts down". <strong>Do not copy that.</strong></p>
+            <p>Aerobic respiration does not stop during heavy exercise. If it did you would lose about 94% of your ATP supply instantly and collapse, and elite athletes would be no better than anyone else at events lasting more than a minute — the thing that makes them better is precisely their capacity to keep aerobic respiration going at a very high rate.</p>
+            <p>The anchor guide's own wording is the careful one: the cells are receiving <em>less</em> oxygen than is normal. Less, not none. Your model should show the aerobic pathway still running, at its limit, with fermentation supplementing it.</p>
+        </div>
+
+        <p>The same logic sorts out a related puzzle. Why is a 100-metre sprint anaerobic and a marathon aerobic? Not because the runner's biochemistry changes, but because of rates. A sprinter's demand is enormous and brief; oxygen delivery cannot ramp up in ten seconds, so most of the ATP comes from stored phosphates and glycolysis. A marathon runner's demand is high but sustained at a level oxygen delivery can just about match — which is exactly why they must run at a pace they can supply, and why hitting that limit is called "hitting the wall".</p>
+
+        <h3>Where this goes next</h3>
+
+        <p>You now have the two processes that move energy and carbon through every living thing: photosynthesis putting energy into sugar, and respiration taking it out again. Everything so far has been at the scale of one cell.</p>
+
+        <p>The rest of the unit changes nothing about the chemistry and everything about the scale. Chapter 2.7 asks what happens when you stack organism on organism — when the energy in a plant has to pass through a grasshopper, then a mouse, then a hawk, losing some at every step. The answer explains why there are so few wolves, and it is the second law of thermodynamics from 2.1 with fur on it.</p>
+    
+        <h3>Quick check</h3>
+
+        <p>Auto-marked. Get one wrong and it will point you back to the section that covers it.</p>
+
+        <div class="quiz" data-quiz>
+
+            <div class="quiz-q" data-review="backup">
+                <div class="quiz-variant" data-answer="2">
+                    <p class="quiz-stem">What is fermentation actually for?</p>
+                    <ol class="quiz-options">
+                        <li data-why="Fermentation makes no ATP whatsoever. Every ATP a fermenting cell gets comes from glycolysis.">It is an alternative way of making ATP when oxygen is short</li>
+                        <li>It dumps electrons off NADH onto pyruvate, regenerating NAD⁺ so that glycolysis can keep running</li>
+                        <li data-why="It stops well short of the bottom. Lactate and ethanol still hold most of the sugar's original energy.">It breaks glucose down further than aerobic respiration manages</li>
+                        <li data-why="It supplies no oxygen at all. It is what a cell does precisely because there is none.">It supplies oxygen to the electron transport chain</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>Once you see fermentation as a maintenance crew rather than an engine, its products stop looking arbitrary. Ethanol and lactic acid are not useful to the cell — they are simply where the electrons were dumped.</p>
+                    </div>
+                </div>
+                <div class="quiz-variant" data-answer="3">
+                    <p class="quiz-stem">Yeast finish with a sugar molecule and leave ethanol behind; your muscles leave lactate. Why does a cell make these at all?</p>
+                    <ol class="quiz-options">
+                        <li data-why="Nothing in the cell comes back for them. A yeast cell discards ethanol entirely, and it still holds most of the sugar's energy.">They are stores, set aside to be broken down later when conditions improve</li>
+                        <li data-why="Fermentation makes no ATP at all, so there is none for them to carry. The 2 ATP come from glycolysis.">They carry the ATP made during fermentation out of the cytosol</li>
+                        <li>They are simply where NADH's electrons ended up once pyruvate had accepted them</li>
+                        <li data-why="CO₂ and water are the bottom of the energy hill. Lactate and ethanol are substantial organic molecules with plenty of energy still in them.">They are the oxygen-free equivalent of CO₂ and water — the bottom of the energy hill</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>The point of the pathway is the empty carrier it hands back, not the molecule it leaves behind. Whatever pyruvate turns into is a by-product of the cell needing somewhere to put electrons.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-q" data-review="backup">
+                <div class="quiz-variant" data-answer="4">
+                    <p class="quiz-stem">Glycolysis needs no oxygen. So why does a cell with no oxygen and no fermentation stop making ATP altogether?</p>
+                    <ol class="quiz-options">
+                        <li data-why="Glycolysis happens in the cytosol, which is exactly why it can run in a cell with no mitochondrion at all.">Glycolysis happens in the mitochondrion, which shuts down</li>
+                        <li data-why="Glucose still arrives perfectly well. What has run out is an empty electron carrier.">Glucose can no longer get into the cell</li>
+                        <li data-why="It needs none. What it needs is NAD⁺ — and it is oxygen's absence that removes the supply of it.">Glycolysis secretly needs a small amount of oxygen</li>
+                        <li>Glycolysis needs NAD⁺ as an input, and with the chain stopped every NAD⁺ in the cell is stuck as loaded NADH</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>This is the part most people miss. Without oxygen a cell loses not 88% of its ATP but all of it — even the one stage that never needed oxygen in the first place. That is the problem fermentation exists to solve.</p>
+                    </div>
+                </div>
+                <div class="quiz-variant" data-answer="2">
+                    <p class="quiz-stem">Suppose a cell held a hundred times its normal stock of NAD⁺, and still had no oxygen and no fermentation. What would change?</p>
+                    <ol class="quiz-options">
+                        <li data-why="It does need it. NAD⁺ is one of glycolysis's inputs, which is exactly why glycolysis stalls when the supply is gone.">Nothing at all, because glycolysis does not use NAD⁺</li>
+                        <li>Glycolysis would run far longer before stalling, but it would still stop once every carrier was loaded as NADH</li>
+                        <li data-why="The chain stops because there is no oxygen to accept electrons at the end of it, not because it is short of carriers.">The electron transport chain would restart, having plenty of carriers to work with</li>
+                        <li data-why="Carriers do not add ATP. Glycolysis yields 2 ATP per glucose however many of them are available.">The ATP yield per glucose would rise well above 2</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>NAD⁺ and NADH are the same small population of molecules going round and round. A bigger pool buys more time; only something that unloads them buys a cell an indefinite supply.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-q" data-review="two-ways">
+                <div class="quiz-variant" data-answer="1">
+                    <p class="quiz-stem">Yeast in dough produces bubbles. Your muscles making lactate do not. Why the difference?</p>
+                    <ol class="quiz-options">
+                        <li>Alcoholic fermentation removes a carbon from pyruvate as CO₂; lactic acid fermentation removes none</li>
+                        <li data-why="Speed is not it. Lactic acid fermentation releases no gas at all — count the carbons: 6 go in as glucose and 6 stay in the two lactate molecules.">Muscles ferment more slowly, so the gas has time to dissolve away</li>
+                        <li data-why="A sealed dough goes anaerobic quickly. The gas that raises it is fermentation's carbon dioxide.">The yeast is respiring aerobically in the dough, and the CO₂ comes from that</li>
+                        <li data-why="Muscles do exhale carbon dioxide from aerobic respiration, but lactic acid fermentation produces none in the first place.">Muscles release their CO₂ through the lungs instead of into the cell</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>Both equations balance, and counting the atoms tells you what to expect before you ever see a tube. C₆H₁₂O₆ → 2 C₃H₆O₃ has nowhere for a gas to come from. C₆H₁₂O₆ → 2 C₂H₅OH + 2 CO₂ does — and that gas is the entire point in baking.</p>
+                    </div>
+                </div>
+                <div class="quiz-variant" data-answer="4">
+                    <p class="quiz-stem">A brewer and a yoghurt maker both seal their vessel. Only one needs a valve to let gas escape. Which, and why?</p>
+                    <ol class="quiz-options">
+                        <li data-why="Lactic acid fermentation releases no gas. Count the carbons: 6 go in as glucose and all 6 stay in the two lactate molecules.">The yoghurt maker — acidifying the milk releases carbon dioxide</li>
+                        <li data-why="NAD⁺ is regenerated by loading the electrons onto pyruvate. Losing a carbon as CO₂ is a separate step, and lactic acid fermentation skips it.">Both — all fermentation releases CO₂ in the course of regenerating NAD⁺</li>
+                        <li data-why="A sealed vessel runs out of oxygen quickly, and the gas keeps coming long after that. It is fermentation's own product.">Neither — the gas in brewing comes from yeast respiring aerobically before sealing</li>
+                        <li>The brewer — pyruvate loses a carbon as CO₂ before it takes the electrons and becomes ethanol</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>The equation tells you what to expect from a sealed vessel before you ever open one. C₆H₁₂O₆ → 2 C₂H₅OH + 2 CO₂ has a gas in it; C₆H₁₂O₆ → 2 C₃H₆O₃ does not.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-q" data-review="cost">
+                <div class="quiz-variant" data-answer="3">
+                    <p class="quiz-stem">Fermentation is quick and needs no oxygen. Does that make it a more efficient way to use a glucose molecule?</p>
+                    <ol class="quiz-options">
+                        <li data-why="It is quicker per glucose and far poorer per glucose. Speed and efficiency are not the same measurement.">Yes — it skips the slow stages and gets straight to the ATP</li>
+                        <li data-why="Ethanol is not useful to the yeast at all. It is where the electrons were dumped, and it still holds most of the fuel's energy.">Yes, because it produces useful products such as ethanol as well as ATP</li>
+                        <li>No — 2 ATP against 32, about 6%, because it stops at lactate or ethanol instead of going all the way to CO₂ and water</li>
+                        <li data-why="Aerobic respiration gets sixteen times as much ATP from the same molecule. The gap is not about time taken.">They are equally efficient; fermentation just takes longer to get there</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>A fermenting cell is throwing away most of its fuel unburnt, and you can prove the leftover energy is real by setting fire to it — ethanol runs spirit burners and, in some countries, cars. Fermentation is a fallback, not a shortcut.</p>
+                    </div>
+                </div>
+                <div class="quiz-variant" data-answer="1">
+                    <p class="quiz-stem">Lactate leaves your muscle, and your liver spends ATP turning it back into glucose. What does that tell you about lactate?</p>
+                    <ol class="quiz-options">
+                        <li>It still holds most of the original glucose's energy — fermentation stopped well short of CO₂ and water</li>
+                        <li data-why="A molecule with nothing left in it could not be rebuilt into glucose at any price. The liver is recovering fuel, not disposing of rubbish.">It is a spent molecule with no energy left, which is why the liver must pay to handle it</li>
+                        <li data-why="Both routes capture the same 2 ATP per glucose. What differs is where the carbon ends up, not the yield.">It shows lactic acid fermentation is the more efficient of the two fermentations</li>
+                        <li data-why="32 is the aerobic figure. A muscle cell running lactic acid fermentation got 2, roughly 6% of it.">It shows the muscle captured about 32 ATP from that glucose before releasing it</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>The waste product is the evidence. Ethanol will run a spirit burner and lactate is worth rebuilding into sugar — neither is what a molecule looks like after all its energy has been taken out.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-q" data-review="yeast">
+                <div class="quiz-variant" data-answer="2">
+                    <p class="quiz-stem">Glycolysis can only take glucose, never sucrose. Yet tubes containing only sucrose bubbled hard, and the most concentrated bubbled most. What does that show?</p>
+                    <ol class="quiz-options">
+                        <li data-why="It cannot. Sucrose is a disaccharide — glucose joined to fructose — and it is too big to enter the pathway. Something must happen to it first.">Sucrose can enter glycolysis after all</li>
+                        <li>The yeast must be splitting the sucrose into glucose and fructose before fermenting it</li>
+                        <li data-why="Sealed warm tubes of yeast and sugar produce carbon dioxide by fermentation, and more sucrose gave more gas. The pattern points straight at the sugar.">The bubbles must have come from something other than fermentation</li>
+                        <li data-why="It cannot ferment just anything. The evidence points to one specific extra step, not to unlimited flexibility.">Yeast can ferment any molecule at all</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>This is a nice piece of reasoning: you never see the splitting happen, but you can show it must have. Yeast makes an enzyme called invertase, and the reaction balances — C₁₂H₂₂O₁₁ + H₂O → 2 C₆H₁₂O₆.</p>
+                    </div>
+                </div>
+                <div class="quiz-variant" data-answer="3">
+                    <p class="quiz-stem">The sucrose tubes bubbled, and the tube with the most sucrose bubbled most. Why does that second observation strengthen the argument?</p>
+                    <ol class="quiz-options">
+                        <li data-why="The tubes are sealed and their dissolved oxygen is gone within the first minutes. After that the gas is fermentation's.">It shows the yeast were respiring aerobically, since more sugar means more oxygen used</li>
+                        <li data-why="Glycolysis takes glucose and nothing else. A dose-response pattern cannot change what the pathway accepts.">It shows that glycolysis will take sucrose provided there is enough of it</li>
+                        <li>It ties the gas to the sucrose itself — more sucrose, more fermentation, so the sucrose must be reaching the pathway</li>
+                        <li data-why="The experiment measures gas, not enzyme. All it establishes is that the sucrose was being used.">It proves the yeast made more invertase in the stronger tubes</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>A single positive result tells you something happened; a dose-response tells you what caused it. The rising trend is what rules out the gas having come from anything other than the sugar you added.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-q" data-review="oxygen-evidence">
+                <div class="quiz-variant" data-answer="4">
+                    <p class="quiz-stem">In the sealed <em>Aerobacter</em> tubes, adding glucose beyond 288 mg stopped increasing the cell count — 650, 675, 675, 670. What is the best explanation?</p>
+                    <ol class="quiz-options">
+                        <li data-why="More glucose is exactly what was added, at every step. Something else must have become limiting.">The bacteria ran out of glucose</li>
+                        <li data-why="The aerated tubes still reached about five times as many cells at every concentration measured. The gap did not close.">Fermentation had become as efficient as aerobic respiration</li>
+                        <li data-why="Four consistent readings are evidence, not error. Ceilings are common in growth data and they are informative.">The measurements must be wrong, because a ceiling is impossible</li>
+                        <li>Something else has become limiting — most likely the ethanol and acid the cells have been dumping into their own tube</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>Two patterns live in that table and both are worth stating carefully. Air multiplies the yield by about five at every concentration measured, which is in the right region for a sixteen-fold ATP advantage. And a flat line at the top of a curve is always telling you that something you were not varying has run out.</p>
+                    </div>
+                </div>
+                <div class="quiz-variant" data-answer="2">
+                    <p class="quiz-stem">The aerated <em>Aerobacter</em> tubes grew about five times as many cells, yet aerobic respiration yields sixteen times the ATP. Does that mismatch sink the claim?</p>
+                    <ol class="quiz-options">
+                        <li data-why="The two figures measure different things — ATP per glucose against cells built per glucose — so they were never going to match.">Yes — a fivefold result cannot support a sixteen-fold claim, so the data contradict the arithmetic</li>
+                        <li>No — cells per glucose is only a proxy for ATP per glucose, and fivefold is in the right region once you allow for glucose that never goes into new cells</li>
+                        <li data-why="The measured ratios sit between 4.0× and 5.6×, with a mean of 4.8×. That spread comes nowhere near sixteen.">No, because the ratios ranged from 4.0× to 5.6×, so the true figure could well be sixteen</li>
+                        <li data-why="The ATP figures come from the pathways themselves. This experiment is a check on the direction and rough size of the advantage, not a measurement of yield.">Yes, so the ATP figures should be revised down to about 2 against 10</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>Knowing what a measurement is a proxy for tells you how closely to expect it to match. Cell counts fold in everything else the glucose was spent on, so agreement in direction and rough size is all this data set can offer — and it delivers that at every concentration measured.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-q" data-review="exercise">
+                <div class="quiz-variant" data-answer="2">
+                    <p class="quiz-stem">During a hard sprint, what happens to aerobic respiration in your leg muscles?</p>
+                    <ol class="quiz-options">
+                        <li data-why="This is the error in the worked answer set, and it is worth resisting. Losing aerobic respiration would cost about 94% of your ATP instantly and you would collapse.">It shuts down completely, and fermentation takes over</li>
+                        <li>It keeps running at the fastest rate the available oxygen allows, with fermentation supplying the shortfall on top</li>
+                        <li data-why="Demand rises, certainly — but oxygen delivery sets the ceiling, which is precisely why the shortfall has to be covered another way.">It speeds up, because the muscles now need far more ATP</li>
+                        <li data-why="It never stopped. What continues afterwards is a surplus, used to clear lactate and repay the oxygen you went without.">It stops, and restarts once you have finished running</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>The anchor guide's own wording is the careful one: the cells receive <em>less</em> oxygen than is normal. Less, not none. What makes an elite athlete better over anything longer than a minute is precisely their capacity to keep aerobic respiration running at a very high rate.</p>
+                    </div>
+                </div>
+                <div class="quiz-variant" data-answer="1">
+                    <p class="quiz-stem">A marathon is called aerobic and a 100-metre sprint anaerobic, though both runners have the same biochemistry. What is the actual difference?</p>
+                    <ol class="quiz-options">
+                        <li>Rates — the sprinter's demand is enormous and brief, and oxygen delivery cannot ramp up in ten seconds; the marathon runner holds a pace delivery can just about match</li>
+                        <li data-why="Neither runner switches pathway. Both run the same ones; what differs is how much of the demand oxygen delivery can cover.">The sprinter's muscle cells switch to a different set of pathways, and the marathon runner's do not</li>
+                        <li data-why="Fermentation yields 2 ATP per glucose. Nobody sustains two hours of hard running on that — the aerobic route is carrying the marathon.">The marathon runner is fermenting the whole way, simply doing it slowly enough to keep up</li>
+                        <li data-why="No pathway is switched off by speed. Oxygen delivery simply cannot be raised fast enough to meet a ten-second demand.">Sprinters' mitochondria shut down under heavy load, which is what lets them go so fast</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>This is why hitting the wall is described as a pace problem rather than a chemistry problem. A marathon runner is holding the fastest speed their oxygen supply can sustain; go above it and the shortfall has to be covered the expensive way.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+<script src="../assets/toc.js?v=330"></script>
+<script src="../assets/course.js?v=330"></script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en-GB" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Printout — Biology</title>
+<!--
+    PRINTABLE WORKBOOK
+    ---------------------------------------------------------------
+    printout.html?unit=u1 builds a paper workbook for a unit: ruled
+    space to write in, vocabulary to complete, diagrams to label and
+    multiple-choice to answer, with an answer key the teacher can
+    leave out. Everything is read from the same parsed unit the
+    reader, Present and the flash cards use, so it never drifts from
+    the chapters.
+
+    Printing is the browser's own: choose Save as PDF.
+-->
+<script>
+(function () {
+    var q = new URLSearchParams(location.search);
+    var v = (q.get('v') || '1').replace(/[^\w.-]/g, '');
+    window.PRINTOUT_V = v;
+    ['assets/course.css', 'assets/printout.css'].forEach(function (href) {
+        var l = document.createElement('link');
+        l.rel = 'stylesheet';
+        l.href = href + '?v=' + v;
+        document.head.appendChild(l);
+    });
+})();
+</script>
+<script>
+/* Follow the reader's theme: the one it saved, else the system's. Only the
+   control panel and the backdrop take it. <html> stays light so nothing on
+   the paper, which is what comes out of the printer, can change with it.
+   A change made in the reader while this page is open arrives as a storage event. */
+(function () {
+    var theme = 'light';
+    function paint() {
+        document.documentElement.setAttribute('data-page-theme', theme);
+        var bar = document.getElementById('po-bar');
+        if (bar) bar.setAttribute('data-theme', theme);
+    }
+    function apply(t) {
+        if (t !== 'light' && t !== 'sepia' && t !== 'dark')
+            t = window.matchMedia && matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light';
+        theme = t;
+        paint();
+    }
+    var t = null;
+    try { t = localStorage.getItem('bio_theme'); } catch (e) { /* storage blocked */ }
+    apply(t);
+    document.addEventListener('DOMContentLoaded', paint);
+    window.addEventListener('storage', function (e) { if (e.key === 'bio_theme') apply(e.newValue); });
+})();
+</script>
+</head>
+<body class="po-page">
+
+<div class="po-bar" id="po-bar">
+    <div class="po-bar-in">
+        <h1 class="po-title">Printout</h1>
+        <p class="po-lede" id="po-lede">Choose a unit, then what to put on the paper.</p>
+        <div class="po-controls" id="po-controls"></div>
+    </div>
+</div>
+
+<main class="po-doc" id="po-doc">
+    <p class="po-loading">Reading the chapters…</p>
+</main>
+
+<script>
+(function () {
+    var v = window.PRINTOUT_V;
+    ['assets/toc.js', 'assets/unit-content.js', 'assets/printout.js'].forEach(function (src) {
+        var s = document.createElement('script');
+        s.src = src + '?v=' + v;
+        s.async = false;
+        document.body.appendChild(s);
+    });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,810 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3.4 Food Webs, Keystones and Cascades — Biology</title>
+<link rel="stylesheet" href="../assets/course.css?v=330">
+<script>if('scrollRestoration' in history)history.scrollRestoration='manual';</script>
+</head>
+<body data-root="../" data-chapter="u3-food-webs">
+
+<main class="main" role="main">
+
+    <section id="overview">
+        <div class="chapter-eyebrow">Unit 3 — Ecosystem Dynamics</div>
+        <h1>3.4 Food Webs, Keystones and Cascades</h1>
+        <p class="lead">Chapters 3.1 to 3.3 followed one population at a time. That was a simplification, and here is where it breaks: in Borneo in the 1950s, spraying insecticide to kill mosquitoes ended with the roofs of houses collapsing and rats in the grain stores. Nobody predicted it, because nobody had drawn the food web. This chapter is about drawing the food web.</p>
+
+        <div class="chapter-meta"></div>
+
+        <div data-progression></div>
+    </section>
+
+    <section id="webs" data-kind="Core" data-standards="HS-LS2-6" data-time="9 min" data-track>
+        <h2>Chains, webs and trophic levels</h2>
+
+        <p>A <span class="term">food chain</span> is a single line of who-eats-whom: grass &rarr; mouse &rarr; snake &rarr; hawk. It is easy to draw and it is almost always wrong, because nothing in nature eats only one thing.</p>
+
+        <p>A <span class="term">food web</span> is what you get when you draw all the chains at once and let them cross.</p>
+
+        <figure class="diagram dense">
+            <svg viewBox="0 0 720 588" xmlns="http://www.w3.org/2000/svg" role="img"
+             aria-labelledby="fw-t fw-d">
+            <title id="fw-t">A six-species food web, arranged by trophic level</title>
+            <desc id="fw-d">Six organisms arranged in four rows, one row per trophic level, with
+                nine arrows between them. Every arrow points from the organism being eaten to the
+                organism eating it. On the bottom row, level one, are the producers: wildflowers and
+                grass. On the second row, the primary consumers: rabbit and mouse. Arrows run from
+                wildflowers to both the rabbit and the mouse, and from grass to both the rabbit and
+                the mouse. On the third row, the secondary consumer: the snake, with arrows reaching
+                it from the rabbit and from the mouse. On the top row the hawk, with arrows reaching
+                it from the rabbit, from the mouse and from the snake. Because the hawk eats both a
+                level-two mouse and a level-three snake, it is marked as level three or four.</desc>
+            <style>
+                .fw-band  { fill: var(--text-secondary); opacity: 0.055; }
+                .fw-lvl   { font-size: 10px; font-weight: 700; fill: var(--text); text-anchor: end; }
+                .fw-lvls  { font-size: 9px; fill: var(--text-secondary); text-anchor: end; }
+                /* The cut-outs are drawn with dark outlines for a light ground, so the card keeps
+                   a constant cream fill in every theme — on the dark surface a var(--bg) card
+                   swallowed the rabbit and the snake. The label ink is pinned to match. */
+                .fw-card  { fill: #faf6ee; stroke: #d9d0c1; stroke-width: 1.2; }
+                .fw-name  { font-size: 11.5px; font-weight: 700; fill: #2b2233; text-anchor: middle; }
+                .fw-sub   { font-size: 8.5px; fill: #6d6259; text-anchor: middle; }
+                .fw-arrow { stroke: hsl(28 62% 42%); stroke-width: 2.4; fill: none; stroke-linecap: round; }
+                .fw-head  { fill: hsl(28 62% 42%); }
+                .fw-hdr   { font-size: 11px; font-weight: 700; fill: hsl(28 62% 42%); }
+                /* the amber is mixed for paper; lift it on the dark surface */
+                [data-theme="dark"] .fw-arrow { stroke: hsl(28 70% 70%); }
+                [data-theme="dark"] .fw-head  { fill: hsl(28 70% 70%); }
+                [data-theme="dark"] .fw-hdr   { fill: hsl(28 70% 70%); }
+            </style>
+            <text class="fw-hdr" x="16" y="26">Each arrow points from the organism being eaten to the organism eating it &mdash; the way the energy travels.</text>
+
+            <rect class="fw-band" x="184" y="44"  width="516" height="104" rx="8"/>
+            <rect class="fw-band" x="184" y="184" width="516" height="104" rx="8"/>
+            <rect class="fw-band" x="184" y="324" width="516" height="104" rx="8"/>
+            <rect class="fw-band" x="184" y="464" width="516" height="104" rx="8"/>
+
+            <text class="fw-lvl"  x="172" y="92">4 &middot; Tertiary consumer</text>
+            <text class="fw-lvls" x="172" y="105">eats level 3</text>
+            <text class="fw-lvl"  x="172" y="232">3 &middot; Secondary consumer</text>
+            <text class="fw-lvls" x="172" y="245">eats level 2</text>
+            <text class="fw-lvl"  x="172" y="372">2 &middot; Primary consumer</text>
+            <text class="fw-lvls" x="172" y="385">a herbivore</text>
+            <text class="fw-lvl"  x="172" y="512">1 &middot; Producer</text>
+            <text class="fw-lvls" x="172" y="525">makes its own food</text>
+
+                <line class="fw-arrow" x1="300.0" y1="465.0" x2="300.0" y2="436.0"/>
+                <path class="fw-head" d="M300.0 427.0 L305.0 436.0 L295.0 436.0 Z"><title>wildflowers is eaten by rabbit</title></path>
+                <line class="fw-arrow" x1="367.0" y1="482.5" x2="505.0" y2="413.5"/>
+                <path class="fw-head" d="M513.0 409.5 L507.2 418.0 L502.7 409.1 Z"><title>wildflowers is eaten by mouse</title></path>
+                <line class="fw-arrow" x1="513.0" y1="482.5" x2="375.0" y2="413.5"/>
+                <path class="fw-head" d="M367.0 409.5 L377.3 409.1 L372.8 418.0 Z"><title>grass is eaten by rabbit</title></path>
+                <line class="fw-arrow" x1="580.0" y1="465.0" x2="580.0" y2="436.0"/>
+                <path class="fw-head" d="M580.0 427.0 L585.0 436.0 L575.0 436.0 Z"><title>grass is eaten by mouse</title></path>
+                <line class="fw-arrow" x1="367.0" y1="342.5" x2="505.0" y2="273.5"/>
+                <path class="fw-head" d="M513.0 269.5 L507.2 278.0 L502.7 269.1 Z"><title>rabbit is eaten by snake</title></path>
+                <line class="fw-arrow" x1="300.0" y1="325.0" x2="300.0" y2="156.0"/>
+                <path class="fw-head" d="M300.0 147.0 L305.0 156.0 L295.0 156.0 Z"><title>rabbit is eaten by hawk</title></path>
+                <line class="fw-arrow" x1="580.0" y1="325.0" x2="580.0" y2="296.0"/>
+                <path class="fw-head" d="M580.0 287.0 L585.0 296.0 L575.0 296.0 Z"><title>mouse is eaten by snake</title></path>
+                <line class="fw-arrow" x1="529.0" y1="325.0" x2="357.4" y2="153.4"/>
+                <path class="fw-head" d="M351.0 147.0 L360.9 149.8 L353.8 156.9 Z"><title>mouse is eaten by hawk</title></path>
+                <line class="fw-arrow" x1="513.0" y1="202.5" x2="375.0" y2="133.5"/>
+                <path class="fw-head" d="M367.0 129.5 L377.3 129.1 L372.8 138.0 Z"><title>snake is eaten by hawk</title></path>
+
+                <rect class="fw-card" x="241" y="473" width="118" height="86" rx="12"/>
+                <image href="../images/u3/web-wildflowers.png" x="276.4" y="481.6" width="47.3" height="48.7" preserveAspectRatio="xMidYMid meet"/>
+                <text class="fw-name" x="300" y="548">wildflowers</text>
+                <rect class="fw-card" x="521" y="473" width="118" height="86" rx="12"/>
+                <image href="../images/u3/web-grass.png" x="556.2" y="481.8" width="47.6" height="48.4" preserveAspectRatio="xMidYMid meet"/>
+                <text class="fw-name" x="580" y="548">grass</text>
+                <rect class="fw-card" x="241" y="333" width="118" height="86" rx="12"/>
+                <image href="../images/u3/web-rabbit.png" x="276.9" y="341.1" width="46.3" height="49.8" preserveAspectRatio="xMidYMid meet"/>
+                <text class="fw-name" x="300" y="408">rabbit</text>
+                <rect class="fw-card" x="521" y="333" width="118" height="86" rx="12"/>
+                <image href="../images/u3/web-mouse.png" x="546.9" y="348.6" width="66.2" height="34.8" preserveAspectRatio="xMidYMid meet"/>
+                <text class="fw-name" x="580" y="408">mouse</text>
+                <rect class="fw-card" x="521" y="193" width="118" height="86" rx="12"/>
+                <image href="../images/u3/web-snake.png" x="547.1" y="208.5" width="65.8" height="35.0" preserveAspectRatio="xMidYMid meet"/>
+                <text class="fw-name" x="580" y="268">snake</text>
+                <rect class="fw-card" x="241" y="53" width="118" height="86" rx="12"/>
+                <image href="../images/u3/web-hawk.png" x="276.6" y="61.4" width="46.9" height="49.1" preserveAspectRatio="xMidYMid meet"/>
+                <text class="fw-name" x="300" y="124">hawk</text>
+                <text class="fw-sub" x="300" y="135">level 3 or 4</text>
+
+            </svg>
+            <figcaption><b>Figure 3.13</b> &mdash; Six populations, nine feeding relationships, sorted into <span class="term">trophic levels</span> &mdash; the number of steps each organism sits from the sunlight. Read the arrows carefully: each one points <em>from</em> the organism being eaten <em>to</em> the organism eating it, because an arrow in a food web shows the direction the energy travels. This trips people up constantly &mdash; the arrow does not point at the food. Trace two chains through it and notice they are both true at once: <em>grass &rarr; mouse &rarr; hawk</em>, and <em>wildflowers &rarr; rabbit &rarr; snake &rarr; hawk</em>. That is also why the hawk carries two level numbers.</figcaption>
+        </figure>
+
+        <p>Inside that web there are several chains. <em>Grass &rarr; mouse &rarr; hawk</em> is one. <em>Wildflowers &rarr; rabbit &rarr; snake &rarr; hawk</em> is another. Both are true at once.</p>
+
+        <p>Each organism sits at a <span class="term">trophic level</span> — a position counted in steps from the sunlight:</p>
+
+        <div class="tbl-scroll" style="overflow-x:auto;-webkit-overflow-scrolling:touch">
+<table>
+            <thead>
+                <tr><th>Level</th><th>Name</th><th>What it does</th><th>In Figure 3.13</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>1</td><td><span class="term">Producer</span></td><td>Makes its own food from sunlight by photosynthesis</td><td>grass, wildflowers</td></tr>
+                <tr><td>2</td><td>Primary consumer</td><td>Eats producers — a herbivore</td><td>rabbit, mouse</td></tr>
+                <tr><td>3</td><td>Secondary consumer</td><td>Eats primary consumers</td><td>snake; the hawk, when it eats a mouse</td></tr>
+                <tr><td>4</td><td>Tertiary consumer</td><td>Eats secondary consumers</td><td>the hawk, when it eats the snake</td></tr>
+            </tbody>
+        </table>
+        </div>
+
+        <div class="callout callout-note">
+            <p>Notice that the hawk appears twice. An animal that eats at more than one level does not have a single trophic level — it has an average one, and it changes with the season. This is normal, not a special case, and it is the first sign that a real web is more tangled than a chain suggests.</p>
+            <p>One group is missing from that table and from most food-web diagrams: <strong>decomposers</strong> — the fungi and bacteria that break down every organism in the web when it dies and return the nutrients to the soil. They are left off for space, not because they are optional. Nothing in this chapter works without them.</p>
+        </div>
+    </section>
+
+    <section id="energy" data-kind="Core" data-standards="HS-LS2-6" data-time="8 min" data-track>
+        <h2>Why webs are shaped like a pyramid</h2>
+
+        <p>Here is a question with a surprising answer: why is there no animal that eats hawks, and no animal that eats <em>that</em>? Why do food chains stop at four or five links, everywhere on Earth?</p>
+
+        <p>The answer is energy. When a rabbit eats grass, only a small fraction of the grass's energy ends up as rabbit. Most of it is spent on staying alive — moving, breathing, keeping warm, pumping ions — and leaves as heat. More is never absorbed at all and passes straight through. A useful rule of thumb is that roughly <strong>ten per cent</strong> of the energy at one trophic level becomes body mass at the next.</p>
+
+        <figure class="diagram dense">
+            <svg viewBox="0 0 720 440" xmlns="http://www.w3.org/2000/svg" role="img"
+             aria-labelledby="pyr-t pyr-d">
+            <title id="pyr-t">Energy transfer between trophic levels, using the Figure 3.13 food web</title>
+            <desc id="pyr-d">A pyramid of four stacked bars, narrowest at the top, drawn with the same
+                organisms as the food web in Figure 3.13. The bottom bar, level one, holds the
+                producers, grass and wildflowers, with ten thousand kilocalories. Above it, level two,
+                the primary consumers, a rabbit and a mouse, with one thousand kilocalories. Above that,
+                level three, the secondary consumer, a snake, with one hundred kilocalories. At the top,
+                level four, the tertiary consumer, a hawk, with ten kilocalories. Between each pair of
+                levels, ninety per cent of the energy is lost. A note says the bars are not to scale:
+                drawn to scale, the hawk's bar would be a thousandth as wide as the producers' bar.</desc>
+            <style>
+                /* the cut-outs are drawn for a light ground, so the bars keep a constant cream
+                   fill in every theme with the label ink pinned to match — as in Figure 3.13 */
+                .pyr-bar  { fill: #faf6ee; stroke: #d9d0c1; stroke-width: 1.3; }
+                .pyr-base { stroke: #2e7d32; stroke-width: 2; }
+                .pyr-name { font-size: 11px; font-weight: 700; fill: #2b2233; text-anchor: middle; }
+                .pyr-kcal { font-size: 13px; font-weight: 800; fill: var(--red); text-anchor: end; }
+                .pyr-loss { font-size: 10px; fill: var(--text-secondary); text-anchor: end; }
+                .pyr-hdr  { font-size: 12px; font-weight: 700; fill: var(--text); text-anchor: middle; }
+                .pyr-note { font-size: 10px; fill: var(--text-secondary); }
+            </style>
+            <text class="pyr-hdr" x="380" y="26">Where the energy goes</text>
+            <rect class="pyr-bar" x="310" y="42" width="140" height="80" rx="10"/>
+            <text class="pyr-name" x="380" y="60">4 &middot; Tertiary consumer</text>
+            <image href="../images/u3/web-hawk.png" x="358.5" y="69.5" width="43.0" height="45.0" preserveAspectRatio="xMidYMid meet"><title>hawk</title></image>
+            <text class="pyr-kcal" x="704" y="87">10 kcal</text>
+            <text class="pyr-loss" x="704" y="130">&#8722;90%</text>
+            <rect class="pyr-bar" x="265" y="130" width="230" height="80" rx="10"/>
+            <text class="pyr-name" x="380" y="148">3 &middot; Secondary consumer</text>
+            <image href="../images/u3/web-snake.png" x="349.8" y="164.0" width="60.4" height="32.1" preserveAspectRatio="xMidYMid meet"><title>snake</title></image>
+            <text class="pyr-kcal" x="704" y="175">100 kcal</text>
+            <text class="pyr-loss" x="704" y="218">&#8722;90%</text>
+            <rect class="pyr-bar" x="220" y="218" width="320" height="80" rx="10"/>
+            <text class="pyr-name" x="380" y="236">2 &middot; Primary consumers</text>
+            <image href="../images/u3/web-rabbit.png" x="320.5" y="245.2" width="42.4" height="45.6" preserveAspectRatio="xMidYMid meet"><title>rabbit</title></image>
+            <image href="../images/u3/web-mouse.png" x="378.9" y="252.0" width="60.7" height="31.9" preserveAspectRatio="xMidYMid meet"><title>mouse</title></image>
+            <text class="pyr-kcal" x="704" y="263">1,000 kcal</text>
+            <text class="pyr-loss" x="704" y="306">&#8722;90%</text>
+            <rect class="pyr-bar pyr-base" x="175" y="306" width="410" height="80" rx="10"/>
+            <text class="pyr-name" x="380" y="324">1 &middot; Producers</text>
+            <image href="../images/u3/web-grass.png" x="328.5" y="333.8" width="43.7" height="44.3" preserveAspectRatio="xMidYMid meet"><title>grass</title></image>
+            <image href="../images/u3/web-wildflowers.png" x="388.2" y="333.7" width="43.3" height="44.7" preserveAspectRatio="xMidYMid meet"><title>wildflowers</title></image>
+            <text class="pyr-kcal" x="704" y="351">10,000 kcal</text>
+
+            <text class="pyr-note" x="16" y="412">Roughly a tenth of the energy at one level becomes body mass at the next; the rest is used staying alive, or lost as heat.</text>
+            <text class="pyr-note" x="16" y="428">The bars are not to scale. Drawn to scale, the hawk&#8217;s bar would be a thousandth as wide as the producers&#8217; &#8212; under half a pixel on this page.</text>
+            </svg>
+            <figcaption><b>Figure 3.14</b> &mdash; The ten-per-cent rule, drawn with the same food web as Figure 3.13. Ten thousand kilocalories in the grass and wildflowers supports about a thousand in the rabbits and mice, a hundred in the snake, and ten in the hawk. Every organism is at the same level as it was in Figure 3.13 &mdash; trace <em>grass &rarr; mouse &rarr; snake &rarr; hawk</em> through both. The hawk is at level four here because, in this chain, it is eating the snake. The rule is a rough average &mdash; real transfer efficiencies range from about 1% to 20% &mdash; but the order of magnitude is right, and the consequence is unavoidable. Notice what the pyramid cannot show: drawn to scale, the top bar would be too thin to see.</figcaption>
+        </figure>
+
+        <p>Follow the arithmetic and two facts fall out that you can use in almost any answer about food webs:</p>
+
+        <ul>
+            <li><strong>Chains are short.</strong> After four steps you have a thousandth of what you started with. A fifth-level predator would need such an enormous area to feed itself that it becomes impossible to be one. This is why top predators are rare, large-ranging, and the first thing to disappear when a habitat is broken up.</li>
+            <li><strong>There must be far more prey than predators.</strong> That is why the lynx axis in <a href="u3-reading-data.html#cycles">Figure 3.10</a> ran to nine thousand while the hare axis ran to a hundred and sixty thousand. It is not a quirk of Canadian trapping — it is thermodynamics.</li>
+        </ul>
+
+        <div class="callout callout-example">
+            <p>Put a number on it. To build <strong>1 kg</strong> of hawk at the fourth level you need roughly 10 kg of snake, 100 kg of mouse, and <strong>1,000 kg of plants</strong>. A single hawk represents about a tonne of grass, standing somewhere, growing all season.</p>
+        </div>
+    </section>
+
+    <section id="desert" data-kind="Core" data-standards="HS-LS2-6" data-time="10 min" data-track>
+        <h2>A real web: the Sonoran Desert</h2>
+
+        <p>Six species is a diagram. Here is something closer to an ecosystem — fifteen species from the Sonoran Desert of Arizona and northern Mexico, with every feeding relationship drawn in.</p>
+
+        <figure class="diagram dense wide">
+            <svg viewBox="0 0 820 640" xmlns="http://www.w3.org/2000/svg" role="img"
+             aria-labelledby="sw-t sw-d">
+            <title id="sw-t">A Sonoran Desert food web, arranged by trophic level</title>
+            <desc id="sw-d">Fifteen organisms in five rows, one per trophic level, joined by
+                twenty-eight arrows that point from each organism to whatever eats it. On the bottom
+                row, the producers: brittlebush, mesquite, prickly pear and saguaro cactus. Above them
+                the primary consumers: harvester ants, grasshopper, kangaroo rat and antelope squirrel.
+                Above those the secondary consumers: grasshopper mouse, praying mantis, collared lizard
+                and Gila woodpecker. Above those the tertiary consumers, the elf owl and the
+                diamondback rattlesnake. At the top, the red-tailed hawk. The grasshopper eats
+                brittlebush, mesquite and prickly pear; the harvester ants eat brittlebush and mesquite.
+                The praying mantis eats both the harvester ants and the grasshopper. One arrow runs
+                sideways within the third row, from the praying mantis to the collared lizard, because
+                the lizard eats the mantis. Most organisms have more than one arrow in and more than
+                one arrow out.</desc>
+            <style>
+                .sw-band  { fill: var(--text-secondary); opacity: 0.055; }
+                .sw-lvl   { font-size: 10px; font-weight: 700; fill: var(--text); text-anchor: end; }
+                .sw-lvls  { font-size: 9px; fill: var(--text-secondary); text-anchor: end; }
+                /* the cut-outs are drawn for a light ground: cream cards and pinned ink in every
+                   theme, as in Figures 3.13 and 3.14 */
+                .sw-card  { fill: #faf6ee; stroke: #d9d0c1; stroke-width: 1.2; }
+                .sw-name  { font-size: 9.5px; font-weight: 700; fill: #2b2233; text-anchor: middle; }
+                .sw-a     { fill: none; stroke: hsl(28 62% 42%); stroke-width: 1.8; stroke-linecap: round; }
+                .sw-h     { fill: hsl(28 62% 42%); }
+                .sw-hdr   { font-size: 11px; font-weight: 700; fill: hsl(28 62% 42%); }
+                [data-theme="dark"] .sw-a   { stroke: hsl(28 70% 70%); }
+                [data-theme="dark"] .sw-h   { fill: hsl(28 70% 70%); }
+                [data-theme="dark"] .sw-hdr { fill: hsl(28 70% 70%); }
+            </style>
+            <text class="sw-hdr" x="16" y="24">Each arrow points from the organism being eaten to the organism eating it.</text>
+
+            <rect class="sw-band" x="180" y="42"  width="630" height="100" rx="8"/>
+            <rect class="sw-band" x="180" y="162" width="630" height="100" rx="8"/>
+            <rect class="sw-band" x="180" y="282" width="630" height="100" rx="8"/>
+            <rect class="sw-band" x="180" y="402" width="630" height="100" rx="8"/>
+            <rect class="sw-band" x="180" y="522" width="630" height="100" rx="8"/>
+
+            <text class="sw-lvl"  x="170" y="88">5 &middot; Quaternary</text>
+            <text class="sw-lvls" x="170" y="101">consumer</text>
+            <text class="sw-lvl"  x="170" y="208">4 &middot; Tertiary</text>
+            <text class="sw-lvls" x="170" y="221">consumers</text>
+            <text class="sw-lvl"  x="170" y="328">3 &middot; Secondary</text>
+            <text class="sw-lvls" x="170" y="341">consumers</text>
+            <text class="sw-lvl"  x="170" y="448">2 &middot; Primary</text>
+            <text class="sw-lvls" x="170" y="461">consumers</text>
+            <text class="sw-lvl"  x="170" y="568">1 &middot; Producers</text>
+            <text class="sw-lvls" x="170" y="581">make their own food</text>
+
+            <path class="sw-a" d="M294.1 527.0 L324.7 502.1"/>
+            <path class="sw-h" d="M330.9 497.0 L327.5 505.5 L321.8 498.6 Z"><title>Brittlebush is eaten by Grasshopper</title></path>
+            <path class="sw-a" d="M238.6 527.0 L238.4 505.0"/>
+            <path class="sw-h" d="M238.4 497.0 L242.9 505.0 L233.9 505.0 Z"><title>Brittlebush is eaten by Harvester ants</title></path>
+            <path class="sw-a" d="M329.9 527.0 L299.3 502.1"/>
+            <path class="sw-h" d="M293.1 497.0 L302.2 498.6 L296.5 505.5 Z"><title>Mesquite is eaten by Harvester ants</title></path>
+            <path class="sw-a" d="M385.4 527.0 L385.6 505.0"/>
+            <path class="sw-h" d="M385.6 497.0 L390.1 505.0 L381.1 505.0 Z"><title>Mesquite is eaten by Grasshopper</title></path>
+            <path class="sw-a" d="M440.5 527.0 L471.3 502.0"/>
+            <path class="sw-h" d="M477.5 497.0 L474.1 505.5 L468.5 498.5 Z"><title>Mesquite is eaten by Kangaroo rat</title></path>
+            <path class="sw-a" d="M533.0 527.0 L533.0 505.0"/>
+            <path class="sw-h" d="M533.0 497.0 L537.5 505.0 L528.5 505.0 Z"><title>Prickly pear is eaten by Kangaroo rat</title></path>
+            <path class="sw-a" d="M588.9 527.0 L619.9 502.0"/>
+            <path class="sw-h" d="M626.1 497.0 L622.7 505.5 L617.1 498.5 Z"><title>Prickly pear is eaten by Antelope squirrel</title></path>
+            <path class="sw-a" d="M716.4 527.0 L706.0 504.3"/>
+            <path class="sw-h" d="M702.6 497.0 L710.0 502.4 L701.9 506.1 Z"><title>Saguaro cactus is eaten by Antelope squirrel</title></path>
+            <path class="sw-a" d="M739.8 527.0 L748.7 385.0"/>
+            <path class="sw-h" d="M749.2 377.0 L753.2 385.3 L744.2 384.7 Z"><title>Saguaro cactus is eaten by Gila woodpecker</title></path>
+            <path class="sw-a" d="M477.9 527.0 L447.3 502.1"/>
+            <path class="sw-h" d="M441.1 497.0 L450.2 498.6 L444.5 505.5 Z"><title>Prickly pear is eaten by Grasshopper</title></path>
+            <path class="sw-a" d="M294.0 416.1 L362.3 372.3"/>
+            <path class="sw-h" d="M369.0 367.9 L364.7 376.0 L359.8 368.5 Z"><title>Harvester ants is eaten by Praying mantis</title></path>
+            <path class="sw-a" d="M400.6 407.0 L407.9 384.6"/>
+            <path class="sw-h" d="M410.4 377.0 L412.2 386.0 L403.6 383.2 Z"><title>Grasshopper is eaten by Praying mantis</title></path>
+            <path class="sw-a" d="M334.3 407.0 L305.8 382.2"/>
+            <path class="sw-h" d="M299.8 377.0 L308.7 378.9 L302.8 385.6 Z"><title>Grasshopper is eaten by Grasshopper mouse</title></path>
+            <path class="sw-a" d="M442.0 421.3 L542.0 366.5"/>
+            <path class="sw-h" d="M549.0 362.7 L544.1 370.5 L539.8 362.6 Z"><title>Grasshopper is eaten by Collared lizard</title></path>
+            <path class="sw-a" d="M536.4 407.0 L547.0 265.0"/>
+            <path class="sw-h" d="M547.6 257.0 L551.5 265.3 L542.5 264.6 Z"><title>Kangaroo rat is eaten by Diamondback</title></path>
+            <path class="sw-a" d="M688.0 407.0 Q704.3 284.1 614.2 241.7"/>
+            <path class="sw-h" d="M607.0 238.3 L616.2 237.7 L612.3 245.8 Z"><title>Antelope squirrel is eaten by Diamondback</title></path>
+            <path class="sw-a" d="M529.3 407.0 Q519.6 287.6 436.1 244.6"/>
+            <path class="sw-h" d="M429.0 240.9 L438.2 240.6 L434.0 248.6 Z"><title>Kangaroo rat is eaten by Elf owl</title></path>
+            <path class="sw-a" d="M677.0 407.0 L647.9 145.0"/>
+            <path class="sw-h" d="M647.0 137.0 L652.4 144.5 L643.4 145.4 Z"><title>Antelope squirrel is eaten by Red-tailed hawk</title></path>
+            <path class="sw-a" d="M481.0 332.0 L541.0 332.0"/>
+            <path class="sw-h" d="M549.0 332.0 L541.0 336.5 L541.0 327.5 Z"><title>Praying mantis is eaten by Collared lizard</title></path>
+            <path class="sw-a" d="M405.5 287.0 L395.7 264.3"/>
+            <path class="sw-h" d="M392.5 257.0 L399.8 262.6 L391.6 266.1 Z"><title>Praying mantis is eaten by Elf owl</title></path>
+            <path class="sw-a" d="M304.0 309.8 L487.6 237.1"/>
+            <path class="sw-h" d="M495.0 234.2 L489.2 241.3 L485.9 232.9 Z"><title>Grasshopper mouse is eaten by Diamondback</title></path>
+            <path class="sw-a" d="M294.9 287.0 L320.4 262.5"/>
+            <path class="sw-h" d="M326.1 257.0 L323.5 265.8 L317.2 259.3 Z"><title>Grasshopper mouse is eaten by Elf owl</title></path>
+            <path class="sw-a" d="M584.8 287.0 L574.5 264.3"/>
+            <path class="sw-h" d="M571.3 257.0 L578.6 262.4 L570.4 266.1 Z"><title>Collared lizard is eaten by Diamondback</title></path>
+            <path class="sw-a" d="M611.9 287.0 L633.8 144.9"/>
+            <path class="sw-h" d="M635.1 137.0 L638.3 145.6 L629.4 144.2 Z"><title>Collared lizard is eaten by Red-tailed hawk</title></path>
+            <path class="sw-a" d="M696.0 298.6 L613.9 249.5"/>
+            <path class="sw-h" d="M607.0 245.4 L616.2 245.7 L611.6 253.4 Z"><title>Gila woodpecker is eaten by Diamondback</title></path>
+            <path class="sw-a" d="M731.4 287.0 L666.0 144.3"/>
+            <path class="sw-h" d="M662.6 137.0 L670.0 142.4 L661.9 146.1 Z"><title>Gila woodpecker is eaten by Red-tailed hawk</title></path>
+            <path class="sw-a" d="M429.0 187.0 L578.7 120.2"/>
+            <path class="sw-h" d="M586.0 117.0 L580.5 124.4 L576.9 116.1 Z"><title>Elf owl is eaten by Red-tailed hawk</title></path>
+            <path class="sw-a" d="M585.1 167.0 L603.0 143.4"/>
+            <path class="sw-h" d="M607.9 137.0 L606.6 146.1 L599.5 140.7 Z"><title>Diamondback is eaten by Red-tailed hawk</title></path>
+
+            <rect class="sw-card" x="592" y="53" width="100" height="78" rx="10"/>
+            <image href="../images/u3/web-hawk.png" x="623.4" y="59.6" width="37.1" height="38.9" preserveAspectRatio="xMidYMid meet"/>
+            <text class="sw-name" x="642" y="112">Red-tailed</text>
+            <text class="sw-name" x="642" y="123">hawk</text>
+            <rect class="sw-card" x="323" y="173" width="100" height="78" rx="10"/>
+            <image href="../images/u3/web-owl.png" x="358.1" y="179.0" width="29.8" height="40.0" preserveAspectRatio="xMidYMid meet"/>
+            <text class="sw-name" x="373" y="237">Elf owl</text>
+            <rect class="sw-card" x="501" y="173" width="100" height="78" rx="10"/>
+            <image href="../images/u3/web-snake.png" x="524.9" y="185.1" width="52.1" height="27.7" preserveAspectRatio="xMidYMid meet"/>
+            <text class="sw-name" x="551" y="237">Diamondback</text>
+            <rect class="sw-card" x="375" y="293" width="100" height="78" rx="10"/>
+            <image href="../images/u3/web-mantis.png" x="404.0" y="301.8" width="42.0" height="34.4" preserveAspectRatio="xMidYMid meet"/>
+            <text class="sw-name" x="425" y="357">Praying mantis</text>
+            <rect class="sw-card" x="198" y="293" width="100" height="78" rx="10"/>
+            <image href="../images/u3/web-mouse.png" x="221.8" y="305.2" width="52.4" height="27.6" preserveAspectRatio="xMidYMid meet"/>
+            <text class="sw-name" x="248" y="352">Grasshopper</text>
+            <text class="sw-name" x="248" y="363">mouse</text>
+            <rect class="sw-card" x="555" y="293" width="100" height="78" rx="10"/>
+            <image href="../images/u3/web-lizard.png" x="578.0" y="305.6" width="53.9" height="26.8" preserveAspectRatio="xMidYMid meet"/>
+            <text class="sw-name" x="605" y="352">Collared</text>
+            <text class="sw-name" x="605" y="363">lizard</text>
+            <rect class="sw-card" x="702" y="293" width="100" height="78" rx="10"/>
+            <image href="../images/u3/web-woodpecker.png" x="740.6" y="299.0" width="22.9" height="40.0" preserveAspectRatio="xMidYMid meet"/>
+            <text class="sw-name" x="752" y="352">Gila</text>
+            <text class="sw-name" x="752" y="363">woodpecker</text>
+            <rect class="sw-card" x="188" y="413" width="100" height="78" rx="10"/>
+            <image href="../images/u3/web-ant.png" x="212.8" y="424.7" width="50.4" height="28.7" preserveAspectRatio="xMidYMid meet"/>
+            <text class="sw-name" x="238" y="477">Harvester ants</text>
+            <rect class="sw-card" x="336" y="413" width="100" height="78" rx="10"/>
+            <image href="../images/u3/web-grasshopper.png" x="360.5" y="424.8" width="51.0" height="28.3" preserveAspectRatio="xMidYMid meet"/>
+            <text class="sw-name" x="386" y="477">Grasshopper</text>
+            <rect class="sw-card" x="483" y="413" width="100" height="78" rx="10"/>
+            <image href="../images/u3/web-kangaroorat.png" x="509.2" y="423.8" width="47.6" height="30.3" preserveAspectRatio="xMidYMid meet"/>
+            <text class="sw-name" x="533" y="477">Kangaroo rat</text>
+            <rect class="sw-card" x="632" y="413" width="100" height="78" rx="10"/>
+            <image href="../images/u3/web-squirrel.png" x="660.1" y="422.5" width="43.7" height="33.0" preserveAspectRatio="xMidYMid meet"/>
+            <text class="sw-name" x="682" y="472">Antelope</text>
+            <text class="sw-name" x="682" y="483">squirrel</text>
+            <rect class="sw-card" x="189" y="533" width="100" height="78" rx="10"/>
+            <image href="../images/u3/web-brittlebush.png" x="216.4" y="543.0" width="45.3" height="31.9" preserveAspectRatio="xMidYMid meet"/>
+            <text class="sw-name" x="239" y="597">Brittlebush</text>
+            <rect class="sw-card" x="335" y="533" width="100" height="78" rx="10"/>
+            <image href="../images/u3/web-mesquite.png" x="364.1" y="541.7" width="41.8" height="34.6" preserveAspectRatio="xMidYMid meet"/>
+            <text class="sw-name" x="385" y="597">Mesquite</text>
+            <rect class="sw-card" x="483" y="533" width="100" height="78" rx="10"/>
+            <image href="../images/u3/web-pricklypear.png" x="513.5" y="540.5" width="38.9" height="37.1" preserveAspectRatio="xMidYMid meet"/>
+            <text class="sw-name" x="533" y="597">Prickly pear</text>
+            <rect class="sw-card" x="687" y="533" width="100" height="78" rx="10"/>
+            <image href="../images/u3/web-saguaro.png" x="725.0" y="539.0" width="23.9" height="40.0" preserveAspectRatio="xMidYMid meet"/>
+            <text class="sw-name" x="737" y="597">Saguaro cactus</text>
+            </svg>
+            <figcaption><b>Figure 3.15</b> &mdash; A Sonoran Desert food web, drawn in the same style as Figures 3.13 and 3.14. Producers along the bottom, the top predator alone at the top. Follow one organism at a time and count the arrows going in and out of it &mdash; almost nothing here has only one food and only one predator. Two things to notice. This web is one level taller than Figure 3.13, so the hawk is a <em>quaternary</em> consumer here rather than a tertiary one: its level depends on the web it is in, not on the hawk. And one arrow runs <em>sideways</em>, from the praying mantis to the collared lizard &mdash; the lizard eats the mantis, so when it does, it is feeding a level higher than its row. Real webs are full of arrows like that.</figcaption>
+        </figure>
+
+        <p>Work through the questions your anchor guide asks about this web, using this version rather than a chain:</p>
+
+        <div class="callout callout-try">
+            <ol>
+                <li><strong>Write down two food chains found in this web.</strong> Each must start at a producer, end at a consumer with nothing above it, and use only arrows that are actually drawn.</li>
+                <li><strong>Name two abiotic and two biotic factors that might affect the grasshopper population.</strong> Remember the distinction from Chapter 3.2 — abiotic means non-living.</li>
+                <li><strong>Name two sets of organisms in competition for resources.</strong> Look for two consumers with an arrow coming from the same producer, or two predators sharing a prey species.</li>
+            </ol>
+        </div>
+
+        <p>Some things worth pulling out of the diagram, in case they are not obvious:</p>
+
+        <ul>
+            <li><strong>Competition is visible in the arrows.</strong> The harvester ants and the grasshopper both eat mesquite: that is <span class="term">interspecific competition</span>, between species. Two grasshoppers eating the same brittlebush are in <span class="term">intraspecific competition</span>, within a species — which you cannot see on this diagram at all, and which is usually the fiercer of the two, because members of the same species need exactly the same things.</li>
+            <li><strong>Multiple paths make a web resilient.</strong> If the harvester ants vanished, the praying mantis would not starve — it also eats grasshoppers. Every alternative arrow is a piece of insurance.</li>
+            <li><strong>But not every species has a spare.</strong> Look for the ones where a single arrow carries everything. Those are where the web is fragile, and the next section is about what happens when one of them is cut.</li>
+        </ul>
+    </section>
+
+    <section id="competition" data-kind="Core" data-standards="HS-LS2-6" data-time="8 min" data-track>
+        <h2>Competition, and why a web is more stable than a chain</h2>
+
+        <p>Arrows in a food web show who eats whom. They also, indirectly, show who is <em>competing</em> — and competition is a limiting factor you met in Chapter 3.2 without seeing where it comes from.</p>
+
+        <div class="tbl-scroll" style="overflow-x:auto;-webkit-overflow-scrolling:touch">
+<table>
+            <thead>
+                <tr><th></th><th>Who is competing</th><th>How to spot it in Figure 3.15</th><th>Why it matters</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Intraspecific</strong></td>
+                    <td>Members of the <em>same</em> species</td>
+                    <td>Invisible — a diagram of species cannot show it</td>
+                    <td>Usually the fiercer of the two, because two individuals of one species need <em>exactly</em> the same food, water, space and mates. This is the competition that produces the density-dependent regulation behind every S-curve.</td>
+                </tr>
+                <tr>
+                    <td><strong>Interspecific</strong></td>
+                    <td><em>Different</em> species</td>
+                    <td>Two consumers with arrows from the same producer, or two predators sharing a prey species</td>
+                    <td>Shapes which species can coexist at all, and where each of them lives. It is why removing one species can make a completely different one more abundant.</td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+
+        <p>Now use that to answer a question that runs through the rest of the unit: <strong>why does a web survive damage better than a chain?</strong></p>
+
+        <p>Take the chain <em>brittlebush &rarr; grasshopper &rarr; praying mantis</em> on its own. Remove the brittlebush and every organism above it starves. There is no alternative, because a chain has no alternatives — that is what makes it a chain.</p>
+
+        <p>Now put it back in the web of Figure 3.15. The grasshopper also eats mesquite and prickly pear. The praying mantis also eats harvester ants. Remove the brittlebush and the numbers wobble, but nothing collapses, because the energy simply flows along other arrows. Every extra connection is a piece of insurance.</p>
+
+        <div class="callout callout-key">
+            <p><strong>This is where the first half of HS-LS2-6 comes from.</strong> The standard says complex interactions in ecosystems maintain relatively consistent numbers and types of organisms in stable conditions. The complexity <em>is</em> the mechanism: a densely connected web has many routes for energy, many alternatives for each consumer, and many density-dependent feedbacks pulling in different directions. All that redundancy is what makes an ecosystem look steady.</p>
+            <p>Which sets up the obvious follow-up question, and it is the one the rest of this chapter answers: <em>are all the connections equally important?</em></p>
+        </div>
+    </section>
+
+    <section id="pull" data-kind="Practice" data-standards="HS-LS2-6" data-time="15 min" data-track>
+        <h2>Pull one thread and see what moves</h2>
+
+        <p>This is the warm-up from your anchor guide, run properly: remove one population, and work out what happens to every other one. Predict before you check — that is the entire value of the exercise.</p>
+
+        <div class="sim" data-sim="u3-food-web">
+            <div class="sim-header">
+                <h4>Pull a thread</h4>
+                <span class="sim-kind">Interactive</span>
+            </div>
+        </div>
+
+        <div class="callout callout-key">
+            <p>If you removed the hawk, the model told you the rabbit is <strong>pulled both ways</strong> — one of its predators is gone, which pushes it up, but the snakes it also has to survive are now booming, which pushes it down. The model refuses to pick a winner.</p>
+            <p>That refusal is not a weakness. Two opposing effects of unknown size cannot be resolved by drawing arrows, and pretending otherwise is how confident predictions turn into Borneo. To find out which effect wins, somebody has to go and do the removal for real and count what happens. That is exactly what the next section is about.</p>
+        </div>
+    </section>
+
+    <section id="paine" data-kind="Case study" data-standards="HS-LS2-6" data-time="12 min" data-track>
+        <h2>Paine's crowbar, and the idea it produced</h2>
+
+        <p>In 1963 a young ecologist named Robert Paine went down to a rocky shore at Mukkaw Bay on the coast of Washington State, marked out a stretch of tide pool, and began throwing starfish into the sea.</p>
+
+        <p>The starfish was <em>Pisaster ochraceus</em>, the ochre sea star, and it eats mussels. Paine removed every one from his experimental plot and kept removing them, every few weeks, for years. Alongside it he left an identical stretch of shore alone as a control. Then he counted how many species lived in each.</p>
+
+        <figure class="diagram">
+            <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="pn-t pn-d">
+                <title id="pn-t">Species in a tide pool with and without the starfish Pisaster</title>
+                <desc id="pn-d">Two lines against year from 1963 to 1973. The control line, where the starfish was left alone, stays flat at fifteen species for the whole period. The experimental line, where every starfish was removed by hand, falls steadily from fifteen species to eight within three years and to about five by the end.</desc>
+                <style>
+                  .f-grid { stroke: var(--border); stroke-width: 1; }
+                  .f-axis { stroke: var(--text-secondary); stroke-width: 1.2; opacity: 0.6; }
+                  .f-vline { stroke: var(--text-secondary); stroke-width: 1; stroke-dasharray: 3 3; opacity: 0.7; }
+                  .f-kline { stroke: var(--red); stroke-width: 1.3; stroke-dasharray: 6 4; opacity: 0.85; }
+                  .f-klab { font-size: 10.5px; fill: var(--red); font-weight: 700; }
+                  .f-band { fill: var(--text-secondary); opacity: 0.07; }
+                  .f-bandlab { font-size: 10px; fill: var(--text-secondary); opacity: 0.9; }
+                  .f-tick { font-size: 10px; fill: var(--text-secondary); }
+                  .f-tick2 { fill: var(--blue); }
+                  .f-axtitle { font-size: 11px; fill: var(--text-secondary); font-weight: 600; }
+                  .f-note { font-size: 10.5px; fill: var(--text); font-weight: 600; }
+                  .f-legend { font-size: 11px; fill: var(--text); }
+                  .f-mark { fill: var(--red); }
+                  .f-a { fill: none; stroke: var(--red); stroke-width: 2.4; stroke-linejoin: round; }
+                  .f-a-dot { fill: var(--red); }
+                  .f-b { fill: none; stroke: var(--blue); stroke-width: 2.2; stroke-linejoin: round; }
+                  .f-b-dot { fill: var(--blue); }
+                  .f-c { fill: none; stroke: var(--text-secondary); stroke-width: 2; stroke-dasharray: 5 4; }
+                  .f-c-dot { fill: var(--text-secondary); }
+                  .f-d { fill: none; stroke: var(--light-teal); stroke-width: 2.2; }
+                  .f-d-dot { fill: var(--light-teal); }
+                </style>
+                <line x1="66" y1="250" x2="678" y2="250" class="f-grid"/>
+                <text x="58" y="253.5" class="f-tick" text-anchor="end">0</text>
+                <line x1="66" y1="186.7" x2="678" y2="186.7" class="f-grid"/>
+                <text x="58" y="190.2" class="f-tick" text-anchor="end">5</text>
+                <line x1="66" y1="123.3" x2="678" y2="123.3" class="f-grid"/>
+                <text x="58" y="126.8" class="f-tick" text-anchor="end">10</text>
+                <line x1="66" y1="60" x2="678" y2="60" class="f-grid"/>
+                <text x="58" y="63.5" class="f-tick" text-anchor="end">15</text>
+                <line x1="66" y1="250" x2="66" y2="254" class="f-axis"/>
+                <text x="66" y="268" class="f-tick" text-anchor="middle">1963</text>
+                <line x1="188.4" y1="250" x2="188.4" y2="254" class="f-axis"/>
+                <text x="188.4" y="268" class="f-tick" text-anchor="middle">1965</text>
+                <line x1="310.8" y1="250" x2="310.8" y2="254" class="f-axis"/>
+                <text x="310.8" y="268" class="f-tick" text-anchor="middle">1967</text>
+                <line x1="433.2" y1="250" x2="433.2" y2="254" class="f-axis"/>
+                <text x="433.2" y="268" class="f-tick" text-anchor="middle">1969</text>
+                <line x1="555.6" y1="250" x2="555.6" y2="254" class="f-axis"/>
+                <text x="555.6" y="268" class="f-tick" text-anchor="middle">1971</text>
+                <line x1="678" y1="250" x2="678" y2="254" class="f-axis"/>
+                <text x="678" y="268" class="f-tick" text-anchor="middle">1973</text>
+                <line x1="66" y1="22" x2="66" y2="250" class="f-axis"/>
+                <line x1="66" y1="250" x2="678" y2="250" class="f-axis"/>
+                <path d="M66 60 L127.2 60 L188.4 60 L249.6 60 L310.8 60 L372 60 L433.2 60 L494.4 60 L555.6 60 L616.8 60 L678 60" class="f-b"/>
+                <circle cx="66" cy="60" r="3" class="f-b-dot"/>
+                <circle cx="127.2" cy="60" r="3" class="f-b-dot"/>
+                <circle cx="188.4" cy="60" r="3" class="f-b-dot"/>
+                <circle cx="249.6" cy="60" r="3" class="f-b-dot"/>
+                <circle cx="310.8" cy="60" r="3" class="f-b-dot"/>
+                <circle cx="372" cy="60" r="3" class="f-b-dot"/>
+                <circle cx="433.2" cy="60" r="3" class="f-b-dot"/>
+                <circle cx="494.4" cy="60" r="3" class="f-b-dot"/>
+                <circle cx="555.6" cy="60" r="3" class="f-b-dot"/>
+                <circle cx="616.8" cy="60" r="3" class="f-b-dot"/>
+                <circle cx="678" cy="60" r="3" class="f-b-dot"/>
+                <path d="M66 60 L127.2 85.3 L188.4 110.7 L249.6 148.7 L310.8 148.7 L372 161.3 L433.2 174 L494.4 174 L555.6 186.7 L616.8 186.7 L678 186.7" class="f-a"/>
+                <circle cx="66" cy="60" r="3" class="f-a-dot"/>
+                <circle cx="127.2" cy="85.3" r="3" class="f-a-dot"/>
+                <circle cx="188.4" cy="110.7" r="3" class="f-a-dot"/>
+                <circle cx="249.6" cy="148.7" r="3" class="f-a-dot"/>
+                <circle cx="310.8" cy="148.7" r="3" class="f-a-dot"/>
+                <circle cx="372" cy="161.3" r="3" class="f-a-dot"/>
+                <circle cx="433.2" cy="174" r="3" class="f-a-dot"/>
+                <circle cx="494.4" cy="174" r="3" class="f-a-dot"/>
+                <circle cx="555.6" cy="186.7" r="3" class="f-a-dot"/>
+                <circle cx="616.8" cy="186.7" r="3" class="f-a-dot"/>
+                <circle cx="678" cy="186.7" r="3" class="f-a-dot"/>
+                <text x="372" y="294" class="f-axtitle" text-anchor="middle">Year</text>
+                <text transform="translate(14 136) rotate(-90)" class="f-axtitle" text-anchor="middle">Number of species present</text>
+                <line x1="78" y1="36" x2="98" y2="36" class="f-b"/>
+                <text x="104" y="40" class="f-legend">Pisaster left in place (control)</text>
+                <line x1="78" y1="52" x2="98" y2="52" class="f-a"/>
+                <text x="104" y="56" class="f-legend">Pisaster removed (experiment)</text>
+            </svg>
+            <figcaption><b>Figure 3.16</b> — Species richness in the control plot and the removal plot. The control holds steady at about fifteen species. The removal plot loses roughly half of them within three years. Redrawn from R. T. Paine, <em>Food web complexity and species diversity</em>, The American Naturalist 100:65&ndash;75 (<strong>1966</strong>), and his subsequent monitoring of the same plots.</figcaption>
+        </figure>
+
+        <div class="callout callout-note">
+            <p><strong>A citation correction worth making.</strong> Several versions of this figure in circulation — including the one on your class slides and in the anchor guide — date Paine's paper to <em>1996</em>. Volume 100 of <em>The American Naturalist</em> was published in <strong>1966</strong>. It is a thirty-year error on the founding paper of the whole keystone-species idea, and it matters for more than pedantry: 1966 places the work at the start of experimental field ecology, before anyone had established that you could test an ecosystem by breaking a piece of it. In 1996 it would be an unremarkable follow-up study. Check the date if you cite it.</p>
+        </div>
+
+        <p><strong>What happened, and why.</strong> Without <em>Pisaster</em> eating them, the mussels grew, spread, and took over the rock. Mussels are extremely good competitors for space — they simply cover everything — and space on a rock is the limiting resource for barnacles, limpets, anemones, algae and chitons. One by one they were crowded out. Paine had not removed those species. He had removed the thing that was stopping the mussels from removing them.</p>
+
+        <p>Paine's conclusion was that some species have an influence on their community far out of proportion to their abundance. He called such a species a <span class="term">keystone species</span>, borrowing an image from architecture.</p>
+
+        <figure class="diagram">
+            <div data-sim="u3-keystone"></div>
+            <figcaption><b>Figure 3.17</b> &mdash; The metaphor, and the experiment it names. The keystone is the wedge at the top of an arch. It carries no more weight than any other stone and there is nothing special about the rock it is cut from. Take it out and every other stone falls &mdash; not because they were weak, but because the keystone was what held them in position. Paine chose the word because his sea star did the same thing to a shore: one species, not the most numerous, holding a whole community in place. The keystone and the sea stars are drawn in the same ochre on purpose. Predict first, then pull it out.</figcaption>
+        </figure>
+
+        <div class="callout callout-key">
+            <p>A <strong>keystone species</strong> has an effect on its community that is disproportionately large compared with its abundance. Remove it and the structure of the community changes, often losing a great deal of diversity.</p>
+            <p>Two traps in that definition. First, <strong>keystone is not the same as top predator</strong> — some keystones are herbivores (the sea otter's kelp, elephants pushing over trees to keep savanna open) and some are plants. Second, <strong>keystone is not the same as abundant</strong>. <em>Pisaster</em> was never the commonest animal on that shore; that is precisely the point. The commonest species is often called a <em>dominant</em> species, which is a different idea entirely.</p>
+        </div>
+
+        <p>Hear it from the scientists themselves. In this short film from HHMI BioInteractive, Robert Paine describes the starfish experiment, and James Estes shows how sea otters do the same job in the kelp forests of the North Pacific — by eating the sea urchins that would otherwise strip the kelp bare. Watch for the moment the idea gets its name.</p>
+
+        <div class="video" data-video="hRGg5it5FMI" data-title="Some Animals Are More Equal than Others: Keystone Species and Trophic Cascades" data-source="HHMI BioInteractive · CC BY-NC-SA 4.0"></div>
+
+        <p>Now use the definition properly. Your guide asks you to identify a possible keystone species in the desert web of Figure 3.15 and back the claim with evidence and reasoning. A good answer looks like this:</p>
+
+        <div class="callout callout-example">
+            <p><strong>Claim.</strong> The saguaro cactus is a keystone species in this web.</p>
+            <p><strong>Evidence.</strong> In Figure 3.15, arrows run from the saguaro to the antelope squirrel and to the Gila woodpecker. In the real desert it does far more: the woodpecker excavates nest holes in the saguaro's trunk, and when it abandons them the elf owl moves in. The elf owl has no other nest site in this web.</p>
+            <p><strong>Reasoning.</strong> Remove the saguaro and you do not only remove a food source. You remove the only nesting structure for two of the four secondary consumers and, through the elf owl, cut a path to a tertiary consumer. The saguaro is not the most numerous plant in the desert — brittlebush and mesquite far outnumber it — so its influence is out of all proportion to its abundance, which is the definition.</p>
+            <p><strong>What would test it.</strong> Paine's method: find two comparable areas, remove saguaros from one, leave the other alone, and count species in both for several years. Note how much better that is than arguing from the diagram — and note that nobody would get permission to do it, which is why most keystone evidence comes from removals that happened by accident.</p>
+        </div>
+
+        <h3>Where this goes next</h3>
+
+        <p>Paine cut one thread deliberately and watched half a community disappear. That is a controlled experiment, on twenty metres of rock, and it is about as clean as ecology ever gets.</p>
+
+        <p>Chapter 3.5 takes the same idea out into the world, where nothing is controlled. It follows what happened in Borneo when a public-health programme cut a thread nobody knew was there; it looks at species dropped into ecosystems that had no defence against them; and it finishes with the hardest question in this unit, which HS-LS2-6 asks you directly. When conditions change and an ecosystem is knocked over, does it get back up as the same ecosystem — or as a different one wearing the same name?</p>
+    </section>
+
+    <section id="check" data-kind="Practice" data-standards="HS-LS2-6" data-time="10 min" data-track>
+        <h2>Check your understanding</h2>
+
+        <div class="callout callout-try">
+            <ol>
+                <li>Explain why an arrow in a food web points from the organism eaten to the organism eating it, and what would be wrong with drawing it the other way.</li>
+                <li>A lake contains 50,000 kcal of algae. Using the ten-per-cent rule, estimate the energy available to a fish that eats the animals that eat the algae. Show each step.</li>
+                <li>Use the ten-per-cent rule to explain why there is no such thing as a common top predator, and why a national park has to be large to keep one.</li>
+                <li>Define a keystone species. Then explain why "the most abundant species in the ecosystem" is a wrong answer, using <em>Pisaster</em> as your example.</li>
+                <li>Paine's experiment had a control plot. Explain precisely what would have been unknowable without it.</li>
+                <li>A student says "removing a predator always increases its prey". Using your result from the "pull a thread" interactive, evaluate that claim. Give one case where it holds and one where it does not.</li>
+                <li>The Sonoran web in Figure 3.15 shows fifteen species. A real desert has thousands. Does that make the diagram useless? Argue both sides in three sentences, then say which you find more convincing.</li>
+            </ol>
+        </div>
+
+        <h3>Quick check</h3>
+
+        <div class="quiz" data-quiz>
+
+            <div class="quiz-q" data-review="webs">
+                <div class="quiz-variant" data-answer="3">
+                    <p class="quiz-stem">A student draws an arrow from the hawk to the mouse, saying it shows that the hawk eats the mouse. What is wrong?</p>
+                    <ol class="quiz-options">
+                        <li data-why="Direction is the entire content of the arrow. A web drawn with arrows pointing either way says nothing at all.">Nothing — arrows in a web can point either way</li>
+                        <li data-why="Hawks eat both mice and snakes. The problem is the direction of the arrow, not the diet.">Hawks eat snakes, not mice</li>
+                        <li>The arrow should run mouse to hawk, because it follows the energy rather than pointing at the food</li>
+                        <li data-why="Energy does not travel back into the mouse. Decomposers return nutrients to the soil, and that is a separate part of the picture.">It should have arrowheads at both ends</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>This trips people up constantly, because "the hawk eats the mouse" naturally points the other way in English. The arrow is not a sentence — it is a route for energy, and energy travels out of the eaten and into the eater.</p>
+                    </div>
+                </div>
+
+                <div class="quiz-variant" data-answer="1">
+                    <p class="quiz-stem">Figure 3.13 draws an arrow running from the rabbit to the snake. What does that arrow claim?</p>
+                    <ol class="quiz-options">
+                        <li>That the snake eats the rabbit — the arrow runs the way the energy travels</li>
+                        <li data-why="That reads the arrow as though it pointed at the food. It points away from the organism being eaten, not towards it.">That the rabbit eats the snake, since the arrow starts at the rabbit</li>
+                        <li data-why="Competition shows up as two arrows leaving the same organism, not as one arrow joining two consumers.">That the rabbit and the snake compete for the same food</li>
+                        <li data-why="An arrow between them is exactly what puts the snake a level above the rabbit. Organisms on one level have no arrow between them.">That the rabbit and the snake sit on the same trophic level</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>Every arrow in a web carries the same single piece of information, and it is carried by the direction alone. Read it out loud as "eaten by" rather than "eats" and the whole diagram stops flipping around.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-q" data-review="energy">
+                <div class="quiz-variant" data-answer="2">
+                    <p class="quiz-stem">A lake holds 50,000 kcal of algae. Using the ten-per-cent rule, roughly how much reaches a fish that eats the animals that eat the algae?</p>
+                    <ol class="quiz-options">
+                        <li data-why="That is one step. The fish is two steps above the algae — count the arrows you crossed.">5,000 kcal</li>
+                        <li>500 kcal</li>
+                        <li data-why="The rule keeps 10%, it does not remove 10%. Almost all the energy is lost at each step, not almost none.">45,000 kcal</li>
+                        <li data-why="That is three steps. There are only two between the algae and this fish.">50 kcal</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>50,000 &rarr; 5,000 &rarr; 500. Two steps, two divisions by ten. Counting the steps carefully is where most of the marks are in this kind of question; the arithmetic is the easy part.</p>
+                    </div>
+                </div>
+
+                <div class="quiz-variant" data-answer="3">
+                    <p class="quiz-stem">A hawk at the fourth trophic level puts on 8 kcal of body mass. Running the ten-per-cent rule backwards, roughly how much energy did the producers underneath it have to capture?</p>
+                    <ol class="quiz-options">
+                        <li data-why="That is two transfers. A level-four consumer sits three transfers above the producers, not two.">800 kcal</li>
+                        <li data-why="That is a single transfer, which would only take you down to level three.">80 kcal</li>
+                        <li>8,000 kcal</li>
+                        <li data-why="That is four transfers. Count the arrows between level 1 and level 4 in Figure 3.14 — there are three.">80,000 kcal</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>Going down the pyramid you multiply by ten at each step, because roughly nine tenths of what the lower level held never arrived. This is the arithmetic behind the tonne of grass standing somewhere to support one hawk.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-q" data-review="desert">
+                <div class="quiz-variant" data-answer="4">
+                    <p class="quiz-stem">In the Sonoran web, if the harvester ants disappeared, the praying mantis would probably survive. Why?</p>
+                    <ol class="quiz-options">
+                        <li data-why="Nothing in the web shows a mantis eating plants, and you can only use arrows that are actually drawn.">It would start eating plants instead</li>
+                        <li data-why="Reproducing quickly cannot replace food. This confuses a population's growth rate with what it has to eat.">It reproduces fast enough to replace its losses</li>
+                        <li data-why="The mantis is not at the top of this web, and being a top predator would not help it find a meal.">It sits at the top of the web, so nothing below affects it</li>
+                        <li>It also eats grasshoppers, and every alternative arrow is a piece of insurance</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>That redundancy is why a web survives damage that would destroy a chain. Now go the other way and look for species in Figure 3.15 where a single arrow carries everything — those are where the web is fragile, and cutting one of those is what the rest of the chapter is about.</p>
+                    </div>
+                </div>
+
+                <div class="quiz-variant" data-answer="2">
+                    <p class="quiz-stem">The praying mantis can lose the harvester ants because it has somewhere else to feed. Which of these consumers in Figure 3.15 has no such alternative?</p>
+                    <ol class="quiz-options">
+                        <li data-why="Two arrows reach the kangaroo rat, from mesquite and from prickly pear. Losing one still leaves it a meal.">The kangaroo rat</li>
+                        <li>The Gila woodpecker — the saguaro is the only arrow reaching it</li>
+                        <li data-why="Three arrows reach the grasshopper, from brittlebush, mesquite and prickly pear. It is one of the best-insured consumers in the web.">The grasshopper</li>
+                        <li data-why="Three prey species are drawn running into the elf owl. Its weak point in the real desert is the nest hole, not the food.">The elf owl</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>Counting the arrows <em>into</em> a species is how you find where a web is thin. One arrow in means one thing standing between that species and starvation, and those are the threads worth worrying about before any of the others.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-q" data-review="competition">
+                <div class="quiz-variant" data-answer="1">
+                    <p class="quiz-stem">Which kind of competition cannot be seen anywhere on a food-web diagram, even though it is usually the fiercer of the two?</p>
+                    <ol class="quiz-options">
+                        <li>Intraspecific — two members of one species need exactly the same things, and a diagram of species cannot show it</li>
+                        <li data-why="Interspecific competition is the visible kind: two consumers with arrows coming from the same producer.">Interspecific, because different species are drawn in different places</li>
+                        <li data-why="Decomposers are left off most diagrams for space, but competition with them is not what makes this the fiercer kind.">Competition with decomposers, which are left off the diagram</li>
+                        <li data-why="Shared arrows show competition between species only. Competition inside a species is invisible on any species-level diagram.">None — every kind of competition shows up as a shared arrow</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>Two grasshoppers on the same brittlebush need identical food, water, space and mates — nothing else in the desert overlaps with a grasshopper that exactly. This is the competition that produces the density-dependent regulation behind every S-curve in Chapter 3.2.</p>
+                    </div>
+                </div>
+
+                <div class="quiz-variant" data-answer="4">
+                    <p class="quiz-stem">In Figure 3.15 both the elf owl and the diamondback have arrows reaching them from the kangaroo rat and from the grasshopper mouse. What does that pattern show?</p>
+                    <ol class="quiz-options">
+                        <li data-why="Intraspecific competition is between members of one species, and no diagram drawn species by species can show it.">Intraspecific competition, since both are predators of the same kind</li>
+                        <li data-why="No arrow runs between the two of them. Sharing a prey species is not the same as eating one another.">That the diamondback preys on the elf owl</li>
+                        <li data-why="Being eaten by two predators does not make a species a keystone. The test is the size of its effect set against the size of its population.">That the kangaroo rat is a keystone species</li>
+                        <li>Interspecific competition — two predators drawing on the same prey are in competition, although no arrow joins them</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>Competition is never drawn in a food web. You infer it from arrows that share an end, which is why it is easy to read a web for a year and never notice it. It is also why removing one species can make a completely different one more abundant.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-q" data-review="pull">
+                <div class="quiz-variant" data-answer="3">
+                    <p class="quiz-stem">Remove the hawk, and the model refuses to say whether rabbit numbers go up or down. Why?</p>
+                    <ol class="quiz-options">
+                        <li data-why="Rabbits are affected twice over, which is the whole difficulty. Being unaffected would make this easy.">Rabbits are not affected by hawks at all</li>
+                        <li data-why="This is the claim the exercise is designed to break. Sometimes it holds; here two effects fight each other.">Removing a predator always increases its prey, so the model must be wrong</li>
+                        <li>Two effects pull opposite ways — one predator gone, but the snakes booming — and arrows cannot say which is bigger</li>
+                        <li data-why="A bigger web adds more arrows, not an answer to this one. The problem is the size of two effects, not the number of species.">The web is too small, and a bigger one would give an answer</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>That refusal is a strength, not a limitation. Two opposing effects of unknown size cannot be settled by drawing arrows, and pretending otherwise is how confident predictions turn into Borneo. Somebody has to do the removal for real and count what happens — which is exactly what Paine did.</p>
+                    </div>
+                </div>
+
+                <div class="quiz-variant" data-answer="1">
+                    <p class="quiz-stem">Take the snake out of the web in Figure 3.13. What happens to the mouse?</p>
+                    <ol class="quiz-options">
+                        <li>It cannot be settled from the diagram — one predator is gone, but the hawk has lost a prey species and may take more mice</li>
+                        <li data-why="That is the claim this exercise is built to break. It holds sometimes, but here a second effect pushes the other way and the diagram cannot weigh them.">It must rise, because one of its predators has been removed</li>
+                        <li data-why="That effect is real, but its size is unknown and it is fighting an opposite one. Asserting it wins is the same mistake in the other direction.">It must fall, because the hawk will now hunt mice much harder</li>
+                        <li data-why="Nothing about removing the snake changes what the mouse eats. The grass and wildflowers are untouched.">It must fall, because there is less grass to go round</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>An arrow records that a relationship exists. It records nothing about how strong it is, and two effects of unknown strength pointing opposite ways have no answer on paper. Somebody has to remove the snake and count the mice.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-q" data-review="paine">
+                <div class="quiz-variant" data-answer="4">
+                    <p class="quiz-stem"><em>Pisaster</em> was never the commonest animal on Paine's shore. Does that count against calling it a keystone species?</p>
+                    <ol class="quiz-options">
+                        <li data-why="Backwards. A keystone matters more than its numbers suggest, not less.">Yes — a keystone species has to be the most abundant one present</li>
+                        <li data-why="Some keystones are herbivores or plants: elephants pushing over trees to keep savanna open, or the sea otter protecting kelp.">Yes — a keystone species has to be the top predator</li>
+                        <li data-why="Whether it is a predator is not the test. The test is the size of its effect measured against the size of its population.">It depends — only predators can be keystone species</li>
+                        <li>No — the definition is an effect out of proportion to abundance, so being uncommon is the point</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>The commonest species has its own name — a <em>dominant</em> species — and it is a different idea entirely. Think of the arch: the keystone carries no more weight than any other block, and there is nothing special about the stone. Take it out and the rest fall, because it was holding them in position.</p>
+                    </div>
+                </div>
+
+                <div class="quiz-variant" data-answer="2">
+                    <p class="quiz-stem">Brittlebush and mesquite far outnumber the saguaro in the Sonoran Desert. Which is the better candidate for a keystone species, and why?</p>
+                    <ol class="quiz-options">
+                        <li data-why="Being the commonest producer makes brittlebush a dominant species, which is a different idea entirely.">Brittlebush, because the most abundant producer supports the most consumers</li>
+                        <li>The saguaro, because it is uncommon and yet supplies the only nest sites for the Gila woodpecker and the elf owl</li>
+                        <li data-why="Keystones need not be predators — elephants keeping savanna open and the otter's kelp are the standard cases — and a plant can certainly be one.">Neither, because a plant cannot be a keystone species</li>
+                        <li data-why="Eating widely makes a predator well insured, not keystone. The test is the size of its effect measured against the size of its population.">The diamondback, because it preys on five species and so touches most of the web</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>Abundance and influence are two different measurements, and a keystone is defined by the gap between them. The saguaro's influence is largely structural rather than nutritional — it is what the desert nests in, not only what it eats.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-q" data-review="paine">
+                <div class="quiz-variant" data-answer="2">
+                    <p class="quiz-stem">Paine left an identical stretch of shore untouched alongside his removal plot. What would have been unknowable without it?</p>
+                    <ol class="quiz-options">
+                        <li data-why="He counted those in the removal plot itself. The control answers a different question.">How many sea stars were there before he started</li>
+                        <li>Whether the species loss was caused by removing the sea stars, or by something affecting the whole coast at that time</li>
+                        <li data-why="That came out of the removal plot, where the mussels took over the rock. The control shows what happens when they are held back.">Whether mussels can outcompete barnacles for space</li>
+                        <li data-why="How long to run the study was his choice, and the calendar would have recorded it either way.">How many years the experiment needed to run</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>Without a control, "half the species disappeared" is only a correlation with the removal — a storm, a warm year or a disease would produce the same result. The control makes the comparison fair, and it is why one experiment on twenty metres of rock is about as clean as ecology ever gets.</p>
+                    </div>
+                </div>
+
+                <div class="quiz-variant" data-answer="3">
+                    <p class="quiz-stem">Suppose you could test the claim that the saguaro is a keystone species. Which design would let you say the saguaro caused any species loss you found?</p>
+                    <ol class="quiz-options">
+                        <li data-why="One plot measured twice cannot separate the removal from a drought, a disease or a warm decade that would have hit the plot anyway.">Count the species in one desert plot, remove the saguaros, and count again five years later</li>
+                        <li data-why="A survey finds places where saguaros and species happen to occur together. That is a correlation, which is exactly what Paine's removal was designed to get past.">Survey many desert sites and check whether those with more saguaros hold more species</li>
+                        <li>Remove the saguaros from one plot, leave a comparable plot untouched, and count species in both for several years</li>
+                        <li data-why="An untouched plot on its own is a control with nothing to compare against. Without a removal there is no treatment to judge.">Watch one untouched plot for several years and record every species that disappears</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>A control plot has to carry everything the experimental plot carries except the one thing you changed — same shore, same weather, same years. Which is also why most keystone evidence comes from removals that happened by accident: nobody would be given permission to clear the saguaros.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+<script src="../assets/toc.js?v=330"></script>
+<script src="../assets/course.js?v=330"></script>
+</body>
+</html>

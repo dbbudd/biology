@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en-GB" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Present — Biology</title>
+<script>
+/* Slide and presenter windows for the Present tool. Opened by assets/present.js
+   with ?session=…&role=audience|presenter|single&v=<asset version>.
+   The theme follows the reader; the version query keeps a cached old script
+   from being paired with a new one. */
+(function () {
+    var v = (new URLSearchParams(location.search).get('v') || '1').replace(/[^\w.-]/g, '');
+    window.PRESENT_ASSET_V = v;
+    ['assets/course.css', 'assets/present.css'].forEach(function (href) {
+        var l = document.createElement('link');
+        l.rel = 'stylesheet';
+        l.href = href + '?v=' + v;
+        document.head.appendChild(l);
+    });
+})();
+</script>
+<script>
+/* Follow the reader's theme: the one it saved, else the system's. A change made
+   in the reader while this page is open arrives as a storage event. */
+(function () {
+    function apply(t) {
+        if (t !== 'light' && t !== 'sepia' && t !== 'dark')
+            t = window.matchMedia && matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', t);
+        window.dispatchEvent(new CustomEvent('themechange', { detail: { theme: t } }));
+    }
+    var t = null;
+    try { t = localStorage.getItem('bio_theme'); } catch (e) { /* storage blocked */ }
+    apply(t);
+    window.addEventListener('storage', function (e) { if (e.key === 'bio_theme') apply(e.newValue); });
+})();
+</script>
+</head>
+<body class="present-page" data-root="./">
+
+<div class="present-msg" id="present-msg" role="status">
+    <h1>Getting the slides ready…</h1>
+    <div class="prm-bar"><i></i></div>
+</div>
+<noscript><p style="color:#fff;padding:2rem">The slides need JavaScript to be switched on.</p></noscript>
+
+<script>
+(function () {
+    var v = window.PRESENT_ASSET_V;
+    ['assets/toc.js', 'assets/unit-content.js', 'assets/present-core.js', 'assets/present-player.js', 'assets/present-page.js']
+        .forEach(function (src) {
+            var s = document.createElement('script');
+            s.src = src + '?v=' + v;
+            s.async = false;                         // run in order
+            document.body.appendChild(s);
+        });
+})();
+</script>
+</body>
+</html>

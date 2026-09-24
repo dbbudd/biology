@@ -1,0 +1,117 @@
+/* =============================================================
+   UNIT OVERVIEW PAGES — standards, learning targets, activities
+   Built by assets/overview.js from plain lists in each overview.
+   Colours use the unit's hue (--unit-h, set on <main>) through the
+   per-theme --u-sat / --u-light / --u-soft values in course.css.
+   ============================================================= */
+
+/* ----- the unit's chapters: on an overview none is "ahead", all are links ----- */
+.main .progression li.ahead { opacity: 1; }
+.main .progression li .step-num { color: hsl(var(--unit-h, 210) var(--u-sat) var(--u-light)); font-weight: 700; }
+
+/* ----- a chapter number in the prose, drawn like the target pills ----- */
+.main a.ch-pill {
+    display: inline-block; font-size: 0.78em; font-weight: 700; line-height: 1.25; text-decoration: none;
+    min-width: 2.3em; text-align: center; padding: 0.1em 0.5em; border-radius: 999px; vertical-align: 0.08em;
+    color: hsl(var(--unit-h, 210) var(--u-sat) var(--u-light));
+    border: 1px solid hsl(var(--unit-h, 210) var(--u-sat) var(--u-light) / 0.4);
+}
+.main a.ch-pill:hover { background: hsl(var(--unit-h, 210) var(--u-sat) var(--u-light) / var(--u-soft)); }
+
+/* ----- the unit's standards ----- */
+.std-cards { display: grid; gap: 0.8rem; margin: 1.2rem 0 1.4rem; }
+.std-card {
+    border: 1px solid var(--border); border-left: 4px solid hsl(var(--unit-h, 210) var(--u-sat) var(--u-light));
+    border-radius: 12px; padding: 0.95rem 1.15rem 1rem; background: var(--bg);
+    scroll-margin-top: 80px;
+}
+.std-card-top { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.7rem; }
+.std-card-title { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-secondary); }
+.main .std-card p.std-card-q { font-size: 1.04rem; font-weight: 650; line-height: 1.4; margin: 0.55rem 0 0.35rem; color: var(--text); }
+.main .std-card p.std-card-text { font-size: 0.86rem; line-height: 1.55; margin: 0; color: var(--text-secondary); }
+mark.std-verb {
+    background: hsl(var(--unit-h, 210) var(--u-sat) var(--u-light) / var(--u-soft)); color: var(--text);
+    font-weight: 700; padding: 0.05em 0.25em; border-radius: 4px;
+}
+.std-card-chs { display: flex; flex-wrap: wrap; align-items: center; gap: 0.3rem; margin-top: 0.7rem; }
+.std-card-chs > span {
+    font-size: 0.64rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--text-secondary); margin-right: 0.2rem;
+}
+.std-card-chs a {
+    font-size: 0.78rem; font-weight: 700; text-decoration: none; min-width: 2.4em; text-align: center;
+    padding: 0.18rem 0.5rem; border-radius: 999px;
+    color: hsl(var(--unit-h, 210) var(--u-sat) var(--u-light));
+    border: 1px solid hsl(var(--unit-h, 210) var(--u-sat) var(--u-light) / 0.4);
+}
+.std-card-chs a:hover { background: hsl(var(--unit-h, 210) var(--u-sat) var(--u-light) / var(--u-soft)); }
+
+/* ----- learning targets ----- */
+.tgt-group {
+    border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
+    margin: 1rem 0 1.1rem; background: var(--bg);
+}
+.main .tgt-group > h3 {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.7rem;
+    margin: 0; padding: 0.75rem 1rem; font-size: 1rem;
+    background: hsl(var(--unit-h, 210) var(--u-sat) var(--u-light) / calc(var(--u-soft) * 0.6));
+    border-bottom: 1px solid var(--border);
+}
+.tgt-stds { display: inline-flex; flex-wrap: wrap; gap: 0.3rem; }
+.main ul.targets { list-style: none; margin: 0; padding: 0.55rem 1rem 0.7rem; }
+/* a checklist look: a hollow square in the unit's colour, not a control */
+.main ul.targets > li {
+    position: relative; margin: 0; padding: 0.38rem 0 0.38rem 1.65rem;
+    font-size: 0.93rem; line-height: 1.5;
+}
+.main ul.targets > li::before {
+    content: ''; position: absolute; left: 0.1rem; top: 0.72em;
+    width: 0.78rem; height: 0.78rem; box-sizing: border-box; border-radius: 3px;
+    border: 2px solid hsl(var(--unit-h, 210) var(--u-sat) var(--u-light) / 0.75);
+}
+.tgt-kind {
+    display: inline-block; vertical-align: 0.1em; margin-left: 0.15rem;
+    font-size: 0.6rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 0.12rem 0.42rem; border-radius: 5px; cursor: help;
+}
+.tgt-sep { background: rgba(20, 80, 158, 0.12); color: var(--blue); }
+.tgt-cc { background: rgba(178, 106, 0, 0.14); color: #8a5300; }
+[data-theme="dark"] .tgt-sep { background: rgba(143, 176, 208, 0.18); color: #9dc4e8; }
+[data-theme="dark"] .tgt-cc { background: rgba(224, 183, 85, 0.16); color: #e0b755; }
+[data-theme="sepia"] .tgt-cc { color: #7a4a10; }
+.tgt-where { display: inline-flex; flex-wrap: wrap; gap: 0.25rem; vertical-align: 0.08em; margin-left: 0.2rem; }
+.tgt-where a {
+    font-size: 0.72rem; font-weight: 700; line-height: 1.2; text-decoration: none;
+    min-width: 2.3em; text-align: center; padding: 0.14rem 0.45rem; border-radius: 999px;
+    color: hsl(var(--unit-h, 210) var(--u-sat) var(--u-light));
+    border: 1px solid hsl(var(--unit-h, 210) var(--u-sat) var(--u-light) / 0.4);
+}
+.tgt-where a:hover { background: hsl(var(--unit-h, 210) var(--u-sat) var(--u-light) / var(--u-soft)); }
+
+/* ----- what you will do ----- */
+.do-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 0.7rem; margin: 1.1rem 0 1.4rem; }
+.do-card {
+    display: flex; flex-direction: column; gap: 0.4rem;
+    border: 1px solid var(--border); border-radius: 12px; padding: 0.85rem 1rem 0.8rem;
+    background: var(--bg); color: var(--text); text-decoration: none;
+    transition: border-color 0.15s, transform 0.15s;
+}
+a.do-card:hover { border-color: hsl(var(--unit-h, 210) var(--u-sat) var(--u-light)); transform: translateY(-1px); }
+.do-ch { font-size: 0.78rem; font-weight: 700; line-height: 1.3; color: var(--text-secondary); }
+.do-ch b { color: hsl(var(--unit-h, 210) var(--u-sat) var(--u-light)); margin-right: 0.15rem; }
+.do-text { font-size: 0.9rem; line-height: 1.45; }
+.do-go { margin-top: auto; padding-top: 0.2rem; font-size: 0.74rem; font-weight: 700; color: hsl(var(--unit-h, 210) var(--u-sat) var(--u-light)); }
+
+/* ----- the lesson table (Unit 6) ----- */
+.lesson-table td:first-child { font-weight: 700; white-space: nowrap; color: hsl(var(--unit-h, 210) var(--u-sat) var(--u-light)); }
+.lesson-table td:last-child a {
+    display: inline-block; margin: 0.12rem 0.1rem 0.12rem 0; white-space: nowrap;
+    font-size: 0.78rem; line-height: 1.3; text-decoration: none; color: var(--text);
+    padding: 0.2rem 0.55rem; border-radius: 999px; background: var(--bg-surface); border: 1px solid var(--border);
+}
+.lesson-table td:last-child a:hover { border-color: hsl(var(--unit-h, 210) var(--u-sat) var(--u-light)); }
+
+@media print {
+    .std-card, .tgt-group, .do-card { break-inside: avoid; }
+    .do-go { display: none; }
+}

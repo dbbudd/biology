@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Replacement Queue — Biology</title>
+<link rel="stylesheet" href="../assets/course.css?v=330">
+<script>if('scrollRestoration' in history)history.scrollRestoration='manual';</script>
+<style>
+    .rq-summary { display:flex; gap:0.5rem; flex-wrap:wrap; margin:0 0 1.5rem; }
+    .rq-stat { border:1px solid var(--border); border-radius:10px; padding:0.6rem 0.9rem;
+               min-width:96px; }
+    .rq-stat b { display:block; font-size:1.5rem; line-height:1.1; }
+    .rq-stat span { font-size:0.68rem; letter-spacing:0.06em; text-transform:uppercase;
+                    color:var(--text-secondary); }
+    .rq-group { margin:2rem 0 0; }
+    .rq-group h2 { margin-bottom:0.3rem; }
+    .rq-why { font-size:0.8rem; color:var(--text-secondary); margin:0 0 0.9rem; }
+    .rq-grid { display:grid; gap:0.9rem;
+               grid-template-columns:repeat(auto-fill,minmax(190px,1fr)); }
+    .rq-item { border:1px solid var(--border); border-radius:10px; overflow:hidden;
+               display:flex; flex-direction:column; }
+    .rq-item img { width:100%; height:130px; object-fit:contain; background:var(--bg-surface);
+                   display:block; }
+    .rq-meta { padding:0.5rem 0.6rem; font-size:0.7rem; line-height:1.35; }
+    .rq-meta code { font-size:0.68rem; word-break:break-all; }
+    .rq-reason { display:block; margin-top:0.3rem; color:var(--red); font-weight:700;
+                 font-size:0.62rem; letter-spacing:0.04em; text-transform:uppercase; }
+    [data-theme="dark"] .rq-reason { color:var(--light-red); }
+</style>
+</head>
+<body data-root="../" data-chapter="replacements">
+
+<main class="main" role="main">
+    <section id="replacements">
+        <div class="chapter-eyebrow">Reference</div>
+        <h1>Replacement queue</h1>
+        <p class="lead">Every image extracted from the source decks that carries third-party copyright — a publisher line, a stock watermark, or a licence granted to someone else. This page scans every chapter live, so it always shows which of them the reader is <em>actually</em> using.</p>
+
+        <div class="callout callout-key">
+            <p>Most of these are <strong>line diagrams</strong>, and line diagrams are better hand-authored as SVG than regenerated as pictures: they come out cleaner, they recolour across the light, sepia and dark themes, and there is no licence attached to them afterwards. Reach for image generation only where the subject is genuinely photographic.</p>
+            <p>To clear an item: author the replacement, point the figure at it, and delete that entry from <code>COURSE.replacements</code> in <code>assets/toc.js</code>. The badge disappears with the entry.</p>
+        </div>
+
+        <div class="rq-summary" id="rq-summary"></div>
+        <div id="rq-body"></div>
+    </section>
+</main>
+
+<script src="../assets/toc.js?v=330"></script>
+<script src="../assets/course.js?v=330"></script>
+<script>
+(async function () {
+    const R = COURSE.replacements || {};
+    const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+    const keys = Object.keys(R).sort();
+
+    // ---- which of these is the reader actually using? ----
+    // Scanned live rather than recorded, so the page cannot drift out of date
+    // as chapters are rewritten.
+    const used = {};
+    const files = (COURSE.chapters || []).filter(c => c.status !== 'planned').map(c => c.file);
+    await Promise.all(files.map(async f => {
+        let html = '';
+        try { const r = await fetch('../' + f); if (r.ok) html = await r.text(); } catch (e) { return; }
+        (html.match(/images\/(u\d\/[^"')\s]+)/g) || []).forEach(m => {
+            const k = m.replace('images/', '');
+            if (R[k]) (used[k] = used[k] || []).push(f.split('/').pop());
+        });
+    }));
+    const inUse = keys.filter(k => used[k]);
+
+    // ---- summary: how many, and per unit ----
+    const perUnit = {};
+    keys.forEach(k => { const u = k.split('/')[0]; perUnit[u] = (perUnit[u] || 0) + 1; });
+    const unitLabel = u => {
+        const found = (COURSE.units || []).filter(x => x.id === u)[0];
+        return found ? found.label : u.toUpperCase();
+    };
+    document.getElementById('rq-summary').innerHTML =
+        `<div class="rq-stat" style="border-color:${inUse.length ? 'var(--red)' : 'var(--ok)'}">` +
+        `<b>${inUse.length}</b><span>still in use</span></div>` +
+        `<div class="rq-stat"><b>${keys.length}</b><span>catalogued</span></div>` +
+        Object.keys(perUnit).sort().map(u =>
+            `<div class="rq-stat"><b>${perUnit[u]}</b><span>${esc(u.toUpperCase())}</span></div>`
+        ).join('');
+
+    // ---- grouped by reason, biggest group first: one decision clears many ----
+    const byReason = {};
+    keys.forEach(k => { (byReason[R[k]] = byReason[R[k]] || []).push(k); });
+    const order = Object.keys(byReason).sort((a, b) => byReason[b].length - byReason[a].length);
+
+    const banner = inUse.length
+        ? `<div class="callout callout-misconception"><p><strong>${inUse.length} of these are currently rendering in the reader</strong> and carry a REPLACE badge: ` +
+          inUse.map(k => `<code>${esc(k)}</code>`).join(', ') + `. They must be replaced before publishing.</p></div>`
+        : `<div class="callout callout-key"><p><strong>None of these are in use.</strong> Every one was replaced with hand-authored SVG or an interactive while the units were written, so the reader currently publishes no third-party copyrighted image. They are catalogued below so that nobody re-extracts them from the source decks believing they are clean — and if one is ever placed in a chapter, <code>course.js</code> will stamp it with a REPLACE badge automatically.</p></div>`;
+    document.getElementById('rq-body').innerHTML = banner + order.map(reason => {
+        const items = byReason[reason];
+        const units = [...new Set(items.map(i => i.split('/')[0].toUpperCase()))].join(', ');
+        return `<div class="rq-group">
+            <h2>${esc(reason)} <small>&mdash; ${items.length}</small></h2>
+            <p class="rq-why">${esc(units)}</p>
+            <div class="rq-grid">` +
+            items.map(k => `<div class="rq-item">
+                    <img src="../images/${esc(k)}" alt="" loading="lazy">
+                    <div class="rq-meta"><code>${esc(k)}</code>
+                    <span class="rq-reason">${esc(R[k])}</span></div>
+                </div>`).join('') +
+            `</div></div>`;
+    }).join('');
+})();
+</script>
+</body>
+</html>

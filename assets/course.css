@@ -1,0 +1,2779 @@
+/* ===== CSS CUSTOM PROPERTIES ===== */
+:root {
+    --red: #aa272f;
+    --dark-blue: #002a42;
+    --yellow: #ffcd00;
+    --blue: #14509e;
+    --light-gray: #eeeeee;
+    --dark-gray: #d9d9d9;
+    --light-red: #cb5d63;
+    --light-teal: #577899;
+
+    --font-size-base: 1rem;
+    --font-scale: 1;
+    --body-font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    --heading-font: var(--body-font);
+
+    --nav-width: 300px;
+    --toolbar-height: 48px;
+    --content-max-width: 820px;
+}
+
+/* — Light — */
+[data-theme="light"] {
+    --bg: #ffffff;
+    --bg-surface: #f8f8f8;
+    --bg-nav: #f0f0f0;
+    --bg-nav-hover: rgba(0,0,0,0.05);
+    --bg-nav-active: rgba(0,42,66,0.1);
+    --text: #1a1a1a;
+    --text-secondary: #555;
+    --text-nav: #444;
+    --text-nav-active: var(--dark-blue);
+    --border: #e0e0e0;
+    --bg-tight: #fdf0f0;
+    --border-tight: var(--red);
+    --bg-guidance: #eff6ff;
+    --border-guidance: var(--blue);
+    --bg-example: #fefce8;
+    --border-example: var(--yellow);
+    --bg-toolbar: var(--dark-blue);
+    --border-toolbar: var(--dark-blue);
+    --dfn-bg: rgba(87,120,153,0.1);
+    --dfn-border: var(--light-teal);
+    --popover-bg: var(--dark-blue);
+    --popover-text: #fff;
+}
+/* — Sepia — */
+[data-theme="sepia"] {
+    --bg: #f5edd6;
+    --bg-surface: #ede4cb;
+    --bg-nav: #e8dfca;
+    --bg-nav-hover: rgba(62,47,28,0.08);
+    --bg-nav-active: rgba(62,47,28,0.15);
+    --text: #3e2f1c;
+    --text-secondary: #6b5b45;
+    --text-nav: #5a4a34;
+    --text-nav-active: #3e2f1c;
+    --border: #d4c6a8;
+    --bg-tight: #f0ddc0;
+    --border-tight: #a04040;
+    --bg-guidance: #e8dcc0;
+    --border-guidance: #6b7d5e;
+    --bg-example: #f0e4c0;
+    --border-example: #b89a40;
+    --bg-toolbar: #3e2f1c;
+    --border-toolbar: #3e2f1c;
+    --dfn-bg: rgba(107,91,69,0.12);
+    --dfn-border: #8a7350;
+    --popover-bg: #3e2f1c;
+    --popover-text: #f5edd6;
+}
+/* — Dark — */
+[data-theme="dark"] {
+    --bg: #121212;
+    --bg-surface: #1e1e1e;
+    --bg-nav: #1a1a1a;
+    --bg-nav-hover: rgba(255,255,255,0.06);
+    --bg-nav-active: rgba(255,255,255,0.12);
+    --text: #e0e0e0;
+    --text-secondary: #a0a0a0;
+    --text-nav: #a0a0a0;
+    --text-nav-active: #fff;
+    --border: #333;
+    --bg-tight: rgba(170,39,47,0.12);
+    --border-tight: var(--light-red);
+    --bg-guidance: rgba(20,80,158,0.12);
+    --border-guidance: var(--light-teal);
+    --bg-example: rgba(255,205,0,0.08);
+    --border-example: #b8940a;
+    --bg-toolbar: #0a1a28;
+    --border-toolbar: #0a1a28;
+    --dfn-bg: rgba(87,120,153,0.15);
+    --dfn-border: var(--light-teal);
+    --popover-bg: #2a3a4a;
+    --popover-text: #e0e0e0;
+}
+
+/* ===== RESET ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ===== BASE ===== */
+html {
+    font-size: calc(var(--font-size-base) * var(--font-scale));
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--toolbar-height) + 1.5rem);
+}
+body {
+    font-family: var(--body-font);
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.7;
+    transition: background 0.25s, color 0.25s;
+}
+h1, h2, h3, h4, h5 { font-family: var(--heading-font); line-height: 1.3; color: var(--text); }
+h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+h2 { font-size: 1.55rem; margin-top: 2.5rem; margin-bottom: 0.75rem; padding-bottom: 0.4rem; border-bottom: 2px solid var(--border); }
+h3 { font-size: 1.25rem; margin-top: 2rem; margin-bottom: 0.5rem; color: var(--dark-blue); }
+[data-theme="dark"] h3 { color: var(--light-teal); }
+[data-theme="sepia"] h3 { color: #5a3e1b; }
+h4 { font-size: 1.05rem; margin-top: 1.5rem; margin-bottom: 0.4rem; }
+p { margin-bottom: 1rem; }
+ul, ol { margin-bottom: 1rem; padding-left: 1.5rem; }
+li { margin-bottom: 0.35rem; }
+a { color: var(--blue); text-decoration: underline; text-underline-offset: 2px; }
+[data-theme="dark"] a { color: #6fa8dc; }
+[data-theme="sepia"] a { color: #5a3e1b; }
+a:hover { text-decoration-thickness: 2px; }
+strong { font-weight: 600; }
+
+/* ===== TOOLBAR ===== */
+.toolbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    height: var(--toolbar-height);
+    background: var(--bg-toolbar);
+    border-bottom: 1px solid var(--border-toolbar);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 1rem; gap: 0.5rem;
+}
+.toolbar-left { display: flex; align-items: center; gap: 0.75rem; }
+.toolbar-right { display: flex; align-items: center; gap: 0.5rem; flex-shrink: 0; }
+.menu-toggle {
+    display: none; background: none; border: none;
+    color: #fff; font-size: 1.4rem; cursor: pointer; padding: 0.25rem; line-height: 1;
+}
+.toolbar-logo {
+    height: 32px; width: 32px; border-radius: 50%; flex-shrink: 0;
+}
+.toolbar-brand { font-weight: 700; font-size: 0.9rem; color: #fff; white-space: nowrap; letter-spacing: -0.01em; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.tb { /* toolbar button base */
+    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 6px;
+    color: #fff; cursor: pointer; padding: 0.35rem 0.65rem;
+    font-size: 0.82rem; line-height: 1; transition: all 0.15s; white-space: nowrap;
+    font-family: inherit; display: inline-flex; align-items: center; gap: 0.3rem;
+}
+.tb:hover { background: rgba(255,255,255,0.2); }
+/* Unit tools (flash cards, present): icon + label, icon only on phones */
+.tb-tool .tb-icon { font-size: 0.95rem; line-height: 1; }
+/* The Cards icon is an inline SVG rather than a text glyph. The old playing-card
+   character is a colour emoji: it ignores the CSS color property and rendered as a
+   fixed coloured picture against the dark toolbar, in every theme. An SVG stroked
+   with currentColor inherits the toolbar white instead. Sized in px so it matches
+   the height of the triangle glyph on Present beside it. */
+.tb-tool .tb-icon { display: inline-flex; align-items: center; }
+.tb-tool .tb-icon svg { display: block; }
+.tb-tool.loading { opacity: 0.6; cursor: progress; }
+@media (max-width: 760px) { .tb-tool .tb-label { display: none; } .tb-tool { padding: 0.3rem 0.45rem; } }
+@media print { .tb-tool { display: none !important; } }
+/* Cards and Present drive the room rather than the reading, so they sit apart
+   at the end of the bar in the course red. The toolbar is always dark navy, so
+   these are fixed values rather than theme variables. */
+.tb-sep {
+    width: 1px; height: 20px; flex: 0 0 1px;
+    background: rgba(255,255,255,0.22); margin: 0 0.25rem;
+}
+.tb-accent {
+    background: var(--red); border-color: var(--red); color: #fff; font-weight: 600;
+}
+.tb-accent:hover { background: #c33039; border-color: #c33039; }
+.tb-accent:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+/* On a phone every pixel of the bar is spoken for, and the red buttons read as
+   their own group by colour alone. */
+@media (max-width: 600px) { .tb-sep { display: none; } }
+@media print { .tb-sep { display: none !important; } }
+
+.tb.active { background: var(--dark-blue); color: #fff; border-color: var(--dark-blue); }
+[data-theme="dark"] .tb.active { background: var(--pick); color: var(--pick-ink); border-color: var(--pick); }
+[data-theme="sepia"] .tb.active { background: #3e2f1c; color: #f5edd6; border-color: #3e2f1c; }
+
+/* — Aa Popover — */
+.aa-wrap { position: relative; }
+.aa-popover {
+    display: none; position: absolute; top: calc(100% + 8px); right: 0;
+    background: var(--bg); border: 1px solid var(--border); border-radius: 10px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.12); padding: 1.25rem; width: 280px; z-index: 300;
+}
+.aa-popover.open { display: block; }
+.aa-section { margin-bottom: 1rem; }
+.aa-section:last-child { margin-bottom: 0; }
+.aa-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-secondary); margin-bottom: 0.5rem; }
+.aa-row { display: flex; gap: 0.35rem; }
+.aa-row .tb { flex: 1; justify-content: center; font-size: 0.8rem; padding: 0.4rem 0.3rem; }
+.aa-size-row { display: flex; align-items: center; gap: 0.5rem; }
+.aa-size-row .tb { width: 36px; height: 36px; justify-content: center; font-size: 1rem; padding: 0; flex: none; }
+/* Override toolbar button colours inside the popover (sits on page bg, not toolbar bg) */
+.aa-popover .tb {
+    background: var(--bg-surface); color: var(--text); border-color: var(--border);
+}
+.aa-popover .tb:hover {
+    background: var(--bg-nav-hover); border-color: var(--text-secondary);
+}
+.aa-popover .tb.active {
+    background: var(--dark-blue); color: #fff; border-color: var(--dark-blue);
+}
+[data-theme="dark"] .aa-popover .tb.active {
+    background: var(--pick); color: var(--pick-ink); border-color: var(--pick);
+}
+[data-theme="sepia"] .aa-popover .tb.active {
+    background: #3e2f1c; color: #f5edd6; border-color: #3e2f1c;
+}
+.aa-size-label { flex: 1; text-align: center; font-size: 0.82rem; color: var(--text-secondary); }
+/* Theme swatches */
+.theme-swatch {
+    width: 100%; height: 32px; border-radius: 6px; border: 2px solid var(--border);
+    cursor: pointer; transition: border-color 0.15s;
+}
+.theme-swatch:hover { border-color: var(--text-secondary); }
+.theme-swatch.active { border-color: var(--dark-blue); border-width: 2.5px; }
+[data-theme="dark"] .theme-swatch.active { border-color: var(--yellow); }
+.swatch-light { background: #fff; }
+.swatch-sepia { background: #f5edd6; }
+.swatch-dark { background: #1e1e1e; }
+.aa-themes { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.4rem; }
+.aa-theme-opt { text-align: center; }
+.aa-theme-opt span { display: block; font-size: 0.68rem; margin-top: 0.25rem; color: var(--text-secondary); }
+
+/* ===== SEARCH ===== */
+.search-wrap { position: relative; }
+#btn-search, #btn-aa { padding: 0.4rem 0.75rem; }
+.search-input {
+    width: 0; opacity: 0; border: 1px solid var(--border); border-radius: 6px;
+    padding: 0.35rem 0.65rem; font-size: 0.82rem; font-family: inherit;
+    background: var(--bg); color: var(--text); outline: none;
+    transition: width 0.25s, opacity 0.25s, padding 0.25s;
+}
+.search-input.open { width: 200px; opacity: 1; }
+.search-input:focus { border-color: var(--light-teal); }
+.search-results {
+    display: none; position: absolute; top: calc(100% + 6px); right: 0;
+    background: var(--bg); border: 1px solid var(--border); border-radius: 8px;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.12); width: 340px; max-height: 400px;
+    overflow-y: auto; z-index: 310;
+}
+.search-results.open { display: block; }
+.search-results-header {
+    padding: 0.6rem 0.85rem; font-size: 0.7rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-secondary);
+    border-bottom: 1px solid var(--border);
+}
+.search-result {
+    display: block; padding: 0.6rem 0.85rem; text-decoration: none; color: var(--text);
+    border-bottom: 1px solid var(--border); cursor: pointer; transition: background 0.1s;
+}
+.search-result:last-child { border-bottom: none; }
+.search-result:hover { background: var(--bg-surface); text-decoration: none; }
+.search-result-title { font-weight: 600; font-size: 0.85rem; margin-bottom: 0.15rem; }
+.search-result-snippet { font-size: 0.78rem; color: var(--text-secondary); line-height: 1.4; }
+.search-result-snippet mark { background: rgba(255,205,0,0.35); color: inherit; border-radius: 2px; padding: 0 1px; }
+.search-no-results { padding: 1rem 0.85rem; font-size: 0.85rem; color: var(--text-secondary); text-align: center; }
+/* In-page highlight */
+.search-highlight { background: rgba(255,205,0,0.4); border-radius: 2px; padding: 0 1px; scroll-margin-top: calc(var(--toolbar-height) + 2rem); }
+
+/* ===== READING PROGRESS BAR ===== */
+.progress-bar {
+    position: fixed; top: var(--toolbar-height); left: 0; right: 0;
+    height: 3px; z-index: 99; background: var(--border);
+}
+.progress-bar-fill {
+    height: 100%; width: 0; background: var(--red);
+    transition: width 0.1s linear;
+}
+
+/* ===== READING POSITION (bottom) ===== */
+.reading-pos {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    height: 32px; background: var(--bg); border-top: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 1rem;
+    font-size: 0.72rem; color: var(--text-secondary); z-index: 99;
+}
+.reading-pos-section { font-weight: 600; color: var(--text); }
+.reading-pos-progress { display: flex; align-items: center; gap: 0.5rem; }
+.reading-pos-bar {
+    width: 80px; height: 4px; background: var(--border); border-radius: 2px; overflow: hidden;
+}
+.reading-pos-bar-fill { height: 100%; background: var(--red); border-radius: 2px; transition: width 0.15s; }
+
+/* ===== SIDEBAR ===== */
+.sidebar {
+    position: fixed; top: var(--toolbar-height); left: 0; bottom: 32px;
+    width: var(--nav-width); background: var(--bg-nav);
+    overflow-y: auto; padding: 1rem 0 0; z-index: 50;
+    transition: transform 0.3s ease;
+}
+.sidebar { border-right: 1px solid var(--border); }
+.sidebar::-webkit-scrollbar { width: 4px; }
+.sidebar::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 4px; }
+[data-theme="dark"] .sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); }
+.nav-section-label {
+    font-size: 0.62rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.09em; color: var(--red);
+    padding: 0 var(--nav-pad) 0.3rem;
+    margin-top: 1.15rem;
+}
+.sidebar > .nav-section-label:first-child { margin-top: 0.35rem; }
+
+/* The reference tools sit at the foot of the sidebar and stay there while the
+   chapter list scrolls behind them. Sticky rather than fixed, so on a short
+   list they simply follow the content instead of floating in a gap. */
+.nav-reference {
+    position: sticky; bottom: 0; z-index: 2;
+    margin-top: auto;
+    /* carries the sidebar's bottom padding, so nothing scrolls past beneath it */
+    padding-bottom: 1rem;
+    background: var(--bg-nav);
+    /* a hard edge, not a fade: items must disappear cleanly, not half-show */
+    border-top: 1px solid var(--border);
+    box-shadow: 0 -10px 14px -10px rgba(0,0,0,0.30);
+}
+.nav-reference .nav-section-label { margin-top: 0.7rem; }
+[data-theme="dark"] .nav-reference { box-shadow: 0 -8px 12px -8px rgba(0,0,0,0.6); }
+/* the sidebar becomes a column so margin-top:auto can push the block down */
+.sidebar { display: flex; flex-direction: column; }
+.sidebar > .nav-reference { flex: 0 0 auto; }
+[data-theme="dark"] .nav-section-label { color: var(--light-teal); }
+.nav-link {
+    display: flex; align-items: flex-start; gap: 0;
+    padding: 0.34rem var(--nav-pad);
+    color: var(--text-nav); text-decoration: none;
+    font-size: var(--nav-size); font-weight: 500; line-height: 1.35;
+    border-left: 3px solid transparent; transition: background 0.15s, color 0.15s;
+    width: 100%; text-align: left; background: none;
+    border-right: none; border-top: none; border-bottom: none;
+    font-family: inherit; cursor: pointer;
+}
+.nav-num {
+    flex-shrink: 0; width: var(--nav-gutter);
+    font-size: var(--nav-size); font-weight: 500;
+    font-variant-numeric: tabular-nums;
+    color: var(--text-secondary); opacity: 0.7;
+}
+.nav-link.current-page .nav-num {
+    color: hsl(var(--unit-h, 210) var(--u-sat) var(--u-light)); opacity: 1;
+}
+.nav-text { flex: 1; min-width: 0; }
+.nav-link:hover { background: var(--bg-nav-hover); color: var(--text-nav-active); text-decoration: none; }
+.nav-link.active { color: var(--text-nav-active); background: var(--bg-nav-active); font-weight: 650; }
+.nav-link.sub { padding-left: 2rem; font-size: 0.78rem; }
+
+
+/* ===== MAIN ===== */
+.main {
+    margin-left: var(--nav-width); margin-top: var(--toolbar-height);
+    padding: 2.5rem 3rem 4rem; max-width: calc(var(--content-max-width) + 6rem);
+    padding-bottom: 3rem; margin-bottom: 32px;
+    transition: margin 0.3s;
+}
+.main > section { margin-bottom: 3rem; }
+.main > section + section { border-top: 1px solid var(--border); padding-top: 2.5rem; }
+/* The "how the ideas build" box already closes off the section it ends,
+   so the section after it needs no divider line as well. */
+.main > section:has(> .progression:last-child) + section { border-top: 0; padding-top: 0.75rem; }
+#welcome + section { border-top: 0; padding-top: 0; }
+.lead { font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 2rem; line-height: 1.6; }
+
+/* ===== CALLOUTS ===== */
+.callout {
+    border-left: 4px solid; border-radius: 4px;
+    padding: 1rem 1.25rem; margin: 1.25rem 0; font-size: 0.92rem;
+}
+.callout p:last-child { margin-bottom: 0; }
+.callout::before {
+    display: block; font-weight: 700; font-size: 0.72rem;
+    text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.5rem;
+}
+.callout-key { background: var(--bg-tight); border-color: var(--border-tight); }
+.callout-key::before { content: 'Key idea'; color: var(--border-tight); }
+.callout-note { background: var(--bg-guidance); border-color: var(--border-guidance); }
+.callout-note::before { content: 'Note'; color: var(--border-guidance); }
+.callout-example { background: var(--bg-example); border-color: var(--border-example); }
+.callout-example::before { content: 'Example'; color: var(--border-example); }
+.callout-misconception { background: var(--bg-tight); border-color: var(--border-tight); }
+.callout-misconception::before { content: 'Common misconception'; color: var(--border-tight); }
+.callout-try { background: var(--bg-guidance); border-color: var(--border-guidance); }
+.callout-try::before { content: 'Try this'; color: var(--border-guidance); }
+/* Override any label: <div class="callout callout-key" data-label="Exam tip"> */
+.callout[data-label]::before { content: attr(data-label); }
+
+/* ===== SECTION BANNERS ===== */
+.section-banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.25rem;
+    background: #aa272f;
+    color: #fff;
+    padding: 1rem 1.5rem;
+    margin: 2.5rem 0 1.5rem;
+    border-radius: 8px;
+}
+.section-banner .banner-ribbon {
+    height: 2.75rem;
+    width: auto;
+    flex-shrink: 0;
+}
+.section-banner .banner-title {
+    margin: 0;
+    padding: 0;
+    border: none;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 700;
+    font-size: 1.5rem;
+    text-align: center;
+    flex: 0 1 auto;
+}
+@media (max-width: 600px) {
+    .section-banner { gap: 0.75rem; padding: 0.75rem 1rem; }
+    .section-banner .banner-ribbon { height: 2rem; }
+    .section-banner .banner-title { font-size: 1.15rem; letter-spacing: 0.08em; }
+}
+
+/* ===== DETAILS / ACCORDIONS ===== */
+details { margin: 0.75rem 0; border: 1px solid var(--border); border-radius: 6px; }
+details[open] { border-color: var(--light-teal); }
+/* SLR accent colours */
+details.slr { border-left: 4px solid; }
+details.slr-chinese { border-left-color: #aa272f; }
+details.slr-chinese summary { color: #aa272f; }
+details.slr-service { border-left-color: #14509e; }
+details.slr-service summary { color: #14509e; }
+details.slr-spirituality { border-left-color: #577899; }
+details.slr-spirituality summary { color: #577899; }
+details.slr-technology { border-left-color: #ffcd00; }
+details.slr-technology summary { color: #b8960a; }
+[data-theme="dark"] details.slr-chinese summary { color: var(--light-red); }
+[data-theme="dark"] details.slr-service summary { color: #6ba3eb; }
+[data-theme="dark"] details.slr-spirituality summary { color: var(--light-teal); }
+[data-theme="dark"] details.slr-technology summary { color: var(--yellow); }
+details.slr[open] { border-left-width: 4px; }
+details.slr-chinese[open] { border-color: #aa272f; border-left-color: #aa272f; }
+details.slr-service[open] { border-color: #14509e; border-left-color: #14509e; }
+details.slr-spirituality[open] { border-color: #577899; border-left-color: #577899; }
+details.slr-technology[open] { border-color: #ffcd00; border-left-color: #ffcd00; }
+summary {
+    padding: 0.8rem 1.1rem; font-weight: 600; font-size: 1rem;
+    cursor: pointer; background: var(--bg-surface);
+    list-style: none; display: flex; align-items: center; gap: 0.6rem;
+    transition: background 0.15s;
+}
+summary:hover { background: var(--dark-gray); }
+[data-theme="dark"] summary:hover { background: #2a2a2a; }
+[data-theme="sepia"] summary:hover { background: #e0d5b8; }
+summary::before {
+    content: ''; display: inline-block; width: 0.45rem; height: 0.45rem;
+    border-right: 2px solid var(--text-secondary); border-bottom: 2px solid var(--text-secondary);
+    transform: rotate(-45deg); transition: transform 0.2s; flex-shrink: 0;
+}
+details[open] > summary::before { transform: rotate(45deg); }
+summary::-webkit-details-marker { display: none; }
+.details-content { padding: 1rem 1.25rem; border-top: 1px solid var(--border); }
+
+/* ===== GLOSSARY TERMS (inline) ===== */
+.term {
+    font-style: normal; background: var(--dfn-bg);
+    border-bottom: 1.5px dashed var(--dfn-border);
+    padding: 0.05em 0.3em; border-radius: 3px;
+    cursor: help; position: relative;
+}
+
+/* ===== GLOBAL TERM POPOVER (rendered in body layer) ===== */
+#term-popover {
+    display: none; position: fixed; z-index: 9999;
+    background: var(--popover-bg); color: var(--popover-text);
+    padding: 0.75rem 1rem; border-radius: 8px;
+    font-size: 0.82rem; line-height: 1.55; width: max-content; max-width: 360px;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.25);
+    pointer-events: none;
+}
+#term-popover.visible { display: block; }
+#term-popover::after {
+    content: ''; position: absolute; border: 7px solid transparent;
+}
+#term-popover.arrow-bottom::after { top: 100%; left: 50%; transform: translateX(-50%); border-top-color: var(--popover-bg); }
+#term-popover.arrow-top::after { bottom: 100%; left: 50%; transform: translateX(-50%); border-bottom-color: var(--popover-bg); }
+
+/* ===== QUICK-START CAROUSEL ===== */
+.pathway-carousel {
+    display: flex; gap: 1rem; margin: 1.5rem 0;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 1.5rem;
+    -webkit-overflow-scrolling: touch;
+    padding: 0.4rem 0.25rem 0.75rem;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+}
+.pathway-carousel::-webkit-scrollbar { height: 6px; }
+.pathway-carousel::-webkit-scrollbar-track { background: transparent; }
+.pathway-carousel::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+.pathway-carousel::-webkit-scrollbar-thumb:hover { background: var(--text-secondary); }
+.pathway-card {
+    scroll-snap-align: center; flex-shrink: 0;
+    width: 260px; min-height: 130px;
+    border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem;
+    background: var(--bg-surface); text-decoration: none; color: var(--text);
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s; cursor: pointer;
+    display: flex; flex-direction: column; justify-content: center;
+}
+.pathway-card:hover {
+    border-color: var(--light-teal); box-shadow: 0 4px 16px rgba(0,42,66,0.1);
+    text-decoration: none; transform: translateY(-2px);
+}
+.pathway-card h4 { margin: 0 0 0.4rem; font-size: 0.95rem; color: var(--dark-blue); }
+[data-theme="dark"] .pathway-card h4 { color: var(--yellow); }
+[data-theme="sepia"] .pathway-card h4 { color: #5a3e1b; }
+.pathway-card p { font-size: 0.85rem; color: var(--text-secondary); margin: 0; }
+.pathway-hint {
+    font-size: 0.75rem; color: var(--text-secondary); text-align: center;
+    margin-top: -0.25rem; margin-bottom: 0.5rem;
+}
+@media (min-width: 900px) {
+    .pathway-card { width: 280px; }
+}
+
+/* ===== TABLES ===== */
+table { width: 100%; border-collapse: collapse; margin: 1.25rem 0; font-size: 0.9rem; }
+th, td { padding: 0.65rem 0.85rem; text-align: left; border: 1px solid var(--border); }
+th { background: var(--dark-blue); color: #fff; font-weight: 600; font-size: 0.82rem; }
+[data-theme="dark"] th { background: #1a3a52; }
+[data-theme="sepia"] th { background: #3e2f1c; color: #f5edd6; }
+tr:nth-child(even) td { background: var(--bg-surface); }
+
+/* ===== DOMAIN HEADER ===== */
+.domain-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem; }
+.domain-number {
+    display: flex; align-items: center; justify-content: center;
+    width: 2rem; height: 2rem; border-radius: 50%;
+    background: var(--dark-blue); color: #fff; font-weight: 700; font-size: 0.85rem; flex-shrink: 0;
+}
+[data-theme="dark"] .domain-number { background: var(--pick); color: var(--pick-ink); }
+[data-theme="sepia"] .domain-number { background: #3e2f1c; color: #f5edd6; }
+
+/* ===== FOCUS MODE ===== */
+body.focus-mode .sidebar { transform: translateX(-100%); }
+body.focus-mode .main { margin-left: auto; margin-right: auto; max-width: calc(var(--content-max-width) + 6rem); }
+body.focus-mode .reading-pos { left: 0; }
+
+/* ===== OVERLAY ===== */
+.overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 40; }
+.overlay.active { display: block; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+    .menu-toggle { display: block; }
+    .sidebar { transform: translateX(-100%); }
+    .sidebar.open { transform: translateX(0); }
+    .main { margin-left: 0; padding: 1.5rem 1.25rem 3rem; }
+    body.focus-mode .main { padding: 1.5rem 1.25rem 3rem; }
+    #btn-focus { display: none; }
+    .toolbar-left { min-width: 0; overflow: hidden; }
+}
+@media (max-width: 600px) {
+    .toolbar-brand { font-size: 0.78rem; }
+    .tb { padding: 0.3rem 0.5rem; font-size: 0.78rem; }
+    .aa-popover { width: 260px; right: -0.5rem; }
+    .main { margin-bottom: 48px; }
+    .reading-pos { height: 40px; padding: 0 0.75rem; }
+}
+
+/* ===== GLOSSARY (section F) ===== */
+dl dt { font-weight: 600; margin-top: 0.75rem; }
+dl dd { margin: 0.2rem 0 0.85rem 0; padding-left: 1rem; border-left: 2px solid var(--border); font-size: 0.92rem; color: var(--text-secondary); }
+
+/* ===== ACRONYMS COLUMNS ===== */
+.acr-cols { columns: 2; column-gap: 2rem; font-size: 0.88rem; }
+.acr-cols p { margin-bottom: 0.35rem; break-inside: avoid; }
+
+/* ===== EXTERNAL LINK BUTTON ===== */
+.btn-external {
+    display: flex; align-items: center; gap: 0.75rem;
+    padding: 0.85rem 1.25rem; border-radius: 10px; margin: 0.75rem 0 1.5rem;
+    border: 1.5px solid var(--border); background: var(--bg-surface);
+    text-decoration: none; color: var(--text); transition: all 0.2s;
+}
+.btn-external:hover {
+    border-color: var(--dark-blue); box-shadow: 0 2px 12px rgba(0,42,66,0.1);
+    transform: translateY(-1px); text-decoration: none;
+}
+[data-theme="dark"] .btn-external:hover { border-color: var(--light-teal); box-shadow: 0 2px 12px rgba(87,120,153,0.2); }
+.btn-external-icon { font-size: 1.5rem; flex-shrink: 0; }
+.btn-external strong { display: block; font-size: 0.95rem; color: var(--dark-blue); }
+[data-theme="dark"] .btn-external strong { color: var(--yellow); }
+[data-theme="sepia"] .btn-external strong { color: #5a3e1b; }
+.btn-external small { display: block; font-size: 0.78rem; color: var(--text-secondary); margin-top: 0.1rem; }
+.btn-external-arrow { margin-left: auto; font-size: 1.1rem; color: var(--text-secondary); flex-shrink: 0; }
+
+/* ===== CHAPTER HEADER ===== */
+.chapter-eyebrow {
+    font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.1em; color: var(--red); margin-bottom: 0.4rem;
+}
+[data-theme="dark"] .chapter-eyebrow { color: var(--yellow); }
+.chapter-meta {
+    display: flex; flex-wrap: wrap; gap: 1.25rem; align-items: center;
+    font-size: 0.78rem; color: var(--text-secondary);
+    padding-bottom: 1.25rem; margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+}
+
+/* ===== LEARNING OBJECTIVES ===== */
+.objectives {
+    border: 1px solid var(--border); border-radius: 10px;
+    background: var(--bg-surface); padding: 1.25rem 1.5rem; margin: 1.5rem 0 2rem;
+}
+.objectives h4 {
+    margin: 0 0 0.6rem; font-size: 0.72rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.06em; color: var(--dark-blue);
+}
+[data-theme="dark"] .objectives h4 { color: var(--light-teal); }
+[data-theme="sepia"] .objectives h4 { color: #5a3e1b; }
+.objectives ul { margin: 0; padding-left: 1.2rem; }
+.objectives li { font-size: 0.9rem; margin-bottom: 0.4rem; }
+.objectives li:last-child { margin-bottom: 0; }
+
+.tag {
+    font-size: 0.68rem; padding: 0.15rem 0.5rem; border-radius: 999px;
+    background: var(--bg-nav-active); color: var(--text-secondary);
+    border: 1px solid var(--border);
+}
+.tag-sim { border-color: var(--light-teal); color: var(--light-teal); }
+
+/* ===== FIGURES & DIAGRAMS ===== */
+figure { margin: 1.75rem 0; }
+figure svg, figure img { display: block; max-width: 100%; height: auto; margin: 0 auto; }
+.diagram {
+    border: 1px solid var(--border); border-radius: 10px;
+    background: var(--bg-surface); padding: 1.25rem;
+}
+/* A row of illustrated panels, each carrying its own label. The row WRAPS as the
+   screen narrows instead of shrinking, so the labels never fall below reading size. */
+/* Three across, not five: the content column is capped at 820px, so a five-across
+   row would leave each panel under 150px and the animals unreadable. */
+.panel-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.85rem; }
+.panel-row > div { display: flex; flex-direction: column; gap: 0.3rem; }
+.panel-row img {
+    width: 100%; height: auto; display: block; margin: 0;
+    border: 1px solid var(--border); border-radius: 8px;
+}
+.panel-row b { font-size: 0.85rem; color: var(--text); }
+.panel-row span { font-size: 0.78rem; color: var(--text-secondary); line-height: 1.45; }
+.panel-row em {
+    align-self: flex-start; font-style: normal; font-size: 0.66rem; font-weight: 700;
+    letter-spacing: 0.03em; padding: 0.1rem 0.45rem; border-radius: 999px;
+    color: var(--light-teal); border: 1px solid var(--light-teal);
+}
+/* the brand teal is mixed for paper and reads thin on the dark surface */
+[data-theme="dark"] .panel-row em { color: #8fb3d9; border-color: #8fb3d9; }
+@media (max-width: 560px) { .panel-row { grid-template-columns: repeat(2, 1fr); } }
+
+figcaption {
+    font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.75rem;
+    padding-top: 0.6rem; border-top: 1px solid var(--border); line-height: 1.5;
+}
+figcaption b, figcaption strong { color: var(--text); }
+/* Source line for images from outside the course: who made it, where it lives, its licence */
+figcaption .fig-credit { display: block; margin-top: 0.45rem; font-size: 0.72rem; font-style: normal; line-height: 1.45; }
+figcaption .fig-credit a { color: inherit; }
+/* Theme-aware diagram tokens for inline SVG */
+.diagram svg { --dg-line: var(--text-secondary); --dg-fill: var(--bg); --dg-ink: var(--text); }
+/* Brand red and blue are tuned for paper. Inside a diagram on the dark surface they
+   fall to about 2:1, so lift them there only — callouts and borders keep the brand tone. */
+[data-theme="dark"] .diagram svg { --red: #e8878f; --blue: #7fb0e8; }
+/* This is a DEFAULT, not an override. `:where()` contributes no specificity, so a
+   figure's own classes and any fill="…" attribute always win. Written as a plain
+   `.diagram svg text` rule it silently out-specified both, and every coloured label
+   in every inline diagram — red key labels, grey axis ticks — rendered as body text. */
+:where(.diagram svg) text { font-family: var(--body-font); }
+:where(.diagram svg) :where(text:not([fill])) { fill: var(--dg-ink); }
+/* On a phone a wide diagram would shrink its labels below reading size, so it
+   scrolls sideways inside its own box instead — the same treatment the sims use. */
+@media (max-width: 600px) {
+    .diagram { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .diagram > svg { min-width: 520px; }
+    /* side-by-side comparisons carry twice the text in the same width */
+    .diagram.dense > svg { min-width: 680px; }
+    /* webs drawn on an 820-wide canvas: render 1:1 on a phone so the names stay at 9.5px */
+    .diagram.dense.wide > svg { min-width: 820px; }
+}
+
+/* ===== SIMULATION ===== */
+.sim {
+    border: 1px solid var(--border); border-radius: 12px;
+    background: var(--bg-surface); margin: 2rem 0; overflow: hidden;
+}
+/* ===== SHARE ONE INTERACTIVE =====
+   Only simulations carry this. Quizzes stay in the reader because that is where
+   a student's progress is tracked, and figures travel as ordinary images. */
+/* ===== AN INTERACTIVE, FULL SCREEN =====
+   The real element goes full screen rather than a copy, because a sim is live. */
+.sim-full-btn {
+    margin-left: auto; font: inherit; font-size: 0.75rem; font-weight: 600;
+    padding: 0.25rem 0.6rem; border-radius: 6px; cursor: pointer;
+    border: 1px solid var(--border); background: var(--bg); color: var(--text-secondary);
+}
+.sim-full-btn:hover { color: var(--text); border-color: var(--text-secondary); }
+/* Share sits next to it, so only the first control pushes away from the title. */
+.sim-full-btn + .sim-share-btn { margin-left: 0.4rem; }
+/* Both routes look the same. The fallback also needs taking out of the page flow,
+   which real full screen does for itself. */
+.sim.sim-is-full:not(:fullscreen) { position: fixed; inset: 0; z-index: 9000; }
+body.sim-full-open { overflow: hidden; }
+.sim:fullscreen, .sim.sim-is-full {
+    margin: 0; border: 0; border-radius: 0; background: var(--bg);
+    display: flex; flex-direction: column; overflow: auto;
+}
+.sim:fullscreen > .sim-header, .sim.sim-is-full > .sim-header { flex: 0 0 auto; }
+.sim:fullscreen > .sim-share-wrap, .sim.sim-is-full > .sim-share-wrap { flex: 0 0 auto; }
+/* The stage takes the room that is left and centres itself in it. */
+.sim:fullscreen .sim-stage, .sim.sim-is-full .sim-stage { flex: 1 1 auto; align-items: center; padding: 2rem; min-height: 0; }
+.sim:fullscreen .sim-stage > *, .sim.sim-is-full .sim-stage > * { max-height: 100%; }
+
+.sim-share-btn {
+    margin-left: auto; font: inherit; font-size: 0.75rem; font-weight: 600;
+    padding: 0.25rem 0.6rem; border-radius: 6px; cursor: pointer;
+    border: 1px solid var(--border); background: var(--bg); color: var(--text-secondary);
+}
+.sim-share-btn:hover { color: var(--text); border-color: var(--text-secondary); }
+.sim-share-btn.is-open { background: var(--bg-surface); color: var(--text); }
+.sim-share-wrap { border-top: 1px solid var(--border); background: var(--bg); }
+.sim-share { padding: 0.9rem 1.25rem 1rem; display: grid; gap: 0.5rem; }
+.sim-share-row { display: grid; gap: 0.2rem; font-size: 0.75rem; font-weight: 600; color: var(--text-secondary); }
+.sim-share-row input, .sim-share-row textarea {
+    font: inherit; font-size: 0.8rem; font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    padding: 0.4rem 0.5rem; border-radius: 6px; border: 1px solid var(--border);
+    background: var(--bg-surface); color: var(--text); width: 100%; resize: vertical;
+}
+.sim-share-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin-top: 0.15rem; }
+.sim-share-copy {
+    font: inherit; font-size: 0.78rem; font-weight: 600; padding: 0.3rem 0.7rem;
+    border-radius: 6px; cursor: pointer; border: 1px solid var(--border);
+    background: var(--bg-surface); color: var(--text);
+}
+.sim-share-copy:hover { border-color: var(--text-secondary); }
+.sim-share-said { font-size: 0.78rem; font-weight: 600; color: var(--ok, #2e7d32); }
+.sim-share-note { margin: 0; font-size: 0.74rem; line-height: 1.45; color: var(--text-secondary); }
+.sim-share-note code { font-size: 0.95em; }
+@media print { .sim-share-btn, .sim-share-wrap { display: none !important; } }
+
+.sim-header {
+    display: flex; align-items: baseline; gap: 0.6rem; flex-wrap: wrap;
+    padding: 0.85rem 1.25rem; border-bottom: 1px solid var(--border);
+    background: var(--bg-nav);
+}
+.sim-header h4 { margin: 0; font-size: 0.95rem; }
+.sim-header .sim-kind {
+    font-size: 0.62rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--red); border: 1px solid currentColor; border-radius: 999px; padding: 0.05rem 0.45rem;
+}
+[data-theme="dark"] .sim-header .sim-kind { color: var(--yellow); }
+.sim-stage { padding: 1.25rem; display: flex; justify-content: center; }
+.sim-stage canvas, .sim-stage svg { max-width: 100%; height: auto; }
+.sim-controls {
+    display: grid; gap: 0.9rem 1.5rem; padding: 0 1.25rem 1.25rem;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+}
+.sim-control label {
+    display: block; font-size: 0.75rem; font-weight: 600;
+    color: var(--text-secondary); margin-bottom: 0.3rem;
+}
+.sim-control label .val { float: right; font-variant-numeric: tabular-nums; color: var(--text); }
+.sim-control input[type=range] { width: 100%; accent-color: var(--red); }
+.sim-buttons { display: flex; gap: 0.5rem; flex-wrap: wrap; padding: 0 1.25rem 1.25rem; }
+.sim-btn {
+    font: inherit; font-size: 0.8rem; padding: 0.4rem 0.9rem; cursor: pointer;
+    border: 1px solid var(--border); border-radius: 6px;
+    background: var(--bg); color: var(--text); transition: all 0.15s;
+}
+.sim-btn:hover { border-color: var(--light-teal); }
+.sim-btn.primary { background: var(--dark-blue); color: #fff; border-color: var(--dark-blue); }
+[data-theme="dark"] .sim-btn.primary { background: var(--pick); color: var(--pick-ink); border-color: var(--pick); }
+.sim-readout {
+    padding: 0.85rem 1.25rem; border-top: 1px solid var(--border);
+    font-size: 0.82rem; color: var(--text-secondary); background: var(--bg-nav);
+}
+.sim-readout strong { color: var(--text); }
+.sim-fallback { padding: 1.25rem; font-size: 0.85rem; color: var(--text-secondary); }
+
+/* ===== CHECK YOUR UNDERSTANDING ===== */
+.check { margin: 2rem 0; }
+.check > h4 {
+    font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.06em; color: var(--dark-blue); margin-bottom: 0.75rem;
+}
+[data-theme="dark"] .check > h4 { color: var(--light-teal); }
+.check-q {
+    border: 1px solid var(--border); border-radius: 8px;
+    background: var(--bg-surface); margin-bottom: 0.75rem;
+}
+.check-q > summary {
+    cursor: pointer; padding: 0.85rem 1.1rem; font-size: 0.9rem; font-weight: 600;
+    list-style: none; display: flex; gap: 0.6rem; align-items: flex-start;
+}
+.check-q > summary::-webkit-details-marker { display: none; }
+.check-q > summary::before {
+    content: '?'; flex-shrink: 0;
+    width: 1.35rem; height: 1.35rem; border-radius: 50%;
+    background: var(--dark-blue); color: #fff;
+    font-size: 0.75rem; display: flex; align-items: center; justify-content: center;
+}
+[data-theme="dark"] .check-q > summary::before { background: var(--pick); color: var(--pick-ink); }
+.check-q[open] > summary::before { content: '\2713'; }
+.check-a {
+    padding: 0 1.1rem 1rem 3.05rem; font-size: 0.88rem; color: var(--text-secondary);
+}
+.check-a p:last-child { margin-bottom: 0; }
+
+/* ===== CHAPTER NAV (prev / next) ===== */
+.chapter-nav {
+    display: flex; gap: 1rem; justify-content: space-between;
+    margin-top: 3rem; padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+}
+/* The destination is now just its number, so the cards no longer need to span the
+   column. A fixed width keeps the pair identical whatever the labels say; flex:1 did
+   not, because a flex item will not shrink below its own min-content. */
+.chapter-nav a {
+    flex: 0 0 auto; width: 12.5rem; min-width: 0;
+    padding: 0.62rem 0.85rem; border: 1px solid var(--red); border-radius: 9px;
+    text-decoration: none; color: #fff; background: var(--red);
+    transition: background 0.2s, border-color 0.2s, transform 0.2s;
+}
+.chapter-nav a:hover {
+    background: #8e1f26; border-color: #8e1f26; transform: translateY(-1px); text-decoration: none;
+}
+/* Label and destination sit on one line; a long chapter title truncates
+   rather than wrapping the card to two rows. */
+.chapter-nav a { display: flex; align-items: baseline; gap: 0.45rem; }
+.chapter-nav .next { justify-content: flex-end; }
+.chapter-nav small {
+    flex-shrink: 0; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.07em;
+    color: rgba(255, 255, 255, 0.82);
+}
+.chapter-nav span {
+    font-size: 0.8rem; font-weight: 700;
+    min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+@media (max-width: 600px) {
+    .chapter-nav { flex-direction: column; }
+    .chapter-nav a { width: auto; }
+}
+
+/* ===== ON THIS PAGE (sidebar sub-nav) ===== */
+.nav-onpage { display: none; }
+.nav-link.current-page + .nav-onpage { display: block; }
+.nav-onpage a {
+    display: block; padding: 0.25rem 1.25rem 0.25rem 2.4rem;
+    font-size: 0.75rem; color: var(--text-nav); text-decoration: none;
+    border-left: 3px solid transparent; line-height: 1.35;
+}
+.nav-onpage a:hover { background: var(--bg-nav-hover); color: var(--text-nav-active); }
+.nav-onpage a.active { color: var(--text-nav-active); border-left-color: var(--red); font-weight: 600; }
+[data-theme="dark"] .nav-onpage a.active { border-left-color: var(--yellow); }
+.nav-link.current-page { background: var(--bg-nav-active); color: var(--text-nav-active); font-weight: 600; border-left-color: var(--red); }
+[data-theme="dark"] .nav-link.current-page { border-left-color: var(--yellow); }
+
+/* ===== SEARCH: cross-chapter result source ===== */
+.search-result-where {
+    font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--text-secondary); margin-top: 0.25rem;
+}
+
+/* ===== PRINT ===== */
+@media print {
+    .toolbar, .sidebar, .overlay, .progress-bar, .reading-pos,
+    .chapter-nav, .sim-controls, .sim-buttons { display: none !important; }
+    .main { margin: 0; padding: 1cm; max-width: 100%; }
+    .sim, .diagram, figure, .check-q, .objectives { break-inside: avoid; }
+    .check-q > summary { font-weight: 700; }
+    .check-a { display: block !important; }
+    a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 0.75em; color: #555; }
+}
+
+/* ===== COMPLETION COLOUR TOKENS ===== */
+:root { --ok: #2e7d32; --ok-border: #2e7d32; --ok-bg: rgba(46,125,50,0.08); }
+[data-theme="dark"]  { --ok: #7fc98a; --ok-border: #7fc98a; --ok-bg: rgba(127,201,138,0.12); }
+[data-theme="sepia"] { --ok: #4a6b3a; --ok-border: #4a6b3a; --ok-bg: rgba(74,107,58,0.10); }
+
+/* ===== SECTION TAGS (type + curriculum standards) =====
+   Rendered from data-kind / data-standards on a <section>. */
+.section-tags {
+    display: flex; flex-wrap: wrap; align-items: center;
+    gap: 0.4rem; margin-bottom: 0.6rem;
+}
+.section-tag {
+    display: inline-flex; align-items: center; gap: 0.3rem;
+    font-size: 0.66rem; font-weight: 700; letter-spacing: 0.09em;
+    text-transform: uppercase; border-radius: 6px; padding: 0.2rem 0.5rem;
+    background: var(--bg-nav-active); color: var(--text-secondary);
+}
+.section-tag.kind {
+    background: rgba(170,39,47,0.12); color: var(--red);
+}
+[data-theme="dark"] .section-tag.kind { background: rgba(203,93,99,0.18); color: var(--light-red); }
+.standard-tag {
+    display: inline-flex; align-items: center; gap: 0.3rem;
+    font-size: 0.66rem; font-weight: 700; letter-spacing: 0.06em;
+    border-radius: 6px; padding: 0.2rem 0.5rem; cursor: help;
+    background: rgba(87,120,153,0.14); color: #2f5c85;
+    border: 1px solid transparent;
+}
+[data-theme="dark"] .standard-tag { background: rgba(87,120,153,0.22); color: #9dc4e8; }
+[data-theme="sepia"] .standard-tag { background: rgba(107,91,69,0.14); color: #5a4a34; }
+.standard-tag:hover { border-color: currentColor; }
+a.standard-tag { cursor: pointer; text-decoration: none; }
+.standard-tag .std-framework { opacity: 0.7; font-weight: 600; }
+
+/* ===== SECTION PILL BAR (time / prerequisite / complete) ===== */
+.section-pills {
+    display: flex; flex-wrap: wrap; align-items: center;
+    gap: 0.6rem; margin: 1rem 0 1.75rem;
+}
+.pill-time, .pill-prereq, .complete-btn {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    padding: 0.45rem 0.9rem; border-radius: 22px;
+    border: 1.5px solid var(--border); background: transparent;
+    color: var(--text-secondary);
+    font-family: inherit; font-size: 0.78rem; font-weight: 500;
+    max-width: 100%; white-space: nowrap; transition: all 0.2s;
+}
+/* The prerequisite label is a section heading, so its length is arbitrary.
+   nowrap on an arbitrarily long label forces the page wider than the
+   viewport on a phone, so this one is allowed to wrap. The time and
+   complete pills keep nowrap — their labels are short and fixed. */
+.pill-prereq { white-space: normal; text-align: left; }
+.pill-time { cursor: default; }
+.pill-time .pill-icon { display: inline-flex; align-items: center; line-height: 1; }
+.pill-time .pill-icon svg { display: block; }
+
+.pill-prereq {
+    cursor: pointer; text-decoration: none;
+    border-color: var(--red); color: var(--red);
+    background: rgba(170,39,47,0.05);
+}
+.pill-prereq:hover { background: rgba(170,39,47,0.11); text-decoration: none; }
+[data-theme="dark"] .pill-prereq { border-color: var(--light-red); color: var(--light-red); }
+.pill-prereq.met {
+    border-color: var(--ok-border); color: var(--ok);
+    background: var(--ok-bg); cursor: default; pointer-events: none;
+}
+
+.complete-btn { cursor: pointer; }
+.complete-btn:hover { border-color: var(--dark-blue); color: var(--dark-blue); background: rgba(0,42,66,0.04); }
+[data-theme="dark"] .complete-btn:hover { border-color: var(--light-teal); color: var(--light-teal); background: rgba(87,120,153,0.12); }
+.complete-btn.completed {
+    border-color: #2e7d32; background: #2e7d32; color: #fff;
+}
+.complete-btn.completed:hover { border-color: #266a2a; background: #266a2a; color: #fff; }
+[data-theme="dark"] .complete-btn.completed { border-color: #3f8f45; background: #3f8f45; }
+.complete-btn .btn-icon { font-size: 0.95rem; line-height: 1; }
+
+/* A completed section fades its heading rule slightly */
+section.section-done > h2 { border-bottom-color: var(--ok-border); }
+
+/* ===== SIDEBAR COMPLETION MARKS ===== */
+.nav-link { position: relative; }
+.nav-link .nav-done, .nav-onpage a .nav-done {
+    color: var(--ok); font-weight: 700; margin-left: 0.4rem;
+}
+.nav-link.done, .nav-onpage a.done { color: var(--text-secondary); }
+.nav-chapter-progress {
+    display: block; padding: 0 1.25rem 0.4rem 1.25rem;
+    font-size: 0.66rem; color: var(--text-secondary);
+}
+
+/* ===== CHAPTER META BAR (rendered from toc.js) ===== */
+.chapter-meta {
+    display: flex; flex-wrap: wrap; gap: 1.25rem; align-items: center;
+    font-size: 0.78rem; color: var(--text-secondary);
+    padding-bottom: 1.25rem; margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+}
+.chapter-meta .section-pills { margin: 0; }
+.chapter-meta .section-tags { margin: 0; }
+
+.course-progress {
+    display: flex; align-items: center; gap: 1rem;
+    border: 1px solid var(--border); border-radius: 10px;
+    background: var(--bg-surface); padding: 1rem 1.25rem; margin: 1.5rem 0;
+}
+.course-progress .bar { flex: 1; height: 6px; border-radius: 3px; background: var(--border); overflow: hidden; }
+.course-progress .bar span { display: block; height: 100%; background: var(--ok); border-radius: 3px; transition: width 0.4s ease; }
+.course-progress .count { font-size: 0.82rem; font-weight: 600; white-space: nowrap; }
+.course-progress .reset {
+    font: inherit; font-size: 0.72rem; cursor: pointer; padding: 0.3rem 0.7rem;
+    border: 1px solid var(--border); border-radius: 6px;
+    background: var(--bg); color: var(--text-secondary);
+}
+.course-progress .reset:hover { border-color: var(--red); color: var(--red); }
+
+/* ===== STANDARDS INDEX PAGE ===== */
+.standard-entry {
+    border: 1px solid var(--border); border-radius: 10px;
+    background: var(--bg-surface); padding: 1rem 1.25rem; margin-bottom: 0.85rem;
+}
+.standard-entry h3 { margin: 0 0 0.3rem; font-size: 0.95rem; }
+.standard-entry .std-code {
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--text-secondary);
+}
+.standard-entry p { font-size: 0.88rem; margin: 0.4rem 0 0.6rem; }
+.standard-entry .std-where { font-size: 0.78rem; }
+.standard-entry .std-where a { margin-right: 0.75rem; }
+
+/* ===== PRINT ADDITIONS ===== */
+@media print {
+    .complete-btn, .course-progress .reset, .nav-chapter-progress { display: none !important; }
+    .section-pills, .section-tags { break-inside: avoid; }
+}
+
+/* ===== TOOLBAR COURSE PROGRESS ===== */
+.toolbar-progress {
+    display: flex; align-items: center; gap: 0.5rem;
+    margin-right: 0.35rem;
+}
+.toolbar-progress .tp-count {
+    font-size: 0.75rem; font-weight: 600; color: rgba(255,255,255,0.75);
+    font-variant-numeric: tabular-nums; white-space: nowrap;
+}
+/* A finished unit reads as solid and slightly brighter in its own colour */
+.toolbar-progress .tp-seg.done > .tp-fill {
+    background: hsl(var(--unit-h, 210) 75% 60%);
+    box-shadow: 0 0 5px hsl(var(--unit-h, 210) 75% 60% / 0.65);
+}
+/* Units with nothing to track yet stay faint rather than looking unstarted */
+.toolbar-progress .tp-seg.empty { background: rgba(255,255,255,0.09); }
+@media print { .toolbar-progress { display: none !important; } }
+
+/* ===== UNIT COLOUR CODING =====
+   Each unit carries a single hue (set inline as --unit-h from toc.js).
+   Saturation and lightness are chosen per theme here, so one number in
+   the TOC produces readable colour in light, sepia and dark. */
+:root                { --u-sat: 45%; --u-light: 34%; --u-soft: 0.13; --u-line: 0.35; }
+[data-theme="dark"]  { --u-sat: 55%; --u-light: 70%; --u-soft: 0.20; --u-line: 0.55; }
+[data-theme="sepia"] { --u-sat: 38%; --u-light: 30%; --u-soft: 0.15; --u-line: 0.40; }
+
+.u-tint { color: hsl(var(--unit-h, 210) var(--u-sat) var(--u-light)); }
+.u-fill { background: hsl(var(--unit-h, 210) var(--u-sat) var(--u-light)); }
+.u-soft { background: hsl(var(--unit-h, 210) var(--u-sat) var(--u-light) / var(--u-soft)); }
+
+/* ===== SIDEBAR UNIT BLOCK =====
+   Unit headings carry no progress bar — progress lives in the toolbar only. */
+.nav-unit-label { color: hsl(var(--unit-h, 210) var(--u-sat) var(--u-light)) !important; }
+.nav-unit.unit-complete .nav-unit-label::after { content: ' ✓'; color: var(--ok); }
+
+/* Chapter links pick up their unit's colour when active or complete */
+.nav-link.current-page { border-left-color: hsl(var(--unit-h, 210) var(--u-sat) var(--u-light)); }
+[data-theme="dark"] .nav-link.current-page { border-left-color: hsl(var(--unit-h, 210) var(--u-sat) var(--u-light)); }
+
+/* ===== TOOLBAR PROGRESS: SEGMENTED BY UNIT =====
+   The one place course progress is shown. Each unit is a segment sized by its
+   share of the course and filled by its own completion; the unit the reader is
+   currently in is raised and outlined, with a marker at the current chapter.
+   The toolbar is always dark, so these use fixed light values. */
+.toolbar-progress .tp-bar {
+    display: flex; align-items: center; gap: 4px;
+    width: 300px; height: 14px; background: none; overflow: visible;
+}
+.toolbar-progress .tp-seg {
+    position: relative; flex: 1 1 0; min-width: 8px;
+    height: 7px; border-radius: 3px; overflow: visible;
+    background: rgba(255,255,255,0.22);
+    transition: height 0.2s, box-shadow 0.2s;
+}
+.toolbar-progress .tp-seg > .tp-fill {
+    display: block; height: 100%; width: 0; border-radius: 3px;
+    background: hsl(var(--unit-h, 210) 62% 66%);
+    transition: width 0.4s ease;
+}
+/* the unit the reader is in */
+.toolbar-progress .tp-seg.current {
+    height: 14px;
+    box-shadow: 0 0 0 1.5px rgba(255,255,255,0.5);
+}
+.toolbar-progress .tp-seg.current > .tp-fill { border-radius: 3px; }
+/* "you are here" marker within the current unit */
+.toolbar-progress .tp-here {
+    position: absolute; top: -3px; bottom: -3px; width: 2px;
+    background: #fff; border-radius: 1px;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.35);
+}
+.toolbar-progress.complete .tp-count { color: #7fc98a; }
+
+/* It is the one map of the course, so it gets real estate where there is any,
+   and gives it up in steps rather than all at once. */
+@media (min-width: 1700px) { .toolbar-progress .tp-bar { width: 380px; } }
+@media (max-width: 1500px) { .toolbar-progress .tp-bar { width: 250px; } }
+@media (max-width: 1320px) { .toolbar-progress .tp-bar { width: 190px; } }
+@media (max-width: 1150px) { .toolbar-progress .tp-bar { width: 140px; gap: 3px; } }
+@media (max-width: 980px)  { .toolbar-progress .tp-bar { width: 96px; } }
+@media (max-width: 760px)  { .toolbar-progress .tp-bar { width: 64px; } }
+@media (max-width: 620px)  { .toolbar-progress .tp-caret { display: none; } }
+@media (max-width: 560px)  { .toolbar-progress .tp-bar { display: none; } }
+
+/* ===== PROGRESS PANEL =====
+   The bar is a button; this is what it opens. */
+.tp-wrap { position: relative; display: flex; align-items: center; }
+button.toolbar-progress {
+    font: inherit; color: inherit; cursor: pointer;
+    background: none; border: 1px solid transparent; border-radius: 7px;
+    padding: 0.25rem 0.45rem; transition: background 0.15s, border-color 0.15s;
+}
+button.toolbar-progress:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2); }
+button.toolbar-progress[aria-expanded="true"] { background: rgba(255,255,255,0.14); border-color: rgba(255,255,255,0.28); }
+button.toolbar-progress:focus-visible { outline: 2px solid #fff; outline-offset: 1px; }
+.toolbar-progress .tp-caret { font-size: 0.6rem; opacity: 0.7; line-height: 1; }
+button.toolbar-progress[aria-expanded="true"] .tp-caret { transform: rotate(180deg); }
+
+.tp-panel {
+    position: absolute; top: calc(100% + 0.4rem); left: 0; z-index: 120;
+    min-width: 340px; max-width: min(430px, 92vw);
+    background: var(--bg); color: var(--text);
+    border: 1px solid var(--border); border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.22);
+    padding: 0.4rem; max-height: min(70vh, 520px); overflow-y: auto;
+}
+.tp-panel[hidden] { display: none; }
+.tp-panel-head {
+    font-size: 0.65rem; font-weight: 700; letter-spacing: 0.09em;
+    text-transform: uppercase; color: var(--muted);
+    padding: 0.35rem 0.6rem 0.45rem;
+}
+.tp-row {
+    display: flex; align-items: center; gap: 0.5rem;
+    padding: 0.42rem 0.6rem; border-radius: 7px;
+    text-decoration: none; color: var(--text); font-size: 0.82rem;
+}
+a.tp-row:hover { background: hsl(var(--unit-h, 210) var(--u-sat) var(--u-light) / 0.12); }
+a.tp-row:focus-visible { outline: 2px solid hsl(var(--unit-h, 210) var(--u-sat) var(--u-light)); outline-offset: -2px; }
+.tp-row.current { background: hsl(var(--unit-h, 210) var(--u-sat) var(--u-light) / 0.14); font-weight: 600; }
+.tp-row.off { opacity: 0.5; cursor: default; }
+.tp-row-dot {
+    width: 9px; height: 9px; border-radius: 50%; flex: 0 0 9px;
+    background: hsl(var(--unit-h, 210) var(--u-sat) var(--u-light));
+}
+.tp-row.current .tp-row-dot { box-shadow: 0 0 0 3px hsl(var(--unit-h, 210) var(--u-sat) var(--u-light) / 0.25); }
+.tp-row-label { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tp-row-bar {
+    flex: 0 0 54px; height: 5px; border-radius: 3px;
+    background: hsl(var(--unit-h, 210) var(--u-sat) var(--u-light) / 0.2); overflow: hidden;
+}
+.tp-row-bar > span {
+    display: block; height: 100%; border-radius: 3px;
+    background: hsl(var(--unit-h, 210) var(--u-sat) var(--u-light));
+}
+.tp-row-count {
+    flex: 0 0 auto; font-size: 0.7rem; color: var(--muted);
+    font-variant-numeric: tabular-nums; min-width: 2.6rem; text-align: right;
+}
+.tp-row.done .tp-row-count { color: var(--ok); font-weight: 700; }
+.tp-row-all { border-top: 1px solid var(--border); margin-top: 0.25rem; padding-top: 0.5rem; border-radius: 0 0 7px 7px; }
+.tp-row-all .tp-row-dot { background: var(--muted); }
+@media print { .tp-panel { display: none !important; } }
+
+/* ===== CONTENTS PAGE: COURSE MAP =====
+   A Gantt chart whose axis is work rather than calendar time. Bar length is
+   the unit's estimated time, bar position comes from COURSE.units[].needs, and
+   the fill is the reader's own progress. Rows are a fixed height because the
+   dependency links are positioned in px down and % across — no measuring, so
+   it is right on the first paint and stays right through a resize. ROW_H,
+   BAR_TOP and BAR_H in assets/contents.js must match the values here. */
+.cmap {
+    --cmap-tail: 26px;           /* the chevron's lane at the right-hand end */
+    border: 1px solid var(--border); border-radius: 12px;
+    background: var(--bg-surface);
+    padding: 1.1rem 1.2rem 0.9rem; margin: 0 0 2rem;
+}
+.cmap-head h3 { margin: 0 0 0.2rem; font-size: 1rem; }
+.cmap-sub { margin: 0 0 0.75rem; font-size: 0.8rem; color: var(--text-secondary); max-width: 46rem; }
+.cmap-stats {
+    display: flex; flex-wrap: wrap; gap: 0.4rem 1.1rem;
+    font-size: 0.78rem; color: var(--text-secondary);
+    padding-bottom: 0.8rem; margin-bottom: 0.3rem;
+    border-bottom: 1px solid var(--border);
+}
+.cmap-stats b { color: var(--text); font-variant-numeric: tabular-nums; }
+.cmap-stat-done b { color: var(--red); }
+
+.cmap-scroll { container-type: inline-size; }
+.cmap-body { position: relative; padding-top: 26px; }
+.cmap-unit { position: relative; }
+
+/* the hour axis, drawn behind everything */
+.cmap-axis { position: absolute; inset: 0 var(--cmap-tail) 0 var(--cmap-gutter, 177px); pointer-events: none; }
+.cmap-tick { position: absolute; top: 0; bottom: 0; }
+.cmap-tick > i { position: absolute; top: 20px; bottom: 4px; left: 0; width: 1px; background: var(--border); }
+.cmap-tick > b {
+    position: absolute; top: 2px; left: 0; transform: translateX(-50%);
+    font-size: 0.65rem; font-weight: 600; color: var(--text-secondary);
+    font-variant-numeric: tabular-nums;
+}
+.cmap-tick:first-child > b { transform: none; }
+@container (max-width: 700px) {
+    .cmap-tick:nth-of-type(even) > b { display: none; }
+}
+@container (max-width: 420px) {
+    .cmap-tick > b { display: none; }
+    .cmap-tick:nth-of-type(4n + 1) > b { display: block; }
+}
+
+/* one unit */
+.cmap-row {
+    /* A <button> shrink-wraps even as a flex container, so the width is stated.
+       It has to include both negative margins (0.4 + 0.3rem) or the row stops
+       short of where the open panel below it ends. */
+    position: relative; display: flex; align-items: center; width: calc(100% + 0.7rem);
+    height: 46px; text-align: left; font: inherit; color: inherit;
+    background: none; border: 0; cursor: pointer;
+    border-radius: 8px; margin: 0 -0.3rem 0 -0.4rem;
+    padding: 0 calc(0.3rem + var(--cmap-tail)) 0 0.4rem;
+}
+.cmap-row:hover { background: hsl(var(--unit-h, 210) var(--u-sat) var(--u-light) / 0.09); }
+.cmap-row:focus-visible { outline: 2px solid hsl(var(--unit-h, 210) var(--u-sat) var(--u-light)); outline-offset: -2px; }
+.cmap-name {
+    /* The negative margin on the row lets the highlight bleed past the chart;
+       this padding holds the label clear of that edge rather than letting it
+       sit on it. It comes out of the column's own fixed width, so the bars and
+       the axis stay in step. */
+    flex: 0 0 var(--cmap-gutter, 177px); width: var(--cmap-gutter, 177px);
+    padding: 0 0.7rem 0 0.5rem; min-width: 0; line-height: 1.25;
+}
+.cmap-name-main {
+    display: block; font-size: 0.82rem; font-weight: 600;
+    color: hsl(var(--unit-h, 210) var(--u-sat) var(--u-light));
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.cmap-name-sub { display: block; font-size: 0.68rem; color: var(--text-secondary); font-variant-numeric: tabular-nums; }
+
+.cmap-track { position: relative; flex: 1 1 auto; height: 100%; }
+.cmap-bar {
+    position: absolute; top: 14px; height: 18px; border-radius: 5px;
+    background: hsl(var(--unit-h, 210) var(--u-sat) var(--u-light) / 0.30);
+    box-shadow: inset 0 0 0 1px hsl(var(--unit-h, 210) var(--u-sat) var(--u-light) / 0.55);
+    overflow: hidden; transition: filter 0.15s;
+}
+.cmap-fill {
+    display: block; height: 100%; width: 0; border-radius: 4px;
+    background: hsl(var(--unit-h, 210) var(--u-sat) var(--u-light));
+    transition: width 0.4s ease;
+}
+.cmap-row:hover .cmap-bar { filter: brightness(1.06) saturate(1.1); }
+.cmap-row.done .cmap-bar { box-shadow: inset 0 0 0 1.5px hsl(var(--unit-h, 210) var(--u-sat) var(--u-light)); }
+.cmap-pct {
+    position: absolute; top: 15px; margin-left: 0.4rem;
+    font-size: 0.68rem; font-weight: 600; color: var(--text-secondary);
+    font-variant-numeric: tabular-nums; white-space: nowrap;
+}
+.cmap-row.done .cmap-pct { color: var(--ok); }
+
+/* dependency links: a drop from the end of one bar to the start of the next */
+.cmap-links { position: absolute; inset: 0 var(--cmap-tail) 0 var(--cmap-gutter, 177px); pointer-events: none; }
+.cmap-link { position: absolute; width: 0; border-left: 1.5px dashed var(--text-secondary); opacity: 0.55; }
+.cmap-link-h { position: absolute; height: 0; border-top: 1.5px dashed var(--text-secondary); opacity: 0.55; }
+.cmap-arrow {
+    position: absolute; width: 0; height: 0; margin: -3.5px 0 0 -1px;
+    border: 3.5px solid transparent; border-left-color: var(--text-secondary); opacity: 0.6;
+}
+
+.cmap-unit.open > .cmap-row { background: hsl(var(--unit-h, 210) var(--u-sat) var(--u-light) / 0.10); }
+.cmap-unit.open .cmap-bar { box-shadow: inset 0 0 0 1.5px hsl(var(--unit-h, 210) var(--u-sat) var(--u-light)); }
+.cmap-row::after {
+    content: ''; position: absolute; width: 0.4rem; height: 0.4rem;
+    right: calc(var(--cmap-tail) / 2 + 1px);   /* centred in its lane */
+    border-right: 2px solid hsl(var(--unit-h, 210) var(--u-sat) var(--u-light));
+    border-bottom: 2px solid hsl(var(--unit-h, 210) var(--u-sat) var(--u-light));
+    transform: rotate(-45deg); transition: transform 0.18s; opacity: 0.75;
+}
+.cmap-unit.open > .cmap-row::after { transform: rotate(45deg); }
+
+/* The chapter list, opened in place under its bar. Thin on purpose: number,
+   title, time, progress. Everything else is on the chapter's own page. */
+.cmap-panel {
+    /* -0.3rem on the right matches the row's own negative margin, so the panel
+       finishes exactly where the highlighted row above it does. */
+    margin: 0 -0.3rem 0.6rem var(--cmap-gutter, 177px);
+    border-left: 2px solid hsl(var(--unit-h, 210) var(--u-sat) var(--u-light) / 0.45);
+    background: var(--bg);   /* solid, so the axis lines do not show through the list */
+    border-radius: 0 8px 8px 0; padding: 0.45rem 0.5rem;
+    animation: cmapOpen 0.2s ease-out;
+    container-type: inline-size;
+}
+.cmap-panel[hidden] { display: none; }
+@keyframes cmapOpen { from { opacity: 0; transform: translateY(-3px); } to { opacity: 1; transform: none; } }
+.cmap-chaps {
+    list-style: none; margin: 0; padding: 0;
+    display: grid; gap: 1px; grid-template-columns: 1fr;
+}
+.cmap-chap {
+    display: grid; align-items: center; gap: 0.55rem;
+    grid-template-columns: 2.4rem minmax(0, 1fr) 3.6rem 64px 2.6rem;
+    padding: 0.26rem 0.55rem 0.26rem 0.75rem; border-radius: 6px;
+    text-decoration: none; color: var(--text); font-size: 0.82rem;
+}
+a.cmap-chap:hover { background: hsl(var(--unit-h, 210) var(--u-sat) var(--u-light) / 0.14); text-decoration: none; }
+a.cmap-chap:focus-visible { outline: 2px solid hsl(var(--unit-h, 210) var(--u-sat) var(--u-light)); outline-offset: -2px; }
+.cmap-chap-num {
+    font-size: 0.72rem; font-weight: 700; font-variant-numeric: tabular-nums;
+    color: hsl(var(--unit-h, 210) var(--u-sat) var(--u-light));
+}
+.cmap-chap-title { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cmap-chap-time, .cmap-chap-count { font-size: 0.7rem; color: var(--text-secondary); font-variant-numeric: tabular-nums; }
+.cmap-chap-count { text-align: right; }
+.cmap-chap-bar {
+    height: 4px; border-radius: 2px; overflow: hidden;
+    background: hsl(var(--unit-h, 210) var(--u-sat) var(--u-light) / 0.22);
+}
+.cmap-chap-bar-none { background: none; }
+.cmap-chap-bar > i {
+    display: block; height: 100%; border-radius: 2px;
+    background: hsl(var(--unit-h, 210) var(--u-sat) var(--u-light));
+}
+.cmap-chap.done .cmap-chap-title { color: var(--text-secondary); }
+.cmap-chap.done .cmap-chap-count { color: var(--ok); font-weight: 700; }
+.cmap-chap.done .cmap-chap-num::after { content: ' ✓'; color: var(--ok); }
+.cmap-chap.soon { opacity: 0.5; }
+
+/* What the list can afford to show is a question about the PANEL's width, not
+   the window's — the sidebar takes a third of the screen. The title is the
+   thing worth keeping, so the numbers go first. These have to stay below the
+   .cmap-chap rules above: a container query carries no extra specificity. */
+@container (max-width: 560px) {
+    .cmap-chap { grid-template-columns: 2.4rem minmax(0, 1fr) 3.6rem 2.6rem; }
+    .cmap-chap-bar { display: none; }
+}
+@container (max-width: 500px) {
+    .cmap-chap { grid-template-columns: 2.4rem minmax(0, 1fr) 3.6rem; }
+    .cmap-chap-count { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cmap-panel { animation: none; }
+    .cmap-row::after { transition: none; }
+}
+@media (max-width: 700px) {
+    .cmap { --cmap-gutter: 118px; --cmap-tail: 20px; padding: 0.9rem 0.9rem 0.7rem; }
+    .cmap-panel { margin-left: 0; border-radius: 8px; border-left-width: 3px; }
+    .cmap-chap { padding-left: 0.2rem; }
+    .cmap-name-sub { display: none; }
+    .cmap-row { height: 38px; }
+}
+/* Below this the gutter costs more than it is worth: a 96px column cuts every
+   unit name in half. The label goes above its bar instead and the gutter drops
+   to nothing, which hands the whole width to the chart. --cmap-gutter: 0 is all
+   the axis, the links and the panel need to follow. */
+@media (max-width: 560px) {
+    .cmap { --cmap-gutter: 0px; }
+    .cmap-row { flex-direction: column; align-items: stretch; height: auto; padding-top: 0.15rem; }
+    .cmap-name { flex: 0 0 auto; width: auto; padding: 0 1.6rem 0.1rem 0.15rem; }
+    .cmap-track { height: 26px; width: 100%; }
+    .cmap-bar { top: 4px; }
+    .cmap-row::after { top: calc(50% + 4px); }
+    .cmap-panel { border-left-width: 3px; padding-left: 0.35rem; }
+}
+@media print { .cmap { display: none !important; } }
+
+/* The course map's companion: the other way into the course, by body part. */
+.body-entry {
+    display: flex; align-items: center; gap: 0.9rem;
+    margin: -1rem 0 2rem; padding: 0.8rem 1.1rem;
+    border: 1px solid var(--border); border-radius: 12px;
+    background: var(--bg-surface); color: var(--text); text-decoration: none;
+    transition: border-color 0.15s, transform 0.15s;
+}
+.body-entry:hover { border-color: var(--light-teal); text-decoration: none; transform: translateY(-1px); }
+.body-entry:focus-visible { outline: 2px solid var(--light-teal); outline-offset: 2px; }
+.body-entry-icon { flex: 0 0 auto; color: var(--light-teal); display: flex; }
+[data-theme="dark"] .body-entry-icon { color: #8fb3d9; }
+.body-entry-text { flex: 1 1 auto; min-width: 0; line-height: 1.35; }
+.body-entry-text b { display: block; font-size: 0.95rem; }
+.body-entry-text span { display: block; font-size: 0.8rem; color: var(--text-secondary); }
+.body-entry-arrow { flex: 0 0 auto; font-size: 1.2rem; color: var(--text-secondary); transition: transform 0.15s; }
+.body-entry:hover .body-entry-arrow { transform: translateX(3px); color: var(--text); }
+@media print { .body-entry { display: none !important; } }
+
+/* ===== CHAPTER PAGE: eyebrow in the unit colour ===== */
+.chapter-eyebrow { color: hsl(var(--unit-h, 210) var(--u-sat) var(--u-light)); }
+[data-theme="dark"] .chapter-eyebrow { color: hsl(var(--unit-h, 210) var(--u-sat) var(--u-light)); }
+
+/* ===== HEADING ACTIONS (complete + copy link) =====
+   Adapted from the orientation site, where each FAQ heading carries its own
+   Complete pill and link icon. A section's <h2> is wrapped in .section-head
+   so the controls share the heading row without joining the heading's text;
+   a <summary> already lays out as a row, so they are appended to it. */
+.section-head {
+    display: flex; align-items: center; gap: 0.75rem;
+    margin-top: 2.5rem;
+}
+.section-head > h2 { flex: 1; min-width: 0; margin-top: 0; }
+.section-head.head-h1 { margin-top: 0; align-items: flex-start; }
+.section-head.head-h1 > h1 { flex: 1; min-width: 0; }
+
+.head-actions {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    flex-shrink: 0; margin-left: auto;
+}
+.head-actions .complete-btn {
+    padding: 0.3rem 0.7rem; font-size: 0.74rem; font-weight: 600;
+    border-radius: 999px; gap: 0.35rem;
+}
+.head-actions .complete-btn .btn-icon { font-size: 0.9em; }
+
+.copy-link {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 1.85rem; height: 1.85rem; padding: 0;
+    border: 1.5px solid var(--border); border-radius: 999px;
+    background: transparent; color: var(--text-secondary);
+    font-family: inherit; font-size: 0.8rem; line-height: 1;
+    cursor: pointer; transition: all 0.15s;
+}
+.copy-link:hover { border-color: var(--dark-blue); color: var(--dark-blue); background: var(--bg-surface); }
+[data-theme="dark"] .copy-link:hover { border-color: var(--light-teal); color: var(--light-teal); }
+.copy-link:active { transform: scale(0.93); }
+.copy-link.copied {
+    border-color: #2e7d32; background: #2e7d32; color: #fff;
+    opacity: 1 !important;   /* the "copied" confirmation must never fade out */
+    transition: none;
+}
+.copy-link .link-icon { line-height: 1; }
+
+/* On a touch screen the controls are always visible; on a pointer device the
+   copy-link fades in on hover so it doesn't clutter every heading. */
+@media (hover: hover) {
+    .copy-link {
+        opacity: 0;
+        transition: opacity 0.15s, border-color 0.15s, background 0.15s,
+                    color 0.15s, transform 0.1s;
+    }
+    /* Anything that means "the reader is dealing with this button" keeps it
+       visible. :focus alone matters as well as :focus-visible — on macOS a
+       mouse click does not focus a button, so :focus-visible never applies
+       on click and the button would otherwise have nothing holding it
+       visible while it is being used. */
+    .section-head:hover .copy-link,
+    .section-head:focus-within .copy-link,
+    .check-q > summary:hover .copy-link,
+    .check-q > summary:focus-within .copy-link,
+    .copy-link:hover,
+    .copy-link:focus,
+    .copy-link:focus-visible,
+    .copy-link:active,
+    .copy-link.copied { opacity: 1; }
+}
+
+/* Activity headings — the .check-q summary row */
+.check-q > summary { align-items: center; }
+.check-q > summary .head-actions { margin-left: auto; }
+.check-q[data-track] > summary { padding-right: 0.85rem; }
+
+/* A completed activity gets the same green tint the sections get */
+.check-q.section-done { border-color: var(--ok-border); }
+.check-q.section-done > summary { background: var(--ok-bg); }
+
+/* Brief highlight when arriving from a deep link */
+.link-target { animation: link-flash 2s ease-out; }
+@keyframes link-flash {
+    0%, 40% { background: hsl(48 100% 50% / 0.18); }
+    100%    { background: transparent; }
+}
+
+@media print {
+    .head-actions { display: none !important; }
+    .section-head { display: block; }
+}
+
+/* ===== PHOTO / SCREENSHOT FIGURES =====
+   Images lifted from the course slide deck. Distinct from .diagram, which is
+   for inline SVG we draw ourselves. */
+figure.shot { margin: 1.75rem 0; }
+figure.shot img {
+    display: block; width: 100%; height: auto;
+    border: 1px solid var(--border); border-radius: 10px;
+    background: #fff;
+}
+[data-theme="dark"] figure.shot img { opacity: 0.92; }
+/* Goodsell paintings are dense, often portrait, and at column width run over 1,000px tall.
+   Shown compact on the page; the figure still opens full screen for the detail. */
+figure.shot img.painting { width: auto; max-width: min(100%, 26rem); max-height: 22rem; margin-inline: auto; object-fit: contain; }
+figure.shot.narrow img { max-width: 460px; margin: 0 auto; }
+figure.shot.pair {
+    display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+figure.shot.pair figcaption { grid-column: 1 / -1; }
+/* Marks a placeholder asset that is expected to be replaced */
+/* ===== VIDEO EMBEDS =====
+   Rendered from <div class="video" data-video="ID" ...> by course.js.
+   The player itself is only loaded when the reader clicks play. Before that the
+   facade shows the video's own YouTube thumbnail (a lazy-loaded image), so the
+   video can be recognised before anyone presses play. */
+.video-embed {
+    border: 1px solid var(--border); border-radius: 12px;
+    background: var(--bg-surface); margin: 1.75rem 0; overflow: hidden;
+}
+.video-frame {
+    position: relative; aspect-ratio: 16 / 9; width: 100%;
+    background: linear-gradient(160deg, var(--dark-blue), #123);
+}
+.video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.video-play {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 0.75rem; cursor: pointer; border: 0; background: none;
+    color: #fff; font-family: inherit; text-align: center; padding: 1.5rem;
+}
+.video-play:hover .video-play-icon { transform: scale(1.08); background: var(--red); }
+.video-thumb { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.video-play.has-thumb::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0.05) 35%, rgba(0,0,0,0.7));
+}
+.video-play > span { position: relative; }
+.video-play.has-thumb { justify-content: flex-end; padding-bottom: 1.4rem; }
+.video-play.has-thumb .video-play-icon {
+    position: absolute; left: 50%; top: 50%; margin: -30px 0 0 -30px;
+    background: rgba(0,0,0,0.55); border-color: rgba(255,255,255,0.85);
+}
+.video-play.has-thumb:hover .video-play-icon { transform: scale(1.08); background: var(--red); }
+.video-play.has-thumb .video-play-label, .video-play.has-thumb .video-play-hint { text-shadow: 0 1px 3px rgba(0,0,0,0.8); }
+.video-play-icon {
+    width: 60px; height: 60px; border-radius: 50%;
+    background: rgba(255,255,255,0.15); border: 2px solid rgba(255,255,255,0.6);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; padding-left: 5px; transition: transform 0.15s, background 0.15s;
+}
+.video-play-label { font-size: 0.95rem; font-weight: 600; max-width: 34ch; line-height: 1.35; }
+.video-play-hint { font-size: 0.72rem; opacity: 0.75; }
+.video-meta {
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.5rem 0.9rem;
+    padding: 0.75rem 1.1rem; border-top: 1px solid var(--border);
+    font-size: 0.78rem; color: var(--text-secondary);
+}
+.video-meta .video-source { font-weight: 600; color: var(--text); }
+.video-meta .video-note {
+    padding: 0.1rem 0.45rem; border-radius: 4px;
+    background: var(--bg-example); color: var(--border-example);
+    border: 1px solid var(--border-example); font-size: 0.7rem; font-weight: 600;
+}
+.video-meta a { margin-left: auto; }
+
+/* ===== EXTERNAL RESOURCE LISTS ===== */
+.resource-list { margin: 1.5rem 0; }
+.resource-list .btn-external { margin: 0 0 0.6rem; }
+
+@media print {
+    .video-frame { display: none; }
+    .video-embed::after {
+        content: 'Video — see link'; display: block; padding: 0.75rem 1.1rem;
+        font-size: 0.8rem; color: #555;
+    }
+}
+
+/* ===== THREE-DIMENSION CARDS ===== */
+.dimension-grid {
+    display: grid; gap: 1rem; margin: 1.5rem 0;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+.dimension {
+    border: 1px solid var(--border); border-left: 4px solid var(--light-teal);
+    border-radius: 10px; background: var(--bg-surface); padding: 1.1rem 1.25rem;
+}
+.dimension h4 { margin: 0 0 0.15rem; font-size: 0.95rem; }
+.dimension .dim-abbr {
+    font-size: 0.64rem; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--red); display: block; margin-bottom: 0.3rem;
+}
+[data-theme="dark"] .dimension .dim-abbr { color: var(--yellow); }
+.dimension p { font-size: 0.85rem; color: var(--text-secondary); margin: 0.35rem 0 0; }
+
+/* ===== NAV TYPE BADGES =====
+   Follows the Geometry Playground pattern: number, title, then a small badge
+   on the line below saying what kind of thing this is. Only non-default
+   kinds are badged in the on-this-page list, so the nav stays quiet. */
+.nav-badge {
+    /* Block + width:fit-content puts every badge on its own line; the auto
+       left margin pushes it to the right edge of .nav-text, so a row with
+       two badges reads as a tidy right-hand column rather than a run-on. */
+    display: block; width: fit-content; margin: 0.25rem 0 0 auto;
+    font-size: 0.58rem; font-weight: 700; letter-spacing: 0.07em;
+    text-transform: uppercase; padding: 0.1rem 0.4rem; border-radius: 4px;
+    background: var(--bg-nav-active); color: var(--text-secondary);
+    border: 1px solid transparent;
+}
+.badge-lesson       { background: rgba(87,120,153,0.16); color: #2f5c85; }
+.badge-overview     { background: rgba(20,80,158,0.12);  color: var(--blue); }
+.badge-case-study   { background: rgba(255,205,0,0.20);  color: #8a6d00; }
+.badge-worked-example { background: rgba(255,205,0,0.14); color: #8a6d00; }
+.badge-investigation{ background: rgba(87,120,153,0.20); color: #2f5c85; }
+.badge-practice     { background: rgba(170,39,47,0.12);  color: var(--red); }
+.badge-orientation  { background: rgba(20,80,158,0.10);  color: var(--blue); }
+.badge-reference    { background: var(--bg-nav-active);  color: var(--text-secondary); }
+.badge-simulation   { background: rgba(120,80,200,0.15); color: #5b3ea8; }
+.badge-soon         { background: none; color: var(--text-secondary); border-color: var(--border); }
+
+[data-theme="dark"] .badge-lesson,
+[data-theme="dark"] .badge-investigation { background: rgba(87,120,153,0.28); color: #9dc4e8; }
+[data-theme="dark"] .badge-case-study,
+[data-theme="dark"] .badge-worked-example { background: rgba(255,205,0,0.18); color: var(--yellow); }
+[data-theme="dark"] .badge-practice { background: rgba(203,93,99,0.22); color: var(--light-red); }
+[data-theme="dark"] .badge-overview,
+[data-theme="dark"] .badge-orientation { background: rgba(111,168,220,0.18); color: #6fa8dc; }
+[data-theme="dark"] .badge-simulation { background: rgba(150,120,230,0.24); color: #bda6f2; }
+[data-theme="sepia"] .badge-simulation { background: rgba(107,91,69,0.16); color: #5a4a34; }
+
+.nav-onpage a .nav-text { display: block; }
+
+/* ===== NAV FLAGS =====
+   One-letter pills in a fixed gutter at the start of a section row, so they
+   line up in their own column the way the chapter numbers do. Two fit side by
+   side, which is the most any row carries (a Practice section holding a sim).
+   The colours are the badge palette, reused unchanged. */
+.nav-flags {
+    /* Same width as the chapter-number gutter, so a flag sits directly under
+       the 5.1 / 5.2 column rather than in a lane of its own. */
+    flex: none; display: flex; gap: 3px; width: var(--nav-gutter);
+    padding-top: 0.12rem; align-items: flex-start;
+}
+.nav-flag {
+    display: inline-block; flex: none;
+    width: 15px; height: 15px; line-height: 15px;
+    border-radius: 4px; text-align: center;
+    font-size: 0.58rem; font-weight: 800; letter-spacing: 0;
+    border: 1px solid transparent;
+}
+/* Chapter rows carry no flag — see navItem in course.js. */
+
+/* Disabled (not yet written) rows: quiet, no strikethrough games */
+.nav-link.disabled { opacity: 0.55; cursor: default; }
+.nav-link.disabled:hover { background: none; }
+
+/* On-this-page rows carry badges too */
+.nav-onpage a {
+    display: flex; align-items: flex-start;
+    padding: 0.3rem 1.1rem 0.3rem 2.3rem;
+}
+.nav-onpage a .nav-text { font-size: 0.75rem; }
+.nav-onpage .nav-badge { font-size: 0.55rem; margin-top: 0.2rem; }
+
+.nav-link .nav-done, .nav-onpage a .nav-done {
+    color: var(--ok); font-weight: 700; margin-left: 0.35rem;
+}
+
+/* ===== SIDEBAR: ONE TYPE SCALE, ONE ALIGNMENT GRID =====
+   Three levels, distinguished by indent, weight and colour — never by a
+   font size that appears nowhere else.
+
+     unit label   0.62rem  700  uppercase, coloured by unit
+     row          0.79rem  500  numbered rows indent by the gutter
+     sub-row      0.79rem  400  indented to sit under a numbered row's text
+
+   A row with no number starts at the gutter, so unit overviews line up with
+   the chapter numbers rather than with the chapter titles. */
+.sidebar { --nav-pad: 1.05rem; --nav-gutter: 2.15rem; --nav-size: 0.79rem; }
+
+.nav-link:hover { background: var(--bg-nav-hover); color: var(--text-nav-active); text-decoration: none; }
+.nav-link.current-page {
+    background: var(--bg-nav-active); color: var(--text-nav-active);
+    font-weight: 650;
+    border-left-color: hsl(var(--unit-h, 210) var(--u-sat) var(--u-light));
+}
+.nav-link.disabled { opacity: 0.5; cursor: default; }
+.nav-link.disabled:hover { background: none; color: var(--text-nav); }
+
+/* Sub-rows align under the text column of a numbered row */
+.nav-onpage a {
+    display: flex; align-items: flex-start;
+    /* No extra indent: the flag gutter IS the indent, and it lines up with the
+       chapter numbers above it. Hierarchy is carried by size and weight. */
+    padding: 0.28rem var(--nav-pad);
+    gap: 0;
+    font-size: var(--nav-size); font-weight: 400; line-height: 1.35;
+    color: var(--text-nav); text-decoration: none;
+    border-left: 3px solid transparent; transition: background 0.15s, color 0.15s;
+}
+.nav-onpage a:hover { background: var(--bg-nav-hover); color: var(--text-nav-active); text-decoration: none; }
+.nav-onpage a.active {
+    color: var(--text-nav-active); font-weight: 600;
+    border-left-color: hsl(var(--unit-h, 210) var(--u-sat) var(--u-light));
+}
+.nav-onpage a .nav-text { font-size: inherit; }
+
+/* Unit heading: no tick, no bar — completion is shown in the toolbar */
+.nav-unit.unit-complete .nav-unit-label::after { content: none; }
+
+/* Badges sit under the title, quiet */
+.nav-badge { margin-top: 0.22rem; font-size: 0.56rem; }
+
+/* Completion tick stays inline with the title and never wraps alone */
+.nav-link .nav-done, .nav-onpage a .nav-done {
+    color: var(--ok); font-weight: 700; margin-left: 0.35rem; white-space: nowrap;
+}
+
+/* ===== PROGRESSION STRIP =====
+   Drawn from the `question` field on each chapter in a unit. Shows the unit's
+   argument in order with the current step marked, so a reader can always see
+   what has been established and what is still coming. */
+.progression {
+    border: 1px solid var(--border); border-radius: 12px;
+    background: var(--bg-surface); padding: 1rem 1.15rem; margin: 1.75rem 0 2rem;
+}
+.progression-title {
+    font-size: 0.62rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--text-secondary); margin-bottom: 0.7rem;
+}
+.progression ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.3rem; }
+.progression li {
+    display: flex; gap: 0.7rem; align-items: baseline;
+    padding: 0.35rem 0.5rem; border-radius: 7px; margin: 0;
+    font-size: 0.85rem; color: var(--text-secondary);
+}
+.progression li .step-num {
+    flex-shrink: 0; width: 2.1rem; font-weight: 700; font-size: 0.75rem;
+    font-variant-numeric: tabular-nums;
+}
+.progression li a { color: inherit; text-decoration: none; }
+.progression li a:hover { text-decoration: underline; }
+.progression li.done .step-num { color: hsl(var(--unit-h, 210) var(--u-sat) var(--u-light)); }
+.progression li.here {
+    background: hsl(var(--unit-h, 210) var(--u-sat) var(--u-light) / var(--u-soft));
+    color: var(--text); font-weight: 600;
+}
+.progression li.here .step-num { color: hsl(var(--unit-h, 210) var(--u-sat) var(--u-light)); }
+.progression li.ahead { opacity: 0.6; }
+
+/* ===== LOOKING BACK / LOOKING AHEAD CALLOUTS ===== */
+.callout-recall { background: var(--bg-guidance); border-color: var(--light-teal); }
+.callout-recall::before { content: 'Looking back'; color: var(--light-teal); }
+[data-theme="dark"] .callout-recall::before { color: #9dc4e8; }
+.callout-ahead { background: var(--bg-surface); border-color: var(--text-secondary); }
+.callout-ahead::before { content: 'Where this goes next'; color: var(--text-secondary); }
+
+/* ===== QUICK CHECK (auto-marked multiple choice) =====
+   Authored as a .quiz containing .quiz-q blocks; course.js makes it
+   interactive. Wrong answers route the reader back to the section that
+   covers the idea, which is the point of the component. */
+.quiz { margin: 1.5rem 0; }
+.quiz-q {
+    border: 1px solid var(--border); border-radius: 10px;
+    background: var(--bg-surface); padding: 1.1rem 1.25rem; margin-bottom: 0.9rem;
+}
+.quiz-stem { font-weight: 600; font-size: 0.95rem; margin: 0 0 0.85rem; }
+.quiz-stem .quiz-n {
+    display: inline-block; min-width: 1.5rem; color: var(--text-secondary);
+    font-weight: 700; font-size: 0.8rem;
+}
+.quiz-options { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.4rem; }
+.quiz-options li { margin: 0; }
+.quiz-opt {
+    display: flex; align-items: flex-start; gap: 0.6rem; width: 100%;
+    padding: 0.6rem 0.85rem; border: 1.5px solid var(--border); border-radius: 8px;
+    background: var(--bg); color: var(--text); font: inherit; font-size: 0.88rem;
+    text-align: left; cursor: pointer; transition: border-color 0.15s, background 0.15s;
+}
+.quiz-opt:hover:not(:disabled) { border-color: var(--light-teal); }
+.quiz-opt:disabled { cursor: default; }
+.quiz-key {
+    flex-shrink: 0; width: 1.4rem; height: 1.4rem; border-radius: 50%;
+    border: 1.5px solid var(--border); display: flex; align-items: center;
+    justify-content: center; font-size: 0.72rem; font-weight: 700;
+    color: var(--text-secondary);
+}
+.quiz-opt.chosen-right { border-color: #2e7d32; background: var(--ok-bg); }
+.quiz-opt.chosen-right .quiz-key { background: #2e7d32; border-color: #2e7d32; color: #fff; }
+.quiz-opt.chosen-wrong { border-color: var(--red); background: rgba(170,39,47,0.06); }
+.quiz-opt.chosen-wrong .quiz-key { background: var(--red); border-color: var(--red); color: #fff; }
+.quiz-opt.reveal-right { border-color: #2e7d32; }
+.quiz-opt.reveal-right .quiz-key { border-color: #2e7d32; color: #2e7d32; }
+
+.quiz-why {
+    display: none; margin-top: 0.85rem; padding-top: 0.8rem;
+    border-top: 1px solid var(--border); font-size: 0.88rem; color: var(--text-secondary);
+}
+.quiz-q.answered .quiz-why { display: block; }
+.quiz-why p:last-child { margin-bottom: 0; }
+/* A question may hold two versions; only one is on screen at a time. */
+.quiz-variant[hidden] { display: none; }
+.quiz-again {
+    margin-left: 0.5rem; font-size: 0.62rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.07em; padding: 0.1rem 0.4rem; border-radius: 999px;
+    color: var(--red); border: 1px solid var(--red); white-space: nowrap;
+}
+.quiz-review {
+    display: inline-flex; align-items: center; gap: 0.4rem; margin-top: 0.6rem;
+    font-size: 0.8rem; font-weight: 600; text-decoration: none;
+    padding: 0.35rem 0.75rem; border-radius: 999px;
+    border: 1.5px solid var(--red); color: var(--red);
+    background: rgba(170,39,47,0.05);
+}
+.quiz-review:hover { background: rgba(170,39,47,0.12); text-decoration: none; }
+[data-theme="dark"] .quiz-review { border-color: var(--light-red); color: var(--light-red); }
+
+.quiz-score {
+    border: 1px solid var(--border); border-radius: 10px; padding: 1rem 1.25rem;
+    background: var(--bg-nav); font-size: 0.9rem; display: none;
+}
+.quiz-score.show { display: block; }
+.quiz-score strong { font-size: 1rem; }
+.quiz-score ul { margin: 0.5rem 0 0; padding-left: 1.2rem; font-size: 0.85rem; }
+.quiz-score.all-right { border-color: var(--ok-border); background: var(--ok-bg); }
+.quiz-reset {
+    font: inherit; font-size: 0.78rem; cursor: pointer; margin-top: 0.75rem;
+    padding: 0.3rem 0.75rem; border: 1px solid var(--border); border-radius: 6px;
+    background: var(--bg); color: var(--text-secondary);
+}
+.quiz-reset:hover { border-color: var(--text-secondary); color: var(--text); }
+
+@media print {
+    .quiz-opt { pointer-events: none; }
+    .quiz-why { display: block !important; }
+    .quiz-score, .quiz-reset { display: none !important; }
+}
+
+/* select control inside a simulation */
+.sim-select {
+    width: 100%; font: inherit; font-size: 0.82rem; padding: 0.35rem 0.5rem;
+    border: 1px solid var(--border); border-radius: 6px;
+    background: var(--bg); color: var(--text);
+}
+
+/* ===== CLADOGRAM BUILDER ===== */
+.clado-table { padding: 1rem 1.25rem 0; overflow-x: auto; }
+.clado-table table { margin: 0; font-size: 0.85rem; }
+.clado-table th:not(:first-child), .clado-table td:not(:first-child) { text-align: center; }
+.clado-prompt {
+    flex-basis: 100%; font-size: 0.8rem; font-weight: 600;
+    color: var(--text-secondary); margin-bottom: 0.2rem;
+}
+.clado-picker {
+    display: flex; flex-wrap: wrap; gap: 0.5rem; padding: 0 1.25rem 1rem;
+}
+.clado-opt {
+    font: inherit; font-size: 0.82rem; padding: 0.45rem 0.9rem; cursor: pointer;
+    border: 1.5px solid var(--border); border-radius: 999px;
+    background: var(--bg); color: var(--text); transition: all 0.15s;
+}
+.clado-opt:hover { border-color: var(--light-teal); background: var(--bg-surface); }
+
+/* Attribution line beneath a third-party embed */
+.video-credit {
+    font-size: 0.78rem; color: var(--text-secondary);
+    margin: -1.25rem 0 1.5rem; padding-left: 0.15rem;
+}
+
+/* ===== LIGHTBOX =====
+   Figures render at column width, but several carry fine detail and small
+   labels. Clicking one opens it as large as the screen allows. */
+figure.zoomable { cursor: zoom-in; position: relative; }
+figure.zoomable:focus-visible { outline: 2px solid var(--light-teal); outline-offset: 4px; }
+figure.zoomable img, figure.zoomable svg { cursor: zoom-in; }
+figure.zoomable::after {
+    content: '⤢'; position: absolute; top: 0.6rem; right: 0.6rem;
+    width: 1.7rem; height: 1.7rem; border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(0,0,0,0.55); color: #fff; font-size: 0.85rem;
+    opacity: 0; transition: opacity 0.15s; pointer-events: none;
+}
+figure.zoomable:hover::after, figure.zoomable:focus-visible::after { opacity: 1; }
+
+body.lb-open { overflow: hidden; }
+.lightbox {
+    position: fixed; inset: 0; z-index: 10000;
+    background: rgba(10,14,20,0.94);
+    display: flex; align-items: center; justify-content: center;
+    padding: 3.5rem 4rem 1rem;
+}
+.lightbox[hidden] { display: none; }
+/* The stage takes a definite width. Without one it shrank to fit its contents, and
+   since the caption is capped at 70ch that is what ended up deciding the figure's
+   width -- a diagram that had already collapsed to nothing. */
+.lb-stage {
+    margin: 0; width: 100%; height: 100%; max-width: 100%;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.9rem;
+}
+.lb-media { width: 100%; max-width: 100%; min-height: 0; flex: 0 1 auto; display: flex; align-items: center; justify-content: center; }
+.lb-media img {
+    max-width: 100%; max-height: calc(100vh - 9rem);
+    width: auto; height: auto; object-fit: contain;
+    background: #fff; border-radius: 6px;
+}
+/* A bitmap knows how big it is; an SVG with only a viewBox does not, so width:auto
+   resolves to nothing here. It is given the width and takes its height from the
+   aspect-ratio set on it when it is cloned. */
+.lb-media svg {
+    width: 100%; height: auto; max-width: 100%; max-height: calc(100vh - 9rem);
+    background: #fff; border-radius: 6px;
+}
+/* .lb-media borrows the .diagram class so a figure's own ".diagram svg" rules keep
+   matching. Its box styling is not wanted here, and neither is the phone rule that
+   gives .diagram > svg a 520px floor — that would overflow the lightbox sideways. */
+.lb-media.diagram { border: 0; background: none; padding: 0; border-radius: 0; }
+.lb-media.diagram > svg { min-width: 0; }
+.lb-cap {
+    color: rgba(255,255,255,0.85); font-size: 0.85rem; line-height: 1.5;
+    max-width: 70ch; text-align: center; flex-shrink: 0;
+}
+.lightbox button {
+    position: absolute; background: rgba(255,255,255,0.12); color: #fff;
+    border: 1px solid rgba(255,255,255,0.3); border-radius: 50%;
+    width: 2.6rem; height: 2.6rem; font-size: 1.4rem; line-height: 1;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    font-family: inherit; transition: background 0.15s;
+}
+.lightbox button:hover { background: rgba(255,255,255,0.26); }
+.lightbox button:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+.lb-close { top: 1rem; right: 1rem; }
+.lb-prev { left: 1rem; top: 50%; transform: translateY(-50%); }
+.lb-next { right: 1rem; top: 50%; transform: translateY(-50%); }
+
+@media (max-width: 700px) {
+    .lightbox { padding: 3.5rem 0.75rem 1rem; }
+    .lb-prev { left: 0.4rem; } .lb-next { right: 0.4rem; }
+    .lb-media img, .lb-media svg { max-height: calc(100vh - 11rem); }
+}
+@media print { .lightbox { display: none !important; } }
+
+
+/* ===== REPLACEMENT QUEUE =====
+   Deliberately loud. These images are in the reader only so their subject can
+   be re-authored; the badge is what stops one shipping by accident. */
+figure.needs-replacing {
+    outline: 2px dashed var(--red);
+    outline-offset: 4px;
+    position: relative;
+}
+figure.needs-replacing img { opacity: 0.88; }
+.replace-tag {
+    display: block; width: fit-content; margin: 0.5rem 0 0;
+    font-size: 0.62rem; font-weight: 800; letter-spacing: 0.07em;
+    text-transform: uppercase; padding: 0.2rem 0.5rem; border-radius: 4px;
+    background: var(--red); color: #fff;
+}
+[data-theme="dark"] .replace-tag { background: var(--light-red); color: #1a1a1a; }
+
+/* A stepwise process whose stages differ in size. The two short stages sit side
+   by side and the two long ones span the row, so each image is displayed at a
+   width proportional to its own pixel width — every stage therefore appears at
+   the SAME scale and the cell never changes thickness between rows. Two columns
+   at every width: collapsing to one would show the long stage-3 cell and the
+   short stage-1 cell at the same length and destroy the point of the figure. */
+.panel-row.steps { grid-template-columns: 1fr 1fr; }
+.panel-row.steps > div:nth-child(n+3) { grid-column: 1 / -1; }
+
+
+/* ===== READING TOOLS ===== */
+/* The sentence being spoken. Tinted rather than outlined so it does not
+   shift the layout as it moves down the page. */
+.rt-now {
+    background: var(--dfn-bg); border-radius: 4px;
+    box-shadow: 0 0 0 4px var(--dfn-bg);
+}
+.rt-bar {
+    /* .reading-pos is a fixed 32px footer at z-index 99, so the bar has to clear
+       it both in space and in the stack, or it gets clipped from below. */
+    position: fixed; left: 50%; bottom: calc(32px + 1.1rem); transform: translate(-50%, 160%);
+    display: flex; align-items: center; gap: 0.35rem;
+    padding: 0.45rem 0.6rem; border-radius: 999px;
+    background: var(--dark-blue); color: #fff;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.28);
+    z-index: 100; opacity: 0; pointer-events: none;
+    transition: transform 0.25s, opacity 0.25s;
+    max-width: calc(100vw - 2rem); flex-wrap: wrap; justify-content: center;
+    /* left:50% caps a shrink-to-fit box at HALF the viewport, so without this the
+       bar wrapped onto two lines as soon as the Natural | Device switch was added.
+       max-content sizes it to its contents; max-width still wraps it on a phone. */
+    width: max-content;
+}
+.rt-bar.show { transform: translate(-50%, 0); opacity: 1; pointer-events: auto; }
+.rt-b {
+    font: inherit; font-size: 0.9rem; line-height: 1; cursor: pointer;
+    background: rgba(255,255,255,0.14); color: #fff; border: 0;
+    border-radius: 999px; padding: 0.4rem 0.62rem;
+}
+.rt-b:hover { background: rgba(255,255,255,0.3); }
+.rt-main { font-size: 0.8rem; padding: 0.45rem 0.8rem; }
+.rt-x { background: none; font-size: 1.1rem; padding: 0.3rem 0.5rem; }
+.rt-pos { font-size: 0.7rem; opacity: 0.75; min-width: 4.2rem; text-align: center; }
+.rt-sp { display: flex; gap: 0.15rem; }
+.rt-r {
+    font: inherit; font-size: 0.68rem; cursor: pointer; color: #fff;
+    background: none; border: 1px solid rgba(255,255,255,0.35);
+    border-radius: 999px; padding: 0.22rem 0.4rem;
+}
+.rt-r.on { background: #fff; color: var(--dark-blue); border-color: #fff; font-weight: 700; }
+.rt-voice {
+    font: inherit; font-size: 0.7rem; max-width: 9rem; border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.35); background: rgba(255,255,255,0.1);
+    color: #fff; padding: 0.22rem 0.4rem;
+}
+.rt-voice option { color: #111; }
+/* Listen with no voice for the page language: greyed, but still tappable so it can say why */
+.tb[aria-disabled="true"] { opacity: 0.45; cursor: not-allowed; }
+.rt-explain {
+    position: fixed; z-index: 1000; width: 300px; box-sizing: border-box;
+    background: var(--dark-blue); color: #fff; border-radius: 10px;
+    padding: 0.6rem 0.8rem; font-size: 0.8rem; line-height: 1.45;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.28);
+}
+.rt-explain[hidden] { display: none; }
+/* Natural | Device. Kept visible on phones, where the voice list is hidden,
+   because it is the one choice that changes what every sentence sounds like. */
+.rt-mode { display: inline-flex; border: 1px solid rgba(255,255,255,0.35); border-radius: 999px; overflow: hidden; }
+.rt-m {
+    font: inherit; font-size: 0.68rem; cursor: pointer; color: #fff;
+    background: none; border: 0; padding: 0.22rem 0.55rem;
+}
+.rt-m + .rt-m { border-left: 1px solid rgba(255,255,255,0.35); }
+.rt-m.on { background: #fff; color: var(--dark-blue); font-weight: 700; }
+.rt-m:disabled { opacity: 0.45; cursor: not-allowed; }
+/* The bar is a one-line pill, so the note floats just above it rather than
+   wrapping inside and bending its shape. */
+.rt-note {
+    position: absolute; bottom: calc(100% + 0.45rem); left: 50%; transform: translateX(-50%);
+    width: max-content; max-width: min(34rem, 92vw); text-align: center;
+    font-size: 0.72rem; line-height: 1.35; color: #fff;
+    background: var(--dark-blue); border-radius: 10px; padding: 0.35rem 0.7rem;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+}
+.rt-note[hidden] { display: none; }
+@media (max-width: 560px) {
+    .rt-voice, .rt-pos { display: none; }
+}
+@media print { .rt-bar { display: none; } }
+.rt-bar.rt-failed { border-radius: 12px; padding: 0.6rem 0.8rem; }
+.rt-msg { font-size: 0.78rem; line-height: 1.4; max-width: 24rem; }
+/* Sits ABOVE the pill rather than inside it, so the bar keeps its shape and
+   width whether the hint is showing or not. */
+.rt-hint {
+    position: absolute; bottom: calc(100% + 0.45rem); left: 50%; transform: translateX(-50%);
+    white-space: nowrap; font-size: 0.7rem; letter-spacing: 0.01em;
+    background: var(--dark-blue); color: #fff; opacity: 0.94;
+    border-radius: 999px; padding: 0.26rem 0.62rem;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.22); pointer-events: none;
+}
+.rt-hint[hidden] { display: none; }
+@media (max-width: 560px) { .rt-hint { display: none; } }
+
+
+/* ===== TRANSLATE PANEL =====
+   One job up top — pick a language, translate — and the browser's own tools
+   folded away underneath. */
+.tr-wrap { position: relative; display: flex; }   /* flex: no inline baseline gap under the button */
+.tr-panel {
+    position: absolute; right: 0; z-index: 300;
+    width: min(21rem, calc(100vw - 2rem)); max-height: calc(100vh - 5rem); overflow-y: auto;
+    background: var(--bg-surface); color: var(--text);
+    border: 1px solid var(--border); border-radius: 12px;
+    box-shadow: 0 10px 34px rgba(0,0,0,0.22); padding: 0.75rem 0.85rem 0.8rem;
+}
+.tr-row { display: flex; gap: 0.4rem; align-items: center; }
+.tr-row select {
+    font: inherit; font-size: 0.8rem; flex: 1 1 auto; min-width: 0;
+    padding: 0.36rem 0.45rem; border-radius: 7px;
+    border: 1px solid var(--border); background: var(--bg); color: var(--text);
+}
+/* nothing to say, no space taken */
+.tr-status { font-size: 0.74rem; color: var(--text-secondary); margin-top: 0.45rem; line-height: 1.45; }
+.tr-status:empty { display: none; }
+.tr-lead { font-size: 0.84rem; line-height: 1.5; margin: 0 0 0.35rem; }
+.tr-alt { font-size: 0.74rem; color: var(--text-secondary); margin: 0; }
+
+/* The browser's own tools, folded away. The site gives every <summary> a
+   surface background and heading weight; neither belongs in a small panel. */
+.tr-more { margin: 0.7rem 0 0; border: 0; border-radius: 0; }
+.tr-more > summary {
+    background: none; padding: 0.15rem 0; gap: 0.4rem;
+    font-size: 0.74rem; font-weight: 600; color: var(--text-secondary);
+}
+.tr-more > summary:hover { background: none; color: var(--text); }
+.tr-more > summary::before { width: 0.35rem; height: 0.35rem; }
+.tr-hints { list-style: none; margin: 0.35rem 0 0; padding: 0; display: flex; flex-direction: column; gap: 0.35rem; }
+.tr-hints li { margin: 0; font-size: 0.75rem; line-height: 1.45; }
+.tr-hints b { display: block; font-weight: 600; color: var(--text); }
+.tr-hints span { color: var(--text-secondary); }
+@media print { .tr-panel { display: none; } }
+/* The panel sits on a light surface, so it cannot borrow .tb — that is styled
+   white-on-transparent for the dark toolbar and vanishes here. */
+.tr-btn {
+    font: inherit; font-size: 0.78rem; cursor: pointer; white-space: nowrap;
+    padding: 0.34rem 0.7rem; border-radius: 7px;
+    border: 1px solid var(--dark-blue); background: var(--dark-blue); color: #fff;
+}
+.tr-btn:hover { filter: brightness(1.12); }
+.tr-btn[disabled] { opacity: 0.5; cursor: progress; }
+#tr-back { background: none; color: var(--text); border-color: var(--border); }
+#tr-back:hover { border-color: var(--dark-blue); filter: none; }
+
+/* The sentence currently being spoken. Painted through the Custom Highlight
+   API, so no elements are wrapped or altered. ::highlight() only accepts a
+   handful of properties — background, colour, underline — so no rounding. */
+/* ::highlight() accepts only colour, background, text-decoration, text-shadow
+   and text-stroke — font-size is not on the list, so the sentence cannot be
+   enlarged on its own without wrapping it in an element. Thickening the glyphs
+   gives the same lift and costs no reflow. */
+::highlight(rt-sentence) {
+    background-color: #ffe08a; color: #14100a;
+    -webkit-text-stroke: 0.4px currentColor;
+    text-shadow: 0 0 0.5px rgba(0,0,0,0.25);
+}
+[data-theme="sepia"] ::highlight(rt-sentence) { background-color: #f0d79b; color: #241a0e; }
+[data-theme="dark"] ::highlight(rt-sentence) {
+    background-color: #5570a8; color: #fff; text-shadow: 0 0 0.5px rgba(0,0,0,0.4);
+}
+/* The paragraph grows a hair as it is reached. transform is composited, so
+   nothing below it moves — a font-size change here would reflow the page on
+   every sentence. */
+.rt-now {
+    background: var(--dfn-bg); border-radius: 4px; box-shadow: 0 0 0 5px var(--dfn-bg);
+    transform: scale(1.018); transform-origin: left center;
+    transition: transform 0.18s ease-out;
+}
+@media (prefers-reduced-motion: reduce) {
+    .rt-now { transform: none; transition: none; }
+}
+
+
+/* ===== CURRICULUM STANDARDS: COVERAGE MATRIX =====
+   Standards down, units across, each cell shaded by the number of sections
+   that address that standard in that unit. Cell colour is the unit's own hue
+   (the same one the course map uses), alpha carries the count. */
+.std-summary { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.6rem; margin: 1.5rem 0 1.1rem; }
+.std-stat {
+    border: 1px solid var(--border); border-radius: 10px; background: var(--bg-surface);
+    padding: 0.7rem 0.85rem; display: flex; flex-direction: column; gap: 0.15rem;
+}
+.std-stat b { font-size: 1.55rem; line-height: 1; font-variant-numeric: tabular-nums; color: var(--text); }
+.std-stat span { font-size: 0.72rem; color: var(--text-secondary); line-height: 1.3; }
+.std-stat.gap { border-color: color-mix(in srgb, var(--red) 45%, var(--border)); }
+.std-stat.gap b { color: var(--red); }
+
+.std-controls { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.6rem; margin-bottom: 0.7rem; }
+.std-seg { display: inline-flex; align-items: center; gap: 0.25rem; }
+.std-seg-label { font-size: 0.64rem; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--text-secondary); margin-right: 0.35rem; }
+.std-segbtn, .std-btn {
+    font: inherit; font-size: 0.78rem; cursor: pointer;
+    padding: 0.3rem 0.7rem; border-radius: 999px;
+    border: 1px solid var(--border); background: var(--bg-surface); color: var(--text);
+}
+.std-segbtn.on { background: var(--dark-blue); border-color: var(--dark-blue); color: #fff; font-weight: 600; }
+[data-theme="dark"] .std-segbtn.on { background: var(--pick); color: var(--pick-ink); border-color: var(--pick); }
+.std-segbtn:hover:not(.on), .std-btn:hover { border-color: var(--light-teal); }
+
+.std-matrix { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; background: var(--bg); }
+.std-row {
+    display: grid; align-items: center; column-gap: 4px;
+    grid-template-columns: minmax(0, 1fr) repeat(var(--nu, 6), 42px) 44px;
+    width: 100%; padding: 0.3rem 0.55rem 0.3rem 0.4rem;
+    font: inherit; color: inherit; text-align: left; background: none; border: 0;
+}
+button.std-row { cursor: pointer; border-top: 1px solid var(--border); }
+button.std-row:hover { background: var(--bg-nav-hover); }
+button.std-row:focus-visible { outline: 2px solid var(--light-teal); outline-offset: -2px; }
+.std-head { background: var(--bg-surface); padding-top: 0.5rem; padding-bottom: 0.45rem; }
+.std-head .std-lab, .std-head .std-tot {
+    font-size: 0.64rem; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--text-secondary);
+}
+.std-uhead {
+    text-align: center; font-size: 0.7rem; font-weight: 700;
+    color: hsl(var(--unit-h, 210) var(--u-sat) var(--u-light));
+}
+.std-tot { text-align: right; font-size: 0.78rem; font-weight: 600; font-variant-numeric: tabular-nums; color: var(--text-secondary); padding-right: 0.15rem; }
+
+.std-ghead {
+    display: flex; align-items: baseline; gap: 0.55rem; flex-wrap: wrap;
+    padding: 0.7rem 0.75rem 0.35rem; border-top: 1px solid var(--border);
+    background: var(--bg-surface);
+}
+.std-ghead b { font-size: 0.78rem; letter-spacing: 0.02em; }
+.std-ghead span { font-size: 0.76rem; color: var(--text-secondary); flex: 1 1 auto; min-width: 0; }
+.std-ghead em { font-style: normal; font-size: 0.7rem; color: var(--text-secondary); }
+
+.std-lab { display: flex; align-items: center; gap: 0.5rem; min-width: 0; }
+.std-lab code {
+    flex: 0 0 auto; font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.72rem; font-weight: 600; color: var(--text-secondary);
+    background: none; padding: 0;
+}
+.std-short { flex: 1 1 auto; min-width: 0; font-size: 0.85rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.std-chev {
+    flex: 0 0 auto; width: 6px; height: 6px; margin: 0 0.1rem 0 0.2rem;
+    border-right: 1.6px solid var(--text-secondary); border-bottom: 1.6px solid var(--text-secondary);
+    transform: rotate(-45deg); transition: transform 0.18s;
+}
+.std-item.open .std-chev { transform: rotate(45deg); }
+.std-flag {
+    flex: 0 0 auto; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 0.08rem 0.4rem; border-radius: 999px; white-space: nowrap;
+}
+.std-flag.gap  { color: var(--red); background: color-mix(in srgb, var(--red) 12%, transparent); }
+.std-flag.thin { color: var(--text-secondary); border: 1px solid var(--border); }
+.std-item.is-gap .std-short { color: var(--text-secondary); }
+
+/* the cells */
+.std-cell {
+    height: 26px; border-radius: 5px; display: flex; align-items: center; justify-content: center;
+    background: hsl(var(--unit-h, 210) var(--u-sat) var(--u-light) / var(--a, 0.5));
+}
+.std-cell.std-none { background: repeating-linear-gradient(135deg, transparent 0 4px, var(--border) 4px 5px); opacity: 0.55; }
+.std-cell.std-mention {
+    background: none; box-shadow: inset 0 0 0 1.5px hsl(var(--unit-h, 210) var(--u-sat) var(--u-light) / 0.55);
+    color: hsl(var(--unit-h, 210) var(--u-sat) var(--u-light)); font-weight: 700;
+}
+.std-n { font-size: 0.72rem; font-weight: 700; font-variant-numeric: tabular-nums; color: var(--text); }
+.std-n.light { color: #fff; }
+[data-theme="dark"] .std-n.light { color: #111; }
+
+/* the reveal */
+.std-detail { padding: 0.4rem 0.9rem 1rem 1.9rem; border-top: 1px dashed var(--border); background: var(--bg); }
+.std-detail[hidden] { display: none; }
+.std-item.open > .std-row { background: var(--bg-nav-hover); }
+.std-body { font-size: 0.9rem; line-height: 1.6; margin: 0.4rem 0 0.55rem; }
+.std-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-bottom: 0.8rem; }
+.std-tag {
+    font-size: 0.68rem; padding: 0.15rem 0.55rem; border-radius: 999px;
+    border: 1px solid var(--border); color: var(--text-secondary); background: var(--bg-surface);
+}
+.std-where { display: flex; flex-direction: column; gap: 0.75rem; }
+.std-unit { border-left: 3px solid hsl(var(--unit-h, 210) var(--u-sat) var(--u-light)); padding-left: 0.75rem; }
+.std-unit-name {
+    font-size: 0.66rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    color: hsl(var(--unit-h, 210) var(--u-sat) var(--u-light)); margin-bottom: 0.3rem;
+}
+.std-chap { margin-bottom: 0.45rem; }
+.std-chap-title { font-size: 0.86rem; font-weight: 600; color: var(--text); text-decoration: none; }
+a.std-chap-title:hover { text-decoration: underline; }
+.std-chap-title.planned { color: var(--text-secondary); font-weight: 400; }
+.std-secs { display: flex; flex-wrap: wrap; gap: 0.25rem; margin-top: 0.25rem; }
+.std-sec {
+    font-size: 0.74rem; padding: 0.14rem 0.5rem; border-radius: 6px; text-decoration: none;
+    border: 1px solid var(--border); background: var(--bg-surface); color: var(--text);
+}
+a.std-sec:hover { border-color: hsl(var(--unit-h, 210) var(--u-sat) var(--u-light)); text-decoration: none; }
+.std-sec.none { font-style: italic; color: var(--text-secondary); }
+.std-empty { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.55; border-left: 3px solid var(--red); padding-left: 0.7rem; }
+
+.std-legend { display: flex; flex-wrap: wrap; gap: 0.4rem 1.2rem; margin: 0.8rem 0 0.4rem; font-size: 0.72rem; color: var(--text-secondary); }
+.std-key { display: inline-flex; align-items: center; gap: 0.3rem; }
+.std-swatch {
+    display: inline-block; width: 16px; height: 12px; border-radius: 3px;
+    background: hsl(210 var(--u-sat) var(--u-light) / var(--a, 0.5));
+}
+.std-swatch.std-mention { background: none; box-shadow: inset 0 0 0 1.5px hsl(210 var(--u-sat) var(--u-light) / 0.55); }
+.std-swatch.std-none { background: repeating-linear-gradient(135deg, transparent 0 3px, var(--border) 3px 4px); }
+
+@media (max-width: 700px) {
+    .std-summary { grid-template-columns: repeat(2, 1fr); }
+    .std-row { grid-template-columns: minmax(0, 1fr) repeat(var(--nu, 6), 26px) 30px; column-gap: 2px; }
+    .std-short { display: none; }
+    .std-cell { height: 22px; }
+    .std-n { font-size: 0.62rem; }
+    .std-detail { padding-left: 0.9rem; }
+}
+@media print {
+    .std-controls { display: none; }
+    .std-detail[hidden] { display: block; }
+}
+
+
+/* ===== TOOLBAR DROPDOWNS: ONE LOOK =====
+   Jump to a unit, Text, Translate and the search results had drifted into four
+   backgrounds, radii, shadows and gaps. This rule sits last so it is the one
+   that wins; each panel keeps only its own layout above. Content lines up on a
+   16px inset in all of them. */
+.tp-panel, .aa-popover, .tr-panel, .search-results, .more-panel {
+    background: var(--bg); color: var(--text);
+    border: 1px solid var(--border); border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+}
+[data-theme="dark"] :is(.tp-panel, .aa-popover, .tr-panel, .search-results, .more-panel) {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
+}
+.tp-panel, .aa-popover, .tr-panel, .search-results, .more-panel { top: calc(100% + 8px); }
+.aa-popover { padding: 1rem; }
+.tr-panel { padding: 0.85rem 1rem 1rem; }
+
+/* every dropdown opens with the same small label */
+.tp-panel-head, .aa-label, .tr-label, .more-label {
+    font-size: 0.66rem; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--text-secondary);
+}
+.aa-label, .tr-label { margin-bottom: 0.5rem; }
+
+/* On a phone the buttons sit too far left for a panel to hang from them
+   without running off-screen, so Translate spans the width instead. */
+@media (max-width: 600px) {
+    .tr-panel {
+        position: fixed; left: 0.75rem; right: 0.75rem; width: auto;
+        top: calc(var(--toolbar-height) + 8px);
+    }
+}
+
+
+/* ===== SEARCH: A CLOSED BOX TAKES NO ROOM =====
+   It was width:0 but kept its padding and border, so an invisible 23px sat in
+   the toolbar at every screen size. */
+.search-wrap { display: flex; align-items: center; }
+.search-input:not(.open) { padding-left: 0; padding-right: 0; border-width: 0; }
+.search-input.open { margin-left: 0.4rem; }
+
+/* ===== MORE MENU — phones only ===== */
+.more-wrap { position: relative; display: none; }
+.more-panel { position: absolute; right: 0; z-index: 300; width: 16.5rem; padding: 0.4rem; }
+.more-label { padding: 0.35rem 0.6rem 0.4rem; }
+.more-item {
+    display: flex; align-items: center; gap: 0.7rem; width: 100%;
+    font: inherit; text-align: left; color: var(--text); cursor: pointer;
+    background: none; border: 0; border-radius: 7px; padding: 0.5rem 0.6rem;
+}
+.more-item:hover, .more-item:focus-visible { background: var(--bg-nav-hover); outline: none; }
+.more-icon { flex: 0 0 auto; display: flex; color: var(--red); }
+[data-theme="dark"] .more-icon { color: var(--light-red); }
+.more-text { min-width: 0; }
+.more-text b { display: block; font-size: 0.86rem; font-weight: 600; }
+.more-text span { display: block; font-size: 0.72rem; color: var(--text-secondary); line-height: 1.35; }
+
+/* A phone gets the reading tools on the bar and the teaching tools behind ⋯.
+   Budget at 390px: 32 padding + 72 left + 8 gap leaves 278 for the right. */
+@media (max-width: 600px) {
+    .more-wrap { display: flex; }
+    #btn-cards, #btn-printout, #btn-present { display: none; }
+    .toolbar-brand { display: none; }            /* it only ever showed "Bi…" */
+    #btn-search, #btn-aa { padding: 0.3rem 0.5rem; }
+    .toolbar-right { gap: 0.35rem; }
+    /* Open search drops under the bar, full width, like Translate does —
+       beside the button there is no room for it. 16px text stops iOS zooming
+       in on focus. */
+    .search-input.open {
+        position: fixed; left: 0.75rem; right: 0.75rem; top: calc(var(--toolbar-height) + 8px);
+        width: auto; margin: 0; padding: 0.55rem 0.75rem; font-size: 1rem; z-index: 311;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+    }
+    .search-results {
+        position: fixed; left: 0.75rem; right: 0.75rem; width: auto;
+        top: calc(var(--toolbar-height) + 8px + 48px);
+    }
+    .more-panel { right: -0.25rem; }
+}
+@media print { .more-wrap { display: none !important; } }
+
+
+/* ===== TABLES ON A PHONE =====
+   Nine chapters had a table wider than a phone, and nothing clipped it, so the
+   whole page scrolled sideways (19–166px). The wide figures already scroll
+   inside their own box; tables now do the same. Tighter cells first, so fewer
+   of them need to scroll at all. */
+@media (max-width: 600px) {
+    .main table {
+        display: block; max-width: 100%;
+        overflow-x: auto; -webkit-overflow-scrolling: touch;
+    }
+    .main th, .main td { padding: 0.5rem 0.6rem; }
+}
+
+
+/* ===== LISTEN BAR: THE DROPDOWN LOOK =====
+   The playback bar was the one toolbar surface still in dark navy with white
+   controls. It now uses the dropdowns' surface, border, corners and shadow,
+   and their control vocabulary: quiet buttons on --bg-surface, one filled
+   primary (play/pause), and the same filled state for whichever speed or
+   voice mode is selected. Placement and behaviour are untouched — this block
+   only overrides colour, border and shape, and sits last so it wins. */
+.rt-bar {
+    background: var(--bg); color: var(--text);
+    border: 1px solid var(--border); border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+}
+[data-theme="dark"] .rt-bar { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55); }
+
+/* quiet buttons: previous, next */
+.rt-b {
+    background: var(--bg-surface); color: var(--text);
+    border: 1px solid var(--border); border-radius: 7px;
+}
+.rt-b:hover { background: var(--bg-nav-hover); border-color: var(--text-secondary); }
+
+/* the one primary: play / pause */
+.rt-b.rt-main { background: var(--dark-blue); color: #fff; border-color: var(--dark-blue); }
+.rt-b.rt-main:hover { background: var(--dark-blue); filter: brightness(1.15); }
+
+/* stop: no chrome, like the dropdowns' own close affordances */
+.rt-b.rt-x { background: none; border-color: transparent; color: var(--text-secondary); }
+.rt-b.rt-x:hover { background: var(--bg-nav-hover); color: var(--text); border-color: transparent; }
+
+.rt-pos { color: var(--text-secondary); opacity: 1; font-variant-numeric: tabular-nums; }
+
+/* speed chips and the Natural | Device switch: the Text dropdown's chips */
+.rt-r {
+    background: var(--bg-surface); color: var(--text);
+    border: 1px solid var(--border); border-radius: 6px;
+}
+.rt-r:hover { border-color: var(--text-secondary); }
+.rt-mode { border: 1px solid var(--border); border-radius: 6px; background: var(--bg-surface); }
+.rt-m { color: var(--text-secondary); }
+.rt-m + .rt-m { border-left: 1px solid var(--border); }
+
+/* selected: the same fill the Text dropdown uses for its selected option */
+.rt-r.on, .rt-m.on { background: var(--dark-blue); color: #fff; border-color: var(--dark-blue); font-weight: 700; }
+
+/* the voice list: the Translate dropdown's select */
+.rt-voice {
+    background: var(--bg); color: var(--text);
+    border: 1px solid var(--border); border-radius: 7px;
+}
+.rt-voice option { color: var(--text); background: var(--bg); }
+
+/* the note and first-use hint float above the bar as small dropdown surfaces */
+.rt-note, .rt-hint {
+    background: var(--bg); color: var(--text-secondary); opacity: 1;
+    border: 1px solid var(--border); border-radius: 8px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.14);
+}
+.rt-msg { color: var(--text); }
+
+/* Dark and sepia fill the selected state the way the Text dropdown does. */
+[data-theme="dark"] :is(.rt-b.rt-main, .rt-r.on, .rt-m.on) {
+    background: var(--pick); color: var(--pick-ink); border-color: var(--pick);
+}
+[data-theme="sepia"] :is(.rt-b.rt-main, .rt-r.on, .rt-m.on) {
+    background: #3e2f1c; color: #f5edd6; border-color: #3e2f1c;
+}
+
+/* =============================================================
+   CARDS AND PRESENT: THE DROPDOWN LOOK
+   Both tools bring their own CSS, loaded after this file, so these
+   rules carry a `body` prefix to win on specificity instead of on
+   order. Appearance only: no sizes that change a layout, and the
+   red "Again" and danger buttons keep their meaning.
+   ============================================================= */
+[data-theme="light"] { --pick: var(--dark-blue); --pick-ink: #fff; }
+/* Dark: a lighter blue than --light-teal. The teal under dark-blue text is
+   3.2:1, too faint for a button label; this is 7.8:1. */
+[data-theme="dark"]  { --pick: #8fb0d0; --pick-ink: #0b1a26; }
+[data-theme="sepia"] { --pick: #3e2f1c; --pick-ink: #f5edd6; }
+
+/* Cards takes its accent from the same selected fill */
+html body .fc-root,
+html[data-theme="dark"] body .fc-root,
+html[data-theme="sepia"] body .fc-root { --fc-accent: var(--pick); --fc-accent-ink: var(--pick-ink); }
+
+/* small-caps labels */
+body .fc-group > legend, body .fc-group-h, body .prm legend, body .prm-row > label {
+    font-size: 0.66rem; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--text-secondary);
+}
+
+/* quiet buttons */
+body .fc-btn, body .prm-btn { border-radius: 7px; border-width: 1px; }
+body .fc-btn:not(.fc-btn-primary):not(.fc-btn-again):not(.fc-btn-danger),
+body .prm-btn:not(.primary) { background: var(--bg-surface); }
+body .fc-btn:not(.fc-btn-primary):not(.fc-btn-again):not(.fc-btn-danger):hover,
+body .prm-btn:not(.primary):hover { border-color: var(--text-secondary); }
+
+/* primary: the selected fill */
+html body :is(.fc-btn-primary, .prm-btn.primary),
+html[data-theme] body :is(.fc-btn-primary, .prm-btn.primary) {
+    background: var(--pick); color: var(--pick-ink); border-color: var(--pick);
+}
+
+/* selects */
+body .fc-select, body .prm select {
+    background: var(--bg); color: var(--text);
+    border: 1px solid var(--border); border-radius: 7px;
+}
+
+/* "Select all" / "Clear": small chips, not underlined links */
+body .fc-group-head .fc-link-btn {
+    text-decoration: none; font-size: 0.74rem; font-weight: 600;
+    padding: 0.2rem 0.55rem; color: var(--text-secondary);
+    background: var(--bg-surface); border: 1px solid var(--border); border-radius: 6px;
+}
+body .fc-group-head .fc-link-btn:hover { color: var(--text); border-color: var(--text-secondary); }
+
+/* chapter tiles */
+body .fc-tile { border-width: 1px; border-radius: 7px; }
+body .fc-tile:has(input:checked) {
+    border-color: var(--pick); box-shadow: 0 0 0 1px var(--pick);
+    background: color-mix(in srgb, var(--pick) 6%, var(--bg));
+}
+
+/* the Present window: a dropdown surface, just larger */
+body .prm { border: 1px solid var(--border); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18); }
+html[data-theme="dark"] body .prm { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55); }
+
+/* Translate's button fills the same way in dark and sepia */
+html[data-theme="dark"] body .tr-btn { background: var(--pick); color: var(--pick-ink); border-color: var(--pick); }
+html[data-theme="sepia"] body .tr-btn { background: var(--pick); color: var(--pick-ink); border-color: var(--pick); }
+
+/* =============================================================
+   PRINTOUT: THE SAME PAGE AS CARDS AND PRESENT
+   A plain bar at the top with the title, the settings as panels in a
+   column as wide as the paper, and Print in a bar fixed to the foot.
+   printout.css loads after this file; `body.po-page` wins on
+   specificity. Screen only: when printing, the bar is hidden and the
+   paper is untouched.
+   ============================================================= */
+body.po-page .po-bar { background: none; color: var(--text); padding: 0; }
+body.po-page .po-bar-in {
+    max-width: none; margin: 0;
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.1rem 0.6rem;
+    padding: 0.55rem 0.9rem; background: var(--bg); color: var(--text);
+}
+body.po-page .po-title { font-size: 1rem; font-weight: 800; color: var(--text); border: 0; padding: 0; }
+body.po-page .po-lede { margin: 0; font-size: 0.84rem; color: var(--text-secondary); }
+
+/* the settings leave the bar: full width on the backdrop, centred to the paper */
+body.po-page .po-controls {
+    flex: 0 0 calc(100% + 1.8rem); margin: 0.55rem -0.9rem -0.55rem;
+    padding: 1.5rem max(1rem, calc((100% - 62rem) / 2 + 0.9rem)) 0;
+    background: var(--page); gap: 0.9rem;
+    border-top: 1px solid var(--border);   /* the title bar's bottom edge */
+}
+body.po-page .po-group {
+    flex: 1 1 14rem; background: var(--bg);
+    border: 1px solid var(--border); border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    padding: 0.85rem 1rem 1rem;
+}
+.po-bar[data-theme="dark"] .po-group { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); }
+body.po-page .po-group:has(#po-chs) { flex: 3 1 30rem; }
+body.po-page .po-group:has([data-opt]) { flex: 2 1 24rem; }
+body.po-page .po-checks { max-width: none; }
+
+/* small-caps labels */
+body.po-page .po-group-h {
+    font-size: 0.66rem; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+}
+body.po-page .po-checks input[type="checkbox"] { accent-color: var(--pick); }
+
+/* the number box and selects: the Translate dropdown's select */
+body.po-page .po-checks input[type="number"], body.po-page .po-checks select {
+    background: var(--bg); color: var(--text);
+    border: 1px solid var(--border); border-radius: 7px;
+}
+body.po-page .po-checks select option { color: var(--text); background: var(--bg); }
+
+/* All / None: quiet chips */
+body.po-page .po-link {
+    background: var(--bg-surface); color: var(--text-secondary);
+    border: 1px solid var(--border); border-radius: 6px;
+}
+body.po-page .po-link:hover { filter: none; color: var(--text); border-color: var(--text-secondary); }
+
+/* Print: the main button, in a bar at the foot like Cards and Present */
+body.po-page .po-print {
+    position: fixed; z-index: 21; bottom: 0.65rem; right: max(1rem, calc((100vw - 62rem) / 2));
+    min-height: 2.5rem; padding: 0.5rem 1.1rem; font-size: 0.88rem; font-weight: 700;
+    background: var(--pick); color: var(--pick-ink); border: 1px solid var(--pick); border-radius: 7px;
+}
+body.po-page .po-print:hover { filter: brightness(1.12); }
+@media screen {
+    body.po-page::after {
+        content: ""; position: fixed; z-index: 20; left: 0; right: 0; bottom: 0; height: 3.8rem;
+        background: var(--page-bar); border-top: 1px solid var(--page-line);
+    }
+    body.po-page .po-doc { margin-bottom: 6rem; }
+}
+
+/* =============================================================
+   TOOL PAGES FOLLOW THE THEME
+   The Printout and Present pages take the reader's theme (the
+   inline script in each page sets it). --page is the backdrop a
+   dropdown-style panel sits on: a step darker than --bg.
+   ============================================================= */
+[data-theme="light"] { --page: #f4f4f5; }
+[data-theme="sepia"] { --page: #e9dfc4; }
+[data-theme="dark"]  { --page: #0a0a0a; }
+
+/* ---- Printout: the backdrop and the panel follow the theme; the paper
+   does not (the page keeps <html> light, see printout.html). ---- */
+/* --page-bar / --page-line: the foot bar is drawn on <body>, which keeps the
+   light tokens, so it carries the page theme's --bg and --border itself */
+html[data-page-theme="light"] { --page: #f4f4f5; --page-bar: #ffffff; --page-line: #e0e0e0; }
+html[data-page-theme="sepia"] { --page: #e9dfc4; --page-bar: #f5edd6; --page-line: #d4c6a8; }
+html[data-page-theme="dark"]  { --page: #0a0a0a; --page-bar: #121212; --page-line: #333; }
+body.po-page { background: var(--page); }
+html[data-page-theme="dark"] body.po-page .po-doc { box-shadow: 0 2px 16px rgba(0, 0, 0, 0.6); }
+
+/* ---- Present: the loading message and the page behind the slides ---- */
+body.present-page { background: var(--page); }
+body .present-msg { background: var(--page); color: var(--text-secondary); }
+body .present-msg h1 { color: var(--text); }
+body .present-msg a { color: var(--blue); }
+html[data-theme="dark"] body .present-msg a { color: #6fa8dc; }
+body .present-msg .prm-bar { background: var(--border); }
+
+/* ---- Slides: the surround and the floating controls. Black screen (B)
+   stays black: that is its job. ---- */
+body .pp { background: var(--page); color: var(--text); }
+body .pp-controls, body .pp-hud, body .pp-toast {
+    background: var(--bg); color: var(--text);
+    border: 1px solid var(--border); border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+}
+html[data-theme="dark"] body :is(.pp-controls, .pp-hud, .pp-toast) { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55); }
+body .pp-btn { color: var(--text); border-radius: 7px; }
+body .pp-btn:hover { background: var(--bg-nav-hover); }
+body .pp-count { color: var(--text-secondary); }
+
+/* the slide grid (G) */
+body .pg, body .pg-head { background: var(--page); color: var(--text); }
+body .pg-head h2 { color: var(--text); }
+
+/* the fullscreen prompt */
+body .pp-fs { background: color-mix(in srgb, var(--page) 85%, transparent); }
+body .pp-fs p, body .pp-fs-stay { color: var(--text-secondary); }
+body .pp-fs-go { background: var(--pick); color: var(--pick-ink); border-radius: 12px; }
+
+/* ---- Presenter view ---- */
+body .pv { background: var(--page); color: var(--text); }
+body .pv-bar, body .pv-strip { background: var(--bg); border-color: var(--border); }
+body .pv-clock, body .pv-link-status, body .pv-strip .pr-thumb-num { color: var(--text-secondary); }
+body .pv-link-status.ok { color: var(--ok); }
+body .pv-label {
+    font-size: 0.66rem; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary);
+}
+body .pv-btn {
+    color: var(--text); background: var(--bg-surface);
+    border: 1px solid var(--border); border-radius: 7px;
+}
+body .pv-btn:hover { background: var(--bg-surface); border-color: var(--text-secondary); }
+body .pv-btn.primary { background: var(--pick); color: var(--pick-ink); border-color: var(--pick); }
+body .pv-btn.is-on { background: var(--yellow); color: #000; border-color: var(--yellow); }
+body .pv-frame .pr-thumb { border-color: var(--border); box-shadow: 0 6px 24px rgba(0, 0, 0, 0.18); }
+html[data-theme="dark"] body .pv-frame .pr-thumb { box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5); }
+body :is(.pv, .pg) .pr-thumb-btn.is-current .pr-thumb { outline-color: var(--pick); }
+
+/* speaker notes: a dropdown surface, in the theme's own ink */
+body .pv-notes {
+    background: var(--bg); border: 1px solid var(--border); border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+body .pv-notes-head { border-bottom-color: var(--border); }
+body .pv-notes-body {
+    --text: inherit; --text-secondary: inherit; --light-teal: inherit;
+    --dfn-bg: inherit; --dfn-border: inherit;
+    color: var(--text);
+}
+body .pv-notes-body a { color: var(--blue); }
+html[data-theme="dark"] body .pv-notes-body a { color: #6fa8dc; }
+
+/* notices: the reader's own callout tints */
+body .pv-notice { background: var(--bg-example); color: var(--text); border-bottom-color: var(--border-example); }
+body .pv-notice.warn { background: var(--bg-tight); color: var(--text); border-color: var(--border-tight); }
+body .pv-notice.ok { background: var(--ok-bg); color: var(--text); border-color: var(--ok-border); }
+
+/* ---- Cards: the same page style as Printout and Present. The tool's own
+   colours become the reader's: --page behind, --bg panels, a plain header.
+   The unit colour stays where it means something: the stripe on each card
+   and the progress bar. ---- */
+html[data-theme] body .fc-root {
+    --fc-ground: var(--page); --fc-panel: var(--bg); --fc-card: var(--bg); --fc-line: var(--border);
+    --fc-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+    background: var(--page);
+}
+html[data-theme="sepia"] body .fc-root { --fc-shadow: 0 10px 30px rgba(62, 47, 28, 0.18); }
+html[data-theme="dark"] body .fc-root { --fc-shadow: 0 10px 30px rgba(0, 0, 0, 0.55); }
+
+body .fc-top { background: var(--bg); border-bottom-color: var(--border); box-shadow: none; }
+body .fc-foot { background: var(--bg); border-top-color: var(--border); }
+body .fc-group { background: var(--bg); border-color: var(--border); box-shadow: var(--fc-shadow); }
+
+/* header buttons: the quiet dropdown button */
+body .fc-icon-btn {
+    background: var(--bg-surface); color: var(--text);
+    border: 1px solid var(--border); border-radius: 7px;
+}
+body .fc-icon-btn:hover { border-color: var(--text-secondary); }
+
+/* ---- Present (the picker in the reader): the same page as Cards. It fills
+   the screen on --page, with a plain bar at the top and bottom and its
+   content in a centred column. The slide preview keeps the full width. ---- */
+body .prm-backdrop { padding: 0; background: var(--page); }
+body .prm, body .prm.prm-wide {
+    width: 100%; height: 100vh; height: 100dvh; max-height: none;
+    border: 0; border-radius: 0; box-shadow: none; background: var(--page);
+}
+html[data-theme="dark"] body .prm { box-shadow: none; }
+
+body .prm-head {
+    align-items: center; padding: 0.55rem 0.9rem;
+    background: var(--bg); border-bottom: 1px solid var(--border);
+}
+body .prm-head-text { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.1rem 0.6rem; }
+body .prm-head h2 { font-size: 1rem; font-weight: 800; }
+body .prm-head p { margin: 0; font-size: 0.84rem; }
+body .prm-x {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-width: 2.5rem; min-height: 2.5rem; padding: 0.2rem 0.6rem; font-size: 1.35rem;
+    background: var(--bg-surface); color: var(--text);
+    border: 1px solid var(--border); border-radius: 7px;
+}
+body .prm-x:hover { background: var(--bg-surface); border-color: var(--text-secondary); }
+
+/* the centred column, the same width as Cards */
+body .prm-body { padding: 1.25rem max(1rem, calc((100% - 46rem) / 2)) 1.5rem; }
+body .prm-foot {
+    background: var(--bg); border-top: 1px solid var(--border);
+    padding: 0.65rem max(1rem, calc((100% - 46rem) / 2));
+}
+body .prm.prm-wide .prm-body { padding: 1rem 1.25rem 1.5rem; }
+body .prm.prm-wide .prm-foot { padding: 0.65rem 1.25rem; }
+body .prm-grid-bar { background: var(--page); }
+
+/* panels: the Cards panel */
+body .prm-options, body .prm-screens {
+    background: var(--bg); border: 1px solid var(--border); border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+html[data-theme="dark"] body :is(.prm-options, .prm-screens) { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); }
+body .prm-screens.warn { background: var(--bg-tight); border-color: var(--border-tight); }
+body .prm-options legend { background: var(--bg); border-radius: 4px; }
+body .prm-ch { background: var(--bg); border-radius: 7px; }
+html[data-theme] body .prm-check input { accent-color: var(--pick); }
+
+/* ---- Presenter view: the same page as Cards, Present and Printout.
+   One header row (title, then the link status, then the controls), the
+   notice as a panel, and the two columns as panels on the backdrop:
+   the current slide, and the next slide with the speaker notes. ---- */
+body .pv-bar { padding: 0.55rem 0.9rem; gap: 0.4rem 0.9rem; }
+body .pv-title { font-size: 1rem; font-weight: 800; }
+body .pv-link-status { font-size: 0.78rem; }
+/* Wide enough: the title with the link status under it, the controls beside. */
+@media (min-width: 1000px) {
+    body .pv-bar {
+        display: grid; grid-template-columns: minmax(0, 1fr) auto auto auto auto;
+        grid-template-rows: auto auto; row-gap: 0; column-gap: 0.9rem;
+    }
+    body .pv-title { grid-column: 1; grid-row: 1; align-self: end; }
+    body .pv-link-status { grid-column: 1; grid-row: 2; align-self: start;
+        white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    body .pv-count   { grid-column: 2; grid-row: 1 / 3; }
+    body .pv-timer   { grid-column: 3; grid-row: 1 / 3; }
+    body .pv-clock   { grid-column: 4; grid-row: 1 / 3; }
+    body .pv-actions { grid-column: 5; grid-row: 1 / 3; flex-wrap: nowrap; }
+}
+body .pv-bar .pv-btn { min-height: 2.25rem; font-weight: 600; }
+
+body .pv-notice {
+    margin: 0.9rem 1rem 0; border: 1px solid var(--border-example); border-radius: 12px;
+    padding: 0.55rem 0.9rem;
+}
+body .pv-notice.warn { border-color: var(--border-tight); }
+body .pv-notice.ok { border-color: var(--ok-border); }
+
+body .pv-main { padding: 0.9rem 1rem 1rem; gap: 0.9rem; }
+body .pv-col {
+    background: var(--bg); border: 1px solid var(--border); border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    padding: 0.85rem 1rem 1rem;
+}
+html[data-theme="dark"] body .pv-col { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); }
+body .pv-frame .pr-thumb, html[data-theme="dark"] body .pv-frame .pr-thumb { box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12); }
+body .pv-nav .pv-btn { min-height: 2.5rem; font-weight: 700; }
+
+/* the notes sit inside the right-hand panel, below a rule, not as a panel of their own */
+body .pv-notes, html[data-theme="dark"] body .pv-notes {
+    background: none; border: 0; border-top: 1px solid var(--border);
+    border-radius: 0; box-shadow: none; margin: 0.3rem -1rem -1rem;
+}
+body .pv-notes-head { padding: 0.5rem 0.6rem 0.45rem 1rem; }
+body .pv-notes-body { padding: 0.5rem 1rem 1.2rem; }

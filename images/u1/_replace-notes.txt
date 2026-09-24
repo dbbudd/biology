@@ -1,0 +1,153 @@
+images/u1/_blocked — DO NOT USE ANY FILE IN THIS FOLDER
+=======================================================
+
+Every file here carries a copyright, trademark or provenance problem that makes
+it unsafe to publish in the course reader. They are kept only so that nobody
+re-extracts them from the source decks believing they are clean. Replace each
+one with hand-authored SVG, a properly licensed image, or an interactive.
+
+Where a filename is prefixed `cohen-` the file came from `BIO Cohen 25-26 U1.pptx`;
+where it is prefixed `ag1-N-` it came from that Anchor Guide `.docx`; everything
+else came from `Bio U1 25-26 Best.pptx`.
+
+
+A. VISIBLE PUBLISHER COPYRIGHT LINE
+-----------------------------------
+image22.jpeg    "Some important properties of life" photo montage (order,
+                reproduction, growth, energy processing, regulation, response,
+                adaptation).  © 2014 Pearson Education, Inc.
+                Deck slide 29, captioned "Figure 1.1-0".
+
+image27.jpeg    Life's hierarchy of organisation, biosphere -> atom, alligator
+                and Florida Everglades.  © 2014 Pearson Education, Inc.
+                Deck slide 42, captioned "Figure 1.2-0".
+
+image41.jpeg    The human digestive system, full labelled anatomy.
+                Copyright © 2009 Pearson Education, Inc., publishing as Pearson
+                Benjamin Cummings.  Deck slides 49 and 137.  This is the deck's
+                principal digestive-anatomy figure — it needs a replacement
+                before any digestion chapter can ship.
+
+image95.jpeg    Overview of the digestive processes (ingestion, digestion,
+                absorption, elimination).  Copyright © 2009 Pearson Education,
+                Inc., publishing as Pearson Benjamin Cummings.  Deck slide 147.
+
+image89.png     Surface area to volume: one large cube versus twenty-seven small
+                cubes.  © Addison Wesley Longman, Inc.  Deck slide 136.
+
+cohen-thermoregulation-awl.jpeg
+                Body-temperature negative feedback loop (brain control centre,
+                skin blood vessels, sweating / no sweating).
+                © Addison Wesley Longman, Inc.  Cohen deck slide 141.
+
+
+B. STOCK-LIBRARY OR AGENCY WATERMARK
+------------------------------------
+image29.png     Torso model showing heart and lungs.  Visible "shutterstock.com"
+                watermark, asset 557652898.  Deck slide 45.
+
+image31.png     Flat-vector science-model illustration.  Visible "VectorStock"
+                watermark.  Deck slide 45.
+
+image51.jpeg    Large intestine / colon medical illustration.  Visible "ADAM"
+                watermark (A.D.A.M. Inc. medical illustration library).
+                Deck slides 69 and 85.
+
+image58.jpeg    Small-intestine villi, 3-D render.  Visible "www.visiblebody.com"
+                watermark (Visible Body, Argosy Publishing — commercial licence).
+                Deck slide 84.
+
+cohen-mechanism-of-breathing.jpeg
+                "Mechanism of Breathing", inspiration and expiration.  Visible
+                "depositphotos" watermark, image ID 510450238.  Cohen slide 47.
+
+cohen-britannica-colombia-map.gif
+                Physical map of Colombia.  Visible "©1998, Encyclopaedia
+                Britannica, Inc." credit line.  Cohen slide 7.
+
+
+C. COPYRIGHTED CURRICULUM / SOFTWARE PRODUCTS
+---------------------------------------------
+image158.png    "Biological Molecules — What are the building blocks of life?
+                Model 1 — Molecules of Life".  This is a POGIL activity;
+                POGIL activities are © The POGIL Project and are licensed, not
+                free to redistribute.  Deck slide 258.
+
+ag1-5-image1.png  Same POGIL activity, page 1 (Model 1 - Molecules of Life)
+ag1-5-image2.png  Same POGIL activity, questions 1-10 + "Read This!"
+ag1-5-image3.png  Same POGIL activity, Model 2 - Biochemical Reactions
+ag1-5-image4.png  Same POGIL activity, questions 12-22
+ag1-5-image5.png  Same POGIL activity, Extension Questions 23-26
+                All five are scans of the POGIL "Biological Molecules" activity
+                pasted into Anchor Guide 1-5.  The *biology* in them (monomers,
+                condensation/hydrolysis, saturated vs unsaturated fatty acids)
+                is fine to teach — the pages themselves are not ours to publish.
+
+cohen-amoeba-sisters-feedback.png
+                "Positive vs. Negative Feedback" cartoon.
+                © The Amoeba Sisters LLC.  Their videos may be embedded; their
+                artwork may not be redistributed.  Cohen slides 149, 155.
+
+cohen-gizmo-homeostasis-1.png
+cohen-gizmo-homeostasis-2.png
+                Screenshots of the ExploreLearning "Human Homeostasis" Gizmo.
+                © ExploreLearning, subscription software.  Cohen slide 190.
+                (Note: the reader should build its own homeostasis simulation
+                rather than screenshot a commercial one.)
+
+
+D. UNCREDITED COMMERCIAL TEXTBOOK FIGURES
+-----------------------------------------
+No copyright line survives on these — they have been cropped — but each is a
+recognisable figure from a commercial human anatomy and physiology textbook, and
+the matched pair in section A (cohen-thermoregulation-awl.jpeg) confirms the
+family.  Treat as blocked until provenance is established.
+
+image114.png    Thermoregulation: body temperature increases / decreases, with
+                heating and cooling mechanisms.  Deck slide 179.
+image115.png    "A general feedback loop" with the five numbered stages and the
+                Imbalance seesaw — label boxes left blank.  Deck slide 180.
+image116.png    The same figure with Receptor / Control center / Effector filled
+                in.  Deck slides 181, 183, 194.
+image138.png    Baroreceptor reflex: blood pressure above and below the normal
+                range, cardioacceleratory and cardioinhibitory centres,
+                vasodilation and vasoconstriction.  Deck slide 221.
+ag1-3-image1.jpeg  The thermoregulation loop again, in Anchor Guide 1-3.
+ag1-3-image2.png   The general feedback loop again (blank), Anchor Guide 1-3.
+
+image38.png     Respiratory tract anatomy, heavily labelled 3-D medical render.
+                Uncredited stock medical illustration.  Deck slides 48, 60.
+image40.png     Alveolus and pulmonary capillary gas exchange.  Uncredited
+                textbook scan (red rule border of a scanned page).
+                Deck slides 48, 60.
+image65.png     "Cross section of a tooth" plus "Types of teeth" infographic.
+                Uncredited commercial infographic.  Deck slide 91.
+
+
+E. TRADEMARK
+------------
+image13.png     University of South Carolina Gamecocks athletic logo.  Registered
+                trademark, used on the teacher's personal-introduction slide.
+                Deck slides 6-14 of the Cohen intro sequence / Best slide 13.
+
+
+F. SCRAPED, PROVENANCE UNKNOWN
+------------------------------
+image99.png     Gut-brain axis / microbiota diagram.  Carries a Pinterest "Save"
+                button burnt into the top-right corner, which proves it was
+                lifted from a Pinterest pin rather than from a source that could
+                be credited.  Original creator unknown.  Deck slide 153.
+
+
+REPLACEMENT NOTES
+-----------------
+As in Unit 5, most of these do not need generated artwork.  The hierarchy of
+organisation (image27), the general feedback loop (image115/116), the
+thermoregulation loop (image114), the surface-area-to-volume comparison
+(image89) and the baroreceptor reflex (image138) are all diagrams — hand-authored
+SVG will be cleaner, will recolour across all three themes, and can be made
+interactive.  Only the digestive anatomy (image41) is a genuine illustration
+problem, and even there a schematic organ-by-organ SVG serves the HS-LS1-2
+modelling target better than a photorealistic figure, because the standard
+explicitly asks students to model with shapes and arrows rather than draw
+anatomically correct diagrams.

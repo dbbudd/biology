@@ -1,0 +1,125 @@
+UNIT 4 — COPYRIGHT-BLOCKED MEDIA
+================================
+
+These 26 files were extracted from `Bio U4 25-26 - Best.pptx` and must NOT be
+published in the course reader. Each carries a publisher copyright line, a
+named-artist credit, a permission grant made to a third party rather than to
+us, or is an uncredited third-party photograph.
+
+They are kept here only so a replacement can be authored against what the
+original showed. Nothing in this folder may be referenced from a chapter.
+
+Most of these are diagrams, not photographs. Hand-authored SVG is the right
+replacement in almost every case — it recolours across all three themes and
+costs less than image generation.
+
+-------------------------------------------------------------------------------
+PEARSON EDUCATION (20 files)
+-------------------------------------------------------------------------------
+image22.png   Onion root tip micrograph, cells in every stage.
+              "Copyright (c) 2008 Pearson Education, Inc., publishing as
+              Pearson Benjamin Cummings."   [slide 23]
+
+image24.png   Identical micrograph, second use.  [slide 27]
+
+image29.png   Onion root tip with the five stages labelled by leader lines.
+              Slide 40 carries "(c) 2015 Pearson Education, Inc."
+              [slides 40, 41]
+
+image38.png   SEM of sperm on an egg. "Figure 27.9a ... (c) 2015 Pearson
+              Education, Inc."   [slide 55]
+
+image44.jpeg  Cell cycle control system — G1/G2/M checkpoints, G0.
+              "Figure 8.8a ... (c) 2014 Pearson Education, Inc."
+              [slides 70, 85]
+
+image65.jpeg  Human life cycle: haploid gametes (n=23) / diploid zygote
+              (2n=46), with blank label boxes.
+              "Figure 8.12a ... (c) 2014 Pearson Education, Inc."
+              [slides 108, 116]
+
+image72.jpeg  Meiosis overview — duplication, homologues separate, sister
+              chromatids separate. "Figure 8.12b ... (c) 2014 Pearson."
+              [slide 125]
+
+image73.jpeg  Mitosis vs meiosis side by side, 2n = 4.
+              "Figure 8.14-5 ... (c) 2014 Pearson."   [slide 126]
+
+image75.jpeg  Nondisjunction in meiosis II (n+1, n+1, n-1, n-1).
+              "(c) 2014 Pearson."   [slide 129]
+
+image76.jpeg  Nondisjunction in meiosis I (n+1, n-1, n, n).
+              "(c) 2014 Pearson."   [slide 130]
+
+image83.jpeg  Female reproductive anatomy, anterior view — oviduct, ovaries,
+              uterus, cervix, endometrium, follicles, corpus luteum.
+              "Figure 27.3a ... (c) Pearson Education Inc. / (c) 2015 Pearson."
+              [slide 147]
+
+image85.jpeg  Female reproductive anatomy, sagittal section.
+              "Figure 27.3c ... (c) Pearson Education Inc."   [slide 152]
+
+image86.jpeg  Male reproductive organs, anterior view — vas deferens,
+              epididymis, seminal vesicle, prostate, bulbourethral gland.
+              "Figure 27.4a ... (c) 2015 Pearson."   [slide 154]
+
+image87.jpeg  Male reproductive anatomy, sagittal section.
+              "Figure 27.4b ... (c) Pearson Education Inc."   [slide 158]
+
+image90.jpeg  Spermatogenesis in the seminiferous tubule, 2n -> n.
+              "Figure 27.5a-0 ... (c) 2015 Pearson."   [slides 163, 175]
+
+image91.jpeg  Hypothalamus -> anterior pituitary -> testis feedback loop
+              (GnRH, FSH, LH, testosterone, negative feedback).
+              "(c) 2015 Pearson."   [slides 164, 172]
+              NOTE: this is the central HS-LS1-3 model for the unit. It needs
+              a replacement before the feedback chapter can be written.
+
+image93.jpeg  Oogenesis — follicle development, polar bodies, arrest points.
+              "(c) 2015 Pearson."   [slide 177]
+
+image95.png   Master diagram of the ovarian and menstrual cycles: hypothalamic
+              control, pituitary hormones, follicle, ovarian hormones,
+              endometrium, over 28 days. "(c) 2015 Pearson."
+              [slides 184, 185]
+
+image97.jpeg  "TABLE 27.6 Hormones of the Ovarian and Menstrual Cycles."
+              "(c) 2015 Pearson."   [slide 187]
+              Content should be rebuilt as an HTML table.
+
+image98.jpeg  "TABLE 27.7 STDs common in the United States."
+              "(c) Pearson Education Inc. / (c) 2015 Pearson."   [slide 190]
+              Rebuild as an HTML table, and re-scope beyond the US.
+
+image99.jpeg  "TABLE 27.8 Reliability of Contraceptive Methods."
+              "(c) 2015 Pearson."   [slide 199]
+              Rebuild as an HTML table if this material is kept at all.
+
+-------------------------------------------------------------------------------
+OTHER RIGHTS HOLDERS (6 files)
+-------------------------------------------------------------------------------
+image5.jpeg   Cell cycle wheel — G1 / S / G2 / mitosis / cytokinesis with the
+              three checkpoints marked.
+              "copyright 2013 Ricochet Creative Productions, LLC"
+              [slides 11, 43]
+
+image53.gif   "HOW TO BUILD A HUMAN — human embryo and fetus development from
+              fertilization to birth. Eleanor Lutz 2014 - TabletopWhale.com"
+              Named-artist infographic; at best CC BY-NC-SA, which the reader
+              cannot absorb. Animated version.   [slide 91]
+
+image54.png   Same infographic, static frame.   [slide 92]
+
+image55.png   "Human Fetal Development" — six in-utero photographs at 4, 7,
+              10, 12, 20 and 32 weeks. No credit anywhere on the image; these
+              appear to be well-known commercially licensed in-utero
+              photographs. Uncredited third-party photography — do not use.
+              [slide 93]
+
+image56.png   "Human Embryo - Carnegie Stages. Dr Mark Hill, School of Medical
+              Science, UNSW AUSTRALIA, embryology.med.unsw.edu.au", carrying
+              the fine print "Kyoto Collection - embryos with permission of
+              Prof. Kohei Shiota and Prof. Shigehito Yamada."
+              The permission runs to UNSW, not to us. This is the same
+              situation as Unit 5's NSTA probe licensed to another school
+              district.   [slide 94]

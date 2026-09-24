@@ -1,0 +1,734 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3.2 Carrying Capacity and What Limits a Population — Biology</title>
+<link rel="stylesheet" href="../assets/course.css?v=330">
+<script>if('scrollRestoration' in history)history.scrollRestoration='manual';</script>
+</head>
+<body data-root="../" data-chapter="u3-carrying-capacity">
+
+<main class="main" role="main">
+
+    <section id="overview">
+        <div class="chapter-eyebrow">Unit 3 — Ecosystem Dynamics</div>
+        <h1>3.2 Carrying Capacity and What Limits a Population</h1>
+        <p class="lead">Chapter 3.1 ended with a proof: exponential growth cannot continue, because if it did, one bacterium would outweigh the Earth in under two days. Something stops it. This chapter is about what that something is, how it bends the J-curve into an S, and why on St Matthew Island it arrived far too late.</p>
+
+        <div class="chapter-meta"></div>
+
+        <div data-progression></div>
+    </section>
+
+    <section id="k" data-kind="Core" data-standards="HS-LS2-1" data-time="8 min" data-track>
+        <h2>The ceiling has a name</h2>
+
+        <p>The <span class="term">carrying capacity</span> of an environment is the maximum number of individuals of a population it can support over the long term. It is written <strong>K</strong>.</p>
+
+        <p>Three things in that definition are worth arguing with, because students lose marks on all three.</p>
+
+        <ul>
+            <li><strong>"Of a population."</strong> K is not a property of a place on its own. The same island has one carrying capacity for reindeer and a completely different one for arctic foxes. Asking "what is the carrying capacity of this island?" is not a complete question.</li>
+            <li><strong>"Over the long term."</strong> An island can hold 6,000 reindeer for a season, the way you can hold your breath for a minute. That does not make 6,000 the carrying capacity. K is the number it can support <em>indefinitely</em>, which means the resource must be able to regrow at least as fast as it is eaten.</li>
+            <li><strong>"Maximum number."</strong> K is not fixed and it is not a law of nature. A wet year raises it; a fire lowers it; overgrazing can lower it permanently. K is a summary of the current conditions, and conditions change — which is what the second half of this unit is about.</li>
+        </ul>
+
+        <p>Once there is a ceiling, growth cannot stay exponential. As the population climbs towards K, each individual finds slightly less food, slightly less space, slightly more competition. Birth rates fall, death rates rise, and the population's <em>per-individual</em> growth rate shrinks. When the population reaches K, births balance deaths and net growth is zero.</p>
+
+        <p>Growth of that shape is called <span class="term">logistic growth</span>, and it makes an <strong>S-curve</strong>.</p>
+
+        <figure class="diagram">
+            <svg viewBox="0 0 720 290" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="jvs-t jvs-d">
+                <title id="jvs-t">Exponential and logistic growth compared</title>
+                <desc id="jvs-d">Two graphs of population size against time. On the left, exponential growth: the curve starts almost flat, then bends upward ever more steeply and runs off the top of the panel — a J shape. On the right, logistic growth: the curve rises the same way at first, then bends the other way, flattening against a dashed horizontal line labelled carrying capacity K — an S shape.</desc>
+                <style>
+                  .f-axis { stroke: var(--text-secondary); stroke-width: 1.2; opacity: 0.6; }
+                  .f-kline { stroke: var(--red); stroke-width: 1.3; stroke-dasharray: 6 4; opacity: 0.85; }
+                  .f-klab { font-size: 10px; fill: var(--red); font-weight: 700; }
+                  .f-axtitle { font-size: 10.5px; fill: var(--text-secondary); font-weight: 600; }
+                  .f-ttl { font-size: 12.5px; fill: var(--text); font-weight: 700; }
+                  .f-sub { font-size: 10px; fill: var(--text-secondary); }
+                  .f-a { fill: none; stroke: var(--red); stroke-width: 2.6; }
+                  .f-b { fill: none; stroke: var(--blue); stroke-width: 2.6; }
+                </style>
+                <line x1="46" y1="24" x2="46" y2="244" class="f-axis"/>
+                <line x1="46" y1="244" x2="329" y2="244" class="f-axis"/>
+                <path d="M46 242.1 L48.4 242 L50.7 241.9 L53.1 241.9 L55.4 241.8 L57.8 241.7 L60.2 241.6 L62.5 241.5 L64.9 241.4 L67.2 241.3 L69.6 241.2 L71.9 241.1 L74.3 241 L76.7 240.9 L79 240.8 L81.4 240.6 L83.7 240.5 L86.1 240.4 L88.4 240.2 L90.8 240.1 L93.2 240 L95.5 239.8 L97.9 239.6 L100.2 239.5 L102.6 239.3 L105 239.1 L107.3 238.9 L109.7 238.7 L112 238.5 L114.4 238.3 L116.8 238.1 L119.1 237.9 L121.5 237.6 L123.8 237.4 L126.2 237.2 L128.5 236.9 L130.9 236.6 L133.3 236.3 L135.6 236 L138 235.7 L140.3 235.4 L142.7 235.1 L145.1 234.8 L147.4 234.4 L149.8 234 L152.1 233.7 L154.5 233.3 L156.8 232.9 L159.2 232.4 L161.6 232 L163.9 231.5 L166.3 231 L168.6 230.6 L171 230 L173.4 229.5 L175.7 229 L178.1 228.4 L180.4 227.8 L182.8 227.2 L185.1 226.5 L187.5 225.8 L189.9 225.2 L192.2 224.4 L194.6 223.7 L196.9 222.9 L199.3 222.1 L201.7 221.3 L204 220.4 L206.4 219.5 L208.7 218.6 L211.1 217.6 L213.4 216.6 L215.8 215.5 L218.2 214.4 L220.5 213.3 L222.9 212.1 L225.2 210.9 L227.6 209.7 L230 208.4 L232.3 207 L234.7 205.6 L237 204.1 L239.4 202.6 L241.7 201 L244.1 199.4 L246.5 197.7 L248.8 195.9 L251.2 194 L253.5 192.1 L255.9 190.2 L258.3 188.1 L260.6 186 L263 183.7 L265.3 181.4 L267.7 179 L270 176.6 L272.4 174 L274.8 171.3 L277.1 168.5 L279.5 165.6 L281.8 162.7 L284.2 159.5 L286.5 156.3 L288.9 153 L291.3 149.5 L293.6 145.9 L296 142.1 L298.3 138.2 L300.7 134.2 L303.1 130 L305.4 125.6 L307.8 121.1 L310.1 116.4 L312.5 111.6 L314.8 106.5 L317.2 101.2 L319.6 95.8 L321.9 90.1 L324.3 84.2 L326.6 78.1 L329 71.8" class="f-a"/>
+                <text x="187.5" y="16" class="f-ttl" text-anchor="middle">Exponential — a J-curve</text>
+                <text x="187.5" y="268" class="f-axtitle" text-anchor="middle">Time</text>
+                <text transform="translate(14 134) rotate(-90)" class="f-axtitle" text-anchor="middle">Population size</text>
+                <text x="187.5" y="284" class="f-sub" text-anchor="middle">growth accelerates without limit</text>
+                <line x1="421" y1="24" x2="421" y2="244" class="f-axis"/>
+                <line x1="421" y1="244" x2="704" y2="244" class="f-axis"/>
+                <line x1="421" y1="52.7" x2="704" y2="52.7" class="f-kline"/>
+                <text x="700" y="46.7" class="f-klab" text-anchor="end">carrying capacity (K)</text>
+                <path d="M421 242.1 L423.4 241.9 L425.7 241.8 L428.1 241.6 L430.4 241.4 L432.8 241.2 L435.2 241 L437.5 240.8 L439.9 240.5 L442.2 240.3 L444.6 240 L446.9 239.7 L449.3 239.4 L451.7 239 L454 238.6 L456.4 238.2 L458.7 237.8 L461.1 237.3 L463.5 236.8 L465.8 236.3 L468.2 235.7 L470.5 235.1 L472.9 234.4 L475.2 233.7 L477.6 233 L480 232.2 L482.3 231.3 L484.7 230.4 L487 229.4 L489.4 228.4 L491.8 227.3 L494.1 226.1 L496.5 224.8 L498.8 223.5 L501.2 222.1 L503.5 220.6 L505.9 219 L508.3 217.3 L510.6 215.6 L513 213.7 L515.3 211.7 L517.7 209.7 L520.1 207.5 L522.4 205.2 L524.8 202.9 L527.1 200.4 L529.5 197.8 L531.8 195.1 L534.2 192.4 L536.6 189.5 L538.9 186.5 L541.3 183.5 L543.6 180.3 L546 177.1 L548.4 173.8 L550.7 170.4 L553.1 167 L555.4 163.5 L557.8 160 L560.1 156.5 L562.5 152.9 L564.9 149.3 L567.2 145.7 L569.6 142.1 L571.9 138.6 L574.3 135 L576.7 131.6 L579 128.1 L581.4 124.7 L583.7 121.4 L586.1 118.1 L588.4 114.9 L590.8 111.8 L593.2 108.8 L595.5 105.9 L597.9 103 L600.2 100.3 L602.6 97.7 L605 95.1 L607.3 92.7 L609.7 90.4 L612 88.2 L614.4 86.1 L616.7 84 L619.1 82.1 L621.5 80.3 L623.8 78.6 L626.2 76.9 L628.5 75.4 L630.9 73.9 L633.3 72.6 L635.6 71.3 L638 70.1 L640.3 68.9 L642.7 67.8 L645 66.8 L647.4 65.9 L649.8 65 L652.1 64.1 L654.5 63.4 L656.8 62.6 L659.2 61.9 L661.6 61.3 L663.9 60.7 L666.3 60.2 L668.6 59.6 L671 59.1 L673.3 58.7 L675.7 58.3 L678.1 57.9 L680.4 57.5 L682.8 57.2 L685.1 56.9 L687.5 56.6 L689.8 56.3 L692.2 56 L694.6 55.8 L696.9 55.6 L699.3 55.4 L701.6 55.2 L704 55" class="f-b"/>
+                <text x="562.5" y="16" class="f-ttl" text-anchor="middle">Logistic — an S-curve</text>
+                <text x="562.5" y="268" class="f-axtitle" text-anchor="middle">Time</text>
+                <text transform="translate(389 134) rotate(-90)" class="f-axtitle" text-anchor="middle">Population size</text>
+                <text x="562.5" y="284" class="f-sub" text-anchor="middle">growth slows, then stops, at K</text>
+            </svg>
+            <figcaption><b>Figure 3.5</b> — The two curves side by side. They are identical at the start: a small population growing at the same rate produces the same line either way. They part company as the population becomes large enough for the limiting factors to bite. The J-curve is what a population <em>would</em> do; the S-curve is what it does.</figcaption>
+        </figure>
+
+        <div class="callout callout-key">
+            <p>The most useful single feature of an S-curve is where it is <strong>steepest</strong>. Not at the start, when there are almost no breeders. Not at the end, when there is no food. Halfway up, at about <strong>K/2</strong> — enough individuals to reproduce fast, still enough resource to go round.</p>
+            <p>That is not a curiosity. It is the reason fisheries are managed to hold stocks near half their unfished level rather than letting them recover to maximum: a population at K/2 replaces the most fish per year. Whether that is a wise thing to aim for is a different argument, and a good one.</p>
+        </div>
+    </section>
+
+    <section id="seals" data-kind="Case study" data-standards="HS-LS2-1" data-time="7 min" data-track>
+        <h2>An S-curve in the wild</h2>
+
+        <p>Northern fur seals were hunted almost to nothing on the Pribilof Islands in the Bering Sea during the nineteenth century. In 1911 an international treaty stopped the killing of seals at sea, and the population was left largely alone. Biologists then counted breeding males on St Paul Island for the next several decades.</p>
+
+        <figure class="diagram">
+            <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="seal-t seal-d">
+                <title id="seal-t">Breeding male fur seals on St Paul Island, 1915 to 1945</title>
+                <desc id="seal-d">A line graph of the number of breeding male northern fur seals against year. The line rises slowly from about two thousand in 1915, steepens through the late 1920s, then bends over and flattens out near ten thousand by the mid-1940s — an S shape.</desc>
+                <style>
+                  .f-grid { stroke: var(--border); stroke-width: 1; }
+                  .f-axis { stroke: var(--text-secondary); stroke-width: 1.2; opacity: 0.6; }
+                  .f-vline { stroke: var(--text-secondary); stroke-width: 1; stroke-dasharray: 3 3; opacity: 0.7; }
+                  .f-kline { stroke: var(--red); stroke-width: 1.3; stroke-dasharray: 6 4; opacity: 0.85; }
+                  .f-klab { font-size: 10.5px; fill: var(--red); font-weight: 700; }
+                  .f-band { fill: var(--text-secondary); opacity: 0.07; }
+                  .f-bandlab { font-size: 10px; fill: var(--text-secondary); opacity: 0.9; }
+                  .f-tick { font-size: 10px; fill: var(--text-secondary); }
+                  .f-tick2 { fill: var(--blue); }
+                  .f-axtitle { font-size: 11px; fill: var(--text-secondary); font-weight: 600; }
+                  .f-note { font-size: 10.5px; fill: var(--text); font-weight: 600; }
+                  .f-legend { font-size: 11px; fill: var(--text); }
+                  .f-mark { fill: var(--red); }
+                  .f-a { fill: none; stroke: var(--red); stroke-width: 2.4; stroke-linejoin: round; }
+                  .f-a-dot { fill: var(--red); }
+                  .f-b { fill: none; stroke: var(--blue); stroke-width: 2.2; stroke-linejoin: round; }
+                  .f-b-dot { fill: var(--blue); }
+                  .f-c { fill: none; stroke: var(--text-secondary); stroke-width: 2; stroke-dasharray: 5 4; }
+                  .f-c-dot { fill: var(--text-secondary); }
+                  .f-d { fill: none; stroke: var(--light-teal); stroke-width: 2.2; }
+                  .f-d-dot { fill: var(--light-teal); }
+                </style>
+                <line x1="68" y1="252" x2="678" y2="252" class="f-grid"/>
+                <text x="60" y="255.5" class="f-tick" text-anchor="end">0</text>
+                <line x1="68" y1="210.2" x2="678" y2="210.2" class="f-grid"/>
+                <text x="60" y="213.7" class="f-tick" text-anchor="end">2,000</text>
+                <line x1="68" y1="168.4" x2="678" y2="168.4" class="f-grid"/>
+                <text x="60" y="171.9" class="f-tick" text-anchor="end">4,000</text>
+                <line x1="68" y1="126.5" x2="678" y2="126.5" class="f-grid"/>
+                <text x="60" y="130" class="f-tick" text-anchor="end">6,000</text>
+                <line x1="68" y1="84.7" x2="678" y2="84.7" class="f-grid"/>
+                <text x="60" y="88.2" class="f-tick" text-anchor="end">8,000</text>
+                <line x1="68" y1="42.9" x2="678" y2="42.9" class="f-grid"/>
+                <text x="60" y="46.4" class="f-tick" text-anchor="end">10,000</text>
+                <line x1="68" y1="252" x2="68" y2="256" class="f-axis"/>
+                <text x="68" y="270" class="f-tick" text-anchor="middle">1915</text>
+                <line x1="166.4" y1="252" x2="166.4" y2="256" class="f-axis"/>
+                <text x="166.4" y="270" class="f-tick" text-anchor="middle">1920</text>
+                <line x1="264.8" y1="252" x2="264.8" y2="256" class="f-axis"/>
+                <text x="264.8" y="270" class="f-tick" text-anchor="middle">1925</text>
+                <line x1="363.2" y1="252" x2="363.2" y2="256" class="f-axis"/>
+                <text x="363.2" y="270" class="f-tick" text-anchor="middle">1930</text>
+                <line x1="461.5" y1="252" x2="461.5" y2="256" class="f-axis"/>
+                <text x="461.5" y="270" class="f-tick" text-anchor="middle">1935</text>
+                <line x1="559.9" y1="252" x2="559.9" y2="256" class="f-axis"/>
+                <text x="559.9" y="270" class="f-tick" text-anchor="middle">1940</text>
+                <line x1="658.3" y1="252" x2="658.3" y2="256" class="f-axis"/>
+                <text x="658.3" y="270" class="f-tick" text-anchor="middle">1945</text>
+                <line x1="68" y1="22" x2="68" y2="252" class="f-axis"/>
+                <line x1="68" y1="252" x2="678" y2="252" class="f-axis"/>
+                <path d="M68 210.2 L127 197.6 L186.1 185.1 L245.1 166.3 L304.1 143.3 L363.2 116.1 L422.2 95.2 L481.2 78.5 L540.3 65.9 L599.3 57.5 L658.3 51.3" class="f-b"/>
+                <circle cx="68" cy="210.2" r="3" class="f-b-dot"/>
+                <circle cx="127" cy="197.6" r="3" class="f-b-dot"/>
+                <circle cx="186.1" cy="185.1" r="3" class="f-b-dot"/>
+                <circle cx="245.1" cy="166.3" r="3" class="f-b-dot"/>
+                <circle cx="304.1" cy="143.3" r="3" class="f-b-dot"/>
+                <circle cx="363.2" cy="116.1" r="3" class="f-b-dot"/>
+                <circle cx="422.2" cy="95.2" r="3" class="f-b-dot"/>
+                <circle cx="481.2" cy="78.5" r="3" class="f-b-dot"/>
+                <circle cx="540.3" cy="65.9" r="3" class="f-b-dot"/>
+                <circle cx="599.3" cy="57.5" r="3" class="f-b-dot"/>
+                <circle cx="658.3" cy="51.3" r="3" class="f-b-dot"/>
+                <line x1="68" y1="42.9" x2="678" y2="42.9" class="f-kline"/>
+                <text x="674" y="36.9" class="f-klab" text-anchor="end">carrying capacity for this herd, about 10,000</text>
+                <text x="373" y="294" class="f-axtitle" text-anchor="middle">Year</text>
+                <text transform="translate(14 137) rotate(-90)" class="f-axtitle" text-anchor="middle">Breeding male fur seals</text>
+            </svg>
+            <figcaption><b>Figure 3.6</b> — Breeding male northern fur seals on St Paul Island. Slow at first, steepest in the middle, flattening towards a ceiling near ten thousand animals. Values read from the published figure in Kenyon, Scheffer &amp; Chapman, <em>A population study of the Alaska fur seal herd</em>, US Fish and Wildlife Service (1954).</figcaption>
+        </figure>
+
+        <p>Compare this against the reindeer curve in <a href="u3-overview.html#anchor">Figure 3.1</a> and you have the two possible endings of the same story. Both start with a protected population and abundant resources. Both grow exponentially for years. One bends over and settles. The other does not.</p>
+
+        <p>The seals had something the reindeer did not: their food — fish and squid — moved, reproduced independently of the seals, and could not be eaten down to nothing in a single winter. A seal that cannot find a fish this week goes hungry and may not breed, and that feedback reaches the population <em>while there are still fish</em>. That is the whole difference, and the sandbox below lets you demonstrate it.</p>
+    </section>
+
+    <section id="sandbox" data-kind="Practice" data-standards="HS-LS2-1" data-time="18 min" data-track>
+        <h2>Build the model and break it</h2>
+
+        <p>Commit to a prediction first. Then get three sliders and one switch — and use the switch, because it is the reason this chapter exists.</p>
+
+        <div class="sim" data-sim="u3-growth-model">
+            <div class="sim-header">
+                <h4>Growth-model sandbox</h4>
+                <span class="sim-kind">Interactive</span>
+            </div>
+        </div>
+
+        <div class="callout callout-try">
+            <ol>
+                <li>With the delay set to none, try every value of <em>r</em> from 0.05 to 2.40. Can you make the population go above K? What does that tell you about what overshoot actually requires?</li>
+                <li>Now set the delay to 3 years and repeat. At roughly what growth rate does overshoot begin? Explain why a slow-breeding population is safer from it than a fast-breeding one.</li>
+                <li>Press "Push it until it breaks." Describe what happens to the population <em>after</em> the crash, and say whether you would call the final state stable.</li>
+                <li>Change K from 500 to 900 with the delay on. Does a bigger ceiling prevent overshoot, or just move it? Relate your answer to the bigger-bottle question from Chapter 3.1.</li>
+                <li>The dashed grey line is what exponential growth would have produced. At year 60, how many times bigger is it than the logistic line? That gap is the total work done by the limiting factors.</li>
+            </ol>
+        </div>
+    </section>
+
+    <section id="overshoot" data-kind="Core" data-standards="HS-LS2-1" data-time="8 min" data-track>
+        <h2>Overshoot, and the reindeer</h2>
+
+        <p>If you worked through the sandbox you have already found the answer. <span class="term">Overshoot</span> — a population growing past its carrying capacity — happens only when the population grows past that ceiling before the shortage registers — and that can only happen if there is a <strong>delay</strong> between the resource running short and the population responding.</p>
+
+        <p>Delays are everywhere in biology. A reindeer cow that conceives in October gives birth the following May: seven months during which the herd keeps growing on a decision made when there was still food. A population of long-lived adults keeps eating for years after it has stopped successfully raising young. Fat reserves let animals breed through one bad season on last season's food.</p>
+
+        <p>On St Matthew Island the delay was compounded by the food itself. The reindeer lived largely on <strong>lichen</strong>, which grows a few millimetres a year and takes decades to recover once grazed off. The herd was living on a bank balance that had been accumulating undisturbed since the last ice age, and it spent it in twenty years. When Klein returned in 1966 the lichen mat was gone, the winter of 1963&ndash;64 had been exceptionally severe, and the surviving animals were visibly starved.</p>
+
+        <div class="callout callout-key">
+            <p><strong>Overshoot does not just cause a crash. It can lower K itself.</strong> The island after 1966 could support fewer reindeer than the island in 1944, because the lichen that <em>was</em> the carrying capacity had been eaten faster than it could regrow. This is the difference between using a resource and consuming the machinery that makes it.</p>
+            <p>Hold onto this. In Chapter 3.5 you will meet the formal version: changing conditions can produce a new ecosystem rather than a recovered one. St Matthew Island is the simplest example in the whole unit.</p>
+        </div>
+    </section>
+
+    <section id="two-kinds" data-kind="Core" data-standards="HS-LS2-1" data-time="9 min" data-track>
+        <h2>Two kinds of limiting factor</h2>
+
+        <p>Every <span class="term">limiting factor</span> falls into one of two categories, and telling them apart is one of the most heavily assessed skills in this unit. The test is a single question:</p>
+
+        <p style="text-align:center"><strong>Does this factor hit harder when the population is crowded?</strong></p>
+
+        <p>If yes, it is <span class="term">density-dependent</span>. If it would do the same damage to ten individuals as to ten thousand, it is <span class="term">density-independent</span>.</p>
+
+        <div class="tbl-scroll" style="overflow-x:auto;-webkit-overflow-scrolling:touch">
+<table>
+            <thead>
+                <tr><th>Density-<em>dependent</em> — mostly <span class="term">biotic</span></th><th>Density-<em>independent</em> — mostly <span class="term">abiotic</span></th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong><span class="term">Predation</span>.</strong> Predators find dense prey more easily and gather where prey is thick.</td>
+                    <td><strong>Weather.</strong> A hard winter is just as cold for a sparse herd as a dense one.</td>
+                </tr>
+                <tr>
+                    <td><strong><span class="term">Competition</span> for resources</strong> — both <span class="term">intraspecific</span> (between members of the same species) and <span class="term">interspecific</span> (between different species).</td>
+                    <td><strong>Natural disasters</strong> — typhoons, volcanic eruptions, fire, flood.</td>
+                </tr>
+                <tr>
+                    <td><strong>Accumulation of waste.</strong> More individuals, more waste, in the same space.</td>
+                    <td><strong>Pollution</strong> — a chemical spill kills the same proportion regardless of numbers.</td>
+                </tr>
+                <tr>
+                    <td><strong>Disease and parasites.</strong> A pathogen needs to reach a new host, and crowding makes that easy.</td>
+                    <td><strong>Habitat destruction</strong> by human activity.</td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+
+        <div class="callout callout-misconception">
+            <p><strong>"Biotic means density-dependent" is a useful rule of thumb and not a law.</strong> A living thing can act density-independently: a fungal spore blown in from outside kills whatever it lands on regardless of how many neighbours there are. And a non-living factor can act density-dependently — think about oxygen in a pond, where the number of fish determines how fast it runs out. Use the crowding test, not the biotic/abiotic label, and you will always be right.</p>
+        </div>
+
+        <p>The two kinds do different jobs. <strong>Density-dependent factors regulate.</strong> They act as a thermostat: too many individuals, the factor bites harder, numbers come down; too few, it eases off, numbers recover. That negative feedback is what produces a stable population and an S-curve at all.</p>
+
+        <p><strong>Density-independent factors do not regulate — they just knock.</strong> A typhoon can halve a population, but it does not care whether the population was above or below K, and it will not push it back towards K next time. In many real populations, density-independent events keep numbers so low that density-dependent factors rarely become important at all.</p>
+    </section>
+
+    <section id="data" data-kind="Practice" data-standards="HS-LS2-1" data-time="12 min" data-track>
+        <h2>Three datasets: classify before you read on</h2>
+
+        <p>Here are three real studies. For each one, decide before reading the commentary whether the pattern is being driven by a density-dependent or a density-independent factor — and, harder, say <em>what question the researchers were asking</em>.</p>
+
+        <figure class="diagram">
+            <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="spw-t spw-d">
+                <title id="spw-t">Song sparrow reproduction against female density</title>
+                <desc id="spw-d">A scatter plot. The horizontal axis is the number of females on the island; the vertical axis is the mean number of offspring each female raised. The points fall clearly from about five offspring per female at low density to about one at high density, and a fitted straight line slopes downwards across them.</desc>
+                <style>
+                  .f-grid { stroke: var(--border); stroke-width: 1; }
+                  .f-axis { stroke: var(--text-secondary); stroke-width: 1.2; opacity: 0.6; }
+                  .f-vline { stroke: var(--text-secondary); stroke-width: 1; stroke-dasharray: 3 3; opacity: 0.7; }
+                  .f-kline { stroke: var(--red); stroke-width: 1.3; stroke-dasharray: 6 4; opacity: 0.85; }
+                  .f-klab { font-size: 10.5px; fill: var(--red); font-weight: 700; }
+                  .f-band { fill: var(--text-secondary); opacity: 0.07; }
+                  .f-bandlab { font-size: 10px; fill: var(--text-secondary); opacity: 0.9; }
+                  .f-tick { font-size: 10px; fill: var(--text-secondary); }
+                  .f-tick2 { fill: var(--blue); }
+                  .f-axtitle { font-size: 11px; fill: var(--text-secondary); font-weight: 600; }
+                  .f-note { font-size: 10.5px; fill: var(--text); font-weight: 600; }
+                  .f-legend { font-size: 11px; fill: var(--text); }
+                  .f-mark { fill: var(--red); }
+                  .f-a { fill: none; stroke: var(--red); stroke-width: 2.4; stroke-linejoin: round; }
+                  .f-a-dot { fill: var(--red); }
+                  .f-b { fill: none; stroke: var(--blue); stroke-width: 2.2; stroke-linejoin: round; }
+                  .f-b-dot { fill: var(--blue); }
+                  .f-c { fill: none; stroke: var(--text-secondary); stroke-width: 2; stroke-dasharray: 5 4; }
+                  .f-c-dot { fill: var(--text-secondary); }
+                  .f-d { fill: none; stroke: var(--light-teal); stroke-width: 2.2; }
+                  .f-d-dot { fill: var(--light-teal); }
+                </style>
+                <line x1="74" y1="248" x2="678" y2="248" class="f-grid"/>
+                <text x="66" y="251.5" class="f-tick" text-anchor="end">0</text>
+                <line x1="74" y1="210.3" x2="678" y2="210.3" class="f-grid"/>
+                <text x="66" y="213.8" class="f-tick" text-anchor="end">1</text>
+                <line x1="74" y1="172.7" x2="678" y2="172.7" class="f-grid"/>
+                <text x="66" y="176.2" class="f-tick" text-anchor="end">2</text>
+                <line x1="74" y1="135" x2="678" y2="135" class="f-grid"/>
+                <text x="66" y="138.5" class="f-tick" text-anchor="end">3</text>
+                <line x1="74" y1="97.3" x2="678" y2="97.3" class="f-grid"/>
+                <text x="66" y="100.8" class="f-tick" text-anchor="end">4</text>
+                <line x1="74" y1="59.7" x2="678" y2="59.7" class="f-grid"/>
+                <text x="66" y="63.2" class="f-tick" text-anchor="end">5</text>
+                <line x1="74" y1="22" x2="678" y2="22" class="f-grid"/>
+                <text x="66" y="25.5" class="f-tick" text-anchor="end">6</text>
+                <line x1="74" y1="248" x2="74" y2="252" class="f-axis"/>
+                <text x="74" y="266" class="f-tick" text-anchor="middle">0</text>
+                <line x1="225" y1="248" x2="225" y2="252" class="f-axis"/>
+                <text x="225" y="266" class="f-tick" text-anchor="middle">20</text>
+                <line x1="376" y1="248" x2="376" y2="252" class="f-axis"/>
+                <text x="376" y="266" class="f-tick" text-anchor="middle">40</text>
+                <line x1="527" y1="248" x2="527" y2="252" class="f-axis"/>
+                <text x="527" y="266" class="f-tick" text-anchor="middle">60</text>
+                <line x1="678" y1="248" x2="678" y2="252" class="f-axis"/>
+                <text x="678" y="266" class="f-tick" text-anchor="middle">80</text>
+                <line x1="74" y1="22" x2="74" y2="248" class="f-axis"/>
+                <line x1="74" y1="248" x2="678" y2="248" class="f-axis"/>
+                <path d="M89.1 66.2 L647.8 242.1" class="f-c"/>
+                <circle cx="104.2" cy="40.8" r="4" class="f-mark"/>
+                <text x="112.2" y="32.8" class="f-note" text-anchor="start"></text>
+                <circle cx="134.4" cy="89.8" r="4" class="f-mark"/>
+                <text x="142.4" y="81.8" class="f-note" text-anchor="start"></text>
+                <circle cx="164.6" cy="67.2" r="4" class="f-mark"/>
+                <text x="172.6" y="59.2" class="f-note" text-anchor="start"></text>
+                <circle cx="194.8" cy="112.4" r="4" class="f-mark"/>
+                <text x="202.8" y="104.4" class="f-note" text-anchor="start"></text>
+                <circle cx="225" cy="101.1" r="4" class="f-mark"/>
+                <text x="233" y="93.1" class="f-note" text-anchor="start"></text>
+                <circle cx="255.2" cy="138.8" r="4" class="f-mark"/>
+                <text x="263.2" y="130.8" class="f-note" text-anchor="start"></text>
+                <circle cx="285.4" cy="127.5" r="4" class="f-mark"/>
+                <text x="293.4" y="119.5" class="f-note" text-anchor="start"></text>
+                <circle cx="315.6" cy="157.6" r="4" class="f-mark"/>
+                <text x="323.6" y="149.6" class="f-note" text-anchor="start"></text>
+                <circle cx="345.8" cy="150.1" r="4" class="f-mark"/>
+                <text x="353.8" y="142.1" class="f-note" text-anchor="start"></text>
+                <circle cx="376" cy="172.7" r="4" class="f-mark"/>
+                <text x="384" y="164.7" class="f-note" text-anchor="start"></text>
+                <circle cx="406.2" cy="165.1" r="4" class="f-mark"/>
+                <text x="414.2" y="157.1" class="f-note" text-anchor="start"></text>
+                <circle cx="436.4" cy="180.2" r="4" class="f-mark"/>
+                <text x="444.4" y="172.2" class="f-note" text-anchor="start"></text>
+                <circle cx="466.6" cy="191.5" r="4" class="f-mark"/>
+                <text x="474.6" y="183.5" class="f-note" text-anchor="start"></text>
+                <circle cx="527" cy="195.3" r="4" class="f-mark"/>
+                <text x="535" y="187.3" class="f-note" text-anchor="start"></text>
+                <circle cx="617.6" cy="210.3" r="4" class="f-mark"/>
+                <text x="625.6" y="202.3" class="f-note" text-anchor="start"></text>
+                <text x="376" y="294" class="f-axtitle" text-anchor="middle">Density of females on the island</text>
+                <text transform="translate(14 135) rotate(-90)" class="f-axtitle" text-anchor="middle">Mean offspring per female</text>
+            </svg>
+            <figcaption><b>Figure 3.7</b> — Song sparrows on Mandarte Island, British Columbia. Each point is one breeding season: how many females were on the island, against how many offspring the average female raised that year. Points read from the published figure in P. Arcese et al., <em>Stability, regulation, and the determination of abundance in an insular song sparrow population</em>, Ecology 73:805&ndash;822 (1992).</figcaption>
+        </figure>
+
+        <p>The horizontal axis is a measure of <strong>crowding</strong>, and reproduction falls steadily as crowding rises — from around five offspring per female at low density to about one at high density. The fitted line through those points has a slope of about &minus;0.06 offspring per extra female. The researchers' question was: <em>does the sparrows' own density control their reproduction?</em> The answer is clearly yes, so this is <strong>density-dependent</strong>. Note what is being limited: not survival, but <em>birth rate</em>. Regulation does not have to work through death.</p>
+
+        <figure class="diagram">
+            <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="kp-t kp-d">
+                <title id="kp-t">Kelp perch mortality against kelp perch density</title>
+                <desc id="kp-d">A scatter plot. The horizontal axis is the number of kelp perch per plot; the vertical axis is the proportion of them that died. The points rise steadily from about a quarter dying at low density to almost all of them at high density, with a fitted straight line sloping upwards.</desc>
+                <style>
+                  .f-grid { stroke: var(--border); stroke-width: 1; }
+                  .f-axis { stroke: var(--text-secondary); stroke-width: 1.2; opacity: 0.6; }
+                  .f-vline { stroke: var(--text-secondary); stroke-width: 1; stroke-dasharray: 3 3; opacity: 0.7; }
+                  .f-kline { stroke: var(--red); stroke-width: 1.3; stroke-dasharray: 6 4; opacity: 0.85; }
+                  .f-klab { font-size: 10.5px; fill: var(--red); font-weight: 700; }
+                  .f-band { fill: var(--text-secondary); opacity: 0.07; }
+                  .f-bandlab { font-size: 10px; fill: var(--text-secondary); opacity: 0.9; }
+                  .f-tick { font-size: 10px; fill: var(--text-secondary); }
+                  .f-tick2 { fill: var(--blue); }
+                  .f-axtitle { font-size: 11px; fill: var(--text-secondary); font-weight: 600; }
+                  .f-note { font-size: 10.5px; fill: var(--text); font-weight: 600; }
+                  .f-legend { font-size: 11px; fill: var(--text); }
+                  .f-mark { fill: var(--red); }
+                  .f-a { fill: none; stroke: var(--red); stroke-width: 2.4; stroke-linejoin: round; }
+                  .f-a-dot { fill: var(--red); }
+                  .f-b { fill: none; stroke: var(--blue); stroke-width: 2.2; stroke-linejoin: round; }
+                  .f-b-dot { fill: var(--blue); }
+                  .f-c { fill: none; stroke: var(--text-secondary); stroke-width: 2; stroke-dasharray: 5 4; }
+                  .f-c-dot { fill: var(--text-secondary); }
+                  .f-d { fill: none; stroke: var(--light-teal); stroke-width: 2.2; }
+                  .f-d-dot { fill: var(--light-teal); }
+                </style>
+                <line x1="74" y1="248" x2="678" y2="248" class="f-grid"/>
+                <text x="66" y="251.5" class="f-tick" text-anchor="end">0.0</text>
+                <line x1="74" y1="202.8" x2="678" y2="202.8" class="f-grid"/>
+                <text x="66" y="206.3" class="f-tick" text-anchor="end">0.2</text>
+                <line x1="74" y1="157.6" x2="678" y2="157.6" class="f-grid"/>
+                <text x="66" y="161.1" class="f-tick" text-anchor="end">0.4</text>
+                <line x1="74" y1="112.4" x2="678" y2="112.4" class="f-grid"/>
+                <text x="66" y="115.9" class="f-tick" text-anchor="end">0.6</text>
+                <line x1="74" y1="67.2" x2="678" y2="67.2" class="f-grid"/>
+                <text x="66" y="70.7" class="f-tick" text-anchor="end">0.8</text>
+                <line x1="74" y1="22" x2="678" y2="22" class="f-grid"/>
+                <text x="66" y="25.5" class="f-tick" text-anchor="end">1.0</text>
+                <line x1="74" y1="248" x2="74" y2="252" class="f-axis"/>
+                <text x="74" y="266" class="f-tick" text-anchor="middle">0</text>
+                <line x1="166.9" y1="248" x2="166.9" y2="252" class="f-axis"/>
+                <text x="166.9" y="266" class="f-tick" text-anchor="middle">10</text>
+                <line x1="259.8" y1="248" x2="259.8" y2="252" class="f-axis"/>
+                <text x="259.8" y="266" class="f-tick" text-anchor="middle">20</text>
+                <line x1="352.8" y1="248" x2="352.8" y2="252" class="f-axis"/>
+                <text x="352.8" y="266" class="f-tick" text-anchor="middle">30</text>
+                <line x1="445.7" y1="248" x2="445.7" y2="252" class="f-axis"/>
+                <text x="445.7" y="266" class="f-tick" text-anchor="middle">40</text>
+                <line x1="538.6" y1="248" x2="538.6" y2="252" class="f-axis"/>
+                <text x="538.6" y="266" class="f-tick" text-anchor="middle">50</text>
+                <line x1="631.5" y1="248" x2="631.5" y2="252" class="f-axis"/>
+                <text x="631.5" y="266" class="f-tick" text-anchor="middle">60</text>
+                <line x1="74" y1="22" x2="74" y2="248" class="f-axis"/>
+                <line x1="74" y1="248" x2="678" y2="248" class="f-axis"/>
+                <path d="M92.6 195.6 L659.4 15.3" class="f-c"/>
+                <circle cx="120.5" cy="193.8" r="4" class="f-mark"/>
+                <text x="128.5" y="185.8" class="f-note" text-anchor="start"></text>
+                <circle cx="166.9" cy="177.9" r="4" class="f-mark"/>
+                <text x="174.9" y="169.9" class="f-note" text-anchor="start"></text>
+                <circle cx="204.1" cy="157.6" r="4" class="f-mark"/>
+                <text x="212.1" y="149.6" class="f-note" text-anchor="start"></text>
+                <circle cx="250.6" cy="148.6" r="4" class="f-mark"/>
+                <text x="258.6" y="140.6" class="f-note" text-anchor="start"></text>
+                <circle cx="297" cy="121.4" r="4" class="f-mark"/>
+                <text x="305" y="113.4" class="f-note" text-anchor="start"></text>
+                <circle cx="343.5" cy="114.7" r="4" class="f-mark"/>
+                <text x="351.5" y="106.7" class="f-note" text-anchor="start"></text>
+                <circle cx="389.9" cy="92.1" r="4" class="f-mark"/>
+                <text x="397.9" y="84.1" class="f-note" text-anchor="start"></text>
+                <circle cx="436.4" cy="83" r="4" class="f-mark"/>
+                <text x="444.4" y="75" class="f-note" text-anchor="start"></text>
+                <circle cx="492.2" cy="64.9" r="4" class="f-mark"/>
+                <text x="500.2" y="56.9" class="f-note" text-anchor="start"></text>
+                <circle cx="538.6" cy="53.6" r="4" class="f-mark"/>
+                <text x="546.6" y="45.6" class="f-note" text-anchor="start"></text>
+                <circle cx="585.1" cy="42.3" r="4" class="f-mark"/>
+                <text x="593.1" y="34.3" class="f-note" text-anchor="start"></text>
+                <circle cx="631.5" cy="33.3" r="4" class="f-mark"/>
+                <text x="639.5" y="25.3" class="f-note" text-anchor="start"></text>
+                <text x="376" y="294" class="f-axtitle" text-anchor="middle">Kelp perch density (number per plot)</text>
+                <text transform="translate(14 135) rotate(-90)" class="f-axtitle" text-anchor="middle">Proportional mortality</text>
+            </svg>
+            <figcaption><b>Figure 3.8</b> — Kelp perch in Californian kelp forest. Proportion of fish that died, plotted against how many fish were in the plot. Points read from the published figure in T. W. Anderson, <em>Predator responses, prey refuges, and density-dependent mortality of a marine fish</em>, Ecology 82:245&ndash;257 (2001).</figcaption>
+        </figure>
+
+        <p>The same shape upside down: the more crowded the plot, the higher the proportion killed — from about a quarter at low density to nearly all of them at high density. Also <strong>density-dependent</strong>, this time acting through <em>death rate</em> rather than birth rate, and the mechanism is named in the paper's title: predators concentrate where prey is dense, and dense schools run out of places to hide.</p>
+
+        <figure class="diagram">
+            <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="aph-t aph-d">
+                <title id="aph-t">A woolly aphid population through one year</title>
+                <desc id="aph-d">A line graph of aphid numbers by month. From April the line climbs slowly, then ever more steeply through July and August to a peak of about three thousand in early September, then collapses almost vertically within a few weeks and stays low for the rest of the year.</desc>
+                <style>
+                  .f-grid { stroke: var(--border); stroke-width: 1; }
+                  .f-axis { stroke: var(--text-secondary); stroke-width: 1.2; opacity: 0.6; }
+                  .f-vline { stroke: var(--text-secondary); stroke-width: 1; stroke-dasharray: 3 3; opacity: 0.7; }
+                  .f-kline { stroke: var(--red); stroke-width: 1.3; stroke-dasharray: 6 4; opacity: 0.85; }
+                  .f-klab { font-size: 10.5px; fill: var(--red); font-weight: 700; }
+                  .f-band { fill: var(--text-secondary); opacity: 0.07; }
+                  .f-bandlab { font-size: 10px; fill: var(--text-secondary); opacity: 0.9; }
+                  .f-tick { font-size: 10px; fill: var(--text-secondary); }
+                  .f-tick2 { fill: var(--blue); }
+                  .f-axtitle { font-size: 11px; fill: var(--text-secondary); font-weight: 600; }
+                  .f-note { font-size: 10.5px; fill: var(--text); font-weight: 600; }
+                  .f-legend { font-size: 11px; fill: var(--text); }
+                  .f-mark { fill: var(--red); }
+                  .f-a { fill: none; stroke: var(--red); stroke-width: 2.4; stroke-linejoin: round; }
+                  .f-a-dot { fill: var(--red); }
+                  .f-b { fill: none; stroke: var(--blue); stroke-width: 2.2; stroke-linejoin: round; }
+                  .f-b-dot { fill: var(--blue); }
+                  .f-c { fill: none; stroke: var(--text-secondary); stroke-width: 2; stroke-dasharray: 5 4; }
+                  .f-c-dot { fill: var(--text-secondary); }
+                  .f-d { fill: none; stroke: var(--light-teal); stroke-width: 2.2; }
+                  .f-d-dot { fill: var(--light-teal); }
+                </style>
+                <line x1="68" y1="250" x2="678" y2="250" class="f-grid"/>
+                <text x="60" y="253.5" class="f-tick" text-anchor="end">0</text>
+                <line x1="68" y1="178.8" x2="678" y2="178.8" class="f-grid"/>
+                <text x="60" y="182.3" class="f-tick" text-anchor="end">1,000</text>
+                <line x1="68" y1="107.5" x2="678" y2="107.5" class="f-grid"/>
+                <text x="60" y="111" class="f-tick" text-anchor="end">2,000</text>
+                <line x1="68" y1="36.3" x2="678" y2="36.3" class="f-grid"/>
+                <text x="60" y="39.8" class="f-tick" text-anchor="end">3,000</text>
+                <line x1="68" y1="250" x2="68" y2="254" class="f-axis"/>
+                <text x="68" y="268" class="f-tick" text-anchor="middle">Apr</text>
+                <line x1="144.3" y1="250" x2="144.3" y2="254" class="f-axis"/>
+                <text x="144.3" y="268" class="f-tick" text-anchor="middle">May</text>
+                <line x1="220.5" y1="250" x2="220.5" y2="254" class="f-axis"/>
+                <text x="220.5" y="268" class="f-tick" text-anchor="middle">Jun</text>
+                <line x1="296.8" y1="250" x2="296.8" y2="254" class="f-axis"/>
+                <text x="296.8" y="268" class="f-tick" text-anchor="middle">Jul</text>
+                <line x1="373" y1="250" x2="373" y2="254" class="f-axis"/>
+                <text x="373" y="268" class="f-tick" text-anchor="middle">Aug</text>
+                <line x1="449.3" y1="250" x2="449.3" y2="254" class="f-axis"/>
+                <text x="449.3" y="268" class="f-tick" text-anchor="middle">Sep</text>
+                <line x1="525.5" y1="250" x2="525.5" y2="254" class="f-axis"/>
+                <text x="525.5" y="268" class="f-tick" text-anchor="middle">Oct</text>
+                <line x1="601.8" y1="250" x2="601.8" y2="254" class="f-axis"/>
+                <text x="601.8" y="268" class="f-tick" text-anchor="middle">Nov</text>
+                <line x1="678" y1="250" x2="678" y2="254" class="f-axis"/>
+                <text x="678" y="268" class="f-tick" text-anchor="middle">Dec</text>
+                <line x1="68" y1="22" x2="68" y2="250" class="f-axis"/>
+                <line x1="68" y1="250" x2="678" y2="250" class="f-axis"/>
+                <path d="M68 248.6 L106.1 246.8 L144.3 243.2 L182.4 236.5 L220.5 220.8 L258.6 194.4 L296.8 160.9 L334.9 114.6 L373 64.8 L403.5 32.7 L434 79 L449.3 185.9 L487.4 228.6 L525.5 237.9 L563.6 243.6 L601.8 246.1 L639.9 247.7 L678 248.6" class="f-a"/>
+                <text x="260.3" y="177.9" class="f-note" text-anchor="end">exponential growth</text>
+                <text x="466.9" y="95.9" class="f-note" text-anchor="start">sudden decline</text>
+                <text x="373" y="294" class="f-axtitle" text-anchor="middle">Month</text>
+                <text transform="translate(14 136) rotate(-90)" class="f-axtitle" text-anchor="middle">Number of aphids</text>
+            </svg>
+            <figcaption><b>Figure 3.9</b> — A woolly aphid population through one year. Values read from the published figure in Majumder &amp; Agarwala, <em>World Journal of Zoology</em> 8(1):55&ndash;61 (2013).</figcaption>
+        </figure>
+
+        <p>This one is different, and the difference is the point of including it. There is textbook exponential growth from April to August — the J-curve from Chapter 3.1 — and then the population falls off a cliff within a few weeks. Nothing about the shape suggests a gentle approach to a ceiling.</p>
+
+        <p>A collapse that fast and that complete, at the same time every year, is the signature of a <strong>density-independent</strong> factor: the season ended. Cold and the death of the host plant's soft growth kill the aphids whether there are three thousand of them or thirty. Many small, short-lived organisms live like this permanently — booming, crashing, and never once approaching a carrying capacity.</p>
+
+        <div class="callout callout-note">
+            <p>Be careful with this graph, though, because it is the kind of question that separates a good answer from a lazy one. The crash is density-independent. But the <em>timing</em> of the peak, and how high it got before the season ended, will have been shaped by density-dependent things too — predators such as ladybirds, parasitic wasps, and the aphids' own crowding on the plant. Real populations are almost never controlled by one kind of factor alone. As your anchor guide puts it: population sizes are controlled by a complex balance of both.</p>
+        </div>
+    </section>
+
+    <section id="check" data-kind="Practice" data-standards="HS-LS2-1" data-time="10 min" data-track>
+        <h2>Check your understanding</h2>
+
+        <div class="callout callout-try">
+            <ol>
+                <li>Define carrying capacity, then explain why "the carrying capacity of St Matthew Island is 6,000" is a wrong answer even though 6,000 reindeer once lived there.</li>
+                <li>A population is at K/2. Another is at 0.95K. Which is growing faster in absolute numbers, and why? Which has more resource per individual?</li>
+                <li>Classify each of these and justify the classification with the crowding test: a volcanic eruption; a tapeworm; a drought; territorial fighting between males; an oil spill; a virus that spreads by touch.</li>
+                <li>Explain why overshoot is impossible without a delay. Then give a real biological reason such a delay would exist in a herd of large mammals.</li>
+                <li>Two islands are identical except that on one the reindeer eat lichen and on the other they eat fast-growing grass. Predict the shape of each population curve over fifty years and justify the difference.</li>
+                <li>Using Figure 3.7: a conservationist argues that adding more females to Mandarte Island will increase the number of chicks produced. Evaluate that claim using the data.</li>
+            </ol>
+        </div>
+
+        <h3>Quick check</h3>
+
+        <div class="quiz" data-quiz>
+
+            <div class="quiz-q" data-review="k">
+                <div class="quiz-variant" data-answer="2">
+                    <p class="quiz-stem">Six thousand reindeer once lived on St Matthew Island. Why is "the carrying capacity of the island is 6,000" still a wrong answer?</p>
+                    <ol class="quiz-options">
+                        <li data-why="The count was not the problem. The survey found the animals; the island simply could not keep feeding them.">The count of 6,000 was inaccurate</li>
+                        <li>K is the number that can be supported indefinitely, and the lichen was being eaten far faster than it regrew</li>
+                        <li data-why="Populations overshoot K regularly — that is what the rest of this chapter is about.">A population can never rise above its carrying capacity</li>
+                        <li data-why="Area is not what sets K. What matters is how fast the resources renew, which is why lichen and grass give such different answers on the same island.">Carrying capacity is set by the island's area, which had not changed</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>An island can hold 6,000 reindeer the way you can hold your breath for a minute. "Over the long term" is the load-bearing phrase in the definition: the resource has to regrow at least as fast as it is consumed.</p>
+                    </div>
+                </div>
+
+                <div class="quiz-variant" data-answer="4">
+                    <p class="quiz-stem">A shallow pond is stocked with 500 carp in spring. All 500 are alive in September; by March most are dead and the pond weed has been grazed down to the mud. A student writes that the pond's carrying capacity for carp is 500. What is wrong with that?</p>
+                    <ol class="quiz-options">
+                        <li data-why="Neither count is K. A number taken at a different moment is still a snapshot of what survived, not a measure of what the pond can keep supplying.">The count should have been taken in March, once the die-off was over</li>
+                        <li data-why="K is always a figure for a particular population, so asking for a carrying capacity for carp is exactly the right thing to do. The same pond has a different one for herons.">Carrying capacity applies to a whole pond, not to one species living in it</li>
+                        <li data-why="Both populations have a carrying capacity. The weed being the limiting resource does not stop the carp having a K — it is what sets it.">The pond weed, not the carp, is the population with a carrying capacity here</li>
+                        <li>500 is the number the pond fed for one season, not the number it can feed indefinitely — the weed was eaten faster than it grew back</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>The test for K is never how many individuals were once present. It is whether the resource can renew at the rate it is being used. A figure that lasts only until the resource runs out is a peak, not a ceiling.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-q" data-review="k">
+                <div class="quiz-variant" data-answer="3">
+                    <p class="quiz-stem">Fisheries are often managed to hold a stock near half its unfished size rather than letting it recover to K. What is the reasoning?</p>
+                    <ol class="quiz-options">
+                        <li data-why="A population sitting at K adds almost nothing — births and deaths cancel out. That is the flat top of the S-curve.">A population at K grows fastest, so half of K leaves a safety margin</li>
+                        <li data-why="Crowded fish tend to grow more slowly, if anything. Body size is not what the management target is about.">Fish grow to a bigger size when the stock is near K</li>
+                        <li>An S-curve is steepest around K/2, so that is where the stock replaces the most fish per year</li>
+                        <li data-why="Half is not a rule about sharing the catch. The number comes from the shape of the curve.">Half the stock has to be left for other predators</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>At K/2 there are enough adults to breed fast and still enough resource to go round. Whether aiming for that is <em>wise</em> is a separate and very good argument — it leaves almost no margin for a bad year.</p>
+                    </div>
+                </div>
+
+                <div class="quiz-variant" data-answer="2">
+                    <p class="quiz-stem">A reserve manager wants a deer herd to produce as many surplus animals as possible each year for release elsewhere. At roughly what size should the herd be held?</p>
+                    <ol class="quiz-options">
+                        <li data-why="A herd sitting at K is the largest the reserve can hold and adds almost nothing, because births and deaths cancel. The most deer is not the most new deer.">As close to K as the habitat allows</li>
+                        <li>At about half of K, where the curve is steepest and the herd replaces the most animals per year</li>
+                        <li data-why="Resource per individual is highest there, but there are too few breeders to turn it into many calves. That is the flat foot of the S-curve.">As small as the reserve can keep viable, so that each deer has the most food</li>
+                        <li data-why="The per-individual growth rate is not constant under logistic growth — it shrinks as the herd climbs towards K. The number of animals added each year rises and then falls.">It makes no difference, because the herd grows at the same rate whatever its size</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>Maximum growth in total and maximum growth per individual sit at opposite ends of the curve, and the useful figure sits between them. Whether it is wise to hold anything permanently at half its natural level is a separate argument — it leaves very little margin for a bad year.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-q" data-review="seals">
+                <div class="quiz-variant" data-answer="4">
+                    <p class="quiz-stem">Fur seals levelled off at a ceiling; reindeer sailed past theirs and crashed. Both were protected and both had abundant food. What was different?</p>
+                    <ol class="quiz-options">
+                        <li data-why="Neither population had predators worth mentioning, which is exactly what makes the comparison useful.">The seals still had predators keeping them in check</li>
+                        <li data-why="They did reach it — the curve flattens near ten thousand animals. Reaching K is not the same as crashing through it.">The seals grew too slowly ever to reach their carrying capacity</li>
+                        <li data-why="The 1911 treaty stopped the killing of seals at sea. It set no limit on how many seals there could be.">The 1911 treaty put a legal cap on seal numbers</li>
+                        <li>The seals' food swam, bred on its own and could not be eaten to nothing, so hunger reached the herd while there were still fish</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>A hungry seal fails to breed <em>this year</em>, while food remains. Lichen gave no such warning: it was eaten down to bare rock, and the signal arrived only when there was nothing left. Same mechanism, opposite outcome.</p>
+                    </div>
+                </div>
+
+                <div class="quiz-variant" data-answer="1">
+                    <p class="quiz-stem">Suppose the Pribilof seals had fed not on fish and squid but on a slow-growing shellfish bed they dug out of the seabed. What would the count of breeding males after 1911 most likely have looked like?</p>
+                    <ol class="quiz-options">
+                        <li>A climb straight past ten thousand and then a crash, because the shortage would register only once the bed had been stripped</li>
+                        <li data-why="Protection is what allowed the herd to grow at all. What bends the top of the curve over is whether the food can answer back before it is gone.">The same S-curve, since the treaty protected the herd either way</li>
+                        <li data-why="Food that is harder to gather lowers the ceiling; it does not change the shape of the approach to it. The question is when the herd finds out it is short.">A slower climb to the same ceiling, since shellfish are harder to catch than fish</li>
+                        <li data-why="The size of the standing stock is not the problem — St Matthew Island carried 6,000 reindeer for years. A large resource that cannot regrow is precisely what produces overshoot.">No growth at all, because a shellfish bed could not support ten thousand seals</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>What bends a curve over is a warning that arrives in time. Food that moves, breeds independently and cannot be gathered down to nothing delivers that warning; food that is a standing bank balance does not, whatever is eating it.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-q" data-review="sandbox">
+                <div class="quiz-variant" data-answer="1">
+                    <p class="quiz-stem">In the sandbox, with the delay switched off, no growth rate at all will push the population above K. What does that show?</p>
+                    <ol class="quiz-options">
+                        <li>Overshoot needs a lag between the resource running short and the population responding</li>
+                        <li data-why="A fast growth rate makes overshoot far worse once a delay exists, but on its own it produces none at all.">Overshoot only happens above a certain growth rate</li>
+                        <li data-why="A lower ceiling arrives sooner, not more gently. With no delay the curve still bends over and flattens.">Overshoot happens when the carrying capacity is set too low</li>
+                        <li data-why="The model is doing what the biology says. The result is the finding, not a fault in the machine.">The model has a fault and the result should be ignored</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>Biology is full of such delays. A reindeer cow that conceives in October calves the following May — seven months of growth committed on a decision made when there was still food. Long-lived adults keep eating for years after they stop raising young successfully.</p>
+                    </div>
+                </div>
+
+                <div class="quiz-variant" data-answer="3">
+                    <p class="quiz-stem">Leave the delay at 3 years and raise K from 500 to 900. The population still shoots past the new, higher ceiling. What does that show?</p>
+                    <ol class="quiz-options">
+                        <li data-why="Raising it again would simply move the overshoot again. Every ceiling behaves this way once a lag is present, which is what makes the lag the culprit.">That 900 is still too low a ceiling for the growth rate chosen</li>
+                        <li data-why="Switch the delay off and no ceiling is overshot at any growth rate at all. Something other than the ceiling is doing the work.">That a population always overshoots whatever ceiling it is given</li>
+                        <li>That a higher ceiling moves the overshoot rather than preventing it, because the delay has not been touched</li>
+                        <li data-why="The sliders are independent and the growth rate is unchanged. A larger K lets the population reach a bigger size, but it is the lag that carries it past.">That raising K raises the growth rate as well, so the population arrives faster</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>This is the bigger-bottle question from Chapter 3.1 in a new form. Enlarging the container buys time and changes nothing about the process, because the delay that causes the overshoot belongs to the organism rather than to the ceiling.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-q" data-review="overshoot">
+                <div class="quiz-variant" data-answer="3">
+                    <p class="quiz-stem">After the crash, St Matthew Island could support fewer reindeer than it had in 1944. Why?</p>
+                    <ol class="quiz-options">
+                        <li data-why="The survivors were starved, not genetically weaker. Restocking with healthy animals would not have fixed the island.">The surviving reindeer were weaker animals</li>
+                        <li data-why="The winter of 1963&ndash;64 was severe, but weather passes. What did not come back was the food.">The climate had permanently turned colder</li>
+                        <li>The lichen that <em>was</em> the carrying capacity had been eaten faster than it can regrow, and it grows a few millimetres a year</li>
+                        <li data-why="K is not a number that automatically resets after a crash. It is a summary of the conditions — and here the conditions had genuinely changed.">Carrying capacity always falls after a population crash</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>This is the difference between using a resource and consuming the machinery that makes it. Hold onto it — Chapter 3.5 turns it into the hardest idea in the unit: a disturbed ecosystem may come back as a different one rather than a recovered one.</p>
+                    </div>
+                </div>
+
+                <div class="quiz-variant" data-answer="4">
+                    <p class="quiz-stem">Picture a second reindeer herd overshooting on an island where the food is fast-growing grass rather than lichen. The crash is just as severe. What happens to that island's carrying capacity afterwards?</p>
+                    <ol class="quiz-options">
+                        <li data-why="How severe the crash was is not what lowers K. What matters is whether the resource that set K was consumed faster than it can rebuild.">It falls just as far, because a crash this severe always damages the habitat</li>
+                        <li data-why="Fewer animals sharing the grass means more resource per individual, which is not the same thing as a higher ceiling. K is set by what the grass can supply.">It rises, because far fewer animals are now sharing the grass</li>
+                        <li data-why="Grass regrows while it is being grazed — that is the whole difference from lichen. Recovery does not have to wait for the grazers to leave.">It stays the same only if the herd is removed, since grazing prevents any regrowth</li>
+                        <li>It stays close to where it was, because grass rebuilds at roughly the rate it was being eaten</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>A crash and a lowered ceiling are two separate events. Overshoot guarantees the first; only a resource that cannot rebuild carries the damage forward into what the island can support afterwards.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-q" data-review="two-kinds">
+                <div class="quiz-variant" data-answer="2">
+                    <p class="quiz-stem">Oxygen in a pond runs out faster the more fish there are. Oxygen is non-living. Which kind of limiting factor is it here?</p>
+                    <ol class="quiz-options">
+                        <li data-why="Abiotic is a decent rule of thumb for density-independent, and it fails here. Use the crowding test, not the label.">Density-independent, because oxygen is abiotic</li>
+                        <li>Density-dependent, because it bites harder when the pond is crowded</li>
+                        <li data-why="Being a resource rather than a predator makes no difference. Competition for food is density-dependent too.">Density-independent, because it is a resource rather than a predator</li>
+                        <li data-why="Anything capable of stopping a population from growing is a limiting factor, and oxygen certainly can.">Neither — oxygen is not a limiting factor</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>Ask the one question that always works: <em>does this hit harder when the population is crowded?</em> It sorts a fungal spore blown in from outside (density-independent, though living) and pond oxygen (density-dependent, though non-living) correctly, where the biotic/abiotic label gets both wrong.</p>
+                    </div>
+                </div>
+
+                <div class="quiz-variant" data-answer="3">
+                    <p class="quiz-stem">A fungal spore blows onto an island from the mainland and kills whatever it lands on. The fungus is alive. Which kind of limiting factor is it here?</p>
+                    <ol class="quiz-options">
+                        <li data-why="Biotic is a rule of thumb for density-dependent, and this is the case where it fails. The label is not the test.">Density-dependent, because the fungus is biotic</li>
+                        <li data-why="That is true of a pathogen passing from host to host, where crowding makes the next host easy to reach. This one arrives on the wind, so an isolated individual is in just as much danger.">Density-dependent, because disease always spreads more easily in a crowd</li>
+                        <li>Density-independent, because it does the same damage whether it lands among ten individuals or ten thousand</li>
+                        <li data-why="Where a factor comes from makes no difference to whether it limits. Typhoons arrive from outside as well, and they sit squarely in the table.">Neither, because a factor arriving from outside the population cannot be a limiting factor</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>The crowding test cuts across the biotic and abiotic line in both directions: pond oxygen is non-living and regulates, a wind-blown spore is living and merely knocks. Only the regulating kind can pull a population back towards K, which is why the distinction earns its place.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-q" data-review="data">
+                <div class="quiz-variant" data-answer="4">
+                    <p class="quiz-stem">Woolly aphids grow exponentially from April to August, then collapse within a few weeks — at the same time every year. What best explains the crash?</p>
+                    <ol class="quiz-options">
+                        <li data-why="Reaching K produces a curve that bends over and flattens. This one goes off a cliff.">They reached carrying capacity and settled there</li>
+                        <li data-why="Predators do build up, and they help shape how high the peak gets. They do not arrive on the same date every year.">Ladybirds and parasitic wasps built up until they regulated the population</li>
+                        <li data-why="Running out of room would bite gradually, getting worse as numbers rose. The collapse is far too abrupt for that.">They ran out of space on the host plant</li>
+                        <li>A density-independent factor — the season ended, and cold kills three thousand aphids as readily as thirty</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>The shape is the evidence: a gentle bend means density-dependent regulation, a cliff at the same date every year means the calendar. Be careful with the follow-up, though — <em>how high</em> the peak got before the season ended was shaped by density-dependent things as well. Real populations are almost never controlled by one kind of factor alone.</p>
+                    </div>
+                </div>
+
+                <div class="quiz-variant" data-answer="1">
+                    <p class="quiz-stem">In Figure 3.7 the mean number of offspring per female sparrow falls steadily as the number of females on Mandarte Island rises. What does that slope show?</p>
+                    <ol class="quiz-options">
+                        <li>Density-dependent limitation acting through birth rate — crowding is cutting reproduction rather than survival</li>
+                        <li data-why="Weather does vary from year to year, but it would scatter the points rather than line them up against density. The ordering by crowding is the whole finding.">Density-independent limitation, since conditions on the island varied between seasons</li>
+                        <li data-why="The vertical axis counts offspring raised, not the proportion that died. Regulation here works by producing fewer young, not by killing more adults.">Density-dependent limitation acting through death rate, as in the kelp perch plot</li>
+                        <li data-why="K is set by the island's resources and is not moving across these seasons. What falls is each female's output, and that is the mechanism holding the population near K.">That the island's carrying capacity for sparrows drops as the population grows</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>Regulation does not have to work through death. A factor is density-dependent if it bites harder when the population is crowded, whichever of births and deaths it reaches — and the fitted line, at about &minus;0.06 offspring per extra female, is a direct measurement of how hard.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <h3>Where this goes next</h3>
+
+        <p>You can now put a name to every force acting on the reindeer curve, and you can build the model that produces it. What you cannot yet do is trust a graph.</p>
+
+        <p>Every figure in this chapter was handed to you with its axes already chosen — a convenient window, a helpful scale, a line that tells a clear story. Chapter 3.3 takes that away. It gives you one real dataset, lets you choose the window yourself, and shows you how to get three completely opposite conclusions out of it without changing a single number. That is not a trick. It is the most common way people are misled by real data, and learning to catch it is a learning target in its own right.</p>
+    </section>
+
+</main>
+
+<script src="../assets/toc.js?v=330"></script>
+<script src="../assets/course.js?v=330"></script>
+</body>
+</html>

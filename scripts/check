@@ -1,0 +1,29 @@
+#!/bin/sh
+# Run the body-map check without needing node on your PATH.
+#
+# The terminal pane's shell does not source ~/.zshrc, which is where nvm is set
+# up, so a bare `node` fails there even though it works everywhere else. This
+# finds a node and uses it.
+#
+#   ./scripts/check          from the project root
+#   "/full/path/scripts/check"   from anywhere
+
+DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+
+NODE=$(command -v node 2>/dev/null)
+if [ -z "$NODE" ]; then
+    # newest nvm install first
+    for n in $(ls -d "$HOME"/.nvm/versions/node/*/bin/node 2>/dev/null | sort -V -r); do
+        [ -x "$n" ] && NODE="$n" && break
+    done
+fi
+[ -z "$NODE" ] && [ -x /opt/homebrew/bin/node ] && NODE=/opt/homebrew/bin/node
+[ -z "$NODE" ] && [ -x /usr/local/bin/node ] && NODE=/usr/local/bin/node
+
+if [ -z "$NODE" ]; then
+    echo "check: could not find node. Install it, or run:" >&2
+    echo "  source ~/.nvm/nvm.sh && node \"$DIR/check-body-map.js\"" >&2
+    exit 127
+fi
+
+exec "$NODE" "$DIR/check-body-map.js"

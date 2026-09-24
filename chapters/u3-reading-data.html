@@ -1,0 +1,662 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3.3 Reading Population Data — Biology</title>
+<link rel="stylesheet" href="../assets/course.css?v=330">
+<script>if('scrollRestoration' in history)history.scrollRestoration='manual';</script>
+</head>
+<body data-root="../" data-chapter="u3-reading-data">
+
+<main class="main" role="main">
+
+    <section id="overview">
+        <div class="chapter-eyebrow">Unit 3 — Ecosystem Dynamics</div>
+        <h1>3.3 Reading Population Data</h1>
+        <p class="lead">Every graph in Chapter 3.2 came with its axes already chosen for you. This chapter takes that away. It is the mathematics chapter of the unit — percent change, rates, and the one skill that HS-LS2-1 names explicitly: recognising what happens to a conclusion when the <em>scale</em> changes underneath it.</p>
+
+        <div class="chapter-meta"></div>
+
+        <div data-progression></div>
+    </section>
+
+    <section id="percent-change" data-kind="Core" data-standards="HS-LS2-1" data-time="9 min" data-track>
+        <h2>Percent change, and the thing it is not</h2>
+
+        <p>The formula your anchor guide gives you is this:</p>
+
+        <p style="text-align:center"><strong>percent change = (P<sub>2</sub> &minus; P<sub>1</sub>) &divide; P<sub>1</sub> &times; 100</strong></p>
+
+        <p>where P<sub>1</sub> is the population at the earlier time and P<sub>2</sub> at the later one. Three things to get right, and each of them costs marks:</p>
+
+        <ul>
+            <li><strong>Divide by P<sub>1</sub>, always.</strong> The change is measured <em>relative to where you started</em>. Dividing by P<sub>2</sub> is the most common error in this topic and gives a different, meaningless number.</li>
+            <li><strong>Keep the sign.</strong> A negative answer means the population fell. Writing &minus;78% as 78% turns a catastrophe into a boom.</li>
+            <li><strong>Show the substitution.</strong> Your guide asks you to show your work, and in the summative the substituted line is worth marks on its own even if the arithmetic slips.</li>
+        </ul>
+
+        <div class="callout callout-key">
+            <p><strong>Now the correction, and it matters.</strong> That formula is a <span class="term">percent change</span>. It is <em>not</em> a growth rate, even though it is often labelled one — including on some of the slides you will have seen.</p>
+            <p>A percent change answers "how much bigger or smaller, end to end?" A <span class="term">rate</span> answers "how fast, per unit of time?" They are different questions and they need different units. Consider: a population falling 78% over 16 years and a population falling 78% over 2 years have the <em>same percent change</em> and are completely different emergencies. If a question gives you two years and two numbers and asks for a "growth rate", work out the percent change, then say clearly what period it covers — or divide it out to get a change per year. Being explicit is never wrong.</p>
+        </div>
+
+        <div class="callout callout-example">
+            <p><strong>Worked example.</strong> African elephants: 1,300,000 in 1979 and 286,233 in 1995.</p>
+            <p>percent change = (286,233 &minus; 1,300,000) &divide; 1,300,000 &times; 100 = (&minus;1,013,767) &divide; 1,300,000 &times; 100 = <strong>&minus;78.0%</strong></p>
+            <p>Over 16 years. Averaged out, that is about <strong>&minus;9.0% a year</strong> — the population shrinking by roughly a tenth of itself, every year, for sixteen years running. The two statements describe the same collapse; the second one tells you it was relentless rather than a single bad event. (The scale slider below shows both numbers for whatever window you choose.)</p>
+        </div>
+    </section>
+
+    <section id="rates" data-kind="Core" data-standards="HS-LS2-1" data-time="7 min" data-track>
+        <h2>Where the change comes from: birth rate and death rate</h2>
+
+        <p>A percent change tells you what happened. It says nothing about <em>how</em>. For that you need the two quantities underneath every population change in this unit.</p>
+
+        <ul>
+            <li><span class="term">Birth rate</span> — the number of live births per 1,000 individuals, per year.</li>
+            <li><span class="term">Death rate</span> — the number of deaths per 1,000 individuals, per year.</li>
+        </ul>
+
+        <p>Both are expressed <em>per 1,000</em> on purpose. That makes them comparable between a population of two hundred and a population of two million, which raw counts are not. Two hundred deaths in a herd of five hundred and two hundred deaths in a herd of fifty thousand are not the same event.</p>
+
+        <p>The whole of the fill-in-the-blank exercise in your guide reduces to one idea:</p>
+
+        <div class="tbl-scroll" style="overflow-x:auto;-webkit-overflow-scrolling:touch">
+<table>
+            <thead>
+                <tr><th>Birth rate</th><th>Death rate</th><th>Population</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>&#9650; high</td><td>&#9660; low</td><td><strong>increases</strong></td></tr>
+                <tr><td>&#9660; low</td><td>&#9650; high</td><td><strong>decreases</strong></td></tr>
+                <tr><td colspan="2">birth rate = death rate</td><td><strong>steady</strong> — which is what a population at K looks like</td></tr>
+            </tbody>
+        </table>
+        </div>
+
+        <div class="callout callout-note">
+            <p>"Steady" at carrying capacity does not mean nothing is happening. A population sitting exactly on K can have an enormous birth rate and an equally enormous death rate — a great deal of life and death, netting to zero. That is a very different ecosystem from one where both rates are low, even though the graph looks identical. A flat line hides more than it shows.</p>
+        </div>
+    </section>
+
+    <section id="scale" data-kind="Practice" data-standards="HS-LS2-1, HS-LS2-6" data-time="18 min" data-track>
+        <h2>One dataset, three answers</h2>
+
+        <p>This interactive carries the crosscutting learning target for the whole unit: <em>I can recognise proportional relationships between different quantities as scales change.</em> Read the graph it shows you, commit to a verdict, and then find out what you were not shown.</p>
+
+        <div class="sim" data-sim="u3-scale">
+            <div class="sim-header">
+                <h4>The scale slider: African elephants</h4>
+                <span class="sim-kind">Interactive</span>
+            </div>
+        </div>
+
+        <div class="callout callout-try">
+            <ol>
+                <li>Write down the percent change for 1979&ndash;1995, for 1995&ndash;2016, and for 1979&ndash;2016. Three numbers, three stories. Which one would a conservation charity put in a fundraising letter, and which would an ivory trade lobbyist quote?</li>
+                <li>Set the window to 2007&ndash;2016. What does <em>that</em> window say? Was the recovery still going on at the end of the record?</li>
+                <li>Make the window as short as you can — one or two years. Describe what happens to the percent change as you slide it along. Why is a short window unreliable?</li>
+                <li>The blue dashed line joins your two endpoints. For the 1995&ndash;2016 window, how well does that straight line describe what actually happened in between? What does that tell you about reporting a change using only two numbers?</li>
+                <li>Neither number is a lie. Explain, in one sentence you could write in an exam, why two honest calculations from the same data can support opposite conclusions.</li>
+            </ol>
+        </div>
+    </section>
+
+    <section id="cycles" data-kind="Core" data-standards="HS-LS2-1, HS-LS2-6" data-time="9 min" data-track>
+        <h2>Reading cause and effect off a graph</h2>
+
+        <p>The most famous population dataset in ecology comes from an accounting ledger. The Hudson's Bay Company recorded how many snowshoe hare and lynx pelts it bought from trappers in northern Canada, year by year, for nearly two centuries. Charles Elton and Mary Nicholson gathered the records in 1942, and every biology course since has used them.</p>
+
+        <figure class="diagram">
+            <svg viewBox="0 0 720 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="hl-t hl-d">
+                <title id="hl-t">Snowshoe hare and lynx pelt returns, 1900 to 1920</title>
+                <desc id="hl-d">Two lines on one graph. The hare line, read against the left axis in thousands of pelts, rises to a peak in 1903, crashes, rises again to a peak in 1913 and crashes again. The lynx line, read against the right axis, does the same thing but each of its peaks comes a year or two after the hare peak that precedes it.</desc>
+                <style>
+                  .f-grid { stroke: var(--border); stroke-width: 1; }
+                  .f-axis { stroke: var(--text-secondary); stroke-width: 1.2; opacity: 0.6; }
+                  .f-vline { stroke: var(--text-secondary); stroke-width: 1; stroke-dasharray: 3 3; opacity: 0.7; }
+                  .f-kline { stroke: var(--red); stroke-width: 1.3; stroke-dasharray: 6 4; opacity: 0.85; }
+                  .f-klab { font-size: 10.5px; fill: var(--red); font-weight: 700; }
+                  .f-band { fill: var(--text-secondary); opacity: 0.07; }
+                  .f-bandlab { font-size: 10px; fill: var(--text-secondary); opacity: 0.9; }
+                  .f-tick { font-size: 10px; fill: var(--text-secondary); }
+                  .f-tick2 { fill: var(--blue); }
+                  .f-axtitle { font-size: 11px; fill: var(--text-secondary); font-weight: 600; }
+                  .f-note { font-size: 10.5px; fill: var(--text); font-weight: 600; }
+                  .f-legend { font-size: 11px; fill: var(--text); }
+                  .f-mark { fill: var(--red); }
+                  .f-a { fill: none; stroke: var(--red); stroke-width: 2.4; stroke-linejoin: round; }
+                  .f-a-dot { fill: var(--red); }
+                  .f-b { fill: none; stroke: var(--blue); stroke-width: 2.2; stroke-linejoin: round; }
+                  .f-b-dot { fill: var(--blue); }
+                  .f-c { fill: none; stroke: var(--text-secondary); stroke-width: 2; stroke-dasharray: 5 4; }
+                  .f-c-dot { fill: var(--text-secondary); }
+                  .f-d { fill: none; stroke: var(--light-teal); stroke-width: 2.2; }
+                  .f-d-dot { fill: var(--light-teal); }
+                </style>
+                <line x1="62" y1="270" x2="658" y2="270" class="f-grid"/>
+                <text x="54" y="273.5" class="f-tick" text-anchor="end">0</text>
+                <line x1="62" y1="211.6" x2="658" y2="211.6" class="f-grid"/>
+                <text x="54" y="215.1" class="f-tick" text-anchor="end">20</text>
+                <line x1="62" y1="153.3" x2="658" y2="153.3" class="f-grid"/>
+                <text x="54" y="156.8" class="f-tick" text-anchor="end">40</text>
+                <line x1="62" y1="94.9" x2="658" y2="94.9" class="f-grid"/>
+                <text x="54" y="98.4" class="f-tick" text-anchor="end">60</text>
+                <line x1="62" y1="36.6" x2="658" y2="36.6" class="f-grid"/>
+                <text x="54" y="40.1" class="f-tick" text-anchor="end">80</text>
+                <text x="666" y="273.5" class="f-tick f-tick2" text-anchor="start">0</text>
+                <text x="666" y="197.2" class="f-tick f-tick2" text-anchor="start">20</text>
+                <text x="666" y="120.9" class="f-tick f-tick2" text-anchor="start">40</text>
+                <text x="666" y="44.6" class="f-tick f-tick2" text-anchor="start">60</text>
+                <line x1="62" y1="270" x2="62" y2="274" class="f-axis"/>
+                <text x="62" y="288" class="f-tick" text-anchor="middle">1900</text>
+                <line x1="211" y1="270" x2="211" y2="274" class="f-axis"/>
+                <text x="211" y="288" class="f-tick" text-anchor="middle">1905</text>
+                <line x1="360" y1="270" x2="360" y2="274" class="f-axis"/>
+                <text x="360" y="288" class="f-tick" text-anchor="middle">1910</text>
+                <line x1="509" y1="270" x2="509" y2="274" class="f-axis"/>
+                <text x="509" y="288" class="f-tick" text-anchor="middle">1915</text>
+                <line x1="658" y1="270" x2="658" y2="274" class="f-axis"/>
+                <text x="658" y="288" class="f-tick" text-anchor="middle">1920</text>
+                <line x1="62" y1="22" x2="62" y2="270" class="f-axis"/>
+                <line x1="62" y1="270" x2="658" y2="270" class="f-axis"/>
+                <line x1="658" y1="22" x2="658" y2="270" class="f-axis"/>
+                <path d="M62 182.5 L91.8 132.3 L121.6 65.2 L151.4 44.2 L181.2 164.1 L211 209.9 L240.8 217.2 L270.6 207.6 L300.4 205.8 L330.2 195.9 L360 190.9 L389.8 152.4 L419.6 103.7 L449.4 46.5 L479.2 117.4 L509 213.1 L538.8 237.3 L568.6 247.8 L598.4 227.4 L628.2 222.7 L658 197.9" class="f-a"/>
+                <circle cx="62" cy="182.5" r="2.6" class="f-a-dot"/>
+                <circle cx="91.8" cy="132.3" r="2.6" class="f-a-dot"/>
+                <circle cx="121.6" cy="65.2" r="2.6" class="f-a-dot"/>
+                <circle cx="151.4" cy="44.2" r="2.6" class="f-a-dot"/>
+                <circle cx="181.2" cy="164.1" r="2.6" class="f-a-dot"/>
+                <circle cx="211" cy="209.9" r="2.6" class="f-a-dot"/>
+                <circle cx="240.8" cy="217.2" r="2.6" class="f-a-dot"/>
+                <circle cx="270.6" cy="207.6" r="2.6" class="f-a-dot"/>
+                <circle cx="300.4" cy="205.8" r="2.6" class="f-a-dot"/>
+                <circle cx="330.2" cy="195.9" r="2.6" class="f-a-dot"/>
+                <circle cx="360" cy="190.9" r="2.6" class="f-a-dot"/>
+                <circle cx="389.8" cy="152.4" r="2.6" class="f-a-dot"/>
+                <circle cx="419.6" cy="103.7" r="2.6" class="f-a-dot"/>
+                <circle cx="449.4" cy="46.5" r="2.6" class="f-a-dot"/>
+                <circle cx="479.2" cy="117.4" r="2.6" class="f-a-dot"/>
+                <circle cx="509" cy="213.1" r="2.6" class="f-a-dot"/>
+                <circle cx="538.8" cy="237.3" r="2.6" class="f-a-dot"/>
+                <circle cx="568.6" cy="247.8" r="2.6" class="f-a-dot"/>
+                <circle cx="598.4" cy="227.4" r="2.6" class="f-a-dot"/>
+                <circle cx="628.2" cy="222.7" r="2.6" class="f-a-dot"/>
+                <circle cx="658" cy="197.9" r="2.6" class="f-a-dot"/>
+                <path d="M62 254.7 L91.8 246.7 L121.6 232.6 L151.4 135.7 L181.2 43.4 L211 110.9 L240.8 197.5 L270.6 220.4 L300.4 238.3 L330.2 235.3 L360 241.8 L389.8 239.5 L419.6 223.1 L449.4 195.6 L479.2 95.6 L509 75 L538.8 156.7 L568.6 209.7 L598.4 233 L628.2 231.5 L658 237.2" class="f-b"/>
+                <circle cx="62" cy="254.7" r="2.6" class="f-b-dot"/>
+                <circle cx="91.8" cy="246.7" r="2.6" class="f-b-dot"/>
+                <circle cx="121.6" cy="232.6" r="2.6" class="f-b-dot"/>
+                <circle cx="151.4" cy="135.7" r="2.6" class="f-b-dot"/>
+                <circle cx="181.2" cy="43.4" r="2.6" class="f-b-dot"/>
+                <circle cx="211" cy="110.9" r="2.6" class="f-b-dot"/>
+                <circle cx="240.8" cy="197.5" r="2.6" class="f-b-dot"/>
+                <circle cx="270.6" cy="220.4" r="2.6" class="f-b-dot"/>
+                <circle cx="300.4" cy="238.3" r="2.6" class="f-b-dot"/>
+                <circle cx="330.2" cy="235.3" r="2.6" class="f-b-dot"/>
+                <circle cx="360" cy="241.8" r="2.6" class="f-b-dot"/>
+                <circle cx="389.8" cy="239.5" r="2.6" class="f-b-dot"/>
+                <circle cx="419.6" cy="223.1" r="2.6" class="f-b-dot"/>
+                <circle cx="449.4" cy="195.6" r="2.6" class="f-b-dot"/>
+                <circle cx="479.2" cy="95.6" r="2.6" class="f-b-dot"/>
+                <circle cx="509" cy="75" r="2.6" class="f-b-dot"/>
+                <circle cx="538.8" cy="156.7" r="2.6" class="f-b-dot"/>
+                <circle cx="568.6" cy="209.7" r="2.6" class="f-b-dot"/>
+                <circle cx="598.4" cy="233" r="2.6" class="f-b-dot"/>
+                <circle cx="628.2" cy="231.5" r="2.6" class="f-b-dot"/>
+                <circle cx="658" cy="237.2" r="2.6" class="f-b-dot"/>
+                <text x="360" y="314" class="f-axtitle" text-anchor="middle">Year</text>
+                <text transform="translate(14 146) rotate(-90)" class="f-axtitle" text-anchor="middle">Hare pelts (thousands)</text>
+                <text transform="translate(714 146) rotate(-90)" class="f-axtitle" text-anchor="middle">Lynx pelts (thousands)</text>
+                <line x1="74" y1="36" x2="94" y2="36" class="f-a"/>
+                <text x="100" y="40" class="f-legend">Snowshoe hare (left axis)</text>
+                <line x1="74" y1="52" x2="94" y2="52" class="f-b"/>
+                <text x="100" y="56" class="f-legend">Lynx (right axis)</text>
+            </svg>
+            <figcaption><b>Figure 3.10</b> — Snowshoe hare and lynx pelt returns. Note the two different vertical axes: there are far more hares than lynx, so plotting them on one scale would flatten the lynx line into the floor. Data: Hudson's Bay Company pelt records, the series compiled by C. Elton and M. Nicholson, <em>The ten-year cycle in numbers of the lynx in Canada</em>, Journal of Animal Ecology 11:215&ndash;244 (1942).</figcaption>
+        </figure>
+
+        <p>Three things are worth noticing, and your anchor guide asks you for exactly three:</p>
+
+        <ol>
+            <li><strong>Both populations cycle</strong>, rising and crashing repeatedly rather than settling at a carrying capacity. Roughly a ten-year rhythm.</li>
+            <li><strong>The lynx peak comes after the hare peak</strong>, by a year or two. The hares peak in 1903 and the lynx in 1904; the hares peak again in 1913 and the lynx in 1915.</li>
+            <li><strong>The lynx line is much smaller.</strong> There are perhaps ten times as many hares as lynx — which is exactly what Chapter 3.4 will explain with the ten-per-cent rule.</li>
+        </ol>
+
+        <p>The obvious story is a feedback loop: plenty of hares means well-fed lynx raising many kittens, so lynx numbers rise; more lynx means more hares eaten, so hares crash; fewer hares means lynx starve, so lynx crash; with few lynx the hares recover — and round again. Predation is a <strong>density-dependent</strong> factor, and here it is regulating both populations at once.</p>
+
+        <div class="callout callout-misconception">
+            <p><strong>That story is too tidy, and the data cannot settle it.</strong> Field experiments since the 1990s have shown that the hare cycle is driven at least as much by <em>food</em> — the hares strip their winter browse and the plants respond by growing less palatable — as by lynx. When researchers fenced areas and excluded predators, hare numbers stayed higher but still cycled.</p>
+            <p>There is a second problem, and it is worth more than the first: <strong>these are not population counts.</strong> They are records of pelts sold. That number depends on how many animals existed, and also on how many trappers were working, how good the fur prices were, and how easily the company could reach a region. A graph is only ever as good as what was actually measured, and this one measures commerce as well as biology.</p>
+            <p>Neither point makes the figure useless. It makes it a good example of the difference between <em>a pattern in the data</em> and <em>an explanation of it</em> — which is precisely what HS-LS2-6 asks you to be able to evaluate.</p>
+        </div>
+    </section>
+
+    <section id="whales" data-kind="Case study" data-standards="HS-LS2-1, HS-LS2-6" data-time="12 min" data-track>
+        <h2>The humpback whale, end to end</h2>
+
+        <p>This is the case study where the deck makes its own strongest point, and it is worth following all the way through.</p>
+
+        <p>Commercial whaling in the twentieth century was industrial in scale. The catch was recorded, so unlike the hare and lynx data we know reasonably well how many animals were removed and when.</p>
+
+        <figure class="diagram dense">
+            <svg viewBox="0 0 720 400" xmlns="http://www.w3.org/2000/svg" role="img"
+             aria-labelledby="wh-t wh-d">
+            <title id="wh-t">Whales killed per decade worldwide, 1900s to 2010s</title>
+            <desc id="wh-d">A bar chart with one bar for each decade from the 1900s to the 2010s.
+                The bars climb from about 52,000 in the 1900s to 177,000, 229,000 and 403,000, dip
+                to 257,000 in the 1940s, then rise to 614,000 in the 1950s and peak at about
+                704,000 in the 1960s. After that they fall steeply: 364,000 in the 1970s, 76,000 in
+                the 1980s, and under 20,000 in each decade since. The tallest bar by a clear margin
+                is the 1960s.</desc>
+            <style>
+                .wh-grid  { stroke: var(--border); stroke-width: 1; stroke-dasharray: 4 4; }
+                .wh-axis  { stroke: var(--text-secondary); stroke-width: 1.4; }
+                .wh-bar   { fill: var(--blue); }
+                .wh-ytick { font-size: 10px; fill: var(--text-secondary); text-anchor: end; }
+                .wh-xtick { font-size: 10px; fill: var(--text-secondary); text-anchor: middle; }
+                .wh-cap   { font-size: 10.5px; font-weight: 700; fill: var(--text); }
+                .wh-note  { font-size: 10px; fill: var(--text-secondary); }
+            </style>
+            <text class="wh-cap" x="16" y="20">Whales killed, totalled by decade</text>
+            <text class="wh-note" x="16" y="34">&#8220;1900&#8221; means every whale caught from 1900 to 1909, and so on.</text>
+                <line class="wh-grid" x1="80" y1="330.0" x2="704" y2="330.0"/>
+                <text class="wh-ytick" x="72" y="333.5">0</text>
+                <line class="wh-grid" x1="80" y1="290.3" x2="704" y2="290.3"/>
+                <text class="wh-ytick" x="72" y="293.8">100,000</text>
+                <line class="wh-grid" x1="80" y1="250.5" x2="704" y2="250.5"/>
+                <text class="wh-ytick" x="72" y="254.0">200,000</text>
+                <line class="wh-grid" x1="80" y1="210.8" x2="704" y2="210.8"/>
+                <text class="wh-ytick" x="72" y="214.3">300,000</text>
+                <line class="wh-grid" x1="80" y1="171.1" x2="704" y2="171.1"/>
+                <text class="wh-ytick" x="72" y="174.6">400,000</text>
+                <line class="wh-grid" x1="80" y1="131.4" x2="704" y2="131.4"/>
+                <text class="wh-ytick" x="72" y="134.9">500,000</text>
+                <line class="wh-grid" x1="80" y1="91.6" x2="704" y2="91.6"/>
+                <text class="wh-ytick" x="72" y="95.1">600,000</text>
+                <line class="wh-grid" x1="80" y1="51.9" x2="704" y2="51.9"/>
+                <text class="wh-ytick" x="72" y="55.4">700,000</text>
+                <line class="wh-axis" x1="80" y1="330" x2="704" y2="330"/>
+                <rect class="wh-bar" x="89.0" y="309.3" width="34" height="20.7" rx="1.5"><title>1900s: 52,000 whales</title></rect>
+                <text class="wh-xtick" x="106.0" y="346">1900</text>
+                <rect class="wh-bar" x="141.0" y="259.7" width="34" height="70.3" rx="1.5"><title>1910s: 177,000 whales</title></rect>
+                <text class="wh-xtick" x="158.0" y="346">1910</text>
+                <rect class="wh-bar" x="193.0" y="239.0" width="34" height="91.0" rx="1.5"><title>1920s: 229,000 whales</title></rect>
+                <text class="wh-xtick" x="210.0" y="346">1920</text>
+                <rect class="wh-bar" x="245.0" y="169.9" width="34" height="160.1" rx="1.5"><title>1930s: 403,000 whales</title></rect>
+                <text class="wh-xtick" x="262.0" y="346">1930</text>
+                <rect class="wh-bar" x="297.0" y="227.9" width="34" height="102.1" rx="1.5"><title>1940s: 257,000 whales</title></rect>
+                <text class="wh-xtick" x="314.0" y="346">1940</text>
+                <rect class="wh-bar" x="349.0" y="86.1" width="34" height="243.9" rx="1.5"><title>1950s: 614,000 whales</title></rect>
+                <text class="wh-xtick" x="366.0" y="346">1950</text>
+                <rect class="wh-bar" x="401.0" y="50.3" width="34" height="279.7" rx="1.5"><title>1960s: 704,000 whales</title></rect>
+                <text class="wh-xtick" x="418.0" y="346">1960</text>
+                <rect class="wh-bar" x="453.0" y="185.4" width="34" height="144.6" rx="1.5"><title>1970s: 364,000 whales</title></rect>
+                <text class="wh-xtick" x="470.0" y="346">1970</text>
+                <rect class="wh-bar" x="505.0" y="299.8" width="34" height="30.2" rx="1.5"><title>1980s: 76,000 whales</title></rect>
+                <text class="wh-xtick" x="522.0" y="346">1980</text>
+                <rect class="wh-bar" x="557.0" y="327.2" width="34" height="2.8" rx="1.5"><title>1990s: 7,000 whales</title></rect>
+                <text class="wh-xtick" x="574.0" y="346">1990</text>
+                <rect class="wh-bar" x="609.0" y="322.8" width="34" height="7.2" rx="1.5"><title>2000s: 18,000 whales</title></rect>
+                <text class="wh-xtick" x="626.0" y="346">2000</text>
+                <rect class="wh-bar" x="661.0" y="326.4" width="34" height="3.6" rx="1.5"><title>2010s: 9,000 whales</title></rect>
+                <text class="wh-xtick" x="678.0" y="346">2010</text>
+
+            <text class="wh-note" x="80" y="378">Redrawn from Our World in Data (CC BY); data from the International Whaling Commission and Rocha et al. (2014).</text>
+            </svg>
+            <figcaption><b>Figure 3.11</b> &mdash; Whales of all species killed per decade worldwide. Read the shape before the numbers: the peak is not in the age of sail and harpoons thrown by hand &mdash; it is within living memory, in the decade of factory ships, sonar and explosive harpoons. Then look at what happens after the 1960s, and hold on to it: that collapse in catch is the thing Chapter 3.5 asks you to explain. Across the 1900s to the 1980s these bars add up to roughly <strong>2.9 million</strong> whales.</figcaption>
+        </figure>
+
+        <p>Now the population on the receiving end. The humpback whales that breed off Brazil and feed around South Georgia — the western South Atlantic population — are among the best-studied. Before whaling there were roughly <strong>27,000</strong> of them. By the late 1950s there were about <strong>450</strong>.</p>
+
+        <p>That is a percent change of <strong>&minus;98.3%</strong>. Fewer than two whales in every hundred were left.</p>
+
+        <p>Commercial whaling was banned in 1986. Before you look at what happened, do what your anchor guide asks: <strong>predict it.</strong> Sketch the line from 1986 out to 2030, and give a reason for the shape you drew.</p>
+
+        <figure class="diagram">
+            <svg viewBox="0 0 730 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="hb-t hb-d">
+                <title id="hb-t">Humpback whales of the western South Atlantic, 1900 to 2030</title>
+                <desc id="hb-d">Two lines. The population line, read against the left axis, sits at about 27,000 whales in 1900, falls steeply through the whaling years to a low of about 450 in 1958, then climbs back in an S shape to about 24,900 by 2019, with a dashed projection continuing to 2030. The annual catch line, read against the right axis, peaks near 1912, rises again in the 1950s, and reaches zero at the 1986 commercial whaling ban, marked by a vertical dashed line.</desc>
+                <style>
+                  .f-grid { stroke: var(--border); stroke-width: 1; }
+                  .f-axis { stroke: var(--text-secondary); stroke-width: 1.2; opacity: 0.6; }
+                  .f-vline { stroke: var(--text-secondary); stroke-width: 1; stroke-dasharray: 3 3; opacity: 0.7; }
+                  .f-kline { stroke: var(--red); stroke-width: 1.3; stroke-dasharray: 6 4; opacity: 0.85; }
+                  .f-klab { font-size: 10.5px; fill: var(--red); font-weight: 700; }
+                  .f-band { fill: var(--text-secondary); opacity: 0.07; }
+                  .f-bandlab { font-size: 10px; fill: var(--text-secondary); opacity: 0.9; }
+                  .f-tick { font-size: 10px; fill: var(--text-secondary); }
+                  .f-tick2 { fill: var(--blue); }
+                  .f-axtitle { font-size: 11px; fill: var(--text-secondary); font-weight: 600; }
+                  .f-note { font-size: 10.5px; fill: var(--text); font-weight: 600; }
+                  .f-legend { font-size: 11px; fill: var(--text); }
+                  .f-mark { fill: var(--red); }
+                  .f-a { fill: none; stroke: var(--red); stroke-width: 2.4; stroke-linejoin: round; }
+                  .f-a-dot { fill: var(--red); }
+                  .f-b { fill: none; stroke: var(--blue); stroke-width: 2.2; stroke-linejoin: round; }
+                  .f-b-dot { fill: var(--blue); }
+                  .f-c { fill: none; stroke: var(--text-secondary); stroke-width: 2; stroke-dasharray: 5 4; }
+                  .f-c-dot { fill: var(--text-secondary); }
+                  .f-d { fill: none; stroke: var(--light-teal); stroke-width: 2.2; }
+                  .f-d-dot { fill: var(--light-teal); }
+                </style>
+                <line x1="68" y1="290" x2="664" y2="290" class="f-grid"/>
+                <text x="60" y="293.5" class="f-tick" text-anchor="end">0</text>
+                <line x1="68" y1="200.7" x2="664" y2="200.7" class="f-grid"/>
+                <text x="60" y="204.2" class="f-tick" text-anchor="end">10,000</text>
+                <line x1="68" y1="111.3" x2="664" y2="111.3" class="f-grid"/>
+                <text x="60" y="114.8" class="f-tick" text-anchor="end">20,000</text>
+                <line x1="68" y1="22" x2="664" y2="22" class="f-grid"/>
+                <text x="60" y="25.5" class="f-tick" text-anchor="end">30,000</text>
+                <text x="672" y="293.5" class="f-tick f-tick2" text-anchor="start">0</text>
+                <text x="672" y="216.9" class="f-tick f-tick2" text-anchor="start">2,000</text>
+                <text x="672" y="140.4" class="f-tick f-tick2" text-anchor="start">4,000</text>
+                <text x="672" y="63.8" class="f-tick f-tick2" text-anchor="start">6,000</text>
+                <line x1="68" y1="290" x2="68" y2="294" class="f-axis"/>
+                <text x="68" y="308" class="f-tick" text-anchor="middle">1900</text>
+                <line x1="159.7" y1="290" x2="159.7" y2="294" class="f-axis"/>
+                <text x="159.7" y="308" class="f-tick" text-anchor="middle">1920</text>
+                <line x1="251.4" y1="290" x2="251.4" y2="294" class="f-axis"/>
+                <text x="251.4" y="308" class="f-tick" text-anchor="middle">1940</text>
+                <line x1="343.1" y1="290" x2="343.1" y2="294" class="f-axis"/>
+                <text x="343.1" y="308" class="f-tick" text-anchor="middle">1960</text>
+                <line x1="434.8" y1="290" x2="434.8" y2="294" class="f-axis"/>
+                <text x="434.8" y="308" class="f-tick" text-anchor="middle">1980</text>
+                <line x1="526.5" y1="290" x2="526.5" y2="294" class="f-axis"/>
+                <text x="526.5" y="308" class="f-tick" text-anchor="middle">2000</text>
+                <line x1="618.2" y1="290" x2="618.2" y2="294" class="f-axis"/>
+                <text x="618.2" y="308" class="f-tick" text-anchor="middle">2020</text>
+                <line x1="68" y1="22" x2="68" y2="290" class="f-axis"/>
+                <line x1="68" y1="290" x2="664" y2="290" class="f-axis"/>
+                <line x1="664" y1="22" x2="664" y2="290" class="f-axis"/>
+                <path d="M68 48.8 L86.3 50.6 L104.7 75.6 L123 129.2 L141.4 182.8 L159.7 213.2 L182.6 240 L205.5 255.2 L228.5 264.1 L251.4 269.5 L274.3 272.1 L297.2 276.6 L320.2 283.7 L333.9 286 L333.9 286 L338.5 285.5 L343.1 285 L347.7 284.5 L352.2 283.9 L356.8 283.2 L361.4 282.5 L366 281.6 L370.6 280.7 L375.2 279.7 L379.8 278.6 L384.3 277.4 L388.9 276 L393.5 274.5 L398.1 272.9 L402.7 271.1 L407.3 269.2 L411.8 267 L416.4 264.7 L421 262.2 L425.6 259.4 L430.2 256.4 L434.8 253.2 L439.4 249.7 L443.9 246 L448.5 242 L453.1 237.8 L457.7 233.2 L462.3 228.4 L466.9 223.4 L471.4 218.1 L476 212.5 L480.6 206.8 L485.2 200.8 L489.8 194.7 L494.4 188.5 L499 182.1 L503.5 175.7 L508.1 169.2 L512.7 162.7 L517.3 156.3 L521.9 150 L526.5 143.7 L531 137.6 L535.6 131.7 L540.2 125.9 L544.8 120.4 L549.4 115.1 L554 110.1 L558.6 105.3 L563.1 100.8 L567.7 96.5 L572.3 92.6 L576.9 88.9 L581.5 85.4 L586.1 82.2 L590.6 79.2 L595.2 76.5 L599.8 73.9 L604.4 71.6 L609 69.5 L613.6 67.6" class="f-a"/>
+                <path d="M613.6 67.6 L618.2 65.8 L622.7 64.2 L627.3 62.7 L631.9 61.4 L636.5 60.1 L641.1 59 L645.7 58 L650.2 57.1 L654.8 56.3 L659.4 55.6 L664 54.9" class="f-c"/>
+                <path d="M68 290 L86.3 282.3 L104.7 175.1 L123 60.3 L141.4 209.6 L159.7 232.6 L182.6 213.4 L205.5 240.2 L228.5 255.5 L251.4 270.9 L274.3 280.4 L297.2 253.6 L320.2 240.2 L333.9 234.5 L352.2 263.2 L370.6 282.3 L388.9 287.7 L411.8 289 L434.8 289.5 L462.3 290 L480.6 290 L526.5 290 L572.3 290 L618.2 290 L664 290" class="f-b"/>
+                <line x1="462.3" y1="22" x2="462.3" y2="290" class="f-vline"/>
+                <text x="454.3" y="330" class="f-note" text-anchor="end">1986</text>
+                <text x="454.3" y="343" class="f-note" text-anchor="end">whaling</text>
+                <text x="454.3" y="356" class="f-note" text-anchor="end">banned</text>
+                <circle cx="333.9" cy="286" r="4" class="f-mark"/>
+                <text x="341.9" y="308" class="f-note" text-anchor="start">about 450 left</text>
+                <circle cx="613.6" cy="67.6" r="4" class="f-mark"/>
+                <text x="607.6" y="85.6" class="f-note" text-anchor="end">2019: about 24,900</text>
+                <text x="85.2" y="40.8" class="f-note" text-anchor="start">about 27,000 before whaling</text>
+                <text x="366" y="334" class="f-axtitle" text-anchor="middle">Year</text>
+                <text transform="translate(14 156) rotate(-90)" class="f-axtitle" text-anchor="middle">Whales</text>
+                <text transform="translate(724 156) rotate(-90)" class="f-axtitle" text-anchor="middle">Whales caught per year</text>
+                <line x1="80" y1="36" x2="100" y2="36" class="f-a"/>
+                <text x="106" y="40" class="f-legend">Population (left axis)</text>
+                <line x1="80" y1="52" x2="100" y2="52" class="f-b"/>
+                <text x="106" y="56" class="f-legend">Annual catch (right axis)</text>
+            </svg>
+            <figcaption><b>Figure 3.12</b> — The western South Atlantic humpback population and the annual catch that drove it down, on two axes. The dashed continuation past 2019 is a model projection, not data. Population anchor points from A. N. Zerbini et al., <em>Assessing the recovery of an Antarctic predator from historical exploitation</em>, Royal Society Open Science 6:190368 (2019), which is open access.</figcaption>
+        </figure>
+
+        <p>By 2019 the population was estimated at about <strong>24,900</strong> — roughly <strong>92%</strong> of its pre-whaling size. From 450 to 24,900 is a percent change of about <strong>+5,400%</strong>, one of the most complete recoveries of a large animal ever recorded.</p>
+
+        <p>Three questions the guide asks, answered properly:</p>
+
+        <ul>
+            <li><strong>How did the ban affect the population?</strong> Look at the two lines together. The catch line reaches zero and the population line, which had been falling for eighty years, turns and climbs. Notice the recovery does not start instantly — humpbacks take about ten years to mature and produce one calf every two to three years, so the population responds on a whale's timescale, not a policy's.</li>
+            <li><strong>Is whaling density-dependent or density-independent?</strong> Density-<em>independent</em>. A factory fleet does not hunt harder because whales are crowded; it hunts to a quota, and it kept hunting as the population collapsed. That is exactly why hunting can drive a species to extinction where predation rarely does — a natural predator gives up when prey gets scarce, because searching stops paying.</li>
+            <li><strong>What else could explain the increase?</strong> Be honest here rather than reflexive. Better protection of feeding grounds, and possibly reduced competition for krill because so many other whale species had also been removed. It is also worth asking whether the estimates themselves improved: aerial and photo-identification surveys got much better over this period, and a rising count can partly reflect a rising ability to count.</li>
+        </ul>
+
+        <div class="callout callout-key">
+            <p>The summary in your guide, filled in:</p>
+            <p><strong>Data</strong> and <strong>graphs</strong> can allow the reader to predict the <strong>cause</strong> and <strong>effect</strong> in a population change. The <strong>scale</strong> of data can greatly change the predictions that a reader can have. The story of the humpback whale vastly <strong>improved</strong> when given the <strong>full scale</strong> of data in this example.</p>
+        </div>
+    </section>
+
+    <section id="cause-effect" data-kind="Core" data-standards="HS-LS2-6" data-time="10 min" data-track>
+        <h2>A checklist for any population graph</h2>
+
+        <p>Pull the chapter together into something you can actually use in an exam or on a news article. Before you accept what a population graph appears to say, ask:</p>
+
+        <ol>
+            <li><strong>What is on the axes, exactly?</strong> Pelts sold is not hares alive. Sightings is not abundance. Reported cases is not infections.</li>
+            <li><strong>Where does the record start and stop?</strong> A window that begins at a low point will show recovery; one that begins at a peak will show decline. Ask what came before the left edge.</li>
+            <li><strong>Is the vertical axis at zero?</strong> A truncated axis makes a 4% wobble look like a collapse.</li>
+            <li><strong>Is it linear or logarithmic?</strong> A straight line means completely different things on the two.</li>
+            <li><strong>How many data points are there really?</strong> Two censuses joined by a straight line is not a trend; it is a line.</li>
+            <li><strong>What else changed at the same time?</strong> A change that lines up with an event is a hypothesis, not a conclusion.</li>
+        </ol>
+
+        <div class="callout callout-misconception">
+            <p><strong>Correlation is not causation, and the whale graph is a good place to practise saying why.</strong> The catch fell to zero in 1986 and the population rose afterwards. That is a correlation. What makes the causal claim credible here is not the graph — it is the <em>mechanism</em>: we know exactly how whaling reduces whale numbers, and we know the size of the effect because the catches were counted. Compare that with the hare-and-lynx graph, where the correlation is beautiful and the mechanism turned out to be more complicated than everyone assumed.</p>
+            <p>The test to apply: <em>is there a plausible mechanism, does the size of the effect match, and has anything else been ruled out?</em> A graph alone can never pass that test on its own.</p>
+        </div>
+
+        <h3>Where this goes next</h3>
+
+        <p>Everything so far has treated a population as if it were alone in the world — one line on one graph, with food and predators appearing as abstract "limiting factors". That was a useful simplification and it has run out.</p>
+
+        <p>Chapter 3.4 puts the other species back in. It asks what happens to <em>everything else</em> when one population changes, and it turns out that the answer is sometimes "almost nothing" and sometimes "the entire community collapses" — and that the difference between those two cases is one of the most important discoveries in modern ecology. It was made by one man, on one stretch of Washington coastline, throwing starfish into the sea.</p>
+    </section>
+
+    <section id="check" data-kind="Practice" data-standards="HS-LS2-1, HS-LS2-6" data-time="12 min" data-track>
+        <h2>Check your understanding</h2>
+
+        <div class="callout callout-try">
+            <ol>
+                <li>A crab population is 830 million in 1990 and 282 million in 2021. Calculate the percent change, showing the substitution. Then state the average change per year, and say which of the two numbers you would put in a headline and why.</li>
+                <li>Using Figure 3.11: in which decade were the most whales killed? Explain why the answer surprises people, and what technological change is behind it.</li>
+                <li>Using Figure 3.12: estimate the population in 1930 and in 1960, and calculate the percent change between them. Was whaling still the main cause of decline over that period?</li>
+                <li>A newspaper reports "elephant numbers up 38% since 1995". The claim is arithmetically correct. Write two sentences explaining why it is nevertheless misleading.</li>
+                <li>Why is a graph of pelts sold a poor proxy for the number of animals alive? Give two reasons that have nothing to do with biology.</li>
+                <li>Explain the difference between a percent change and a rate, and give an example where confusing the two would lead to a bad decision.</li>
+                <li>The humpback recovery is described as a conservation success. Construct the strongest counter-argument you can, using the idea of scale.</li>
+            </ol>
+        </div>
+        <h3>Quick check</h3>
+
+        <div class="quiz" data-quiz>
+
+            <div class="quiz-q" data-review="percent-change">
+                <div class="quiz-variant" data-answer="3">
+                    <p class="quiz-stem">One population falls 78% over 16 years. Another falls 78% over 2 years. What does the percent change tell you about the difference between them?</p>
+                    <ol class="quiz-options">
+                        <li data-why="Both are &minus;78%. Percent change measures end to end and contains no time at all.">The second one has the larger percent change</li>
+                        <li data-why="Same percent change, very different speed — the second lost the same share in an eighth of the time.">Both are shrinking at the same rate per year</li>
+                        <li>Nothing — the percent change is identical, so you need a rate to tell them apart</li>
+                        <li data-why="Lasting longer does not make it worse. The two-year collapse is much the faster emergency.">The first is more serious because it went on for longer</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>A percent change answers "how much bigger or smaller, end to end?" A rate answers "how fast, per unit of time?" Different questions, different units. When a question hands you two numbers and two years and asks for a "growth rate", say clearly what period your answer covers — being explicit is never wrong.</p>
+                    </div>
+                </div>
+
+                <div class="quiz-variant" data-answer="4">
+                    <p class="quiz-stem">The elephant collapse can be reported as &minus;78% over 16 years, or as about &minus;9.0% a year. What does the second version add?</p>
+                    <ol class="quiz-options">
+                        <li data-why="The division at the end is not cosmetic — it is what turns an end-to-end total into a figure with time in it.">Nothing — it is the same calculation with a division written on the end</li>
+                        <li data-why="It is an average across all sixteen years. No single year of the record is being claimed as &minus;9.0%.">The percent change for one particular year, 1994 to 1995</li>
+                        <li data-why="A smaller number is not a softer claim. Losing roughly a tenth of the population every year for sixteen years is the harsher way to hear it.">A smaller number, which makes the collapse sound less severe</li>
+                        <li>How fast the loss happened — a change per unit of time rather than end to end</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>The two statements describe the same collapse. The per-year figure is the one that tells you it was relentless rather than a single bad event, which is why a question asking for a "growth rate" is really asking you to put time back into the answer.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-q" data-review="rates">
+                <div class="quiz-variant" data-answer="1">
+                    <p class="quiz-stem">A population sits exactly at carrying capacity and its size does not change from year to year. What can you say about births and deaths?</p>
+                    <ol class="quiz-options">
+                        <li>They are equal — and both could still be enormous</li>
+                        <li data-why="A flat line is not a quiet one. Huge birth and death rates that cancel look identical on the graph to tiny ones.">Both must be low, or the line would not be flat</li>
+                        <li data-why="With births at zero and any deaths at all, the line would head downwards.">Almost nothing is being born</li>
+                        <li data-why="If deaths exceeded births the population would be falling, however slightly.">Deaths must slightly exceed births</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>A population with a huge birth rate and an equally huge death rate is a completely different ecosystem from one where both are low — many short lives against a few long ones. The graph cannot tell them apart. A flat line hides more than it shows.</p>
+                    </div>
+                </div>
+
+                <div class="quiz-variant" data-answer="2">
+                    <p class="quiz-stem">A population is falling steadily year after year. What does that line establish about its birth and death rates?</p>
+                    <ol class="quiz-options">
+                        <li data-why="A low death rate running against an even lower birth rate produces exactly the same falling line. It is the difference that sets the direction, not the size of either figure.">The death rate is high — a falling line requires one</li>
+                        <li>Deaths outnumber births — though the line cannot tell you how large either rate is</li>
+                        <li data-why="Births can be substantial and the population still fall, as long as deaths outrun them. A falling line does not mean breeding has stopped.">Almost nothing is being born</li>
+                        <li data-why="The graph shows the population falling. Whether either rate is itself rising or falling is a separate question the line does not answer.">Both rates are themselves falling</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>Direction comes from the gap between the two rates; magnitude does not show up on the line at all. That is why the rates are quoted per 1,000 individuals — it makes a herd of five hundred and a herd of fifty thousand comparable, which raw counts of births and deaths never are.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-q" data-review="scale">
+                <div class="quiz-variant" data-answer="4">
+                    <p class="quiz-stem">The same elephant dataset gives &minus;78% for 1979&ndash;1995 and +38% for 1995&ndash;2016. Which figure is the honest one?</p>
+                    <ol class="quiz-options">
+                        <li data-why="Recent is not the same as representative. A window that begins at the lowest point will always show a rise.">The recent one, because it describes the situation now</li>
+                        <li data-why="A longer window is often more informative, but it is not automatically honest — it can hide a reversal inside it.">The longer one, because more years is always better</li>
+                        <li data-why="Both are arithmetically correct, which is exactly what makes this difficult.">Neither — one of them must contain a calculation error</li>
+                        <li>Both — and neither is usable without stating which years it covers</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>Two honest calculations from one dataset can support opposite conclusions, because the window does the arguing. A conservation charity would quote the first; an ivory lobbyist the second. Neither is lying, and both are incomplete.</p>
+                    </div>
+                </div>
+
+                <div class="quiz-variant" data-answer="1">
+                    <p class="quiz-stem">A report on the western South Atlantic humpbacks could say "up about 5,400% since 1958" or "still slightly below the pre-whaling figure of 27,000". Which is the fair account?</p>
+                    <ol class="quiz-options">
+                        <li>Both, each with its years attached — the recovery is real, and the baseline says what it is a recovery from</li>
+                        <li data-why="1958 is the lowest point in the entire record. A window that starts at the bottom of a collapse can only ever show a rise.">The +5,400%, because 1958 is where the recovery begins</li>
+                        <li data-why="Measured against 27,000 alone, both the eighty-year collapse and the climb back out of it vanish into one small number.">The pre-whaling comparison, because the longer window is the honest one</li>
+                        <li data-why="Survey methods did improve over the period, and that is worth raising — but it does not stop either calculation being correct.">Neither, until the whales have been counted the same way each time</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>The window does the arguing here as much as it does with the elephants, and the direction of the claim reverses depending on which endpoint you start from. Quoting a percent change without its years is not a rounding error — it is the whole argument left unstated.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-q" data-review="scale">
+                <div class="quiz-variant" data-answer="2">
+                    <p class="quiz-stem">Shrink the window on the scale slider to one or two years and the percent change swings wildly as you slide it along. Why?</p>
+                    <ol class="quiz-options">
+                        <li data-why="The formula works over any interval. What changes is how much of what it measures is real signal.">The percent-change formula stops working over short periods</li>
+                        <li>Over a short window the year-to-year wobble is large compared with the underlying trend, so you end up measuring the noise</li>
+                        <li data-why="Elephant numbers do not reverse direction annually. The line only looks that way once you zoom in far enough.">The population genuinely reverses direction every year or two</li>
+                        <li data-why="How many animals are alive has nothing to do with how long a window you draw around them.">Fewer animals are alive during a shorter period</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>This is the mirror image of choosing too long a window. Too short and you report the wobble; too long and you hide a reversal inside it. There is no automatically safe choice, which is why a window has to be stated and justified rather than assumed.</p>
+                    </div>
+                </div>
+
+                <div class="quiz-variant" data-answer="3">
+                    <p class="quiz-stem">Now open the slider to the full record, 1979&ndash;2016. The elephant data returns a single modest percent change. What has that window hidden?</p>
+                    <ol class="quiz-options">
+                        <li data-why="Using every data point is not the same as describing every data point. The endpoints are still the only two numbers in the calculation.">Nothing — the longest window uses every point, so it is the most reliable</li>
+                        <li data-why="Two endpoints far apart are no more likely to be measured differently than two close together. The problem here is what sits between them.">That the two endpoints were probably measured by different methods</li>
+                        <li>A collapse and then a partial recovery, which cancel each other into one unremarkable figure</li>
+                        <li data-why="The formula works over any interval, long or short. It is what the interval conceals that is the difficulty.">The percent change itself, which cannot be calculated over so long an interval</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>The blue dashed line between two endpoints is a line, not a trend — it describes the journey between them no better than a straight road describes a mountain pass. Two censuses joined up can conceal a reversal as easily as a short window can invent one.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-q" data-review="cycles">
+                <div class="quiz-variant" data-answer="3">
+                    <p class="quiz-stem">Lynx numbers peak a year or two after hare numbers. A student concludes that lynx predation drives the hare cycle. What is the weakness?</p>
+                    <ol class="quiz-options">
+                        <li data-why="The order is right — hares first, lynx after. It is what the order can prove that is the problem.">The student has the order of the two peaks backwards</li>
+                        <li data-why="A one- or two-year lag is entirely reasonable for a predator raising young on abundant prey. That is not the flaw.">A two-year lag is far too long for predation to explain</li>
+                        <li>The timing fits that story, but it fits other stories too — hares fenced away from predators still cycled</li>
+                        <li data-why="A lag shows which came first. It does not show that one caused the other, and something else may be driving both.">Nothing — a lag establishes which population is causing the other</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>When researchers excluded predators, hare numbers stayed higher and <em>still cycled</em>: the hares strip their winter browse and the plants respond by growing less palatable. The graph shows a pattern. It cannot, on its own, supply the explanation — which is precisely what HS-LS2-6 asks you to evaluate.</p>
+                    </div>
+                </div>
+
+                <div class="quiz-variant" data-answer="2">
+                    <p class="quiz-stem">Which piece of evidence would do most to test the claim that lynx predation drives the hare cycle, rather than merely illustrate it?</p>
+                    <ol class="quiz-options">
+                        <li data-why="More of the same correlation repeats the pattern without separating predation from the alternatives. A second century of lagged peaks is a second century of the same open question.">Another century of the same pelt record, showing the same lagged peaks</li>
+                        <li>Fencing predators out of an area and seeing whether the hare cycle then behaves any differently</li>
+                        <li data-why="The roughly ten-to-one ratio is a fact about energy passing up the food chain. It says nothing about what sets the timing of the cycle.">A calculation confirming there are about ten times as many hares as lynx</li>
+                        <li data-why="The shape of the hare line is the thing being explained. It cannot also serve as the evidence that explains it.">A graph of hare numbers alone, showing how steep the crashes are</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>An observed pattern is consistent with several mechanisms at once; an experiment can rule some of them out. The fencing work did exactly that, and the answer it gave was not the tidy one — the hares kept cycling, which sent attention to their winter food.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-q" data-review="cause-effect">
+                <div class="quiz-variant" data-answer="2">
+                    <p class="quiz-stem">The hare and lynx graph plots pelts sold to a fur company. Why is that not the same as counting animals?</p>
+                    <ol class="quiz-options">
+                        <li data-why="True, but it is not a flaw in the measurement. Pelts come from dead animals whether or not the count is any good.">Because the animals were dead by the time they were counted</li>
+                        <li>Because the number also depends on how many trappers were working, what fur was worth, and where the company could reach</li>
+                        <li data-why="Lynx did eat hares — that is the biology the graph is being used to show, not a fault in the data.">Because lynx ate some of the hares before trappers could reach them</li>
+                        <li data-why="Covering one region limits where the conclusion applies. It does not change what the axis is actually measuring.">Because the records only cover part of Canada</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>First question on the checklist, every time: <strong>what is on the axes, exactly?</strong> Pelts sold is not hares alive; sightings is not abundance; reported cases is not infections. This graph measures commerce as well as biology — which does not make it useless, but does mean you have to describe it accurately.</p>
+                    </div>
+                </div>
+
+                <div class="quiz-variant" data-answer="3">
+                    <p class="quiz-stem">The bars in Figure 3.11 fall steeply after the 1960s. Read the axis: what exactly is falling?</p>
+                    <ol class="quiz-options">
+                        <li data-why="The two moved together for decades, which is what makes this tempting — but a catch figure counts animals removed, and a population figure counts animals remaining. Only one of them is on this axis.">The number of whales left alive, since so few could still be found</li>
+                        <li data-why="Fleet size, technology and quotas all feed into a catch total, which is precisely why it is not a clean measure of effort either.">The effort the fleets put in, since catch is a measure of hunting effort</li>
+                        <li>The number of whales killed in each decade — that, and nothing more</li>
+                        <li data-why="No recovery appears anywhere on this figure. Every bar counts deaths, so a short bar means little hunting, not rising numbers.">The rate at which whale populations were recovering</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>Figures 3.11 and 3.12 look like they tell one story, and they do only because the second one puts a population axis beside the catch. A catch record on its own can fall because the animals ran out, or because the fleets were stopped from taking them — and the bars do not choose between those.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-q" data-review="whales">
+                <div class="quiz-variant" data-answer="1">
+                    <p class="quiz-stem">Is commercial whaling a density-dependent or a density-independent factor?</p>
+                    <ol class="quiz-options">
+                        <li>Density-independent — the fleets hunted to a quota and kept hunting as the population collapsed</li>
+                        <li data-why="A natural predator does give up when prey gets scarce, because searching stops paying. Industrial fleets with sonar did not, and that is the whole difference.">Density-dependent, because hunters find whales more easily when whales are common</li>
+                        <li data-why="Biotic does not mean density-dependent. The crowding test decides it, not whether the factor is alive.">Density-dependent, because humans are living things, so the factor is biotic</li>
+                        <li data-why="Humans act inside ecosystems, not outside them. Every case study in this unit turns on that.">Neither — humans are outside the ecosystem</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>This is exactly why hunting can drive a species to extinction where natural predation rarely does. The western South Atlantic humpbacks fell from roughly 27,000 to about 450 — a change of &minus;98.3% — with no easing of the pressure as they became scarce.</p>
+                    </div>
+                </div>
+
+                <div class="quiz-variant" data-answer="3">
+                    <p class="quiz-stem">Lynx predation on hares is density-dependent; commercial whaling was not. What is the test that separates the two?</p>
+                    <ol class="quiz-options">
+                        <li data-why="Biotic and density-dependent are not the same label. A lynx and a whaling fleet are both alive, and only one of them eases off.">Whether one living thing is acting on another</li>
+                        <li data-why="Both were devastating to the population they acted on. How hard a factor bites is not what these two words describe.">Whether the factor is severe enough to collapse the population</li>
+                        <li>Whether the pressure eases as the population thins — a lynx stops finding hares worth hunting, and a quota does not notice</li>
+                        <li data-why="Humans act inside ecosystems, not outside them, and the label describes how a factor behaves as numbers fall rather than who is responsible for it.">Whether human beings are the ones involved</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>Density-dependent factors are self-limiting: they weaken as the population they act on shrinks, which is what makes them regulators rather than exterminators. A factor that keeps its grip all the way down has nothing to stop it, and the humpbacks came within about 450 animals of showing what that means.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+<script src="../assets/toc.js?v=330"></script>
+<script src="../assets/course.js?v=330"></script>
+</body>
+</html>

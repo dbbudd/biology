@@ -1,0 +1,609 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>6.3 Reading Trait Distributions — Biology</title>
+<link rel="stylesheet" href="../assets/course.css?v=330">
+<script>if('scrollRestoration' in history)history.scrollRestoration='manual';</script>
+</head>
+<body data-root="../" data-chapter="u6-trait-distributions">
+
+<main class="main" role="main">
+
+    <section id="intro">
+        <div class="chapter-eyebrow">Unit 6 — Evolution</div>
+        <h1>6.3 Reading Trait Distributions</h1>
+        <p class="lead">6.2 gave you the mechanism. This chapter is where you prove it happened — not by retelling the story, but by reading the numbers. Two of the four summatives in this unit are <em>Investigating</em>, and both of them look like this.</p>
+
+        <div class="chapter-meta"></div>
+
+        <div data-progression></div>
+
+        <div class="objectives">
+            <h4>By the end of this chapter you should be able to</h4>
+            <ul>
+                <li>Define microevolution, and describe it as a change in the distribution of a trait or in allele frequency.</li>
+                <li>Analyse and interpret data to explain how a trait distribution changed over time.</li>
+                <li>Distinguish stabilizing, directional and disruptive selection from a graph.</li>
+                <li>Decide whether a dataset actually shows natural selection — and say what is missing when it does not.</li>
+                <li>Write a claim supported by evidence and reasoning.</li>
+            </ul>
+        </div>
+
+        <div class="callout callout-note">
+            <p>This chapter is the reading that goes with the <strong>six data-analysis case studies</strong> in anchor guide 6.2 (pages 10–21) and the tuskless elephant study in anchor guide 6.3. Work through it alongside them rather than instead of them — the graphing and the written analysis are the assessed skills.</p>
+        </div>
+
+        <h2 id="story-so-far">Where we have got to</h2>
+
+        <p><a href="u6-common-ancestry.html">6.1</a> established that populations have changed over time. <a href="u6-natural-selection.html">6.2</a> explained the process that changes them: variation, inheritance, differential survival and reproduction, adaptation.</p>
+
+        <p>Both of those are arguments made in words. A scientist would now ask an awkward question: <strong>can you show me?</strong></p>
+
+        <p>That is this chapter. Everything here is about turning the story into numbers you can check — and, just as importantly, learning to spot when a set of numbers <em>does not</em> show what someone claims it shows.</p>
+
+        <div class="callout callout-recall">
+            <p>From <a href="u5-overview.html">Unit 5</a> you have already worked with <strong>probability and the distribution of traits</strong> in a population — how a characteristic is spread across many individuals rather than being the same in all of them.</p>
+            <p>That is precisely the tool you need here. In this chapter you take two of those distributions, measured at different times, and work out what happened in between.</p>
+        </div>
+
+        <div class="callout callout-note">
+            <p>A word on why this chapter matters more than its length suggests. Two of the four summatives in this unit are assessed under <strong>Investigating</strong>, and both ask you to analyse data or design an investigation. The skills here are the ones being marked.</p>
+        </div>
+    </section>
+
+    <section id="microevolution" data-kind="Core" data-standards="HS-LS4-3" data-time="12 min" data-track>
+        <h2>What change actually looks like in data</h2>
+
+        <p><span class="term">Microevolution</span> is change in the heritable characteristics of a population over a small number of generations — evolution on a timescale you can measure rather than infer.</p>
+
+        <p>Because you cannot watch a population evolve directly, you measure it in one of two ways:</p>
+
+        <ul>
+            <li><strong>The distribution of a trait.</strong> Measure a characteristic — beak depth, path length, body mass — across many individuals, and plot how many fall at each value. Then measure again later and compare the shapes.</li>
+            <li><strong>Allele frequency.</strong> Find what proportion of the population carries a particular allele, and see whether that proportion changes.</li>
+        </ul>
+
+        <div class="callout callout-key">
+            <p>Both measurements are of the <strong>population</strong>, never of an individual. No finch's beak grew during the drought. What changed was which finches were still alive to breed, and therefore what the distribution of beak depths looked like in the next generation. If your written answer describes an individual changing, you have described the wrong thing.</p>
+        </div>
+
+        <h3>The standard asks for statistics and probability</h3>
+
+        <p>HS-LS4-3 says organisms with an advantageous heritable trait "tend to increase in proportion". Both of those words carry weight:</p>
+
+        <ul>
+            <li><strong>Proportion</strong>, not number. A population can shrink dramatically while the proportion carrying an advantageous allele rises. Reporting raw counts without proportions is one of the commonest ways to get this wrong.</li>
+            <li><strong>Tend to</strong>. Selection is a statistical claim about averages, not a guarantee about individuals. A well-camouflaged individual can still be eaten. The pattern shows up across a population and across generations, which is exactly why you need data rather than an anecdote.</li>
+        </ul>
+    </section>
+
+    <section id="three-patterns" data-kind="Core" data-standards="HS-LS4-3" data-time="12 min" data-track>
+        <h2>Three patterns of selection</h2>
+
+        <p>Whatever the organism, a distribution under selection changes in one of three recognisable ways. Being able to name the pattern from a graph is a fast, reliable mark.</p>
+
+        <figure class="diagram">
+            <svg viewBox="0 0 770 250" xmlns="http://www.w3.org/2000/svg" role="img"
+             aria-labelledby="sel-title sel-desc">
+            <title id="sel-title">Three patterns of selection on a trait distribution</title>
+            <desc id="sel-desc">Three pairs of curves. Under stabilizing selection the distribution keeps
+                the same centre but becomes narrower and taller. Under directional selection the whole
+                distribution shifts towards one extreme. Under disruptive selection the single central peak
+                becomes two peaks with a dip in the middle. In each case the dashed curve is the population
+                before selection and the solid curve after.</desc>
+            <style>
+                .axis   { stroke: var(--text-secondary); stroke-width: 1; opacity: 0.5; }
+                .before { stroke: var(--text-secondary); stroke-width: 1.6; fill: none;
+                           stroke-dasharray: 4 3; opacity: 0.65; }
+                .after  { stroke: var(--red); stroke-width: 2.4; fill: none; }
+                .ttl    { font-size: 13px; font-weight: 700; }
+                .note   { font-size: 10.5px; opacity: 0.78; }
+                .axl    { font-size: 9.5px; opacity: 0.55; }
+                .key    { font-size: 10.5px; opacity: 0.78; }
+            </style>
+            <line x1="10" y1="150" x2="220" y2="150" class="axis"/>
+            <path d="M20.0 145.8 L23.2 144.9 L26.3 143.8 L29.5 142.4 L32.7 140.9 L35.8 139.2 L39.0 137.1 L42.2 134.9 L45.3 132.3 L48.5 129.5 L51.7 126.3 L54.8 122.9 L58.0 119.2 L61.2 115.2 L64.3 110.9 L67.5 106.5 L70.7 101.9 L73.8 97.2 L77.0 92.4 L80.2 87.6 L83.3 82.9 L86.5 78.3 L89.7 73.9 L92.8 69.9 L96.0 66.2 L99.2 62.9 L102.3 60.1 L105.5 57.9 L108.7 56.3 L111.8 55.3 L115.0 55.0 L118.2 55.3 L121.3 56.3 L124.5 57.9 L127.7 60.1 L130.8 62.9 L134.0 66.2 L137.2 69.9 L140.3 73.9 L143.5 78.3 L146.7 82.9 L149.8 87.6 L153.0 92.4 L156.2 97.2 L159.3 101.9 L162.5 106.5 L165.7 110.9 L168.8 115.2 L172.0 119.2 L175.2 122.9 L178.3 126.3 L181.5 129.5 L184.7 132.3 L187.8 134.9 L191.0 137.1 L194.2 139.2 L197.3 140.9 L200.5 142.4 L203.7 143.8 L206.8 144.9 L210.0 145.8" class="before"/>
+            <path d="M20.0 149.9 L23.2 149.9 L26.3 149.8 L29.5 149.7 L32.7 149.6 L35.8 149.3 L39.0 149.0 L42.2 148.5 L45.3 147.9 L48.5 147.0 L51.7 145.8 L54.8 144.2 L58.0 142.2 L61.2 139.6 L64.3 136.3 L67.5 132.4 L70.7 127.6 L73.8 122.0 L77.0 115.7 L80.2 108.5 L83.3 100.7 L86.5 92.4 L89.7 83.8 L92.8 75.1 L96.0 66.6 L99.2 58.7 L102.3 51.7 L105.5 45.9 L108.7 41.5 L111.8 38.8 L115.0 37.9 L118.2 38.8 L121.3 41.5 L124.5 45.9 L127.7 51.7 L130.8 58.7 L134.0 66.6 L137.2 75.1 L140.3 83.8 L143.5 92.4 L146.7 100.7 L149.8 108.5 L153.0 115.7 L156.2 122.0 L159.3 127.6 L162.5 132.4 L165.7 136.3 L168.8 139.6 L172.0 142.2 L175.2 144.2 L178.3 145.8 L181.5 147.0 L184.7 147.9 L187.8 148.5 L191.0 149.0 L194.2 149.3 L197.3 149.6 L200.5 149.7 L203.7 149.8 L206.8 149.9 L210.0 149.9" class="after"/>
+            <text x="115" y="24" text-anchor="middle" class="ttl">Stabilizing selection</text>
+            <text x="115" y="174" text-anchor="middle" class="note">Both extremes selected against.</text>
+            <text x="115" y="189" text-anchor="middle" class="note">The distribution narrows.</text>
+            <text x="115" y="164" text-anchor="middle" class="axl">trait value →</text>
+            <line x1="280" y1="150" x2="490" y2="150" class="axis"/>
+            <path d="M290.0 145.8 L293.2 144.9 L296.3 143.8 L299.5 142.4 L302.7 140.9 L305.8 139.2 L309.0 137.1 L312.2 134.9 L315.3 132.3 L318.5 129.5 L321.7 126.3 L324.8 122.9 L328.0 119.2 L331.2 115.2 L334.3 110.9 L337.5 106.5 L340.7 101.9 L343.8 97.2 L347.0 92.4 L350.2 87.6 L353.3 82.9 L356.5 78.3 L359.7 73.9 L362.8 69.9 L366.0 66.2 L369.2 62.9 L372.3 60.1 L375.5 57.9 L378.7 56.3 L381.8 55.3 L385.0 55.0 L388.2 55.3 L391.3 56.3 L394.5 57.9 L397.7 60.1 L400.8 62.9 L404.0 66.2 L407.2 69.9 L410.3 73.9 L413.5 78.3 L416.7 82.9 L419.8 87.6 L423.0 92.4 L426.2 97.2 L429.3 101.9 L432.5 106.5 L435.7 110.9 L438.8 115.2 L442.0 119.2 L445.2 122.9 L448.3 126.3 L451.5 129.5 L454.7 132.3 L457.8 134.9 L461.0 137.1 L464.2 139.2 L467.3 140.9 L470.5 142.4 L473.7 143.8 L476.8 144.9 L480.0 145.8" class="before"/>
+            <path d="M290.0 149.8 L293.2 149.7 L296.3 149.6 L299.5 149.5 L302.7 149.4 L305.8 149.2 L309.0 148.9 L312.2 148.6 L315.3 148.3 L318.5 147.8 L321.7 147.3 L324.8 146.6 L328.0 145.8 L331.2 144.9 L334.3 143.8 L337.5 142.4 L340.7 140.9 L343.8 139.2 L347.0 137.1 L350.2 134.9 L353.3 132.3 L356.5 129.5 L359.7 126.3 L362.8 122.9 L366.0 119.2 L369.2 115.2 L372.3 110.9 L375.5 106.5 L378.7 101.9 L381.8 97.2 L385.0 92.4 L388.2 87.6 L391.3 82.9 L394.5 78.3 L397.7 73.9 L400.8 69.9 L404.0 66.2 L407.2 62.9 L410.3 60.1 L413.5 57.9 L416.7 56.3 L419.8 55.3 L423.0 55.0 L426.2 55.3 L429.3 56.3 L432.5 57.9 L435.7 60.1 L438.8 62.9 L442.0 66.2 L445.2 69.9 L448.3 73.9 L451.5 78.3 L454.7 82.9 L457.8 87.6 L461.0 92.4 L464.2 97.2 L467.3 101.9 L470.5 106.5 L473.7 110.9 L476.8 115.2 L480.0 119.2" class="after"/>
+            <text x="385" y="24" text-anchor="middle" class="ttl">Directional selection</text>
+            <text x="385" y="174" text-anchor="middle" class="note">One extreme favoured.</text>
+            <text x="385" y="189" text-anchor="middle" class="note">The whole curve shifts.</text>
+            <text x="385" y="164" text-anchor="middle" class="axl">trait value →</text>
+            <line x1="550" y1="150" x2="760" y2="150" class="axis"/>
+            <path d="M560.0 145.8 L563.2 144.9 L566.3 143.8 L569.5 142.4 L572.7 140.9 L575.8 139.2 L579.0 137.1 L582.2 134.9 L585.3 132.3 L588.5 129.5 L591.7 126.3 L594.8 122.9 L598.0 119.2 L601.2 115.2 L604.3 110.9 L607.5 106.5 L610.7 101.9 L613.8 97.2 L617.0 92.4 L620.2 87.6 L623.3 82.9 L626.5 78.3 L629.7 73.9 L632.8 69.9 L636.0 66.2 L639.2 62.9 L642.3 60.1 L645.5 57.9 L648.7 56.3 L651.8 55.3 L655.0 55.0 L658.2 55.3 L661.3 56.3 L664.5 57.9 L667.7 60.1 L670.8 62.9 L674.0 66.2 L677.2 69.9 L680.3 73.9 L683.5 78.3 L686.7 82.9 L689.8 87.6 L693.0 92.4 L696.2 97.2 L699.3 101.9 L702.5 106.5 L705.7 110.9 L708.8 115.2 L712.0 119.2 L715.2 122.9 L718.3 126.3 L721.5 129.5 L724.7 132.3 L727.8 134.9 L731.0 137.1 L734.2 139.2 L737.3 140.9 L740.5 142.4 L743.7 143.8 L746.8 144.9 L750.0 145.8" class="before"/>
+            <path d="M560.0 146.8 L563.2 145.1 L566.3 142.7 L569.5 139.5 L572.7 135.3 L575.8 130.0 L579.0 123.6 L582.2 116.0 L585.3 107.4 L588.5 98.1 L591.7 88.5 L594.8 79.2 L598.0 70.6 L601.2 63.5 L604.3 58.3 L607.5 55.5 L610.7 55.2 L613.8 57.6 L617.0 62.3 L620.2 69.1 L623.3 77.4 L626.5 86.6 L629.7 96.2 L632.8 105.6 L636.0 114.3 L639.2 122.2 L642.3 128.8 L645.5 134.4 L648.7 138.8 L651.8 142.2 L655.0 144.7 L658.2 142.2 L661.3 138.8 L664.5 134.4 L667.7 128.8 L670.8 122.2 L674.0 114.3 L677.2 105.6 L680.3 96.2 L683.5 86.6 L686.7 77.4 L689.8 69.1 L693.0 62.3 L696.2 57.6 L699.3 55.2 L702.5 55.5 L705.7 58.3 L708.8 63.5 L712.0 70.6 L715.2 79.2 L718.3 88.5 L721.5 98.1 L724.7 107.4 L727.8 116.0 L731.0 123.6 L734.2 130.0 L737.3 135.3 L740.5 139.5 L743.7 142.7 L746.8 145.1 L750.0 146.8" class="after"/>
+            <text x="655" y="24" text-anchor="middle" class="ttl">Disruptive selection</text>
+            <text x="655" y="174" text-anchor="middle" class="note">The middle selected against.</text>
+            <text x="655" y="189" text-anchor="middle" class="note">One peak becomes two.</text>
+            <text x="655" y="164" text-anchor="middle" class="axl">trait value →</text>
+            <path d="M20 232 h26" class="before"/><text x="54" y="236" class="key">before</text>
+            <path d="M120 232 h26" class="after"/><text x="154" y="236" class="key">after selection</text>
+        </svg>
+            <figcaption><b>Figure 6.14</b> — The three patterns. Dashed is the population before selection, solid after. Look at what happens to the <em>centre</em> and to the <em>width</em>: stabilizing keeps the centre and narrows, directional moves the centre, disruptive splits it.</figcaption>
+        </figure>
+
+        <table>
+            <thead>
+                <tr><th>Pattern</th><th>What is selected against</th><th>What the graph does</th><th>Example</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="term">Stabilizing selection</span></td>
+                    <td>Both extremes</td>
+                    <td>Same centre, narrower peak</td>
+                    <td>Human birth mass — very small and very large babies both historically had lower survival</td>
+                </tr>
+                <tr>
+                    <td><span class="term">Directional selection</span></td>
+                    <td>One extreme</td>
+                    <td>The whole curve shifts</td>
+                    <td>Finch beak depth after a drought; antibiotic resistance</td>
+                </tr>
+                <tr>
+                    <td><span class="term">Disruptive selection</span></td>
+                    <td>The intermediate</td>
+                    <td>One peak becomes two</td>
+                    <td>Beak size where only very small and very large seeds are available</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Make the patterns yourself</h3>
+
+        <p>Reading the three shapes off a finished graph is one thing. Producing them is better. The model below runs the four steps from 6.2 on a population of finches and nothing else — each generation, birds are more likely to become parents if their beak suits the seeds available, and their chicks inherit their beak depth with a small random change.</p>
+
+        <div class="sim" data-sim="selection">
+            <div class="sim-header">
+                <h4>Selection acting on beak depth</h4>
+                <span class="sim-kind">Interactive</span>
+            </div>
+        </div>
+
+        <div class="callout callout-try">
+            <p>Work through these in order. Reset between each one.</p>
+            <ol>
+                <li><strong>No selection.</strong> Run 30 generations. Does the mean stay exactly still? Explain what makes it wobble — you met the answer in 6.4's terms, but you can describe it now.</li>
+                <li><strong>Only deep beaks can crack the seeds.</strong> Run until the mean stops moving. Record the mean every 5 generations. Why does it slow down and then stop, rather than rising forever?</li>
+                <li><strong>Both extremes do badly.</strong> Watch the <em>spread</em> rather than the mean. What happens to it, and what does that cost the population later?</li>
+                <li><strong>Only very small and very large seeds.</strong> Run 40 generations. What happens to the middle of the distribution — and what would happen next if the two groups stopped interbreeding?</li>
+                <li>Set variation to <strong>none</strong> and try any pressure. Explain what you see using the four factors.</li>
+            </ol>
+        </div>
+
+        <div class="callout callout-note">
+            <p>The mean and spread under the graph are your data. Reading a shift off them and writing what caused it is exactly the task in the six case studies below, and in the <em>Investigating</em> summatives.</p>
+        </div>
+
+        <div class="callout callout-try">
+            <p>A quick test that catches most errors: cover the labels and ask two questions of the graph — <em>did the middle move?</em> and <em>did the spread get wider or narrower?</em> Middle moved: directional. Middle stayed, narrower: stabilizing. Middle stayed, split in two: disruptive.</p>
+        </div>
+
+        <div class="callout callout-misconception">
+            <p>Disruptive selection is not "both extremes are selected for" as a separate goal — it is the <em>intermediate</em> being selected against. The distinction matters because it tells you what to look for in the environment: usually two distinct resources with nothing usable in between.</p>
+        </div>
+    </section>
+
+    <section id="case-studies" data-kind="Case study" data-standards="HS-LS4-3" data-time="20 min" data-prereq="three-patterns" data-track>
+        <h2>The six case studies</h2>
+
+        <p>Each case study below gives you a real dataset. In every one you do the same thing: graph the data, identify the difference, give reasoning for it, and predict what happens next. That last step is the one that separates a description from an explanation. The anchor guide has the full task for each station.</p>
+
+        <h3>Station 1 — Galápagos finch beak depth</h3>
+
+        <p>The finches of the Galápagos have been studied to see how a change in environmental conditions affects the frequency of beak depth in a population. Medium ground finches (<em>Geospiza fortis</em>) were studied by measuring the beak depth of their offspring in 1976, before a major drought hit the island, and again in 1978, after the drought.</p>
+
+        <p>Finches on the Galápagos eat a variety of seeds. When there is a drought, the easy-to-crack, softer seeds are eaten first and only the larger, harder-shelled seeds are left as a food source. A drought is a lack of rain over a long period, and it can affect the entire ecosystem, so some individuals end up more successful than others.</p>
+
+        <p>The drought is the selection pressure. Only birds with deep enough beaks can crack what is left. Compare the 1976 and 1978 distributions and the pattern should be clear — and it should have a name from the section above.</p>
+
+        <div class="callout callout-try">
+            <p>The final question asks what you would expect years <em>after</em> the drought ends. Think carefully: does the mean stay where the drought pushed it? The answer depends on whether deep beaks are still advantageous once soft seeds return — which is the difference between a permanent change and a temporary excursion.</p>
+        </div>
+
+        <h3>Station 2 — A cline in mummichog fish</h3>
+
+        <p>Some variation in populations can be seen as a geographic <strong>cline</strong> — a graded change in a characteristic along a geographic axis. Some clines are produced by a gradation in an environmental variable, such as latitude. At higher latitudes, towards the north pole, the water is cold (about 6&nbsp;°C). At lower latitudes, towards the equator, the water is warmer (about 21&nbsp;°C).</p>
+
+        <p>In mummichog fish (<em>Fundulus heteroclitus</em>), the frequency of the <em>Ldh-B<sup>b</sup></em> allele changes in fish sampled from Maine down to Georgia. That allele codes for a form of the enzyme lactate dehydrogenase-B, which works in metabolism. This version of the enzyme functions better in cold water than the other versions do, and individuals carrying it can swim faster in cold water than individuals with other alleles.</p>
+
+        <table>
+            <thead>
+                <tr><th>Latitude °N</th><th><em>Ldh-B<sup>b</sup></em> allele frequency</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>45</td><td>0.98</td></tr>
+                <tr><td>44</td><td>1.00</td></tr>
+                <tr><td>42</td><td>0.80</td></tr>
+                <tr><td>41</td><td>0.78</td></tr>
+                <tr><td>40</td><td>0.40</td></tr>
+                <tr><td>39</td><td>0.37</td></tr>
+                <tr><td>38</td><td>0.24</td></tr>
+                <tr><td>36</td><td>0.12</td></tr>
+                <tr><td>35</td><td>0.10</td></tr>
+                <tr><td>33</td><td>0.10</td></tr>
+                <tr><td>31</td><td>0.05</td></tr>
+            </tbody>
+        </table>
+
+        <p>The frequency runs from 1.00 in the far north to 0.05 in the far south. Notice that it does not fall smoothly: most of the drop happens between 41&nbsp;°N and 38&nbsp;°N.</p>
+
+        <div class="callout callout-note">
+            <p>This one is worth dwelling on because the "generations" are spatial rather than temporal. You are not watching one population change over time — you are seeing many populations, each settled at a different point of balance because each faces a different temperature. Same mechanism, laid out across a map instead of across years.</p>
+        </div>
+
+        <h3>Station 3 — <em>E. coli</em> and citrate</h3>
+
+        <p>Twelve genetically identical populations of <em>E. coli</em> bacteria were grown for 35,000 generations in a low-glucose environment that also had citrate present. <em>E. coli</em> use glucose as an energy source but cannot use citrate. Up to 33,000 generations the bacteria could only metabolise glucose, so every 24 hours the population consistently produced an optical density of 0.03 (a value closer to zero indicates a low population density). After 33,000 generations the bacterial population that could be supported had an optical density of 0.25. Biochemical analysis showed that the strain now had the enzymes to metabolise citrate as well. This strain is referred to as <em>Cit+</em>.</p>
+
+        <table>
+            <thead>
+                <tr><th>Generation</th><th>Optical density</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>30,000</td><td>0.03</td></tr>
+                <tr><td>32,000</td><td>0.03</td></tr>
+                <tr><td>33,000</td><td>0.06</td></tr>
+                <tr><td>33,200</td><td>0.16</td></tr>
+                <tr><td>33,250</td><td>0.25</td></tr>
+                <tr><td>34,000</td><td>0.25</td></tr>
+                <tr><td>34,500</td><td>0.24</td></tr>
+                <tr><td>35,000</td><td>0.25</td></tr>
+            </tbody>
+        </table>
+
+        <p>A low optical density represents a low-density bacterial population. Data from "Historical contingency and the evolution of a key innovation in an experimental population of <em>Escherichia coli</em>".</p>
+
+        <p>For 33,000 generations the optical density sits flat at 0.03 — the population is limited by the scarce glucose. Then it jumps eightfold in a few hundred generations, because a strain has appeared that can also metabolise the citrate that was in the flask all along.</p>
+
+        <div class="callout callout-key">
+            <p>This is the strongest possible answer to "mutations are always harmful" and "you cannot observe evolution". Twelve identical populations were run in parallel; the innovation appeared in one. That tells you the mutation was rare and random — if the environment had caused it, all twelve would have developed it at once.</p>
+        </div>
+
+        <h3>Station 4 — Foraging behaviour in fruit flies</h3>
+
+        <p>The fruit fly (<em>Drosophila melanogaster</em>) gives us a way to study how foraging behaviour might have evolved depending on population size. A gene called <em>forager</em> (<em>for</em>) dictates the food-search behaviour of fruit fly larvae. On average, larvae with the <em>for<sup>R</sup></em> ("Rover") allele travel nearly twice as far while feeding as larvae with the <em>for<sup>S</sup></em> ("sitter") allele. Experiments have shown that the enzyme produced by the <em>for<sup>R</sup></em> allele in larvae is more active than in <em>for<sup>S</sup></em> larvae. Both alleles are naturally present in fruit fly populations.</p>
+
+        <p>So what circumstances might favour one allele over the other, making one of them more common? An experiment was set up to answer that. Two groups of flies were watched for many generations: one kept at low density and one at high density. (Population density is the number of individuals in a certain area.) Each population was given the same amount of food, and the distance the larvae moved to forage was measured.</p>
+
+        <table>
+            <thead>
+                <tr><th>Population</th><th>Density</th><th>Mean path length (cm)</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>L1</td><td>Low</td><td>2.9</td></tr>
+                <tr><td>L2</td><td>Low</td><td>3.1</td></tr>
+                <tr><td>L3</td><td>Low</td><td>2.6</td></tr>
+                <tr><td>H1</td><td>High</td><td>5.8</td></tr>
+                <tr><td>H2</td><td>High</td><td>5.7</td></tr>
+                <tr><td>H3</td><td>High</td><td>6.8</td></tr>
+            </tbody>
+        </table>
+
+        <p>The values are the mean path length of fruit fly larvae after 74 generations of living at low density (populations L1–L3) or high density (populations H1–H3).</p>
+
+        <p>Note the design: three replicate populations at each density, not one. The three low-density values cluster tightly (2.6–3.1) and the three high-density values cluster well above them (5.7–6.8), with no overlap. That separation is what lets you claim the difference is caused by density rather than by chance.</p>
+
+        <div class="callout callout-note">
+            <p>The trait here is a <strong>behaviour</strong>, and it is still heritable — the <em>forager</em> gene determines it, and the enzyme it produces differs between the two alleles. Behaviour evolves by natural selection exactly as anatomy does, which is a point the unit returns to with sexual selection in 6.4.</p>
+        </div>
+
+        <h3>Station 5 — Guppy colouration and predation</h3>
+
+        <p>The guppy (<em>Poecilia reticulata</em>) is a small freshwater fish, originally from north-west South America but now found all over the world. Male guppies come in a variety of colourings: some are a rather drab pale pink, others are brightly coloured with orange spots. One of the guppy's natural predators is the blue acara (<em>Andinoacara pulcher</em>), a small fish of the cichlid (pronounced "sick-lid") family.</p>
+
+        <p>In an aquarium experiment, male guppies of varying colouration — drab or brightly coloured — were presented to a cichlid. The background of the aquarium was tan with a gravel substrate. Researchers recorded which sort of guppy the cichlid attacked first, and how many of those attacks succeeded, recorded as "initial captures".</p>
+
+        <table>
+            <thead>
+                <tr><th>Male guppies</th><th>Initial attacks (%)</th><th>Initial captures (%)</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Bright males</td><td>80</td><td>69</td></tr>
+                <tr><td>Drab males</td><td>20</td><td>31</td></tr>
+            </tbody>
+        </table>
+
+        <p>Adapted from Jean-Guy J. Godin and Heather E. McDonough, "Predator preference for brightly colored males in the guppy: a viability cost for a sexually selected trait", <em>Behavioral Ecology</em>, Volume 14, Issue 2, 1 March 2003, pages 194–200.</p>
+
+        <p>This one has a subtlety the others do not. Two quantities are measured — the percentage of <em>attacks</em> directed at each type, and the percentage of those attacks that succeeded (<em>captures</em>). Bright males are attacked more, which is a straightforward cost. But compare the two columns: bright males take 80% of the attacks and only 69% of the captures. Being attacked more often did not translate into being caught at the same rate, so something about being bright is also helping them escape.</p>
+
+        <div class="callout callout-try">
+            <p>Hold that result until 6.4. If bright colouration raises your chance of being attacked, why has it not been eliminated? The answer is that survival is not the only route to fitness — and that is the whole idea behind sexual selection.</p>
+        </div>
+
+        <h3>Station 6 — Tuskless elephants</h3>
+
+        <div class="video" data-video="imvehfydUpc" data-title="Selection for tuskless elephants" data-source="HHMI BioInteractive"></div>
+
+        <div class="video" data-video="IxJDUrDH9v4" data-title="Tuskless elephants — the data behind the case study" data-source="HHMI BioInteractive"></div>
+
+        <p>Poaching for ivory removes tusked elephants from the population. In heavily poached populations the proportion born without tusks has risen sharply. This is directional selection with a human selection pressure — and it is the case study the argumentation task is built on.</p>
+
+        <div class="callout callout-misconception">
+            <p>"Tusklessness is beneficial to elephants" needs care. It is beneficial <em>while poaching continues</em>. Tusks are used for digging for water, stripping bark and competing for mates, so tuskless elephants pay a cost in every other respect. A trait's value is always relative to the current environment, never absolute — and if poaching stopped, the selection pressure would reverse.</p>
+        </div>
+    </section>
+
+    <section id="is-it-selection" data-kind="Core" data-standards="HS-LS4-3" data-time="10 min" data-track>
+        <h2>Is it actually natural selection?</h2>
+
+        <p>The activity is called "Is it natural selection?" for a reason — the answer is not always yes, and knowing what would be missing is as valuable as recognising when it is.</p>
+
+        <p>For a dataset to demonstrate natural selection, you need all four of these. Check them explicitly:</p>
+
+        <table>
+            <thead>
+                <tr><th>Requirement</th><th>What to look for in the data</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Variation existed</td><td>A range of values in the starting population, not a single value</td></tr>
+                <tr><td>The trait is heritable</td><td>A named gene or allele, or offspring resembling parents. Not a trait acquired during life</td></tr>
+                <tr><td>Differential survival or reproduction</td><td>A selection pressure, and evidence that it affected some variants more than others</td></tr>
+                <tr><td>Change across generations</td><td>Measurements at two or more time points, or across populations under different pressures</td></tr>
+            </tbody>
+        </table>
+
+        <div class="callout callout-example">
+            <p>Two cases that are <strong>not</strong> natural selection, worth being able to explain:</p>
+            <p><em>"I am pale in winter and more tanned in summer."</em> Real variation, real environmental cause — but not heritable. Your children do not inherit your tan. This is an individual responding within its lifetime.</p>
+            <p><em>"Some animals shed their fur in summer."</em> Also not selection. The <strong>ability</strong> to shed seasonally is an inherited adaptation that evolved by natural selection — but an individual shedding its coat this July is that adaptation being <em>used</em>, not evolution happening.</p>
+            <p>The distinction is the same one both times: a population changing across generations versus an individual changing within its life.</p>
+        </div>
+    </section>
+
+    <section id="argumentation" data-kind="Core" data-standards="HS-LS4-3" data-time="12 min" data-prereq="case-studies" data-track>
+        <h2>Writing the argument</h2>
+
+        <p>Analysing the data earns you nothing until it is written down as an argument. The structure assessed here is <strong>claim, evidence, reasoning</strong>.</p>
+
+        <table>
+            <thead>
+                <tr><th>Part</th><th>What it is</th><th>Where students lose marks</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Claim</strong></td>
+                    <td>A direct answer to the question, in one sentence</td>
+                    <td>Hedging, or restating the question instead of answering it</td>
+                </tr>
+                <tr>
+                    <td><strong>Evidence</strong></td>
+                    <td>Specific data from the study — numbers, units, both time points</td>
+                    <td>"The graph went up." Which value, from what to what?</td>
+                </tr>
+                <tr>
+                    <td><strong>Reasoning</strong></td>
+                    <td>Why that evidence supports that claim, using the biology</td>
+                    <td>Omitted entirely. This is the most common single failure</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="callout callout-key">
+            <p>Reasoning is where the mechanism goes. It is not enough to say the proportion of tuskless elephants rose from X% to Y%; you must say <em>why</em> that follows from selection — poachers removed tusked individuals, tusklessness is heritable, so survivors passed the allele on and its frequency rose. Evidence without reasoning is a description. Reasoning is the explanation.</p>
+        </div>
+
+        <div class="callout callout-try">
+            <p>A test for your own writing: could a reader who has not seen the graph follow your argument from your words alone? If your evidence sentence contains no numbers, or your reasoning contains no biological mechanism, the answer is no.</p>
+        </div>
+    </section>
+
+    <section id="whats-next">
+        <h2>Where this leaves us</h2>
+
+        <p>The mechanism from 6.2 now has evidence behind it that you can check yourself. Finch beaks deepened in a drought. A cold-water allele grows commoner the further north you sample. Bacteria gained an ability none of their ancestors had. Fruit flies changed how far they travel to feed. Elephants are being born without tusks.</p>
+
+        <p>Different organisms, different timescales, different researchers — and every one of them fits the same four-step process.</p>
+
+        <div class="callout callout-ahead">
+            <p>Every change here was <strong>within</strong> one population: a trait shifting, an allele spreading. Real, measurable, but modest.</p>
+            <p>Yet the world is full of things that seem far too big for that — an eye, a wing, a mussel that lures a fish. And the tree in 6.1 does not just show populations changing; it shows them <em>splitting</em>, one lineage becoming two.</p>
+            <p><a href="u6-adaptation-speciation.html">6.4</a> asks whether the small changes you have just measured are enough to account for both.</p>
+        </div>
+    </section>
+
+    <section id="check" data-kind="Practice" data-time="12 min" data-prereq="argumentation">
+        <h2>Check your understanding</h2>
+
+        <p>Two parts. The quick check marks itself and points you back to anything shaky. The written questions after it are the harder practice, because explaining in your own words is what the summatives ask for.</p>
+
+        <h3>Quick check</h3>
+
+        <div class="quiz" data-quiz>
+
+            <div class="quiz-q" data-review="three-patterns">
+                <div class="quiz-variant" data-answer="3">
+                    <p class="quiz-stem">A population is measured twice. The mean is unchanged but the spread has clearly narrowed. Which pattern is this?</p>
+                    <ol class="quiz-options">
+                        <li data-why="The mean would have moved.">Directional selection</li>
+                        <li data-why="The distribution would have split into two peaks, widening rather than narrowing.">Disruptive selection</li>
+                        <li>Stabilizing selection</li>
+                        <li data-why="With no selection the spread tends to grow, not shrink.">No selection at all</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>Ask two questions of any distribution graph: did the middle move, and did the spread widen or narrow? Middle stayed, spread narrowed — both extremes were selected against.</p>
+                    </div>
+                </div>
+                <div class="quiz-variant" data-answer="4">
+                <p class="quiz-stem">In the beak-depth model the only seeds available are very small or very large, with nothing usable in between. After many generations, what should the distribution of beak depths look like?</p>
+                <ol class="quiz-options">
+                    <li data-why="A narrower peak in the same place is stabilizing selection, which happens when intermediates do best. Here intermediates do worst.">One peak in the same place, but narrower</li>
+                    <li data-why="A shifted curve is directional selection, which needs one extreme favoured. Here both extremes can feed.">One peak, shifted towards deep beaks</li>
+                    <li data-why="Birds at both extremes are feeding while those in the middle are not, so the shape cannot stay the same.">Unchanged, because the two seed sizes cancel each other out</li>
+                    <li>Two peaks, with a dip at intermediate beak depths</li>
+                </ol>
+                <div class="quiz-why">
+                    <p>Disruptive selection is the intermediate being selected against, so in the environment you look for two distinct resources with nothing usable between them. If the two groups later stopped interbreeding, the split you can see in the graph is where a second species would begin.</p>
+                </div>
+                </div>
+            </div>
+
+            <div class="quiz-q" data-review="microevolution">
+                <div class="quiz-variant" data-answer="2">
+                    <p class="quiz-stem">Why does the standard say advantageous traits increase in <em>proportion</em> rather than in number?</p>
+                    <ol class="quiz-options">
+                        <li data-why="Both are equally measurable. The reason is about meaning, not convenience.">Because proportions are easier to measure</li>
+                        <li>Because a population can shrink while the share carrying the trait still rises</li>
+                        <li data-why="Population sizes change all the time.">Because the number of individuals never changes</li>
+                        <li data-why="They can move in opposite directions, which is exactly the problem.">Because proportion and number mean the same thing here</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>A drought can halve a finch population while the share with deep beaks rises sharply. Reporting raw counts without proportions can make selection look like the opposite of what happened.</p>
+                    </div>
+                </div>
+                <div class="quiz-variant" data-answer="3">
+                <p class="quiz-stem">A drought cuts a finch population from 400 birds to 180. The number with deep beaks falls from 120 to 90. Has the drought favoured deep beaks?</p>
+                <ol class="quiz-options">
+                    <li data-why="The raw count fell because the whole population fell. A count on its own cannot tell you which variants did better.">No — fewer deep-beaked birds are left, so the trait was selected against</li>
+                    <li data-why="Population size and allele frequency are separate measurements. A shrinking population can evolve rapidly.">No — a population that is shrinking cannot be evolving</li>
+                    <li>Yes — the share with deep beaks rose from 30% to 50%</li>
+                    <li data-why="No bird's beak grew. What changed is which birds survived to breed, and therefore the distribution in the population.">Yes — the harder seeds caused the surviving birds' beaks to deepen</li>
+                </ol>
+                <div class="quiz-why">
+                    <p>Divide before you compare. Any count taken from a shrinking population will fall, so counts alone can make selection look like the reverse of what happened — which is why the standard is written in terms of proportion.</p>
+                </div>
+                </div>
+            </div>
+
+            <div class="quiz-q" data-review="is-it-selection">
+                <div class="quiz-variant" data-answer="4">
+                    <p class="quiz-stem">Which of these is <em>not</em> evidence of natural selection?</p>
+                    <ol class="quiz-options">
+                        <li data-why="This is natural selection. Random mutation, heritable, and measured across generations.">Bacteria in a flask evolving the ability to use a new food source</li>
+                        <li data-why="This is natural selection — the classic case, with data at two time points.">Beak depth increasing in a finch population after a drought</li>
+                        <li data-why="This is natural selection, with humans supplying the selection pressure.">The share of tuskless elephants rising where poaching is heavy</li>
+                        <li>People who train developing bigger muscles over a year</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>The trait must be <strong>heritable</strong>. Muscle built by training is acquired during a life and is not passed on, so selection cannot act on it. There is also no data across generations and no differential reproduction.</p>
+                    </div>
+                </div>
+                <div class="quiz-variant" data-answer="2">
+                <p class="quiz-stem">Some animals shed their thick winter coat each summer. Why is one animal shedding its coat this July not natural selection happening?</p>
+                <ol class="quiz-options">
+                    <li data-why="The ability to shed seasonally is inherited — that is precisely why it counts as an adaptation that evolved by selection.">Because the ability to shed a coat is not inherited</li>
+                    <li>Because it is an inherited adaptation being used within one lifetime, not a population changing across generations</li>
+                    <li data-why="Shedding does benefit the animal. Usefulness is not the issue — the issue is what is changing, and when.">Because shedding gives the animal no survival advantage</li>
+                    <li data-why="Reversibility is not the test. The test is whether the inherited make-up of the population has changed between generations.">Because the coat grows back each winter, so nothing has really changed</li>
+                </ol>
+                <div class="quiz-why">
+                    <p>Separate the adaptation from its use. Selection built the seasonal moult over many generations; an individual moulting is that finished adaptation working, in the same way that a tan is an individual responding within its life rather than a population evolving.</p>
+                </div>
+                </div>
+            </div>
+
+            <div class="quiz-q" data-review="case-studies">
+                <div class="quiz-variant" data-answer="1">
+                    <p class="quiz-stem">Twelve identical <em>E. coli</em> populations were grown in the same conditions, and only one evolved the ability to use citrate. Why does that strengthen the conclusion?</p>
+                    <ol class="quiz-options">
+                        <li>It shows the mutation was random rather than caused by the conditions</li>
+                        <li data-why="The replication is what makes it well controlled — eleven populations act as controls.">It shows the experiment was poorly controlled</li>
+                        <li data-why="Being able to use it caused the population to grow eightfold.">It shows citrate is harmful to bacteria</li>
+                        <li data-why="That number is specific to this one population and this one mutation.">It shows evolution needs exactly 33,000 generations</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>All twelve had identical conditions. If the environment caused the useful mutation, all twelve should have acquired it. Only one did — so it arose by chance and was then selected because it happened to help.</p>
+                    </div>
+                </div>
+                <div class="quiz-variant" data-answer="2">
+                <p class="quiz-stem">The fruit fly study kept three separate populations at each density rather than one. What does that replication buy the conclusion?</p>
+                <ol class="quiz-options">
+                    <li data-why="Each population was given the same amount of food. Replication is about how trustworthy the difference is, not how much food was supplied.">It lets the researchers supply more food overall</li>
+                    <li>The three low-density means (2.6–3.1 cm) sit well below the three high-density means (5.7–6.8 cm) with no overlap, so the difference is unlikely to be chance</li>
+                    <li data-why="That difference between the alleles was established separately. Replication addresses whether density caused the shift between the two groups.">It proves that the <em>for<sup>R</sup></em> allele makes larvae travel further than <em>for<sup>S</sup></em></li>
+                    <li data-why="Replication does not make the starting populations identical — it tests whether the same outcome appears more than once.">It guarantees every population began with the same allele frequencies</li>
+                </ol>
+                <div class="quiz-why">
+                    <p>One population giving an unusual result tells you very little. Three that agree with each other, and disagree with three run under the opposite condition, is what lets you attribute the difference to the condition rather than to chance — the same logic as running twelve <em>E. coli</em> flasks instead of one.</p>
+                </div>
+                </div>
+            </div>
+
+            <div class="quiz-q" data-review="argumentation">
+                <div class="quiz-variant" data-answer="3">
+                    <p class="quiz-stem">A student writes: "The proportion of tuskless elephants rose from 18% to 51% over ten years. This shows natural selection." What is missing?</p>
+                    <ol class="quiz-options">
+                        <li data-why="The claim is there — that natural selection occurred.">The claim</li>
+                        <li data-why="The evidence is there, with figures and a time span.">The evidence</li>
+                        <li>The reasoning</li>
+                        <li data-why="Evidence without reasoning is a description, not an explanation.">Nothing — this is a complete answer</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>Reasoning is where the mechanism goes: poachers removed tusked elephants before they bred, tusklessness is heritable, so survivors passed the allele on and its frequency rose. Leaving it out is the most common single failure in these answers.</p>
+                    </div>
+                </div>
+                <div class="quiz-variant" data-answer="1">
+                <p class="quiz-stem">A student writes: "Beak depth increased because the drought left only hard seeds, birds with deeper beaks could crack them and survived to breed, and beak depth is inherited, so their chicks had deeper beaks too." What is missing?</p>
+                <ol class="quiz-options">
+                    <li>The evidence</li>
+                    <li data-why="The claim is there — that the drought caused beak depth to increase.">The claim</li>
+                    <li data-why="The mechanism is exactly what this answer does supply, and supplies well.">The reasoning</li>
+                    <li data-why="An argument with no measurements in it cannot be checked by anyone who has not seen the data.">Nothing — this is a complete answer</li>
+                </ol>
+                <div class="quiz-why">
+                    <p>Reasoning is the part most often dropped, but an answer can fail the other way. Name the measurement, the units and both time points — 1976 and 1978 mean beak depth here — so a reader who has never seen the graph can still check the claim.</p>
+                </div>
+                </div>
+            </div>
+
+        </div>
+
+        <h3>Explain it yourself</h3>
+
+        <p>Write your answer before opening the response. Comparing what you wrote with a full answer is where most of the learning happens.</p>
+
+        <div class="check">
+            <details class="check-q" id="q-name-the-pattern" data-track>
+                <summary>A population of snails is measured twice, fifty years apart. The mean shell thickness is unchanged, but the range has narrowed markedly. Name the pattern and suggest what could cause it.</summary>
+                <div class="check-a">
+                    <p><strong>Stabilizing selection.</strong> The centre has not moved, so it is not directional; the distribution has one peak that got narrower, so it is not disruptive.</p>
+                    <p>A plausible cause: both extremes are disadvantaged. Very thin shells give poor protection from crabs; very thick shells cost more calcium and energy to build and make the snail heavier and slower. Snails near the middle survive and reproduce best, so each generation the extremes are trimmed away.</p>
+                    <p>Note that a narrowing range also means less variation — which leaves the population less able to respond if conditions change later.</p>
+                </div>
+            </details>
+
+            <details class="check-q" id="q-ecoli-twelve" data-track>
+                <summary>In the E. coli study, twelve genetically identical populations were grown under identical conditions, but only one evolved the ability to use citrate. Why does that strengthen the conclusion rather than weaken it?</summary>
+                <div class="check-a">
+                    <p>Because it shows the mutation was random rather than induced by the environment. All twelve populations experienced exactly the same citrate-rich, glucose-poor conditions. If the environment caused the useful mutation, all twelve should have acquired it — the fact that only one did shows the mutation arose by chance and then was selected because it happened to be useful.</p>
+                    <p>The replication is also what makes it a controlled experiment. With a single population you could not tell an evolutionary innovation from contamination or an experimental error; with twelve you have eleven controls.</p>
+                </div>
+            </details>
+
+            <details class="check-q" id="q-not-selection" data-track>
+                <summary>A student offers this as evidence of natural selection: "People who exercise develop bigger muscles, so over time humans are becoming more muscular." Identify every problem.</summary>
+                <div class="check-a">
+                    <p><strong>The trait is not heritable.</strong> Muscle developed by training is acquired during a life and is not passed to offspring. This is the Lamarckian error — inheritance of acquired characteristics.</p>
+                    <p><strong>There is no differential reproduction.</strong> No evidence is offered that more muscular people leave more offspring, which is what selection requires.</p>
+                    <p><strong>There is no data across generations.</strong> A claim about change over time needs measurements at two or more points, and none is given.</p>
+                    <p><strong>Individuals, not the population.</strong> The observation is about individuals changing within their lifetimes, which is not evolution.</p>
+                    <p>What would be needed instead: a heritable genetic variant affecting muscularity, evidence that carriers leave more surviving offspring, and allele frequency measured in at least two generations.</p>
+                </div>
+            </details>
+
+            <details class="check-q" id="q-cer-repair" data-track>
+                <summary>Improve this answer: "The tuskless elephants increased because of poaching. This shows natural selection."</summary>
+                <div class="check-a">
+                    <p>It has a claim but no real evidence and no reasoning.</p>
+                    <p><strong>Claim:</strong> Heavy poaching caused the proportion of tuskless African elephants to increase in the affected populations.</p>
+                    <p><strong>Evidence:</strong> cite the actual figures from the case study — the proportion of tuskless individuals before and after the poaching period, with the time span over which it changed.</p>
+                    <p><strong>Reasoning:</strong> tusklessness is a heritable trait already present at low frequency. Poachers targeted elephants with tusks, so tusked individuals were removed from the population before reproducing while tuskless individuals survived and bred. Because the trait is inherited, a larger share of the next generation was tuskless, and the proportion rose. The environmental change did not create tusklessness — it changed which existing variant survived to reproduce.</p>
+                </div>
+            </details>
+        </div>
+    </section>
+
+</main>
+
+<script src="../assets/toc.js?v=330"></script>
+<script src="../assets/course.js?v=330"></script>
+</body>
+</html>

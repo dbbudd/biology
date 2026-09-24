@@ -1,0 +1,101 @@
+DO NOT PUBLISH ANY IMAGE IN THIS FOLDER.
+
+Each one carries a visible copyright line, a stock-library watermark, a
+publisher workbook page number, or no usable licence at all. They were
+extracted from the Unit 3 PowerPoint and the Unit 3 anchor guide, where
+classroom use is one thing; putting them on a website that students reach by
+URL is another.
+
+Replacements are tracked in the Unit 3 image review (../_review.md). Delete
+this folder once every item has been replaced.
+
+---- FROM THE TEACHING DECK (Bio U3 25-26 - Best.pptx) ----
+
+image5.png    Binary fission, four numbered steps.
+              DREAMSTIME STOCK WATERMARK. The tiled rosette and the repeated
+              "...stime" text are visible once contrast is raised. Same tell as
+              Unit 5's image5.png.
+
+image18.jpeg  Snowshoe hare / lynx boom-and-bust graph.
+              "(c) 2015 Pearson Education, Inc."
+
+image19.png   Exponential growth curve, population size vs time (months).
+image20.png   Alaska fur seal logistic curve, 1915-1945.
+image21.png   Fur seal photo with the same logistic graph inset.
+              No visible credit line, but identical Pearson figure styling
+              (blue gridded plot area, same typography) to the figures on the
+              adjacent slides that DO carry the 2015 Pearson line. The credit
+              was cropped off. Treat as Pearson until proven otherwise.
+              The underlying fur-seal data (Kenyon et al. 1954, US Federal
+              Government Special Scientific Report) is public domain and can be
+              redrawn freely.
+
+image22.png   Logistic growth phases: lag / exponential / deceleration /
+              stable equilibrium, with a fish.
+              "Copyright (c) The McGraw-Hill Companies, Inc. Permission
+              required for reproduction or display."
+
+image25.jpeg  Song sparrow: offspring per female vs density of females.
+image26.jpeg  Kelp perch: proportional mortality vs density.
+image27.jpeg  Aphid population: exponential growth then sudden decline.
+              All three: "(c) 2015 Pearson Education, Inc."
+
+image30.png   "Where'd all the whales go?" western South Atlantic humpback
+              population trajectory plus annual catch.
+              Screenshot of a news article figure, credited only
+              "Image: Supplied". No reusable licence. The underlying science
+              (Zerbini et al. 2019, Royal Society Open Science) is CC BY and
+              can be redrawn from the published data.
+
+image36.jpeg  Paine tide-pool experiment: species present with and without
+              Pisaster, 1963-1973.
+              "(c) 2015 Pearson Education, Inc."
+
+image38.jpeg  Sonoran desert food web with nutrient-transfer key.
+              "(c) 2015 Pearson Education, Inc."
+              This is the food web two whole warmups are built on. It has to be
+              rebuilt as an interactive.
+
+image48.jpeg  Map of the rabbit invasion front across Australia, 1860-1980.
+              "(c) 2015 Pearson Education, Inc." (Campbell Figure 37.13a.)
+
+image50.jpeg  Rabbits crowded round a waterhole, black and white.
+              Campbell Figure 37.13b - the facing half of the same Pearson
+              plate as image48. Credit cropped off.
+
+image51.png   "SPACE INVADERS" - number of invasive species in China,
+              1900-2010s.
+              Uncredited news/journal infographic lifted whole. No licence.
+
+---- FROM THE ANCHOR GUIDE (Bio Anchor Guide 3.1.docx) ----
+
+guide-image6.png   Hare/lynx graph, fuller version with both y-axes labelled.
+guide-image7.png   The two review graphs (exponential + fur seal) side by side.
+guide-image10.png  Song sparrow (duplicate of deck image25).
+guide-image11.png  Kelp perch (duplicate of deck image26).
+guide-image12.png  Aphids (duplicate of deck image27).
+guide-image17.png  Paine tide-pool graph (duplicate of deck image36).
+guide-image22.png  Sonoran desert food web, full uncropped version.
+                   All of the above are the same Pearson figure set as the deck
+                   images above. Blocked on the same grounds.
+
+guide-image13.png  Humpback whale trajectory (duplicate of deck image30).
+guide-image15.png  Same graph, x-axis extended past 1950.
+                   News-article screenshots, "Image: Supplied". No licence.
+
+guide-image18.png  Scanned workbook page, activity "123 Predator-Prey
+                   Relationships", printed page number 171.
+guide-image19.png  Scanned continuation of that spread - deer/wolf census
+                   table and blank graph paper.
+guide-image20.png  Scanned workbook page, activity "124 The Carrying Capacity
+                   of an Ecosystem", printed page number 173.
+guide-image21.png  Scanned workbook page, "When wolves were introduced to
+                   Coronation Island".
+                   All four are photocopied pages from a commercial biology
+                   workbook - numbered activities, "Key Idea" boxes, printed
+                   page numbers, visible scanner shadow. Publisher material
+                   reproduced in full. Do not publish. The Coronation Island
+                   and woolly-aphid/ladybird case studies are worth keeping as
+                   ideas, rewritten from the primary sources
+                   (Klein 1995 for Coronation Island; Majumder & Agarwala 2013,
+                   World Journal of Zoology 8(1):55-61 for the aphids).

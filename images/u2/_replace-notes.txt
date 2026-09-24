@@ -1,0 +1,88 @@
+DO NOT PUBLISH ANY IMAGE IN THIS FOLDER.
+
+Each file below carries a visible copyright line, a stock/worksheet-site
+watermark, publisher branding, or is a screenshot of a commercial product.
+They were extracted from "Bio U2 25-26 Best.pptx", where classroom use is one
+thing; putting them on a website students reach by URL is another.
+
+Replacements are tracked in ../_review.md. Delete this folder once every item
+has been replaced.
+
+--------------------------------------------------------------------------
+FILE                WHAT IT SHOWS                        WHY IT IS BLOCKED
+--------------------------------------------------------------------------
+image42.png         Leaf -> chloroplast, "Figure 10.4",  "(c) 2011 Pearson
+                    thylakoid/granum/stroma labelled,     Education, Inc."
+                    with TEM inset                        printed bottom-left
+
+image65.jpeg        Chloroplast <-> mitochondrion energy "(c) 2014 Pearson
+                    cycle, light in / heat out            Education, Inc."
+
+image70.jpeg        "How is a cell like a car?" fuel /   "(c) 2014 Pearson
+                    energy conversion / waste table        Education, Inc."
+
+image74.jpeg        Mitochondrion with the four stages   "(c) 2014 Pearson
+                    as unlabelled coloured blocks          Education, Inc."
+
+image75.jpeg        Same mitochondrion, electron         "(c) 2014 Pearson
+                    carriers and ATP added                 Education, Inc."
+
+image85.png         "Figure 9.18" glycolysis then the    "(c) 2011 Pearson
+                    fermentation / aerobic fork            Education, Inc."
+
+image110.png        Food (peanuts) -> carbohydrate /     "(c) 2019 Pearson
+                    fat / protein catabolic pathways       Education, Inc."
+
+image125.jpeg       Caterpillar, 100 kcal split into     "(c) 2015 Pearson
+                    feces / growth / respiration           Education, Inc."
+
+image126.jpeg       Trophic pyramid, 1,000,000 kcal of   "(c) 2015 Pearson
+                    sunlight down to 10 kcal               Education, Inc."
+
+image129.jpeg       Corn -> vegetarians vs corn ->       "(c) 2015 Pearson
+                    cattle -> meat-eaters land use         Education, Inc."
+
+image134.png        Carbon cycle with lynx, rabbit,      "(c) 2015 Pearson
+                    tree, detritus, fossil fuels           Education, Inc."
+
+image52.png         "PHOTOLYSIS - photons of light,      "BOGO BIOLOGY" logo
+                    2 H2O -> 4e- + 4H+ + O2"              watermarked into
+                                                          the artwork
+
+image135.png        "A Food Web" - corn, grasshopper,    Diagonal watermark
+                    frog, wolf, eagle silhouettes         "kesschoollessons.com"
+                                                          across the whole image
+
+image130.png        "A Hypothetical Biomass Pyramid" -   Lifted from a
+                    phytoplankton to shark, kg            third-party deck; the
+image131.png        "Pyramid Of Energy" - rainforest      companion slide states
+                    leaves, insect larvae, bonobo,        "copyright cmassengale"
+                    crocodile, 100/10/1/0.1%              in its own body text
+
+image144.png        ExploreLearning "Food Chain" Gizmo   Screenshot of a
+                    UI - hawk/snake/rabbit/grass sim      commercial subscription
+                                                          product (its own UI
+                                                          chrome and branding)
+
+image149.png        "World CO2 emission by region since  Chart is branded
+                    1750" stacked area                    "genuineimpact.substack.com"
+                                                          with its logo. The
+                                                          underlying data is
+                                                          Global Carbon Project /
+                                                          Our World in Data and
+                                                          CAN be re-plotted; the
+                                                          rendered graphic cannot
+                                                          be reused as-is.
+
+image153.png        David Latimer holding his sealed     "(c) BNPS.CO.UK"
+                    bottle garden                         printed on the image
+image154.png        The bottle garden beside a wine       (press agency photos
+                    rack                                   sold for licence)
+--------------------------------------------------------------------------
+
+Note on the Pearson set: eleven of the nineteen are Pearson (Campbell /
+Miller & Levine) figures spanning 2011-2019 editions. Nearly all are
+line-and-block diagrams - a trophic pyramid, a carbon cycle, an energy
+budget, a mitochondrion with four labelled stages. Hand-authored SVG will
+be faster and cleaner than sourcing replacements, and will recolour across
+themes.

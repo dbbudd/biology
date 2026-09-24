@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Glossary — Biology</title>
+<link rel="stylesheet" href="../assets/course.css?v=330">
+<link rel="stylesheet" href="../assets/glossary-map.css?v=330">
+<script>if('scrollRestoration' in history)history.scrollRestoration='manual';</script>
+</head>
+<body data-root="../" data-chapter="glossary">
+
+<main class="main" role="main">
+    <section id="glossary">
+        <div class="chapter-eyebrow">Reference</div>
+        <h1>Glossary</h1>
+        <p class="lead">Every term marked in the reading, with the same definitions that appear when you hover a term in a chapter. Search for a word to see what it is built on and what it leads to.</p>
+        <div id="glossary-map"></div>
+        <dl id="glossary-list"></dl>
+    </section>
+</main>
+
+<script src="../assets/toc.js?v=330"></script>
+<script src="../assets/course.js?v=330"></script>
+<script src="../assets/unit-content.js?v=330"></script>
+<script src="../assets/glossary-map.js?v=330"></script>
+<script>
+(function () {
+    // The full A–Z list: shown only when the page is printed
+    const dl = document.getElementById('glossary-list');
+    const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+    const slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    dl.innerHTML = Object.keys(COURSE.glossary).sort().map(term =>
+        `<dt id="${slug(term)}">${esc(term)}</dt><dd>${esc(COURSE.glossary[term])}</dd>`
+    ).join('');
+
+    // A link to one word (glossary.html#osmosis, from search or a chapter)
+    // opens the map on that word
+    const q = new URLSearchParams(location.search);
+    const fromHash = location.hash ? decodeURIComponent(location.hash.slice(1)) : '';
+    GlossaryMap.mount(document.getElementById('glossary-map'),
+        { unitId: q.get('unit'), word: fromHash || q.get('word') });
+    if (fromHash) history.replaceState(history.state, '', location.pathname + location.search);
+
+    // Search while on this page: a glossary result moves the map to that word
+    document.addEventListener('course:reveal', e => {
+        const dt = e.target;
+        if (!dt || dt.tagName !== 'DT' || !dl.contains(dt)) return;
+        const key = GlossaryMap.keyFor(dt.textContent);
+        if (!key) return;
+        e.preventDefault();
+        GlossaryMap.show(key);
+    });
+})();
+</script>
+</body>
+</html>

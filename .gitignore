@@ -1,0 +1,17 @@
+# macOS
+.DS_Store
+
+# Working material for images: full-size originals, images not used on the
+# site, images held back for copyright, and planning notes. Kept on disk,
+# never published. The notes also mention assessment dates and answer keys.
+images/**/_originals/
+images/**/_unused/
+images/**/_blocked/
+images/**/_*.md
+images/**/_*.json
+
+# Templates from another project, not used by this site
+_reference/
+
+# Node
+node_modules/

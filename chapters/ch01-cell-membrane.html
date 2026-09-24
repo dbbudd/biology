@@ -1,0 +1,636 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1.1 The Cell Membrane — Biology</title>
+<link rel="stylesheet" href="../assets/course.css?v=330">
+<script>if('scrollRestoration' in history)history.scrollRestoration='manual';</script>
+</head>
+<body data-root="../" data-chapter="ch01-cell-membrane">
+
+<main class="main" role="main">
+
+    <section id="intro">
+        <div class="chapter-eyebrow">Unit 1 — Biochemistry &amp; Homeostasis</div>
+        <h1>1.1 The Cell Membrane</h1>
+        <p class="lead">A cell membrane separates a cell from its surroundings. Water, oxygen and nutrients cross it, and many other substances cannot. What crosses depends on how the membrane is built.</p>
+
+        <div class="chapter-meta"></div>
+
+        <div class="objectives">
+            <h4>By the end of this chapter you should be able to</h4>
+            <ul>
+                <li>Describe the arrangement of phospholipids in a membrane, and explain why they form that arrangement.</li>
+                <li>Explain why small non-polar molecules cross a membrane easily while ions and large polar molecules do not.</li>
+                <li>Predict the direction of net water movement between a cell and its surroundings from their solute concentrations.</li>
+                <li>Use the terms <em>hypertonic</em>, <em>hypotonic</em> and <em>isotonic</em> correctly, and describe the effect of each on an animal cell.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="structure" data-kind="Core" data-standards="HS-LS1-2" data-time="15 min" data-track>
+        <h2>Membrane structure</h2>
+
+        <p>The basic structure of a cell membrane is made of <strong>phospholipids</strong>. Each phospholipid has a phosphate <em>head</em> that is attracted to water (<span class="term">hydrophilic</span>) and two fatty acid <em>tails</em> that are not (<span class="term">hydrophobic</span>).</p>
+
+        <p>In water, phospholipids form an arrangement with no energy from a cell. The heads face the water and the tails face away from it. The stable arrangement is two sheets placed tail to tail: a <span class="term">phospholipid bilayer</span>.</p>
+
+        <figure class="diagram dense wide">
+            <svg viewBox="0 0 900 500" xmlns="http://www.w3.org/2000/svg" role="img"
+             aria-labelledby="bilayer-title bilayer-desc">
+            <title id="bilayer-title">The phospholipid bilayer, and what can cross it</title>
+            <desc id="bilayer-desc">Two sheets of phospholipids arranged tail to tail. Hydrophilic
+                phosphate heads face the watery fluid on each side; hydrophobic fatty acid tails meet
+                in the middle to form a thin oily core. Five substances meet the membrane. Oxygen and
+                carbon dioxide cross directly, because they are non-polar and dissolve in oil. Water
+                crosses slowly on its own, and quickly through a channel protein called an aquaporin.
+                A sodium ion cannot cross the bilayer, even though it is the smallest of the five,
+                because it carries a charge. Glucose cannot cross the oily core either, and crosses only
+                through a carrier protein. Below, the five are drawn to scale with one another: sodium
+                0.20 nanometers, water 0.27, carbon dioxide 0.33, oxygen 0.35 and glucose 0.86. The
+                smallest and the largest are the two that cannot cross the bilayer, so what crosses
+                depends on chemistry, not size.</desc>
+            <style>
+                .m-out, .m-in { fill: var(--blue); opacity: 0.07; }
+                /* the core is tinted warm, not blue: it is oil, and the contrast with the
+                   watery bands on either side is the whole point of the figure */
+                .m-core  { fill: var(--yellow); opacity: 0.13; }
+                .m-head  { fill: var(--yellow); stroke: #9a7c00; stroke-width: 1; }
+                .m-tail  { stroke: var(--light-teal); stroke-width: 1.8; fill: none; stroke-linecap: round; }
+                .m-prot  { fill: #6b4f8a; opacity: 0.9; }
+                .m-mol       { stroke-width: 1.2; }
+                .m-mol-yes   { fill: #2e7d32; stroke: #1f5b23; }
+                .m-mol-no    { fill: var(--red); stroke: #7d1c22; }
+                .m-arrow      { stroke: #2e7d32; stroke-width: 2; fill: none; }
+                .m-arrow-slow { stroke-dasharray: 5 4; }
+                .m-arrow-no   { stroke: var(--red); }
+                .m-head-yes   { fill: #2e7d32; }
+                .m-head-no    { fill: var(--red); }
+                .m-ok { stroke: #2e7d32; stroke-width: 2.4; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+                .m-no { stroke: var(--red); stroke-width: 2.4; fill: none; stroke-linecap: round; }
+                .m-lane    { font-size: 10.5px; font-weight: 700; fill: var(--text); text-anchor: middle; }
+                .m-verdict { font-size: 10px; font-weight: 700; fill: #2e7d32; text-anchor: middle; }
+                .m-verdict-no { fill: var(--red); }
+                .m-sub     { font-size: 10px; fill: var(--text-secondary); text-anchor: middle; }
+                .m-zone    { font-size: 11px; font-weight: 700; fill: var(--text-secondary); letter-spacing: 0.05em; }
+                .m-core-lbl{ font-size: 10.5px; font-weight: 700; fill: var(--text); text-anchor: middle; }
+                .m-core-sub{ font-size: 10px; fill: var(--text-secondary); text-anchor: middle; }
+                .m-plate   { fill: var(--bg); opacity: 0.88; }
+                .m-h2      { font-size: 11px; font-weight: 700; fill: var(--text); }
+                .m-keyline { stroke: var(--border); stroke-width: 1.2; }
+                .m-keyname { font-size: 11px; font-weight: 700; fill: var(--text); text-anchor: middle; }
+                .m-keynm   { font-size: 10px; fill: var(--text-secondary); text-anchor: middle; }
+                .m-keywhy  { font-size: 10px; font-style: italic; fill: var(--text-secondary); text-anchor: middle; }
+                [data-theme="dark"] .m-prot { fill: #b9a0d6; }
+                [data-theme="dark"] .m-mol-yes { fill: #7fc98a; stroke: #2e7d32; }
+                [data-theme="dark"] .m-arrow, [data-theme="dark"] .m-head-yes { stroke: #7fc98a; }
+                [data-theme="dark"] .m-head-yes { fill: #7fc98a; stroke: none; }
+                [data-theme="dark"] .m-ok { stroke: #7fc98a; }
+                [data-theme="dark"] .m-verdict { fill: #7fc98a; }
+                [data-theme="dark"] .m-head { stroke: #6b5400; }
+                /* these must come after the dark .m-verdict\/.m-arrow rules: same specificity,
+                   and without them the blocked lane renders in the pass colour */
+                [data-theme="dark"] .m-verdict-no { fill: var(--red); }
+                [data-theme="dark"] .m-arrow-no   { stroke: var(--red); }
+            </style>
+            <rect class="m-out"  x="0" y="0"   width="900" height="104"/>
+            <rect class="m-in"   x="0" y="228" width="900" height="84"/>
+            <rect class="m-core" x="0" y="126" width="900" height="80"/>
+            <circle class="m-head" cx="14" cy="118" r="8"/>
+            <path class="m-tail" d="M11 126 C8 138.67 13 151.33 10 164"/>
+            <path class="m-tail" d="M17 126 C20 138.67 15 151.33 18 164"/>
+            <circle class="m-head" cx="14" cy="214" r="8"/>
+            <path class="m-tail" d="M11 206 C8 218.67 13 231.33 10 168"/>
+            <path class="m-tail" d="M17 206 C20 218.67 15 231.33 18 168"/>
+            <circle class="m-head" cx="38" cy="118" r="8"/>
+            <path class="m-tail" d="M35 126 C32 138.67 37 151.33 34 164"/>
+            <path class="m-tail" d="M41 126 C44 138.67 39 151.33 42 164"/>
+            <circle class="m-head" cx="38" cy="214" r="8"/>
+            <path class="m-tail" d="M35 206 C32 218.67 37 231.33 34 168"/>
+            <path class="m-tail" d="M41 206 C44 218.67 39 231.33 42 168"/>
+            <circle class="m-head" cx="62" cy="118" r="8"/>
+            <path class="m-tail" d="M59 126 C56 138.67 61 151.33 58 164"/>
+            <path class="m-tail" d="M65 126 C68 138.67 63 151.33 66 164"/>
+            <circle class="m-head" cx="62" cy="214" r="8"/>
+            <path class="m-tail" d="M59 206 C56 218.67 61 231.33 58 168"/>
+            <path class="m-tail" d="M65 206 C68 218.67 63 231.33 66 168"/>
+            <circle class="m-head" cx="86" cy="118" r="8"/>
+            <path class="m-tail" d="M83 126 C80 138.67 85 151.33 82 164"/>
+            <path class="m-tail" d="M89 126 C92 138.67 87 151.33 90 164"/>
+            <circle class="m-head" cx="86" cy="214" r="8"/>
+            <path class="m-tail" d="M83 206 C80 218.67 85 231.33 82 168"/>
+            <path class="m-tail" d="M89 206 C92 218.67 87 231.33 90 168"/>
+            <circle class="m-head" cx="110" cy="118" r="8"/>
+            <path class="m-tail" d="M107 126 C104 138.67 109 151.33 106 164"/>
+            <path class="m-tail" d="M113 126 C116 138.67 111 151.33 114 164"/>
+            <circle class="m-head" cx="110" cy="214" r="8"/>
+            <path class="m-tail" d="M107 206 C104 218.67 109 231.33 106 168"/>
+            <path class="m-tail" d="M113 206 C116 218.67 111 231.33 114 168"/>
+            <circle class="m-head" cx="134" cy="118" r="8"/>
+            <path class="m-tail" d="M131 126 C128 138.67 133 151.33 130 164"/>
+            <path class="m-tail" d="M137 126 C140 138.67 135 151.33 138 164"/>
+            <circle class="m-head" cx="134" cy="214" r="8"/>
+            <path class="m-tail" d="M131 206 C128 218.67 133 231.33 130 168"/>
+            <path class="m-tail" d="M137 206 C140 218.67 135 231.33 138 168"/>
+            <circle class="m-head" cx="158" cy="118" r="8"/>
+            <path class="m-tail" d="M155 126 C152 138.67 157 151.33 154 164"/>
+            <path class="m-tail" d="M161 126 C164 138.67 159 151.33 162 164"/>
+            <circle class="m-head" cx="158" cy="214" r="8"/>
+            <path class="m-tail" d="M155 206 C152 218.67 157 231.33 154 168"/>
+            <path class="m-tail" d="M161 206 C164 218.67 159 231.33 162 168"/>
+            <circle class="m-head" cx="182" cy="118" r="8"/>
+            <path class="m-tail" d="M179 126 C176 138.67 181 151.33 178 164"/>
+            <path class="m-tail" d="M185 126 C188 138.67 183 151.33 186 164"/>
+            <circle class="m-head" cx="182" cy="214" r="8"/>
+            <path class="m-tail" d="M179 206 C176 218.67 181 231.33 178 168"/>
+            <path class="m-tail" d="M185 206 C188 218.67 183 231.33 186 168"/>
+            <circle class="m-head" cx="206" cy="118" r="8"/>
+            <path class="m-tail" d="M203 126 C200 138.67 205 151.33 202 164"/>
+            <path class="m-tail" d="M209 126 C212 138.67 207 151.33 210 164"/>
+            <circle class="m-head" cx="206" cy="214" r="8"/>
+            <path class="m-tail" d="M203 206 C200 218.67 205 231.33 202 168"/>
+            <path class="m-tail" d="M209 206 C212 218.67 207 231.33 210 168"/>
+            <circle class="m-head" cx="230" cy="118" r="8"/>
+            <path class="m-tail" d="M227 126 C224 138.67 229 151.33 226 164"/>
+            <path class="m-tail" d="M233 126 C236 138.67 231 151.33 234 164"/>
+            <circle class="m-head" cx="230" cy="214" r="8"/>
+            <path class="m-tail" d="M227 206 C224 218.67 229 231.33 226 168"/>
+            <path class="m-tail" d="M233 206 C236 218.67 231 231.33 234 168"/>
+            <circle class="m-head" cx="254" cy="118" r="8"/>
+            <path class="m-tail" d="M251 126 C248 138.67 253 151.33 250 164"/>
+            <path class="m-tail" d="M257 126 C260 138.67 255 151.33 258 164"/>
+            <circle class="m-head" cx="254" cy="214" r="8"/>
+            <path class="m-tail" d="M251 206 C248 218.67 253 231.33 250 168"/>
+            <path class="m-tail" d="M257 206 C260 218.67 255 231.33 258 168"/>
+            <circle class="m-head" cx="278" cy="118" r="8"/>
+            <path class="m-tail" d="M275 126 C272 138.67 277 151.33 274 164"/>
+            <path class="m-tail" d="M281 126 C284 138.67 279 151.33 282 164"/>
+            <circle class="m-head" cx="278" cy="214" r="8"/>
+            <path class="m-tail" d="M275 206 C272 218.67 277 231.33 274 168"/>
+            <path class="m-tail" d="M281 206 C284 218.67 279 231.33 282 168"/>
+            <circle class="m-head" cx="302" cy="118" r="8"/>
+            <path class="m-tail" d="M299 126 C296 138.67 301 151.33 298 164"/>
+            <path class="m-tail" d="M305 126 C308 138.67 303 151.33 306 164"/>
+            <circle class="m-head" cx="302" cy="214" r="8"/>
+            <path class="m-tail" d="M299 206 C296 218.67 301 231.33 298 168"/>
+            <path class="m-tail" d="M305 206 C308 218.67 303 231.33 306 168"/>
+            <circle class="m-head" cx="326" cy="118" r="8"/>
+            <path class="m-tail" d="M323 126 C320 138.67 325 151.33 322 164"/>
+            <path class="m-tail" d="M329 126 C332 138.67 327 151.33 330 164"/>
+            <circle class="m-head" cx="326" cy="214" r="8"/>
+            <path class="m-tail" d="M323 206 C320 218.67 325 231.33 322 168"/>
+            <path class="m-tail" d="M329 206 C332 218.67 327 231.33 330 168"/>
+            <circle class="m-head" cx="350" cy="118" r="8"/>
+            <path class="m-tail" d="M347 126 C344 138.67 349 151.33 346 164"/>
+            <path class="m-tail" d="M353 126 C356 138.67 351 151.33 354 164"/>
+            <circle class="m-head" cx="350" cy="214" r="8"/>
+            <path class="m-tail" d="M347 206 C344 218.67 349 231.33 346 168"/>
+            <path class="m-tail" d="M353 206 C356 218.67 351 231.33 354 168"/>
+            <circle class="m-head" cx="374" cy="118" r="8"/>
+            <path class="m-tail" d="M371 126 C368 138.67 373 151.33 370 164"/>
+            <path class="m-tail" d="M377 126 C380 138.67 375 151.33 378 164"/>
+            <circle class="m-head" cx="374" cy="214" r="8"/>
+            <path class="m-tail" d="M371 206 C368 218.67 373 231.33 370 168"/>
+            <path class="m-tail" d="M377 206 C380 218.67 375 231.33 378 168"/>
+            <circle class="m-head" cx="494" cy="118" r="8"/>
+            <path class="m-tail" d="M491 126 C488 138.67 493 151.33 490 164"/>
+            <path class="m-tail" d="M497 126 C500 138.67 495 151.33 498 164"/>
+            <circle class="m-head" cx="494" cy="214" r="8"/>
+            <path class="m-tail" d="M491 206 C488 218.67 493 231.33 490 168"/>
+            <path class="m-tail" d="M497 206 C500 218.67 495 231.33 498 168"/>
+            <circle class="m-head" cx="518" cy="118" r="8"/>
+            <path class="m-tail" d="M515 126 C512 138.67 517 151.33 514 164"/>
+            <path class="m-tail" d="M521 126 C524 138.67 519 151.33 522 164"/>
+            <circle class="m-head" cx="518" cy="214" r="8"/>
+            <path class="m-tail" d="M515 206 C512 218.67 517 231.33 514 168"/>
+            <path class="m-tail" d="M521 206 C524 218.67 519 231.33 522 168"/>
+            <circle class="m-head" cx="542" cy="118" r="8"/>
+            <path class="m-tail" d="M539 126 C536 138.67 541 151.33 538 164"/>
+            <path class="m-tail" d="M545 126 C548 138.67 543 151.33 546 164"/>
+            <circle class="m-head" cx="542" cy="214" r="8"/>
+            <path class="m-tail" d="M539 206 C536 218.67 541 231.33 538 168"/>
+            <path class="m-tail" d="M545 206 C548 218.67 543 231.33 546 168"/>
+            <circle class="m-head" cx="566" cy="118" r="8"/>
+            <path class="m-tail" d="M563 126 C560 138.67 565 151.33 562 164"/>
+            <path class="m-tail" d="M569 126 C572 138.67 567 151.33 570 164"/>
+            <circle class="m-head" cx="566" cy="214" r="8"/>
+            <path class="m-tail" d="M563 206 C560 218.67 565 231.33 562 168"/>
+            <path class="m-tail" d="M569 206 C572 218.67 567 231.33 570 168"/>
+            <circle class="m-head" cx="590" cy="118" r="8"/>
+            <path class="m-tail" d="M587 126 C584 138.67 589 151.33 586 164"/>
+            <path class="m-tail" d="M593 126 C596 138.67 591 151.33 594 164"/>
+            <circle class="m-head" cx="590" cy="214" r="8"/>
+            <path class="m-tail" d="M587 206 C584 218.67 589 231.33 586 168"/>
+            <path class="m-tail" d="M593 206 C596 218.67 591 231.33 594 168"/>
+            <circle class="m-head" cx="614" cy="118" r="8"/>
+            <path class="m-tail" d="M611 126 C608 138.67 613 151.33 610 164"/>
+            <path class="m-tail" d="M617 126 C620 138.67 615 151.33 618 164"/>
+            <circle class="m-head" cx="614" cy="214" r="8"/>
+            <path class="m-tail" d="M611 206 C608 218.67 613 231.33 610 168"/>
+            <path class="m-tail" d="M617 206 C620 218.67 615 231.33 618 168"/>
+            <circle class="m-head" cx="638" cy="118" r="8"/>
+            <path class="m-tail" d="M635 126 C632 138.67 637 151.33 634 164"/>
+            <path class="m-tail" d="M641 126 C644 138.67 639 151.33 642 164"/>
+            <circle class="m-head" cx="638" cy="214" r="8"/>
+            <path class="m-tail" d="M635 206 C632 218.67 637 231.33 634 168"/>
+            <path class="m-tail" d="M641 206 C644 218.67 639 231.33 642 168"/>
+            <circle class="m-head" cx="662" cy="118" r="8"/>
+            <path class="m-tail" d="M659 126 C656 138.67 661 151.33 658 164"/>
+            <path class="m-tail" d="M665 126 C668 138.67 663 151.33 666 164"/>
+            <circle class="m-head" cx="662" cy="214" r="8"/>
+            <path class="m-tail" d="M659 206 C656 218.67 661 231.33 658 168"/>
+            <path class="m-tail" d="M665 206 C668 218.67 663 231.33 666 168"/>
+            <circle class="m-head" cx="686" cy="118" r="8"/>
+            <path class="m-tail" d="M683 126 C680 138.67 685 151.33 682 164"/>
+            <path class="m-tail" d="M689 126 C692 138.67 687 151.33 690 164"/>
+            <circle class="m-head" cx="686" cy="214" r="8"/>
+            <path class="m-tail" d="M683 206 C680 218.67 685 231.33 682 168"/>
+            <path class="m-tail" d="M689 206 C692 218.67 687 231.33 690 168"/>
+            <circle class="m-head" cx="806" cy="118" r="8"/>
+            <path class="m-tail" d="M803 126 C800 138.67 805 151.33 802 164"/>
+            <path class="m-tail" d="M809 126 C812 138.67 807 151.33 810 164"/>
+            <circle class="m-head" cx="806" cy="214" r="8"/>
+            <path class="m-tail" d="M803 206 C800 218.67 805 231.33 802 168"/>
+            <path class="m-tail" d="M809 206 C812 218.67 807 231.33 810 168"/>
+            <circle class="m-head" cx="830" cy="118" r="8"/>
+            <path class="m-tail" d="M827 126 C824 138.67 829 151.33 826 164"/>
+            <path class="m-tail" d="M833 126 C836 138.67 831 151.33 834 164"/>
+            <circle class="m-head" cx="830" cy="214" r="8"/>
+            <path class="m-tail" d="M827 206 C824 218.67 829 231.33 826 168"/>
+            <path class="m-tail" d="M833 206 C836 218.67 831 231.33 834 168"/>
+            <circle class="m-head" cx="854" cy="118" r="8"/>
+            <path class="m-tail" d="M851 126 C848 138.67 853 151.33 850 164"/>
+            <path class="m-tail" d="M857 126 C860 138.67 855 151.33 858 164"/>
+            <circle class="m-head" cx="854" cy="214" r="8"/>
+            <path class="m-tail" d="M851 206 C848 218.67 853 231.33 850 168"/>
+            <path class="m-tail" d="M857 206 C860 218.67 855 231.33 858 168"/>
+            <circle class="m-head" cx="878" cy="118" r="8"/>
+            <path class="m-tail" d="M875 126 C872 138.67 877 151.33 874 164"/>
+            <path class="m-tail" d="M881 126 C884 138.67 879 151.33 882 164"/>
+            <circle class="m-head" cx="878" cy="214" r="8"/>
+            <path class="m-tail" d="M875 206 C872 218.67 877 231.33 874 168"/>
+            <path class="m-tail" d="M881 206 C884 218.67 879 231.33 882 168"/>
+            <path class="m-prot" fill-rule="evenodd" d="M414.6 98 L408 116 L414 166 L408 216 L414.6 234 L461.4 234 L468 216 L462 166 L468 116 L461.4 98 Z M429 98 L433.5 166 L429 234 L447 234 L442.5 166 L447 98 Z"/>
+            <path class="m-prot" fill-rule="evenodd" d="M715.48 98 L708 116 L714.8 166 L708 216 L715.48 234 L768.52 234 L776 216 L769.2 166 L776 116 L768.52 98 Z M731 98 L735 166 L731 234 L753 234 L749 166 L753 98 Z"/>
+            <text class="m-lane" x="150" y="46">O₂ and CO₂</text>
+            <circle class="m-mol m-mol-yes" cx="137" cy="70" r="7"/>
+            <circle class="m-mol m-mol-yes" cx="163" cy="70" r="6.6"/>
+            <path class="m-arrow" d="M150 88 L150 250"/>
+            <path class="m-head-yes" d="M150 258 l-4.5 -9 l9 0 Z"/>
+            <path class="m-ok"  d="M160 254 l4 4.5 l8 -9.5"/>
+            <text class="m-verdict" x="150" y="284">straight through</text>
+            <text class="m-sub" x="150" y="297">they dissolve in oil</text>
+            <text class="m-lane" x="300" y="46">water</text>
+            <circle class="m-mol m-mol-yes" cx="300" cy="70" r="5.4"/>
+            <path class="m-arrow m-arrow-slow" d="M300 88 L300 250"/>
+            <path class="m-head-yes" d="M300 258 l-4.5 -9 l9 0 Z"/>
+            <path class="m-ok"  d="M310 254 l4 4.5 l8 -9.5"/>
+            <text class="m-verdict" x="300" y="284">slowly, on its own</text>
+            <text class="m-sub" x="300" y="297">small enough to pass between</text>
+            <text class="m-lane" x="438" y="46">water, via a channel</text>
+            <circle class="m-mol m-mol-yes" cx="438" cy="70" r="5.4"/>
+            <path class="m-arrow" d="M438 88 L438 250"/>
+            <path class="m-head-yes" d="M438 258 l-4.5 -9 l9 0 Z"/>
+            <path class="m-ok"  d="M448 254 l4 4.5 l8 -9.5"/>
+            <text class="m-verdict" x="438" y="284">fast, through the pore</text>
+            <text class="m-sub" x="438" y="297">an aquaporin</text>
+            <text class="m-lane" x="600" y="46">Na⁺, the smallest of all</text>
+            <circle class="m-mol m-mol-no" cx="600" cy="70" r="4"/>
+            <path class="m-arrow m-arrow-no" d="M600 88 L600 117"/>
+            <path class="m-head-no" d="M600 124 l-4.5 -8 l9 0 Z"/>
+            <path class="m-no" d="M595 161 l10 10 M605 161 l-10 10"/>
+            <text class="m-verdict m-verdict-no" x="600" y="300">cannot cross</text>
+            <text class="m-sub" x="600" y="313">it carries a charge</text>
+            <text class="m-lane" x="742" y="46">glucose, via a carrier</text>
+            <circle class="m-mol m-mol-no" cx="742" cy="70" r="17.2"/>
+            <path class="m-arrow" d="M742 88 L742 250"/>
+            <path class="m-head-yes" d="M742 258 l-4.5 -9 l9 0 Z"/>
+            <path class="m-ok"  d="M752 254 l4 4.5 l8 -9.5"/>
+            <text class="m-verdict" x="742" y="284">only with help</text>
+            <text class="m-sub" x="742" y="297">blocked by the oil on its own</text>
+            <text class="m-zone" x="12" y="20">OUTSIDE THE CELL</text>
+            <text class="m-zone" x="12" y="246">INSIDE THE CELL</text>
+            <rect class="m-plate" x="468" y="150" width="104" height="32" rx="5"/>
+            <text class="m-core-lbl" x="520" y="164">the oily core</text>
+            <text class="m-core-sub" x="520" y="177">no water, no ions</text>
+            <line class="m-keyline" x1="12" y1="444" x2="888" y2="444"/>
+            <text class="m-h2" x="12" y="346">Drawn to scale with each other. The smallest and the largest cannot cross the bilayer, so size is not the deciding factor.</text>
+            <circle class="m-mol m-mol-no" cx="62" cy="432.8" r="11.2"/>
+            <path class="m-no" d="M57 402.6 l10 10 M67 402.6 l-10 10"/>
+            <text class="m-keyname" x="62" y="463">Na⁺</text>
+            <text class="m-keynm"   x="62" y="477">0.20 nm</text>
+            <text class="m-keywhy"  x="62" y="491">charged</text>
+            <circle class="m-mol m-mol-yes" cx="214" cy="428.88" r="15.12"/>
+            <path class="m-ok"  d="M208 399.76 l4 4.5 l8 -9.5"/>
+            <text class="m-keyname" x="214" y="463">H₂O</text>
+            <text class="m-keynm"   x="214" y="477">0.27 nm</text>
+            <text class="m-keywhy"  x="214" y="491">small, and channels help</text>
+            <circle class="m-mol m-mol-yes" cx="368" cy="425.52" r="18.48"/>
+            <path class="m-ok"  d="M362 393.03999999999996 l4 4.5 l8 -9.5"/>
+            <text class="m-keyname" x="368" y="463">CO₂</text>
+            <text class="m-keynm"   x="368" y="477">0.33 nm</text>
+            <text class="m-keywhy"  x="368" y="491">non-polar</text>
+            <circle class="m-mol m-mol-yes" cx="528" cy="424.4" r="19.6"/>
+            <path class="m-ok"  d="M522 390.79999999999995 l4 4.5 l8 -9.5"/>
+            <text class="m-keyname" x="528" y="463">O₂</text>
+            <text class="m-keynm"   x="528" y="477">0.35 nm</text>
+            <text class="m-keywhy"  x="528" y="491">non-polar</text>
+            <circle class="m-mol m-mol-no" cx="722" cy="395.84" r="48.16"/>
+            <path class="m-no" d="M717 328.68000000000006 l10 10 M727 328.68000000000006 l-10 10"/>
+            <text class="m-keyname" x="722" y="463">glucose</text>
+            <text class="m-keynm"   x="722" y="477">0.86 nm</text>
+            <text class="m-keywhy"  x="722" y="491">large and water-loving</text>
+            </svg>
+            <figcaption><b>Figure 1.1</b> — The phospholipid bilayer and what can cross it. The heads face the watery fluid on both sides, and the tails meet in the middle to form a thin oily core. No covalent bonds join the two sheets; they stay together because the tails are hydrophobic. Proteins sit in the bilayer, and some span it to form a pore. Now look at the scale strip below. The sodium ion is the <em>smallest</em> of the five, but it cannot cross the bilayer. Carbon dioxide is about one and a half times as wide, and it crosses directly. What crosses depends on chemistry, not size.</figcaption>
+        </figure>
+
+        <div class="callout callout-key">
+            <p>Phospholipids move sideways past one another, so a membrane behaves like a thin film of oil, not a solid sheet. This is why its structure is called the <span class="term">fluid mosaic model</span>: fluid because its parts move, and mosaic because proteins are scattered through it. Diagrams show only a few proteins, but in most membranes about half the mass is protein.</p>
+        </div>
+
+        <h3>Selective permeability</h3>
+
+        <p>The oily core makes the membrane <span class="term">selectively permeable</span>: some substances cross it and others do not.</p>
+
+        <ul>
+            <li><strong>Small, non-polar molecules</strong>, such as oxygen and carbon dioxide, dissolve in the oily core and cross freely.</li>
+            <li><strong>Water</strong> is polar, but it is small enough that some passes between the phospholipids. Most cells also have channel proteins called <span class="term">aquaporin</span>s that let water cross much faster.</li>
+            <li><strong>Ions and large polar molecules</strong>, such as sodium ions, potassium ions and glucose, do not dissolve in the oily core. They cross only through transport proteins specific to them.</li>
+        </ul>
+
+        <div class="callout callout-misconception">
+            <p>“A membrane has holes that let small particles through and keep large ones out.”</p>
+            <p>Size is not the main factor. A sodium ion is smaller than a carbon dioxide molecule, but carbon dioxide crosses the bilayer freely and a sodium ion cannot cross it at all. The difference is <em>chemistry</em>: carbon dioxide is non-polar, and a sodium ion carries a charge.</p>
+        </div>
+    </section>
+
+    <section id="diffusion" data-kind="Core" data-standards="HS-LS1-2" data-time="10 min" data-track>
+        <h2>Diffusion</h2>
+
+        <p>Particles in a liquid or a gas are always moving in random directions. When a substance is more concentrated in one region than in another, this random motion produces a net movement: over time, more particles move out of the concentrated region than move into it.</p>
+
+        <p>This net movement from a higher concentration to a lower concentration is <span class="term">diffusion</span>. The cell spends no energy on it, because the particles are already moving. Diffusion is a form of <span class="term">passive transport</span>.</p>
+
+        <div class="callout callout-misconception">
+            <p>“Diffusion stops when the concentrations are equal.”</p>
+            <p>The particles keep moving and keep crossing in both directions. At equal concentrations they cross at the same rate each way, so there is <strong>no net movement</strong>.</p>
+        </div>
+    </section>
+
+    <section id="osmosis" data-kind="Core" data-standards="HS-LS1-3" data-time="15 min" data-prereq="diffusion" data-track>
+        <h2>Osmosis</h2>
+
+        <p>Now consider a cell in a solution of a solute that <em>cannot</em> cross the membrane, such as a salt or a sugar. The solute stays on its own side of the membrane. Water can cross.</p>
+
+        <p>There is a net movement of water from the solution with the lower solute concentration to the solution with the higher solute concentration. This is <span class="term">osmosis</span>: the net movement of water across a partially permeable membrane. Water that enters or leaves changes the volume of the cell.</p>
+
+        <p>In the simulation below, the yellow solute particles cannot cross the membrane and the blue water particles can. Change the solute concentration outside the cell and observe the cell's volume.</p>
+
+        <div class="sim" data-sim="osmosis">
+            <div class="sim-header">
+                <h4>Osmosis across a cell membrane</h4>
+                <span class="sim-kind">Interactive</span>
+            </div>
+        </div>
+
+        <div class="callout callout-try">
+            <p>Set the solute outside the cell to 55 units, the same as inside. Predict what will happen to the cell if you raise it to 80 units. Then raise it and observe. Explain why the cell stops shrinking at a certain volume instead of shrinking until it disappears.</p>
+        </div>
+
+        <h3>Hypertonic, isotonic and hypotonic</h3>
+
+        <p>These terms describe the <em>solution</em>, always compared with the cell in it:</p>
+
+        <table>
+            <thead>
+                <tr><th>Solution is…</th><th>Solute concentration, compared with the cell</th><th>Net water movement</th><th>Effect on an animal cell</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><span class="term">Hypertonic</span></td><td>Higher</td><td>Out of the cell</td><td>Shrinks and wrinkles (<span class="term">crenation</span>)</td></tr>
+                <tr><td><span class="term">Isotonic</span></td><td>Equal</td><td>None (equal in both directions)</td><td>Volume stays the same</td></tr>
+                <tr><td><span class="term">Hypotonic</span></td><td>Lower</td><td>Into the cell</td><td>Swells and may burst (<span class="term">lysis</span>)</td></tr>
+            </tbody>
+        </table>
+
+        <figure class="shot pair">
+            <img src="../images/u1/onion-epidermis-micrograph.jpeg" alt="A light micrograph of onion epidermis: long, many-sided cells fitted closely together, each filling its cell wall completely." loading="lazy">
+            <img src="../images/u1/plasmolysis-rhoeo-micrograph.jpeg" alt="A light micrograph of leaf epidermis cells after plasmolysis. Inside each many-sided cell wall, the pink cell contents have shrunk into a rounded shape that no longer touches the wall." loading="lazy">
+            <img src="../images/u1/plasmolysed-cell-micrograph.jpeg" alt="A light micrograph of unstained plant cells in which the living contents have pulled away from the cell wall, leaving a dome-shaped membrane with a clear gap between it and the wall." loading="lazy">
+            <figcaption><b>Figure 1.2</b> — Osmosis in plant cells. <em>Left:</em> onion epidermis, the thin layer of cells you can peel from an onion. Each cell fills its cell wall completely. It is turgid, and the wall stops it from bursting. <em>Center:</em> leaf epidermis cells of <i>Tradescantia spathacea</i> (also called <i>Rhoeo</i>) after being placed in a hypertonic solution. Water has left each cell, and the living contents, colored pink by a pigment in the vacuole, have shrunk away from the wall. This is <span class="term">plasmolysis</span>. The field of view is about 0.45 mm across. <em>Right:</em> unstained plant cells after plasmolysis, with the membrane separated from the wall. Notice what does not move in any of the images: the cell wall. Only the living contents inside it gain or lose water. <span class="fig-credit">Credits: <a href="https://www.flickr.com/photos/188857455@N02/53596057941/" target="_blank" rel="noopener">loganrickert</a>, <a href="https://creativecommons.org/licenses/by/2.0" target="_blank" rel="noopener">CC BY 2.0</a>; Mnolf, via <a href="https://commons.wikimedia.org/wiki/File:Rhoeo_Discolor_-_Plasmolysis.jpg" target="_blank" rel="noopener">Wikimedia Commons</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a>; Nicholas.H.Hale, via <a href="https://commons.wikimedia.org/wiki/File:Plasmolysed_Plant_Cell.jpg" target="_blank" rel="noopener">Wikimedia Commons</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0</a>.</span></figcaption>
+        </figure>
+
+        <div class="callout callout-example">
+            <p>Intravenous (IV) fluids contain 0.9% saline, not pure water. Pure water is strongly hypotonic to red blood cells, so water would enter them by osmosis and they would burst. A plant cell in pure water swells but does not burst, because its cell wall resists further expansion once the cell is full.</p>
+        </div>
+    </section>
+
+    <section id="check" data-kind="Practice" data-time="10 min" data-prereq="osmosis">
+        <h2>Check your understanding</h2>
+
+        <div class="check">
+            <details class="check-q" id="q-oxygen-vs-potassium" data-track>
+                <summary>Oxygen crosses a membrane freely, but a potassium ion cannot, even though the ion is smaller. Explain why.</summary>
+                <div class="check-a">
+                    <p>Oxygen is non-polar, so it dissolves in the oily core of the bilayer and crosses. A potassium ion carries a charge and is attracted to water, so it does not enter the oily core. It crosses only through a channel protein.</p>
+                </div>
+            </details>
+
+            <details class="check-q" id="q-red-cell-pure-water" data-track>
+                <summary>A red blood cell is placed in pure water. Describe what happens and explain why.</summary>
+                <div class="check-a">
+                    <p>The cell swells and bursts (lysis). Pure water has no solute, so it is hypotonic to the cytoplasm, and there is a net movement of water into the cell by osmosis. An animal cell has no cell wall to resist the pressure.</p>
+                </div>
+            </details>
+
+            <details class="check-q" id="q-why-shrinking-stops" data-track>
+                <summary>In the simulation, once the cell has settled in a hypertonic solution it stops shrinking. Water is still crossing the membrane in both directions. Explain both facts at once.</summary>
+                <div class="check-a">
+                    <p>As water leaves, the solute inside is concentrated into a smaller volume, so the solute concentration inside rises. Shrinking stops when it equals the outside concentration. Water still crosses in both directions, but at equal rates, so there is no <em>net</em> movement.</p>
+                </div>
+            </details>
+        </div>
+
+        <h3>Quick check</h3>
+
+        <p>Each question marks your answer. If an answer is wrong, a link takes you to the section that teaches it.</p>
+
+        <div class="quiz" data-quiz>
+
+            <div class="quiz-q" data-review="structure">
+                <div class="quiz-variant" data-answer="3">
+                    <p class="quiz-stem">Phospholipids placed in water arrange themselves tail to tail, with no energy input. Why does this happen?</p>
+                    <ol class="quiz-options">
+                        <li data-why="No covalent bonds join the two sheets. They stay together because the tails are hydrophobic, and the phospholipids can move sideways past one another.">Strong bonds between the two sheets lock them together</li>
+                        <li data-why="Mass has nothing to do with it. A membrane keeps the same arrangement whichever way up it is.">The tails are heavier than the heads, so they sink to the middle</li>
+                        <li>The tails are hydrophobic, so they turn inward, away from the water, and meet each other</li>
+                        <li data-why="There is no cell in a beaker of water, and the bilayer still forms. The arrangement comes from the properties of the phospholipids.">The cell assembles the sheets in that order as it builds the membrane</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>The heads are hydrophilic and the tails are hydrophobic. Two sheets placed tail to tail keep every tail away from the water at once, so this is the arrangement that forms and stays stable.</p>
+                    </div>
+                </div>
+
+                <div class="quiz-variant" data-answer="4">
+                    <p class="quiz-stem">The fluid inside a cell is watery, and so is the fluid outside it. Using only the properties of a phospholipid, predict where the heads and the tails end up.</p>
+                    <ol class="quiz-options">
+                        <li data-why="The tails are hydrophobic, so they cannot sit on the two surfaces that face the watery fluid.">The tails face outwards on both surfaces, where there is most room</li>
+                        <li data-why="Phospholipids do move sideways past one another, but only within their own sheet. This movement never turns a tail toward the water.">Heads and tails end up mixed at random, since the phospholipids drift past one another</li>
+                        <li data-why="The cytoplasm is watery too. A single sheet would leave every tail in contact with the fluid inside the cell.">A single sheet forms, heads facing out of the cell and tails facing the cytoplasm</li>
+                        <li>The heads face the watery fluid on each side, and the tails meet in the middle, away from both</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>Water on both sides explains the structure. Two sheets placed tail to tail is the only arrangement that keeps every tail out of the water, so the bilayer forms with no energy from the cell.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-q" data-review="structure">
+                <div class="quiz-variant" data-answer="2">
+                    <p class="quiz-stem">A sodium ion is smaller than a carbon dioxide molecule. Carbon dioxide crosses a membrane freely, but sodium ions cannot cross the bilayer. What does this show?</p>
+                    <ol class="quiz-options">
+                        <li data-why="If the membrane worked like a net with holes, the smaller particle would cross. Here the larger one crosses, so size is not the deciding factor.">The membrane has holes, and sodium is the wrong shape to fit through them</li>
+                        <li>What crosses depends on chemistry: non-polar molecules dissolve in the oily core, and charged particles do not</li>
+                        <li data-why="The cell is not choosing. The core is oily, and a charged particle does not enter oil.">Sodium is too reactive for the cell to allow it in</li>
+                        <li data-why="Membranes are not freely permeable to all gases. Carbon dioxide crosses because it is small and non-polar, not because it is a gas.">Carbon dioxide is a gas, and gases pass through any material</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>To cross the bilayer, a substance must dissolve in its oily core. Carbon dioxide is non-polar and dissolves in it. A sodium ion carries a charge, is attracted to water, and does not enter the oily core.</p>
+                    </div>
+                </div>
+
+                <div class="quiz-variant" data-answer="1">
+                    <p class="quiz-stem">On the scale strip in Figure 1.1, a water molecule is 0.27 nm across and crosses the membrane. A sodium ion is 0.20 nm across and cannot cross the bilayer. What explains the difference?</p>
+                    <ol class="quiz-options">
+                        <li>The ion carries a charge and does not enter the oily core, while water is uncharged and small enough that some passes through</li>
+                        <li data-why="Oxygen and carbon dioxide are both wider than water and cross freely with no pore. Width is not what separates them.">The membrane has pores sized to admit water and exclude anything wider</li>
+                        <li data-why="The heads are hydrophilic, so they attract ions instead of repelling them. The oily layer beneath the heads is what stops a charged particle.">The phosphate heads repel the ion before it reaches the middle of the membrane</li>
+                        <li data-why="Water crosses because it is small and uncharged, and aquaporins let it cross faster. Being the solvent does not change how it crosses.">Water is the solvent, so a membrane is permeable to it whatever its chemistry</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>If you order the five particles by width, there is no pattern: the smallest and the largest are the two that cannot cross the bilayer. Order them by charge and polarity, and the pattern is clear.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-q" data-review="structure">
+                <div class="quiz-variant" data-answer="4">
+                    <p class="quiz-stem">Glucose is a small molecule, but it cannot cross a cell membrane directly through the bilayer. Why not?</p>
+                    <ol class="quiz-options">
+                        <li data-why="Size is not the main obstacle. Some molecules larger than glucose, such as steroid hormones, cross the bilayer because they are non-polar.">It is too large to fit between the phospholipids</li>
+                        <li data-why="Glucose is already a monomer. Cells take it in without breaking it down further.">It has to be broken down further before any cell can take it in</li>
+                        <li data-why="The heads are hydrophilic, so they do not repel glucose. The oily layer beneath them is the obstacle.">The phosphate heads repel it at the outer surface</li>
+                        <li>It is polar, so it does not dissolve in the oily core. It crosses only through a transport protein specific to it</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>Glucose, like sodium and potassium ions, is attracted to water, so the oily core stops it. It crosses only where a transport protein provides a route. This is what makes a membrane <em>selectively</em> permeable.</p>
+                    </div>
+                </div>
+
+                <div class="quiz-variant" data-answer="3">
+                    <p class="quiz-stem">A cell needs to take up potassium ions from the fluid around it. How can they get in?</p>
+                    <ol class="quiz-options">
+                        <li data-why="An aquaporin is a channel for water. A charged ion needs a transport protein specific to it.">Through the aquaporins, alongside the water molecules</li>
+                        <li data-why="Water can do that because it is uncharged. A charged ion does not enter the oily layer between the tails.">By slipping between the phospholipids, in the way water does</li>
+                        <li>Through a transport protein that spans the membrane and is specific to potassium ions</li>
+                        <li data-why="Size is not the factor here. A charged particle does not dissolve in oil, however small it is.">By dissolving in the oily core, since the ion is smaller than the molecules that cross freely</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>Potassium ions, like sodium ions and glucose, are attracted to water and stopped by the oily core. Which substances a cell takes in depends on which transport proteins are in its membrane. This is why two cells with the same bilayer can let different substances through.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-q" data-review="diffusion">
+                <div class="quiz-variant" data-answer="1">
+                    <p class="quiz-stem">A drop of dye has spread evenly through a beaker of water. What are the dye particles doing now?</p>
+                    <ol class="quiz-options">
+                        <li>Still moving in all directions, but the same number crosses each way, so there is no net movement</li>
+                        <li data-why="Random motion does not stop. At equal concentrations, the movements in each direction are balanced.">They have stopped moving, because the concentrations are now equal</li>
+                        <li data-why="Nothing holds them in place. Their random motion needs no energy.">They are held in place by the water molecules around them</li>
+                        <li data-why="That would be diffusion in reverse. Random motion does not collect particles back into one place.">They will slowly gather back together into a drop</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>Diffusion continues at equal concentrations. The particles keep moving in both directions at the same rate, so the <em>net</em> movement is zero.</p>
+                    </div>
+                </div>
+
+                <div class="quiz-variant" data-answer="2">
+                    <p class="quiz-stem">Oxygen diffuses into a cell from the fluid around it until the concentration inside matches the concentration outside. What is happening at that point?</p>
+                    <ol class="quiz-options">
+                        <li data-why="The random motion of the particles does not stop. What has changed is that the movements in each direction are now equal.">Oxygen has stopped crossing the membrane in either direction</li>
+                        <li>Oxygen molecules still cross both ways, at equal rates, so there is no net movement</li>
+                        <li data-why="Diffusion needs no energy from the cell, because the particles are already moving.">The cell must now spend energy to keep oxygen coming in</li>
+                        <li data-why="Oxygen does not move back out as a correction. Equal concentrations mean equal movement in each direction, not a reversal.">Oxygen begins moving back out, because too much of it has come in</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>At equal concentrations, oxygen molecules still cross in both directions at equal rates, so there is no net movement. A membrane does not change diffusion, as long as the substance can cross it.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-q" data-review="osmosis">
+                <div class="quiz-variant" data-answer="3">
+                    <p class="quiz-stem">A patient receives pure water through an IV instead of 0.9% saline. What happens to their red blood cells?</p>
+                    <ol class="quiz-options">
+                        <li data-why="That happens in a hypertonic solution. Pure water is hypotonic to the cells.">They shrink and wrinkle, because water leaves them</li>
+                        <li data-why="Water does cross in both directions, but not at equal rates. There is solute inside the cells and none outside, so there is a net movement of water into them.">Nothing, because water crosses in both directions equally</li>
+                        <li>They swell and may burst, because pure water is hypotonic to them and water moves in</li>
+                        <li data-why="An animal cell has no cell wall. That is exactly why a plant cell survives this situation and a red blood cell does not.">They swell, but their cell wall stops them bursting</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>Pure water contains no solute, so it is strongly hypotonic to the cytoplasm. Water enters by osmosis, the cells swell, and with no cell wall to resist the pressure, their membranes break. IV fluids use 0.9% saline because it is isotonic to blood.</p>
+                    </div>
+                </div>
+
+                <div class="quiz-variant" data-answer="4">
+                    <p class="quiz-stem">A red blood cell and a plant cell are placed in pure water. Both take in water. Why does only one of them burst?</p>
+                    <ol class="quiz-options">
+                        <li data-why="Speed is not the difference, and plant cells also have aquaporins. What matters is what happens once the cell is full.">Water enters the animal cell faster, because only it has aquaporins</li>
+                        <li data-why="A plant cell membrane is a phospholipid bilayer like any other, and the question states that the plant cell takes in water too.">The plant cell's membrane will not let water through, so it never fills</li>
+                        <li data-why="No living cell is isotonic to pure water, which contains no solute. Water enters the plant cell too.">The plant cell's cytoplasm is isotonic to pure water, so nothing happens to it</li>
+                        <li>The plant cell has a cell wall that resists further expansion once it is full; the animal cell has nothing to resist the pressure</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>Water enters both cells by osmosis for the same reason. The difference is outside the membrane: the cell wall does not keep water out, but it stops the plant cell from expanding further.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-q" data-review="osmosis">
+                <div class="quiz-variant" data-answer="2">
+                    <p class="quiz-stem">A cell is placed in a solution and its volume does not change. Which statement is correct?</p>
+                    <ol class="quiz-options">
+                        <li data-why="The terms describe the solution, always compared with the cell. The cell is what the solution is compared with, not what is named.">The cell is isotonic</li>
+                        <li>The solution is isotonic to the cell, so water crosses equally in both directions</li>
+                        <li data-why="Water has not stopped crossing. A constant volume means the movements in the two directions are equal.">Water has stopped crossing the membrane</li>
+                        <li data-why="Two solutions can have equal solute concentrations at any concentration. What matters is that they are equal, not that they contain no solute.">Neither the cell nor the solution contains any solute</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>Hypertonic, hypotonic and isotonic always describe the <em>solution</em>, compared with the cell in it. A constant volume does not mean water has stopped moving. Water crosses in both directions at equal rates.</p>
+                    </div>
+                </div>
+
+                <div class="quiz-variant" data-answer="1">
+                    <p class="quiz-stem">A red blood cell shrinks and wrinkles in the solution it has been placed in. Which statement describes what has happened?</p>
+                    <ol class="quiz-options">
+                        <li>The solution is hypertonic to the cell, so there is a net movement of water out of it</li>
+                        <li data-why="The direction of water movement is correct, but the term is not. The three terms describe the solution, compared with the cell in it.">The cell is hypertonic to the solution, so water has left it</li>
+                        <li data-why="A hypotonic solution has a lower solute concentration, and water moves into the cell. That makes a red blood cell swell.">The solution is hypotonic to the cell, so water has left it</li>
+                        <li data-why="The solute cannot cross the membrane. This is why water moves instead.">Solute has crossed out of the cell, carrying water with it</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>The three terms name the solution, never the cell. Crenation is the visible result of a hypertonic solution: the solute cannot cross, so there is a net movement of water out of the cell.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</main>
+
+<script src="../assets/toc.js?v=330"></script>
+<script src="../assets/course.js?v=330"></script>
+</body>
+</html>

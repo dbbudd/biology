@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en-GB" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Interactive — Biology</title>
+<!--
+    ONE INTERACTIVE, ON ITS OWN
+    ---------------------------------------------------------------
+    embed.html?sim=<name> renders a single simulation and nothing else:
+    no header, no chapter text, no navigation. It exists so a sim can be
+    dropped into SharePoint, Google Sites or anywhere else the way a
+    YouTube video is, while the reader itself stays here.
+
+    Every sim already registers window.SIMS[name] = fn(el) and mounts into
+    any element, so this page only has to build the element and call it.
+
+    Params
+      sim    the file name in sims/ (required)
+      theme  light | sepia | dark      default light
+      title  1 to keep the sim's heading   default off, per "just the interactive"
+      v      cache-busting asset version
+-->
+<script>
+(function () {
+    var q = new URLSearchParams(location.search);
+    var v = (q.get('v') || '1').replace(/[^\w.-]/g, '');
+    window.EMBED_V = v;
+    var t = q.get('theme');
+    if (t === 'light' || t === 'sepia' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+    var l = document.createElement('link');
+    l.rel = 'stylesheet';
+    l.href = 'assets/course.css?v=' + v;
+    document.head.appendChild(l);
+})();
+</script>
+<style>
+    /* The sim is styled by course.css as a bordered card sitting in a text
+       column. Embedded it IS the page, so the card furniture comes off and it
+       runs to the edges. Height stays natural: these sims were authored for a
+       content column and forcing 61 of them to stretch would break layouts, so
+       the frame scrolls if it is shorter than the sim. The Share snippet in the
+       reader measures the real height, so in practice it fits. */
+    html, body { margin: 0; padding: 0; background: var(--bg, #fff); }
+    body { font-family: var(--body-font, system-ui, sans-serif); color: var(--text, #1a1a1a); }
+    #stage > .sim { margin: 0; border: 0; border-radius: 0; background: var(--bg, #fff); }
+    #stage > .sim > .sim-header { border-radius: 0; }
+    .embed-msg {
+        margin: 0; padding: 1.5rem; font-size: 0.95rem; line-height: 1.5;
+        color: var(--text-secondary, #555);
+    }
+    .embed-msg a { color: inherit; }
+</style>
+</head>
+<body>
+<div id="stage"></div>
+<noscript><p class="embed-msg">This interactive needs JavaScript to be switched on.</p></noscript>
+<script>
+(function () {
+    var v = window.EMBED_V;
+    var q = new URLSearchParams(location.search);
+    var stage = document.getElementById('stage');
+    var name = (q.get('sim') || '').trim();
+
+    function fail(msg) { stage.innerHTML = '<p class="embed-msg">' + msg + '</p>'; }
+
+    // The name becomes a script path, so it is checked rather than trusted.
+    // No dot and no slash means a traversal cannot be spelled at all.
+    if (!/^[a-z0-9][a-z0-9-]{0,60}$/.test(name)) {
+        fail('No interactive was named. Add <code>?sim=</code> and the name of one to this address.');
+        return;
+    }
+
+    // bottleneck.js reads this to find vendor/three.module.min.js
+    window.COURSE_SHELL = window.COURSE_SHELL || { root: './' };
+
+    var el = document.createElement('div');
+    el.className = 'sim';
+    el.setAttribute('data-sim', name);
+    if (q.get('title') === '1') {
+        var h = document.createElement('div');
+        h.className = 'sim-header';
+        h.innerHTML = '<h4>' + (q.get('label') || 'Interactive').replace(/[&<>"]/g, '') + '</h4>' +
+                      '<span class="sim-kind">Interactive</span>';
+        el.appendChild(h);
+    }
+    stage.appendChild(el);
+
+    function load(src) {
+        return new Promise(function (ok, no) {
+            var s = document.createElement('script');
+            s.src = src + '?v=' + v;
+            s.async = false;
+            s.onload = ok;
+            s.onerror = function () { no(new Error('could not load ' + src)); };
+            document.head.appendChild(s);
+        });
+    }
+
+    // toc.js carries COURSE.glossary, which u4-word-match builds its pairs from.
+    // Fetched alongside the sim rather than before it, so it costs no extra wait,
+    // and a failure to get it is not fatal to sims that never look at it.
+    Promise.all([
+        load('assets/toc.js').catch(function () { }),
+        load('sims/_ui.js').then(function () { return load('sims/' + name + '.js'); })
+    ]).then(function () {
+        var fn = (window.SIMS || {})[name];
+        if (typeof fn !== 'function') throw new Error('sims/' + name + '.js did not register window.SIMS.' + name);
+        fn(el);
+        // Offered for hosts that can listen. SharePoint cannot run script on the
+        // parent page, so the Share snippet carries a measured height instead.
+        // Reported so the Share panel can size the frame from a real render at a real
+        // width. A sim reflows, so its height depends on how wide it is drawn, which is
+        // why a figure measured in the reader's column does not fit a narrower host.
+        // Sent repeatedly because canvases and fonts settle after first paint.
+        try {
+            var send = function () {
+                parent.postMessage({
+                    type: 'bio-embed-size', sim: name, width: window.innerWidth,
+                    height: Math.max(document.documentElement.scrollHeight, document.body.scrollHeight)
+                }, '*');
+            };
+            send();
+            [120, 400, 1200, 2500].forEach(function (t) { setTimeout(send, t); });
+            if (window.ResizeObserver) new ResizeObserver(send).observe(document.body);
+        } catch (e) { /* not framed, or a host that does not allow it */ }
+    }).catch(function (err) {
+        console.error('[embed:' + name + ']', err);
+        fail('This interactive could not load.');
+    });
+})();
+</script>
+</body>
+</html>

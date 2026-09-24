@@ -1,0 +1,868 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1.6 Homeostasis and Feedback — Biology</title>
+<link rel="stylesheet" href="../assets/course.css?v=330">
+<script>if('scrollRestoration' in history)history.scrollRestoration='manual';</script>
+</head>
+<body data-root="../" data-chapter="u1-homeostasis">
+
+<main class="main" role="main">
+
+    <section id="intro">
+        <div class="chapter-eyebrow">Unit 1 — Biochemistry &amp; Homeostasis</div>
+        <h1>1.6 Homeostasis and Feedback</h1>
+        <p class="lead">Chapter 1.5 left a question hanging: what is all that machinery <em>for</em>? This chapter answers it. Every organ, every folded surface, every transport protein you have met exists to hold a small number of internal conditions inside a narrow range, whatever is happening outside.</p>
+
+        <div class="chapter-meta"></div>
+
+        <div data-progression></div>
+
+        <div class="callout callout-recall">
+            <p>Two things from 1.3 are about to become the whole chapter. Pepsin works at pH 2 and is destroyed at pH 8; pancreatic enzymes work at pH 8 and are destroyed at pH 2. Every enzyme in your body is like that — a protein with a shape that only holds within a narrow band of temperature and acidity.</p>
+            <p>That is why conditions inside you have to be controlled. Not for comfort. Because your chemistry stops if they are not.</p>
+        </div>
+
+        <div class="objectives">
+            <h4>By the end of this chapter you should be able to</h4>
+            <ul>
+                <li>Explain what homeostasis is and why survival depends on it.</li>
+                <li>Identify the stimulus, receptor, control centre, effector and response in any feedback loop.</li>
+                <li>Describe negative feedback using body temperature and blood glucose, and explain what breaks in diabetes.</li>
+                <li>Describe positive feedback using blood clotting, vomiting, sneezing and childbirth, and explain how each one ends.</li>
+                <li>Explain that feedback can stabilise or destabilise a system, and say which kind does which.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="what" data-kind="Core" data-standards="HS-LS1-3" data-time="10 min" data-track>
+        <h2>Staying the same while everything changes</h2>
+
+        <figure class="shot">
+            <img src="../images/u1/image105.png" alt="A photograph of red-orange sand dunes rippled by wind, stretching towards a range of rocky brown mountains under a deep blue cloudless sky, with the low sun casting one dune into deep shadow.">
+            <figcaption><b>Figure 1.22</b> — A desert can swing from above 40 °C in the afternoon to near freezing before dawn. A person walking through it holds their core temperature within about a degree of 37 °C the whole time, in both directions. Nothing about the environment is doing that. Something inside the body is.</figcaption>
+        </figure>
+
+        <p>In 1932 the physiologist Walter Cannon published a book called <em>The Wisdom of the Body</em>, in which he named this idea <span class="term">homeostasis</span> — from Greek words meaning "similar" and "standing still". His insight was that the constancy is not passive. Staying the same in a changing world takes continuous, active work, and a body that stops doing that work does not drift gently; it dies quite quickly.</p>
+
+        <p>Here are the main variables your body holds steady, and what happens if it fails.</p>
+
+        <table>
+            <thead>
+                <tr><th>Variable</th><th>Held near</th><th>What goes wrong outside the range</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Core body temperature</td><td>37 °C (about 36.1–37.2)</td><td>Below 35 °C, enzymes slow and thinking becomes confused; above about 40 °C, proteins begin to denature</td></tr>
+                <tr><td>Blood glucose</td><td>4–6 mmol/L fasting</td><td>Too low: the brain, which cannot store fuel, fails within minutes. Too high: damage to blood vessels, nerves and kidneys over years</td></tr>
+                <tr><td>Blood pH</td><td>7.35–7.45</td><td>A shift of 0.4 either way is usually fatal — every enzyme in the body is affected at once</td></tr>
+                <tr><td>Water and salt balance</td><td>Blood roughly 0.9% salt</td><td>Cells shrink or swell by osmosis, exactly as in Chapter 1.1</td></tr>
+                <tr><td>Blood oxygen and carbon dioxide</td><td>—</td><td>Carbon dioxide build-up lowers blood pH; low oxygen starves respiring cells</td></tr>
+            </tbody>
+        </table>
+
+        <div class="callout callout-key">
+            <p>Notice how narrow the blood pH range is: 7.35 to 7.45, a total width of 0.1. Your stomach runs at pH 2 and your duodenum at pH 8 — a difference of a million-fold in hydrogen ion concentration, six inches apart — while the blood between them never moves by a tenth of a unit. Homeostasis is not the absence of extremes. It is extremes being kept exactly where they are wanted.</p>
+        </div>
+
+        <h3>The thermostat comparison, and where it fails</h3>
+
+        <figure class="diagram">
+            <svg viewBox="0 0 1180 860" xmlns="http://www.w3.org/2000/svg" role="img"
+                 aria-labelledby="tc-title tc-desc">
+            <title id="tc-title">The same temperature control problem in a house and in a body</title>
+            <desc id="tc-desc">Two panels side by side with an identical four-step structure. In the house
+                panel: a wall thermostat, labelled one sensor in one place; then a box headed compare with
+                the target, about 20 degrees Celsius, set by you; then two devices side by side, a fan that
+                moves heat away and a radiator that puts heat in; then a house, whose room cools or warms.
+                In the body panel, the same four steps: a head in profile with the hypothalamus marked deep
+                in the brain, labelled that there are thermoreceptors in the skin as well; then a box headed
+                compare with the target, about 37 degrees Celsius, which the body can move; then two
+                responses, sweating which moves heat away and shivering which puts heat in; then a human
+                figure, whose core cools or warms. The steps are the same in both columns; only the hardware
+                differs.</desc>
+            <style>
+                /* Everything here sits on the cream icon panels, so the ink is fixed rather than
+                   theme-following: var(--text) goes near-white in dark mode and would vanish. */
+                .diagram svg .tcpanel { fill: #F8F0E5; stroke: #d9cfbd; stroke-width: 1.5; }
+                .diagram svg .tcbox { fill: #efe6d5; stroke: #3f8a93; stroke-width: 1.8; }
+                .diagram svg .tcrule { stroke: #cfc4b0; stroke-width: 1.4; }
+                .diagram svg .tcar { stroke: #6f6a60; stroke-width: 3; fill: none; marker-end: url(#tcarrow); }
+                text.tch { font-size: 24px; font-weight: 800; letter-spacing: 0.08em; fill: #1f2933; }
+                text.tct { font-size: 21px; font-weight: 700; fill: #1f2933; }
+                text.tcs { font-size: 19px; fill: #4a4a4a; }
+            </style>
+            <defs>
+                <marker id="tcarrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+                    <path d="M0,0 L10,5 L0,10 z" fill="#6f6a60"/></marker>
+                <clipPath id="ic1"><rect x="229.7" y="80.0" width="138.7" height="140.0"/></clipPath>
+                <clipPath id="ic2"><rect x="114.0" y="446.0" width="107.9" height="140.0"/></clipPath>
+                <clipPath id="ic3"><rect x="366.7" y="446.0" width="126.6" height="140.0"/></clipPath>
+                <clipPath id="ic4"><rect x="243.0" y="702.0" width="112.0" height="120.0"/></clipPath>
+                <clipPath id="ic5"><rect x="820.9" y="80.0" width="120.1" height="140.0"/></clipPath>
+                <clipPath id="ic6"><rect x="680.0" y="474.9" width="140.0" height="82.2"/></clipPath>
+                <clipPath id="ic7"><rect x="944.1" y="446.0" width="135.9" height="140.0"/></clipPath>
+                <clipPath id="ic8"><rect x="855.1" y="702.0" width="51.9" height="120.0"/></clipPath>
+            </defs>
+
+            <rect x="16" y="8" width="566" height="844" rx="14" class="tcpanel"/>
+            <text x="299" y="48" class="tch" text-anchor="middle">A HOUSE</text>
+            <line x1="40" y1="64" x2="558" y2="64" class="tcrule"/>
+            <image href="../images/u1/tempcontrol/thermostat.jpeg" x="224.7" y="75.4" width="147.3" height="149.0" clip-path="url(#ic1)"/>
+            <text x="299" y="248" class="tct" text-anchor="middle">Thermostat on the wall</text>
+            <text x="299" y="270" class="tcs" text-anchor="middle">one sensor, in one place</text>
+            <path d="M299 288 L299 314" class="tcar"/>
+            <rect x="40" y="322" width="518" height="84" rx="10" class="tcbox"/>
+            <text x="299" y="352" class="tct" text-anchor="middle">Compare with the target</text>
+            <text x="299" y="378" class="tcs" text-anchor="middle">about 20 °C — and you set it</text>
+            <path d="M299 412 L299 438" class="tcar"/>
+            <image href="../images/u1/tempcontrol/fan.jpeg" x="108.5" y="444.0" width="118.1" height="145.0" clip-path="url(#ic2)"/>
+            <image href="../images/u1/tempcontrol/radiator.jpeg" x="362.9" y="438.7" width="135.3" height="149.9" clip-path="url(#ic3)"/>
+            <text x="168" y="614" class="tct" text-anchor="middle">Fan</text>
+            <text x="168" y="636" class="tcs" text-anchor="middle">moves heat away</text>
+            <text x="430" y="614" class="tct" text-anchor="middle">Radiator</text>
+            <text x="430" y="636" class="tcs" text-anchor="middle">puts heat in</text>
+            <path d="M168 652 L273 692" class="tcar"/>
+            <path d="M430 652 L325 692" class="tcar"/>
+            <image href="../images/u1/tempcontrol/house.jpeg" x="239.5" y="694.7" width="119.0" height="131.8" clip-path="url(#ic4)"/>
+            <text x="299" y="850" class="tct" text-anchor="middle">The room cools or warms</text>
+            <rect x="598" y="8" width="566" height="844" rx="14" class="tcpanel"/>
+            <text x="881" y="48" class="tch" text-anchor="middle">A BODY</text>
+            <line x1="622" y1="64" x2="1140" y2="64" class="tcrule"/>
+            <image href="../images/u1/tempcontrol/head.jpeg" x="817.7" y="76.4" width="126.1" height="146.2" clip-path="url(#ic5)"/>
+            <text x="881" y="248" class="tct" text-anchor="middle">Hypothalamus, deep in the brain</text>
+            <text x="881" y="270" class="tcs" text-anchor="middle">and thermoreceptors in the skin too</text>
+            <path d="M881 288 L881 314" class="tcar"/>
+            <rect x="622" y="322" width="518" height="84" rx="10" class="tcbox"/>
+            <text x="881" y="352" class="tct" text-anchor="middle">Compare with the target</text>
+            <text x="881" y="378" class="tcs" text-anchor="middle">about 37 °C — and the body can move it</text>
+            <path d="M881 412 L881 438" class="tcar"/>
+            <image href="../images/u1/tempcontrol/sweat.jpeg" x="672.4" y="464.4" width="153.9" height="96.7" clip-path="url(#ic6)"/>
+            <image href="../images/u1/tempcontrol/muscle.jpeg" x="938.2" y="433.6" width="146.2" height="156.2" clip-path="url(#ic7)"/>
+            <text x="750" y="614" class="tct" text-anchor="middle">Sweating</text>
+            <text x="750" y="636" class="tcs" text-anchor="middle">moves heat away</text>
+            <text x="1012" y="614" class="tct" text-anchor="middle">Shivering</text>
+            <text x="1012" y="636" class="tcs" text-anchor="middle">puts heat in</text>
+            <path d="M750 652 L855 692" class="tcar"/>
+            <path d="M1012 652 L907 692" class="tcar"/>
+            <image href="../images/u1/tempcontrol/body.jpeg" x="845.6" y="699.4" width="70.7" height="126.8" clip-path="url(#ic8)"/>
+            <text x="881" y="850" class="tct" text-anchor="middle">The core cools or warms</text>
+            </svg>
+            <figcaption><b>Figure 1.23</b> — The same control problem, twice. Read the two columns side by side: each has a sensor, a target to compare against, and two devices that push in opposite directions. The steps are identical — only the hardware differs. Two details already hint at where the analogy breaks: the body senses temperature in two places rather than one, and it can move its own target.</figcaption>
+        </figure>
+
+        <p>The thermostat is the standard analogy and it is a good one, so it is worth being clear about what it gets right and where it breaks — exactly the habit Chapter 1.2 asked for.</p>
+
+        <p><strong>What it gets right:</strong> the structure. A sensor, a target value, a comparison, and two opposing devices that push in opposite directions.</p>
+
+        <p><strong>Where it breaks:</strong> three places, and each one is interesting.</p>
+        <ul>
+            <li>A thermostat has one sensor on a wall. You have thermoreceptors in your skin <em>and</em> inside your hypothalamus, so your body responds to a cold room before its core has cooled at all.</li>
+            <li>A thermostat has two devices. Your body has at least six responses to temperature — sweating, vasodilation, vasoconstriction, shivering, adjusting metabolic rate, and changing your behaviour by putting on a jumper.</li>
+            <li>A thermostat's target is set by you. Your set point is set by the hypothalamus, and it can be <em>deliberately moved</em>. A fever is not a control failure — it is your body raising its own target, which is why you shiver while running a temperature of 39 °C. You feel cold because you are below your new set point.</li>
+        </ul>
+    </section>
+
+    <section id="loop" data-kind="Core" data-standards="HS-LS1-3" data-time="12 min" data-track>
+        <h2>The five components of a feedback loop</h2>
+
+        <p>Every control system in your body, without exception, is built from the same five parts. Learning them once means you can take apart any example you are given, including ones you have never seen.</p>
+
+        <figure class="diagram">
+            <svg viewBox="0 0 1180 510" xmlns="http://www.w3.org/2000/svg" role="img"
+                 aria-labelledby="loop-title loop-desc">
+            <title id="loop-title">The five components of a feedback loop, and the two ways it can close</title>
+            <desc id="loop-desc">Five numbered boxes arranged in a loop that runs clockwise. Along the top,
+                left to right: one, stimulus, the variable moves away from its set point; two, receptor, a
+                structure that detects the change; three, control centre, which compares the reading with the
+                set point and decides. An arrow then runs down the right-hand side to four, effector, the
+                muscle, gland or cell that carries it out; then left to five, response, what the effector does
+                and its effect on the variable. From the response, two arrows run back to the stimulus side by
+                side. One is marked with a minus sign: in negative feedback the response cancels the stimulus,
+                so the loop switches itself off. The other is marked with a plus sign: in positive feedback
+                the response adds to the stimulus, so each turn of the loop makes the next turn larger. Every
+                other part of the loop is identical in the two cases; only that one returning arrow differs.</desc>
+            <style>
+                .diagram svg .lb { fill: var(--bg-surface); stroke: var(--light-teal); stroke-width: 2; }
+                .diagram svg .lnumb { fill: var(--light-teal); }
+                .diagram svg .la { stroke: var(--light-teal); stroke-width: 3; fill: none; marker-end: url(#lm); }
+                .diagram svg .lneg { stroke: hsl(190 55% 34%); stroke-width: 3.4; fill: none; marker-end: url(#lmn); }
+                .diagram svg .lpos { stroke: var(--red); stroke-width: 3.4; fill: none; marker-end: url(#lmp);
+                                     stroke-dasharray: 9 5; }
+                .diagram svg .lnegb { fill: hsl(190 55% 34%); }
+                .diagram svg .lposb { fill: var(--red); }
+                text.lnum { font-size: 17px; font-weight: 800; fill: #fff; }
+                text.lsign { font-size: 20px; font-weight: 800; fill: #fff; }
+                text.lt { font-size: 21px; font-weight: 700; fill: var(--text); }
+                text.ls { font-size: 19px; fill: var(--text-secondary); }
+                text.lnegt { font-size: 21px; font-weight: 700; fill: hsl(190 55% 30%); }
+                text.lnegs { font-size: 19px; fill: var(--text-secondary); }
+                text.lpost { font-size: 21px; font-weight: 700; fill: var(--red); }
+                text.lposs { font-size: 19px; fill: var(--text-secondary); }
+                text.lfoot { font-size: 19px; font-style: italic; fill: var(--text-secondary); }
+                [data-theme="dark"] .diagram svg .lneg { stroke: hsl(190 60% 58%); }
+                [data-theme="dark"] .diagram svg .lnegb { fill: hsl(190 60% 42%); }
+                [data-theme="dark"] text.lnegt { fill: hsl(190 60% 62%); }
+            </style>
+            <defs>
+                <marker id="lm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+                    <path d="M0,0 L10,5 L0,10 z" fill="var(--light-teal)"/></marker>
+                <marker id="lmn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+                    <path d="M0,0 L10,5 L0,10 z" fill="hsl(190 55% 34%)"/></marker>
+                <marker id="lmp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+                    <path d="M0,0 L10,5 L0,10 z" fill="var(--red)"/></marker>
+            </defs>
+
+            <rect x="20" y="44" width="330" height="96" rx="12" class="lb"/>
+            <circle cx="47" cy="71" r="13" class="lnumb"/>
+            <text x="47" y="78" class="lnum" text-anchor="middle">1</text>
+            <text x="70" y="78" class="lt">Stimulus</text>
+            <text x="36" y="104" class="ls">the variable moves away from its</text>
+            <text x="36" y="126" class="ls">set point</text>
+            <rect x="425" y="44" width="330" height="96" rx="12" class="lb"/>
+            <circle cx="452" cy="71" r="13" class="lnumb"/>
+            <text x="452" y="78" class="lnum" text-anchor="middle">2</text>
+            <text x="475" y="78" class="lt">Receptor</text>
+            <text x="441" y="104" class="ls">a structure that detects the change</text>
+            <rect x="830" y="44" width="330" height="96" rx="12" class="lb"/>
+            <circle cx="857" cy="71" r="13" class="lnumb"/>
+            <text x="857" y="78" class="lnum" text-anchor="middle">3</text>
+            <text x="880" y="78" class="lt">Control centre</text>
+            <text x="846" y="104" class="ls">compares the reading with the set</text>
+            <text x="846" y="126" class="ls">point, and decides</text>
+            <rect x="830" y="244" width="330" height="96" rx="12" class="lb"/>
+            <circle cx="857" cy="271" r="13" class="lnumb"/>
+            <text x="857" y="278" class="lnum" text-anchor="middle">4</text>
+            <text x="880" y="278" class="lt">Effector</text>
+            <text x="846" y="304" class="ls">the muscle, gland or cell that</text>
+            <text x="846" y="326" class="ls">carries it out</text>
+            <rect x="425" y="244" width="330" height="96" rx="12" class="lb"/>
+            <circle cx="452" cy="271" r="13" class="lnumb"/>
+            <text x="452" y="278" class="lnum" text-anchor="middle">5</text>
+            <text x="475" y="278" class="lt">Response</text>
+            <text x="441" y="304" class="ls">what the effector does, and its</text>
+            <text x="441" y="326" class="ls">effect on the variable</text>
+            <path d="M350 92 L409 92" class="la"/>
+            <path d="M755 92 L814 92" class="la"/>
+            <path d="M995 140 L995 228" class="la"/>
+            <path d="M830 292 L771 292" class="la"/>
+            <path d="M425 270 L215 270 L215 156" class="lneg"/>
+            <path d="M425 314 L140 314 L140 156" class="lpos"/>
+            <circle cx="215" cy="270" r="15" class="lnegb"/>
+            <text x="215" y="278" class="lsign" text-anchor="middle">−</text>
+            <circle cx="140" cy="314" r="15" class="lposb"/>
+            <text x="140" y="322" class="lsign" text-anchor="middle">+</text>
+            <circle cx="34" cy="391" r="14" class="lnegb"/>
+            <text x="34" y="399" class="lsign" text-anchor="middle">−</text>
+            <text x="58" y="398" class="lnegt">NEGATIVE feedback</text>
+            <text x="20" y="426" class="lnegs">the response cancels the stimulus, so the loop switches itself off</text>
+            <text x="20" y="448" class="lnegs">— this is how every example in this chapter works</text>
+            <circle cx="626" cy="391" r="14" class="lposb"/>
+            <text x="626" y="399" class="lsign" text-anchor="middle">+</text>
+            <text x="650" y="398" class="lpost">POSITIVE feedback</text>
+            <text x="612" y="426" class="lposs">the response adds to the stimulus, so each turn of the loop</text>
+            <text x="612" y="448" class="lposs">makes the next turn larger — the loop drives itself</text>
+            <text x="590" y="486" class="lfoot" text-anchor="middle">One arrow differs. Everything else is identical.</text>
+            </svg>
+            <figcaption><b>Figure 1.24</b> — The five components, and the two ways the loop can close. Follow it clockwise: a stimulus is detected, compared with the set point, acted on, and the response feeds back to the start. The only thing that separates negative feedback from positive feedback is that last returning arrow — whether the response cancels the stimulus or adds to it. Every other part is the same, which is why the same five words work for both.</figcaption>
+        </figure>
+
+        <h3>Worked example: too hot</h3>
+
+        <table>
+            <thead>
+                <tr><th>Component</th><th>Getting too hot</th><th>Getting too cold</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Stimulus</td><td>Core temperature rises above 37 °C</td><td>Core temperature falls below 37 °C</td></tr>
+                <tr><td>Receptor</td><td colspan="2">Thermoreceptors in the skin, and receptors inside the hypothalamus itself</td></tr>
+                <tr><td>Control centre</td><td colspan="2">The hypothalamus</td></tr>
+                <tr><td>Effector</td><td>Sweat glands; smooth muscle in skin arterioles</td><td>Skeletal muscle; smooth muscle in skin arterioles; hair erector muscles</td></tr>
+                <tr><td>Response</td><td>Sweating (evaporation removes heat); <span class="term">vasodilation</span> brings blood to the surface so heat is lost</td><td>Shivering (muscle contraction releases heat); <span class="term">vasoconstriction</span> keeps blood away from the surface</td></tr>
+                <tr><td>Effect on the variable</td><td>Temperature falls back towards 37 °C</td><td>Temperature rises back towards 37 °C</td></tr>
+            </tbody>
+        </table>
+
+        <p>Two opposing loops sharing a control centre — one for each direction. That pairing is the standard design, and you will see it again in the next section with insulin and glucagon.</p>
+
+        <figure class="diagram">
+            <svg viewBox="0 0 1180 560" xmlns="http://www.w3.org/2000/svg" role="img"
+                 aria-labelledby="bt-t bt-d">
+            <title id="bt-t">Body temperature oscillating about the set point</title>
+            <desc id="bt-d">A line graph of body temperature in degrees Celsius against time. The vertical
+                axis runs from 36.0 to 38.0 degrees with a line every half degree. A dashed horizontal line
+                at 37.0 degrees is labelled as the set point. A smooth curve waves gently above and below it,
+                rising no higher than 37.4 and falling no lower than 36.6, so the whole oscillation spans
+                only 0.8 of a degree. The curve crosses the set point repeatedly and never settles on it. The
+                first peak is marked: too hot, above the set point, where sweat glands open and skin vessels
+                widen so the temperature falls. The first trough is marked: too cold, below the set point,
+                where shivering starts and skin vessels narrow so the temperature rises.</desc>
+            <style>
+                .diagram svg .btGrid { stroke: var(--border); stroke-width: 1; }
+                .diagram svg .btAxis { stroke: var(--text-secondary); stroke-width: 1.8; }
+                .diagram svg .btSet { stroke: var(--text-secondary); stroke-width: 2.2; stroke-dasharray: 10 7; }
+                .diagram svg .btCurve { fill: none; stroke: #c0392b; stroke-width: 3.4; stroke-linejoin: round; }
+                [data-theme="dark"] .diagram svg .btCurve { stroke: #e8837a; }
+                .diagram svg .btDot { fill: #c0392b; }
+                [data-theme="dark"] .diagram svg .btDot { fill: #e8837a; }
+                .diagram svg .btLead { stroke: var(--text-secondary); stroke-width: 1.6; fill: none; }
+                text.btT { font-size: 23px; font-weight: 700; fill: var(--text); }
+                text.btTick { font-size: 19px; fill: var(--text-secondary); }
+                text.btAxt { font-size: 21px; fill: var(--text-secondary); }
+                text.btNote { font-size: 19px; fill: var(--text-secondary); }
+                text.btSetT { font-size: 21px; font-weight: 700; fill: var(--text); }
+                text.btHot { font-size: 21px; font-weight: 700; fill: #b03a2e; }
+                [data-theme="dark"] text.btHot { fill: #e8837a; }
+                text.btCold { font-size: 21px; font-weight: 700; fill: hsl(205 60% 38%); }
+                [data-theme="dark"] text.btCold { fill: hsl(205 70% 70%); }
+                text.btFoot { font-size: 19px; font-style: italic; fill: var(--text-secondary); }
+            </style>
+
+            <text x="190" y="52" class="btT">Body temperature over time</text>
+            <line x1="190" y1="450" x2="1000" y2="450" class="btGrid"/>
+            <text x="176" y="457.0" class="btTick" text-anchor="end">36.0</text>
+            <line x1="190" y1="375" x2="1000" y2="375" class="btGrid"/>
+            <text x="176" y="382.0" class="btTick" text-anchor="end">36.5</text>
+            <line x1="190" y1="300" x2="1000" y2="300" class="btGrid"/>
+            <text x="176" y="307.0" class="btTick" text-anchor="end">37.0</text>
+            <line x1="190" y1="225" x2="1000" y2="225" class="btGrid"/>
+            <text x="176" y="232.0" class="btTick" text-anchor="end">37.5</text>
+            <line x1="190" y1="150" x2="1000" y2="150" class="btGrid"/>
+            <text x="176" y="157.0" class="btTick" text-anchor="end">38.0</text>
+            <line x1="190" y1="300" x2="1000" y2="300" class="btSet"/>
+            <line x1="190" y1="150" x2="190" y2="450" class="btAxis"/>
+            <line x1="190" y1="450" x2="1000" y2="450" class="btAxis"/>
+            <path d="M190.0 300.0 L193.0 295.8 L196.0 291.6 L199.0 287.5 L202.0 283.5 L205.0 279.5 L208.0 275.6 L211.0 271.8 L214.0 268.2 L217.0 264.7 L220.0 261.4 L223.0 258.3 L226.0 255.4 L229.0 252.7 L232.0 250.3 L235.0 248.0 L238.0 246.1 L241.0 244.4 L244.0 242.9 L247.0 241.8 L250.0 240.9 L253.0 240.3 L256.0 240.0 L259.0 240.0 L262.0 240.3 L265.0 240.9 L268.0 241.8 L271.0 242.9 L274.0 244.4 L277.0 246.1 L280.0 248.0 L283.0 250.3 L286.0 252.7 L289.0 255.4 L292.0 258.3 L295.0 261.4 L298.0 264.7 L301.0 268.2 L304.0 271.8 L307.0 275.6 L310.0 279.5 L313.0 283.5 L316.0 287.5 L319.0 291.6 L322.0 295.8 L325.0 300.0 L328.0 304.2 L331.0 308.4 L334.0 312.5 L337.0 316.5 L340.0 320.5 L343.0 324.4 L346.0 328.2 L349.0 331.8 L352.0 335.3 L355.0 338.6 L358.0 341.7 L361.0 344.6 L364.0 347.3 L367.0 349.7 L370.0 352.0 L373.0 353.9 L376.0 355.6 L379.0 357.1 L382.0 358.2 L385.0 359.1 L388.0 359.7 L391.0 360.0 L394.0 360.0 L397.0 359.7 L400.0 359.1 L403.0 358.2 L406.0 357.1 L409.0 355.6 L412.0 353.9 L415.0 352.0 L418.0 349.7 L421.0 347.3 L424.0 344.6 L427.0 341.7 L430.0 338.6 L433.0 335.3 L436.0 331.8 L439.0 328.2 L442.0 324.4 L445.0 320.5 L448.0 316.5 L451.0 312.5 L454.0 308.4 L457.0 304.2 L460.0 300.0 L463.0 295.8 L466.0 291.6 L469.0 287.5 L472.0 283.5 L475.0 279.5 L478.0 275.6 L481.0 271.8 L484.0 268.2 L487.0 264.7 L490.0 261.4 L493.0 258.3 L496.0 255.4 L499.0 252.7 L502.0 250.3 L505.0 248.0 L508.0 246.1 L511.0 244.4 L514.0 242.9 L517.0 241.8 L520.0 240.9 L523.0 240.3 L526.0 240.0 L529.0 240.0 L532.0 240.3 L535.0 240.9 L538.0 241.8 L541.0 242.9 L544.0 244.4 L547.0 246.1 L550.0 248.0 L553.0 250.3 L556.0 252.7 L559.0 255.4 L562.0 258.3 L565.0 261.4 L568.0 264.7 L571.0 268.2 L574.0 271.8 L577.0 275.6 L580.0 279.5 L583.0 283.5 L586.0 287.5 L589.0 291.6 L592.0 295.8 L595.0 300.0 L598.0 304.2 L601.0 308.4 L604.0 312.5 L607.0 316.5 L610.0 320.5 L613.0 324.4 L616.0 328.2 L619.0 331.8 L622.0 335.3 L625.0 338.6 L628.0 341.7 L631.0 344.6 L634.0 347.3 L637.0 349.7 L640.0 352.0 L643.0 353.9 L646.0 355.6 L649.0 357.1 L652.0 358.2 L655.0 359.1 L658.0 359.7 L661.0 360.0 L664.0 360.0 L667.0 359.7 L670.0 359.1 L673.0 358.2 L676.0 357.1 L679.0 355.6 L682.0 353.9 L685.0 352.0 L688.0 349.7 L691.0 347.3 L694.0 344.6 L697.0 341.7 L700.0 338.6 L703.0 335.3 L706.0 331.8 L709.0 328.2 L712.0 324.4 L715.0 320.5 L718.0 316.5 L721.0 312.5 L724.0 308.4 L727.0 304.2 L730.0 300.0 L733.0 295.8 L736.0 291.6 L739.0 287.5 L742.0 283.5 L745.0 279.5 L748.0 275.6 L751.0 271.8 L754.0 268.2 L757.0 264.7 L760.0 261.4 L763.0 258.3 L766.0 255.4 L769.0 252.7 L772.0 250.3 L775.0 248.0 L778.0 246.1 L781.0 244.4 L784.0 242.9 L787.0 241.8 L790.0 240.9 L793.0 240.3 L796.0 240.0 L799.0 240.0 L802.0 240.3 L805.0 240.9 L808.0 241.8 L811.0 242.9 L814.0 244.4 L817.0 246.1 L820.0 248.0 L823.0 250.3 L826.0 252.7 L829.0 255.4 L832.0 258.3 L835.0 261.4 L838.0 264.7 L841.0 268.2 L844.0 271.8 L847.0 275.6 L850.0 279.5 L853.0 283.5 L856.0 287.5 L859.0 291.6 L862.0 295.8 L865.0 300.0 L868.0 304.2 L871.0 308.4 L874.0 312.5 L877.0 316.5 L880.0 320.5 L883.0 324.4 L886.0 328.2 L889.0 331.8 L892.0 335.3 L895.0 338.6 L898.0 341.7 L901.0 344.6 L904.0 347.3 L907.0 349.7 L910.0 352.0 L913.0 353.9 L916.0 355.6 L919.0 357.1 L922.0 358.2 L925.0 359.1 L928.0 359.7 L931.0 360.0 L934.0 360.0 L937.0 359.7 L940.0 359.1 L943.0 358.2 L946.0 357.1 L949.0 355.6 L952.0 353.9 L955.0 352.0 L958.0 349.7 L961.0 347.3 L964.0 344.6 L967.0 341.7 L970.0 338.6 L973.0 335.3 L976.0 331.8 L979.0 328.2 L982.0 324.4 L985.0 320.5 L988.0 316.5 L991.0 312.5 L994.0 308.4 L997.0 304.2 L1000.0 300.0" class="btCurve"/>
+            <circle cx="257.5" cy="240.0" r="6" class="btDot"/>
+            <circle cx="392.5" cy="360.0" r="6" class="btDot"/>
+            <path d="M400 216 L265.5 230.0" class="btLead"/>
+            <text x="400" y="182" class="btHot" text-anchor="middle">Too hot — above the set point</text>
+            <text x="400" y="206" class="btNote" text-anchor="middle">sweat glands open, so the temperature falls</text>
+            <path d="M420 392 L392.5 374.0" class="btLead"/>
+            <text x="420" y="416" class="btCold" text-anchor="middle">Too cold — below the set point</text>
+            <text x="420" y="440" class="btNote" text-anchor="middle">shivering starts, so the temperature rises</text>
+            <text x="1014" y="294.0" class="btSetT">set point</text>
+            <text x="1014" y="318.0" class="btNote">37.0 °C</text>
+            <text x="64" y="300.0" class="btAxt" text-anchor="middle" transform="rotate(-90 64 300.0)">body temperature (°C)</text>
+            <text x="595.0" y="502" class="btAxt" text-anchor="middle">time</text>
+            <text x="190" y="540" class="btFoot">The whole wobble spans 0.8 °C — and the line never sits exactly on the set point.</text>
+            
+            </svg>
+            <figcaption><b>Figure 1.25</b> — Body temperature over time. The most important feature of this graph is the one people read past: <strong>the line is never flat.</strong> It oscillates gently above and below the set point and it never sits exactly on it. Read the scale before you judge the size of that wobble — the whole oscillation spans 0.8&nbsp;°C. That is not a failure. A correcting system can only correct <em>after</em> the variable has moved, so a small permanent wobble is the unavoidable signature of a working feedback loop. Homeostasis means &quot;held within a range&quot;, not &quot;held perfectly still&quot;.</figcaption>
+        </figure>
+    </section>
+
+    <section id="negative" data-kind="Core" data-standards="HS-LS1-3" data-time="12 min" data-track>
+        <h2>Negative feedback, and what breaks in diabetes</h2>
+
+        <p>Now the example the learning targets ask for specifically: blood glucose after a meal. It is the best case in the body for seeing a feedback loop, because you have already followed the glucose all the way here from Chapter 1.3.</p>
+
+        <figure class="diagram">
+            <svg viewBox="0 0 1180 720" xmlns="http://www.w3.org/2000/svg" role="img"
+                 aria-labelledby="gl-t gl-d">
+            <title id="gl-t">Two opposing feedback loops holding blood glucose at its set point</title>
+            <desc id="gl-d">An upward arrow on the far left is labelled blood glucose level, so height on the
+                diagram is the glucose level itself. Three boxes are stacked in the middle: blood glucose high,
+                above the normal range, at the top; blood glucose at the set point, about 4 to 6 millimoles per
+                litre, in the middle; and blood glucose low, below the normal range, at the bottom. Two arrows
+                on the left push glucose away from the set point. The upper one, labelled you eat, runs from the
+                set point up to the high box: carbohydrate is digested to glucose and absorbed into the blood.
+                The lower one, labelled you exercise or do not eat, runs down to the low box: your cells keep on
+                using glucose. Two arrows on the right bring it back. From the high box down to the set point:
+                the pancreas releases insulin, cells take glucose in, and the liver stores it as glycogen. From
+                the low box up to the set point: the pancreas releases glucagon, the liver breaks glycogen back
+                down to glucose and releases it. The same organ orders both corrections.</desc>
+            <style>
+                .diagram svg .gAxis { stroke: var(--text-secondary); stroke-width: 2.4; fill: none;
+                                      marker-end: url(#gam); }
+                .diagram svg .gHigh { fill: hsl(0 62% 55% / 0.16); stroke: hsl(0 55% 45%); stroke-width: 2; }
+                .diagram svg .gOpt  { fill: hsl(45 85% 55% / 0.26); stroke: hsl(40 70% 40%); stroke-width: 2.4; }
+                .diagram svg .gLow  { fill: hsl(205 62% 50% / 0.16); stroke: hsl(205 55% 40%); stroke-width: 2; }
+                .diagram svg .gArrR { stroke: hsl(0 58% 48%); stroke-width: 3.2; fill: none; marker-end: url(#gmr); }
+                .diagram svg .gArrB { stroke: hsl(205 58% 44%); stroke-width: 3.2; fill: none; marker-end: url(#gmb); }
+                text.gT { font-size: 22px; font-weight: 700; fill: var(--text); }
+                text.gS { font-size: 19px; fill: var(--text-secondary); }
+                text.gAxt { font-size: 20px; fill: var(--text-secondary); }
+                text.gHotT { font-size: 21px; font-weight: 700; fill: hsl(0 58% 42%); }
+                text.gColdT { font-size: 21px; font-weight: 700; fill: hsl(205 58% 36%); }
+                [data-theme="dark"] text.gHotT { fill: hsl(0 70% 70%); }
+                [data-theme="dark"] text.gColdT { fill: hsl(205 70% 70%); }
+                text.gFoot { font-size: 19px; font-style: italic; fill: var(--text-secondary); }
+            </style>
+            <defs>
+                <marker id="gam" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+                    <path d="M0,0 L10,5 L0,10 z" fill="var(--text-secondary)"/></marker>
+                <marker id="gmr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+                    <path d="M0,0 L10,5 L0,10 z" fill="hsl(0 58% 48%)"/></marker>
+                <marker id="gmb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+                    <path d="M0,0 L10,5 L0,10 z" fill="hsl(205 58% 44%)"/></marker>
+            </defs>
+
+            <path d="M40 664 L40 78" class="gAxis"/>
+            <text x="20" y="374" class="gAxt" text-anchor="middle" transform="rotate(-90 20 374)">blood glucose level</text>
+            <rect x="396" y="92" width="360" height="100" rx="12" class="gHigh"/>
+            <text x="576" y="134" class="gT" text-anchor="middle">Blood glucose HIGH</text>
+            <text x="576" y="162" class="gS" text-anchor="middle">above the normal range</text>
+            <rect x="396" y="320" width="360" height="100" rx="12" class="gOpt"/>
+            <text x="576" y="362" class="gT" text-anchor="middle">Blood glucose at the set point</text>
+            <text x="576" y="390" class="gS" text-anchor="middle">about 4–6 mmol/L</text>
+            <rect x="396" y="548" width="360" height="100" rx="12" class="gLow"/>
+            <text x="576" y="590" class="gT" text-anchor="middle">Blood glucose LOW</text>
+            <text x="576" y="618" class="gS" text-anchor="middle">below the normal range</text>
+            <path d="M396 346 L364 346 L364 142 L390 142" class="gArrR"/>
+            <path d="M396 394 L364 394 L364 598 L390 598" class="gArrB"/>
+            <path d="M756 142 L788 142 L788 346 L762 346" class="gArrR"/>
+            <path d="M756 598 L788 598 L788 394 L762 394" class="gArrB"/>
+            <text x="207" y="208" class="gHotT" text-anchor="middle">You eat</text>
+            <text x="207" y="232" class="gS" text-anchor="middle">carbohydrate is digested to</text>
+            <text x="207" y="256" class="gS" text-anchor="middle">glucose and absorbed into the</text>
+            <text x="207" y="280" class="gS" text-anchor="middle">blood</text>
+            <text x="207" y="472" class="gColdT" text-anchor="middle">You exercise, or do not eat</text>
+            <text x="207" y="496" class="gS" text-anchor="middle">your cells keep on using</text>
+            <text x="207" y="520" class="gS" text-anchor="middle">glucose</text>
+            <text x="988" y="220" class="gHotT" text-anchor="middle">The pancreas releases insulin</text>
+            <text x="988" y="244" class="gS" text-anchor="middle">cells take glucose in, and the liver stores</text>
+            <text x="988" y="268" class="gS" text-anchor="middle">it as glycogen</text>
+            <text x="988" y="472" class="gColdT" text-anchor="middle">The pancreas releases glucagon</text>
+            <text x="988" y="496" class="gS" text-anchor="middle">the liver breaks glycogen back down to</text>
+            <text x="988" y="520" class="gS" text-anchor="middle">glucose and releases it</text>
+            <text x="72" y="700" class="gFoot">The arrows on the left push glucose away from the set point. The arrows on the right bring it back.</text>
+            </svg>
+            <figcaption><b>Figure 1.26</b> — Two opposing negative feedback loops sharing one set point. Height on the page is the glucose level itself, so the arrows on the left literally push it away from the middle and the arrows on the right bring it back. Whichever way it is pushed, the correction runs the other way — and both corrections are ordered by the same organ, the pancreas, using two different messages.</figcaption>
+        </figure>
+
+        <table>
+            <thead>
+                <tr><th>Component</th><th>Blood glucose too high</th><th>Blood glucose too low</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Stimulus</td><td>Glucose rises above about 5 mmol/L — you ate</td><td>Glucose falls below about 4 mmol/L — you exercised, or have not eaten</td></tr>
+                <tr><td>Receptor</td><td>Beta cells in the pancreatic islets</td><td>Alpha cells in the pancreatic islets</td></tr>
+                <tr><td>Control centre</td><td colspan="2">The pancreas — which is also part of the digestive system, as Chapter 1.2 warned</td></tr>
+                <tr><td>Effector</td><td>Liver and muscle cells</td><td>Liver cells</td></tr>
+                <tr><td>Response</td><td><span class="term">Insulin</span> is released. Cells insert GLUT4 transporters and take glucose in; the liver stores it as <span class="term">glycogen</span></td><td><span class="term">Glucagon</span> is released. The liver breaks glycogen back down and releases glucose into the blood</td></tr>
+                <tr><td>Effect</td><td>Blood glucose falls</td><td>Blood glucose rises</td></tr>
+            </tbody>
+        </table>
+
+        <div class="callout callout-key">
+            <p>Insulin does not "destroy" or "use up" glucose. It is a <em>message</em>, and its content is roughly: <em>there is plenty, take some in and store it.</em> Cells that receive it move glucose transporters into their membranes and start absorbing. The glucose is not destroyed — it is moved out of the blood and stored as glycogen, mainly in the liver and muscles. That is why the process is reversible, and why glucagon can get it all back a few hours later.</p>
+        </div>
+
+        <figure class="shot pair">
+            <img class="painting" src="../images/u1/goodsell-insulin-release.jpeg" alt="A painting of a vesicle opening at the surface of a cell: a yellow block of packed insulin molecules at the top dissolves outwards through a green membrane into a brown mesh of molecules outside the cell." loading="lazy">
+            <img class="painting" src="../images/u1/goodsell-insulin-action.jpeg" alt="A painting of the surface of a cell: yellow insulin molecules are binding to large receptor proteins that span the green cell membrane, with more molecules inside the cell responding." loading="lazy">
+            <figcaption><b>Figure 1.27</b> — Both ends of the insulin message. <strong>A painting, not a photograph.</strong> Nothing this small can be photographed, so David Goodsell paints it from real molecular data, with every molecule at its true shape and relative size, magnified about a million times. <em>Left:</em> the control centre sending the message. A beta cell in the pancreas stores insulin as tiny crystals (yellow) inside vesicles; when blood glucose rises, a vesicle fuses with the cell membrane (green) and the crystal dissolves out into the blood. <em>Right:</em> the effector receiving it. Insulin (yellow) reaches another cell and binds to insulin receptors in its membrane, which switches on the processes that bring glucose into the cell. Type 1 diabetes breaks the left-hand picture; type 2 breaks the right-hand one. <span class="fig-credit">Credits: <a href="https://pdb101.rcsb.org/sci-art/goodsell-gallery/insulin-release" target="_blank" rel="noopener">David S. Goodsell, RCSB Protein Data Bank and Scripps Research</a>, doi: <a href="https://doi.org/10.2210/rcsb_pdb/goodsell-gallery-044" target="_blank" rel="noopener">10.2210/rcsb_pdb/goodsell-gallery-044</a>, <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>; <a href="https://pdb101.rcsb.org/sci-art/goodsell-gallery/insulin-action" target="_blank" rel="noopener">Illustration by David S. Goodsell, RCSB Protein Data Bank</a>, doi: <a href="https://doi.org/10.2210/rcsb_pdb/goodsell-gallery-014" target="_blank" rel="noopener">10.2210/rcsb_pdb/goodsell-gallery-014</a>, <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>.</span></figcaption>
+        </figure>
+
+        <h3>Two diseases, one loop, two different broken parts</h3>
+
+        <p>Diabetes is a failure of this loop, and there are two quite different versions of it. Locating each one on the five-component diagram explains both the symptoms and the treatment.</p>
+
+        <table>
+            <thead>
+                <tr><th></th><th>Type 1</th><th>Type 2</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Which component fails</td><td>The <strong>control centre</strong> — the immune system destroys the beta cells</td><td>The <strong>effector</strong> — cells stop responding to insulin (insulin resistance)</td></tr>
+                <tr><td>Is insulin present?</td><td>Little or none</td><td>Often high, at least at first — the pancreas works harder and harder</td></tr>
+                <tr><td>What happens to glucose</td><td colspan="2">Stays high in the blood, because the message either is not sent or is not heard</td></tr>
+                <tr><td>Treatment follows directly</td><td>Supply the missing message — injected insulin</td><td>Make the effectors listen again — activity, diet, and medicines that improve sensitivity</td></tr>
+            </tbody>
+        </table>
+
+        <p>Notice that you can predict the treatment from the diagram without knowing anything else about the disease. That is what a good model buys you, and it is what HS-LS1-3 is really testing.</p>
+
+        <div class="callout callout-note">
+            <p>Why is high blood glucose harmful at all, if the glucose is only sitting in the blood? Two reasons. Glucose is a solute, so a high concentration pulls water out of cells by osmosis — which is why extreme thirst and frequent urination are classic early symptoms. And over years, glucose reacts slowly with proteins in blood vessel walls, nerves and the kidney, which is where the long-term damage comes from. Both are consequences you could have worked out from Chapter 1.1.</p>
+        </div>
+    </section>
+
+    <section id="positive" data-kind="Core" data-standards="HS-LS1-3" data-time="14 min" data-track>
+        <h2>Positive feedback: when the body wants to run away</h2>
+
+        <p>Almost everything your body regulates uses negative feedback, for an obvious reason: staying alive means staying in range. But there is a second kind, and it is reserved for the handful of situations where staying in range is exactly the wrong thing to do.</p>
+
+        <p>In <span class="term">positive feedback</span>, the response makes the stimulus <em>stronger</em>. Each turn of the loop makes the next turn bigger, so instead of settling, the process accelerates. That sounds like a fault, and in an engineered system it usually is. In a body it is a tool, used when something has to be finished quickly and completely.</p>
+
+        <div class="callout callout-misconception">
+            <p>"Negative" does not mean harmful and "positive" does not mean helpful. The words describe the <em>direction</em> of the correction, not its value. Negative feedback opposes the change; positive feedback amplifies it. A negative feedback loop keeping your temperature at 37 °C is extremely helpful, and a positive feedback loop producing a clot in a coronary artery will kill you.</p>
+        </div>
+
+        <p>Build all six loops now — two negative, four positive. Classify each one before you build it, then run it and look at the shape of the graph.</p>
+
+        <div class="sim" data-sim="u1-feedback">
+            <div class="sim-header">
+                <h4>Feedback loop builder</h4>
+                <span class="sim-kind">Interactive</span>
+            </div>
+        </div>
+
+        <div class="callout callout-try">
+            <ol>
+                <li>Do the two negative loops first, then the four positive ones, and compare the graphs. Describe the difference in shape in one sentence without using the words positive or negative.</li>
+                <li>For each positive loop, write down what finally stops it. All four have the same kind of answer. What is it?</li>
+                <li>Blood clotting and thrombosis are the same mechanism with different outcomes. Which component would you have to change to turn one into the other?</li>
+            </ol>
+        </div>
+
+        <h3>The four cases, summarised</h3>
+
+        <table>
+            <thead>
+                <tr><th>Loop</th><th>What amplifies what</th><th>How it ends</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>Blood clotting</strong></td><td>Platelets stick to exposed collagen and release ADP and thromboxane, which attract more platelets, which release more. In parallel, the enzyme thrombin activates reactions that make yet more thrombin, and thrombin turns soluble fibrinogen into an insoluble <span class="term">fibrin</span> mesh</td><td>The hole is sealed, so no collagen is exposed and there is no stimulus left</td></tr>
+                <tr><td><strong>Vomiting</strong></td><td>Toxin and stretch stimulate the vomiting centre; each retch irritates and stretches the stomach and oesophagus further, so the next contraction is stronger</td><td>The stomach is empty — the loop has removed the irritant that started it</td></tr>
+                <tr><td><strong>Sneezing</strong></td><td>An irritant stimulates nerve endings in the nose; the response increases secretion and blood flow, moving the irritant against more endings, so the urge builds until it crosses a threshold and fires</td><td>The sneeze expels the irritant</td></tr>
+                <tr><td><strong>Childbirth</strong></td><td>The baby's head stretches the cervix; stretch receptors signal the hypothalamus; <span class="term">oxytocin</span> is released; the uterus contracts and pushes the head harder into the cervix, stretching it more</td><td>The baby is born and the cervix is no longer stretched</td></tr>
+            </tbody>
+        </table>
+
+        <figure class="diagram">
+            <svg viewBox="0 0 1180 680" xmlns="http://www.w3.org/2000/svg" role="img"
+                 aria-labelledby="cb-t cb-d">
+            <title id="cb-t">Childbirth as a positive feedback loop</title>
+            <desc id="cb-d">On the left, a cross-section of the uterus at full term: a muscular wall around a
+                fluid-filled chamber, with the baby curled head-down and its head resting on the narrowed
+                cervix at the bottom, which is labelled. On the right, four numbered steps run down the page.
+                One, the head pushes on the cervix and stretches it. Two, stretch receptors fire and signals
+                travel to the hypothalamus. Three, oxytocin is released from the pituitary into the blood.
+                Four, the uterus contracts harder, driving the head down harder still. The arrows joining the
+                steps get thicker as the loop goes on, and a very thick arrow returns from step four to step
+                one: round again, but every turn starts from a stronger push than the one before. A separate
+                arrow leaves step four and ends the loop: once the baby is born the cervix is no longer
+                stretched, so the stimulus that drove the loop no longer exists and the loop stops.</desc>
+            <style>
+                .diagram svg .cbBox { fill: var(--bg-surface); stroke: var(--light-teal); stroke-width: 2; }
+                .diagram svg .cbChip { fill: var(--light-teal); }
+                .diagram svg .cbEnd { fill: hsl(150 40% 45% / 0.14); stroke: hsl(150 40% 34%); stroke-width: 2; }
+                .diagram svg .cbFwd { fill: hsl(348 52% 50%); }
+                .diagram svg .cbRet { stroke: hsl(348 58% 44%); stroke-width: 20; fill: none;
+                                      stroke-linejoin: round; marker-end: url(#cbm2); }
+                .diagram svg .cbExit { fill: hsl(150 42% 34%); }
+                .diagram svg .cbLead { stroke: var(--text-secondary); stroke-width: 1.6; fill: none; }
+                text.cbNum { font-size: 18px; font-weight: 800; fill: #fff; }
+                text.cbT { font-size: 21px; font-weight: 700; fill: var(--text); }
+                text.cbS { font-size: 19px; fill: var(--text-secondary); }
+                text.cbRetT { font-size: 21px; font-weight: 700; fill: hsl(348 58% 40%); }
+                [data-theme="dark"] text.cbRetT { fill: hsl(348 70% 70%); }
+                text.cbEndT { font-size: 21px; font-weight: 700; fill: hsl(150 45% 28%); }
+                [data-theme="dark"] text.cbEndT { fill: hsl(150 50% 62%); }
+            </style>
+            <defs>
+                <clipPath id="utclip"><rect x="20" y="30" width="350" height="492" rx="12"/></clipPath>
+                <marker id="cbm2" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="34" markerHeight="34" orient="auto">
+                    <path d="M0,0 L10,5 L0,10 z" fill="hsl(348 58% 44%)"/></marker>
+            </defs>
+
+            <image href="../images/u1/uterus-full-term.jpeg" x="-312.7" y="-7.6" width="1016.0" height="566.9" clip-path="url(#utclip)"/>
+            <path d="M195.3 491.5 L195.3 544" class="cbLead"/>
+            <text x="195.3" y="568" class="cbT" text-anchor="middle">The cervix</text>
+            <text x="195.3" y="590" class="cbS" text-anchor="middle">the head presses on it</text>
+            <rect x="410" y="30" width="410" height="76" rx="12" class="cbBox"/>
+            <circle cx="440" cy="60" r="14" class="cbChip"/>
+            <text x="440" y="67" class="cbNum" text-anchor="middle">1</text>
+            <text x="466" y="67" class="cbT">The head pushes on the cervix</text>
+            <text x="466" y="91" class="cbS">and stretches it</text>
+            <rect x="410" y="162" width="410" height="76" rx="12" class="cbBox"/>
+            <circle cx="440" cy="192" r="14" class="cbChip"/>
+            <text x="440" y="199" class="cbNum" text-anchor="middle">2</text>
+            <text x="466" y="199" class="cbT">Stretch receptors fire</text>
+            <text x="466" y="223" class="cbS">signals travel to the hypothalamus</text>
+            <rect x="410" y="294" width="410" height="76" rx="12" class="cbBox"/>
+            <circle cx="440" cy="324" r="14" class="cbChip"/>
+            <text x="440" y="331" class="cbNum" text-anchor="middle">3</text>
+            <text x="466" y="331" class="cbT">Oxytocin is released</text>
+            <text x="466" y="355" class="cbS">from the pituitary, into the blood</text>
+            <rect x="410" y="426" width="410" height="76" rx="12" class="cbBox"/>
+            <circle cx="440" cy="456" r="14" class="cbChip"/>
+            <text x="440" y="463" class="cbNum" text-anchor="middle">4</text>
+            <text x="466" y="463" class="cbT">The uterus contracts harder</text>
+            <text x="466" y="487" class="cbS">driving the head down harder still</text>
+            <path d="M612.5 112 L617.5 112 L617.5 144.5 L621.8 144.5 L615 154 L608.3 144.5 L612.5 144.5 Z" class="cbFwd"/>
+            <path d="M610.5 244 L619.5 244 L619.5 268.9 L627.1 268.9 L615 286 L602.9 268.9 L610.5 268.9 Z" class="cbFwd"/>
+            <path d="M608.5 376 L621.5 376 L621.5 393.3 L632.5 393.3 L615 418 L597.5 393.3 L608.5 393.3 Z" class="cbFwd"/>
+            <path d="M820 464 L890 464 L890 68 L836 68" class="cbRet"/>
+            <text x="920" y="222" class="cbRetT">Round again —</text>
+            <text x="920" y="246" class="cbS">but every turn starts from a</text>
+            <text x="920" y="268" class="cbS">stronger push than the one</text>
+            <text x="920" y="290" class="cbS">before</text>
+            <path d="M613 508 L617 508 L617 540.4 L620.4 540.4 L615 548 L609.6 540.4 L613 540.4 Z" class="cbExit"/>
+            <rect x="410" y="554" width="754" height="100" rx="12" class="cbEnd"/>
+            <text x="432" y="588" class="cbEndT">…until the baby is born</text>
+            <text x="432" y="614" class="cbS">The cervix is no longer stretched, so the stimulus that drove the loop no longer</text>
+            <text x="432" y="636" class="cbS">exists — and the loop stops.</text>
+            </svg>
+            <figcaption><b>Figure 1.28</b> — Childbirth as a positive feedback loop. Compare it with Figure 1.24: the arrows thicken as you go, and the returning arrow is the thickest of all, because the loop comes back to a <em>stronger</em> version of its own starting point instead of cancelling it. That is why contractions get closer together and more powerful as labour goes on — not a sign of anything going wrong, but the mechanism working. And it shows how the loop ends: by destroying the very stretch that started it.</figcaption>
+        </figure>
+
+        <div class="callout callout-key">
+            <p>Look down the last column of that table. Every one of the four positive feedback loops ends the same way: <strong>by destroying its own stimulus</strong>. The clot seals the hole. The vomiting empties the stomach. The sneeze removes the irritant. The birth removes the stretch.</p>
+            <p>That answers the question everyone asks — why does it not just keep going? It does keep going. It keeps going right up until the thing causing it no longer exists. And when that safeguard fails, positive feedback becomes lethal: a clot that keeps growing in an undamaged vessel is a thrombosis, and it is the same mechanism that saved your finger.</p>
+        </div>
+
+        <h3>Stabilising and destabilising</h3>
+
+        <p>The crosscutting concept behind this chapter is stability and change, and it can now be stated exactly:</p>
+
+        <ul>
+            <li><strong>Negative feedback stabilises a system.</strong> It resists change and returns the variable to a set point. Systems built from negative feedback loops are hard to shift, which is what you want for temperature, glucose and pH.</li>
+            <li><strong>Positive feedback destabilises a system.</strong> It amplifies change and drives the variable away from where it was. Systems built from positive feedback loops move fast and do not stop on their own, which is what you want for clotting, vomiting and birth — and dangerous everywhere else.</li>
+        </ul>
+
+        <p>That distinction is not confined to biology. Ecosystems, economies, epidemics and climate all contain both kinds, and their behaviour is governed by which kind dominates. A room that gets colder the colder it is will keep getting colder. A room with a thermostat will not.</p>
+
+        <h3>Where this goes next</h3>
+
+        <p>Every claim in this chapter is a claim about how a body behaves — that breathing rate rises with exercise, that insulin lowers blood glucose, that temperature returns to a set point. And every one of them is a claim somebody had to establish with evidence rather than assert.</p>
+
+        <p>So Chapter 1.7 asks the harder question: how would <em>you</em> find out? You will design an investigation into exercise and breathing rate, run it, and discover that the number of people you measured decides whether your result means anything at all. And you will build an energy-balance model that shows what actually happens to body mass when diet and exercise change — which turns out not to be what almost everyone assumes.</p>
+    </section>
+
+    <section id="check" data-kind="Practice" data-time="10 min">
+        <h2>Check your understanding</h2>
+
+        <div class="check">
+            <details class="check-q" id="q-fever" data-track>
+                <summary>A person with a fever has a body temperature of 39 °C and is shivering under a blanket. Their body is clearly too hot. Explain why the shivering is not evidence that homeostasis has failed.</summary>
+                <div class="check-a">
+                    <p>Feedback loops do not aim at 37 °C because 37 is a magic number; they aim at whatever the hypothalamus currently holds as its set point. During an infection, chemicals released by immune cells act on the hypothalamus and <strong>raise the set point</strong>, often to 39 °C or so.</p>
+                    <p>Once that happens, a body at 37 °C is <em>below</em> its target. The loop detects that as too cold and does exactly what it always does when the reading is below the set point: shivering to generate heat, and vasoconstriction to keep blood away from the skin. The person genuinely feels cold, because their own control system says they are.</p>
+                    <p>So the shivering is evidence that homeostasis is working perfectly — against a target that has been deliberately moved. The evidence that it works is that when the fever breaks and the set point drops back, the person sweats heavily: now they are above target, and the loop corrects in the other direction.</p>
+                </div>
+            </details>
+
+            <details class="check-q" id="q-classify" data-track>
+                <summary>For each of these, decide whether it is negative or positive feedback and justify it in one sentence: (a) a lake freezing over, so more sunlight is reflected, so it gets colder; (b) sweating on a hot day; (c) breathing faster when blood carbon dioxide rises; (d) a rumour spreading through a school.</summary>
+                <div class="check-a">
+                    <p><strong>(a) Positive.</strong> The response (more reflective ice) increases the original change (cooling), so the effect grows rather than being cancelled. This is a real climate feedback, and the fact that it works exactly like blood clotting is the point — the mathematics does not care what the system is made of.</p>
+                    <p><strong>(b) Negative.</strong> The response (evaporative cooling) opposes the change (rising temperature) and returns the body towards its set point.</p>
+                    <p><strong>(c) Negative.</strong> Rising carbon dioxide is detected by chemoreceptors; the response, faster breathing, removes carbon dioxide and so cancels the stimulus. This is the loop that actually controls your breathing rate — you breathe mainly in response to carbon dioxide, not to a shortage of oxygen.</p>
+                    <p><strong>(d) Positive.</strong> Each person who hears it tells others, so the number of people who have heard it increases the rate at which more people hear it. It ends the same way as the loops in this chapter — when there is nobody left who has not heard, the stimulus is gone.</p>
+                </div>
+            </details>
+
+            <details class="check-q" id="q-broken-component" data-track>
+                <summary>Someone has a condition in which their sweat glands do not work, although everything else about their temperature control is normal. Using the five components, say exactly what is broken, predict what they would experience, and explain why they can still cope with cold weather.</summary>
+                <div class="check-a">
+                    <p>The broken component is an <strong>effector</strong>. The stimulus still occurs, the thermoreceptors still detect it, the hypothalamus still compares it with the set point and still sends the instruction — but one of the structures that should carry the instruction out cannot do so.</p>
+                    <p>The prediction follows directly. In hot conditions, or during exercise, their core temperature would rise and keep rising, because the main cooling response is unavailable. They would still have vasodilation, which helps a little, and behavioural responses such as seeking shade — but evaporation is by far the most powerful cooling mechanism a human has, and losing it makes overheating a genuine danger. This condition exists and people who have it have to manage heat very carefully.</p>
+                    <p>Cold weather is unaffected because it uses <em>different</em> effectors — skeletal muscle for shivering and arteriole muscle for vasoconstriction — and those are intact. That asymmetry is a good demonstration that a body's control systems are not one machine: each direction has its own effectors, and losing one direction leaves the other untouched.</p>
+                </div>
+            </details>
+        </div>
+
+        <h3>Quick check</h3>
+
+        <p>These mark themselves, and point you back to the right section when an answer goes wrong.</p>
+
+        <div class="quiz" data-quiz>
+
+            <div class="quiz-q" data-review="what">
+                <div class="quiz-variant" data-answer="4">
+                    <p class="quiz-stem">Someone with a fever is at 39 °C and shivering under a blanket. What is happening?</p>
+                    <ol class="quiz-options">
+                        <li data-why="Homeostasis has not failed. Every component is working — the receptors, the hypothalamus and the effectors are all doing exactly what they always do.">Their temperature control has broken down and can no longer correct</li>
+                        <li data-why="Shivering generates heat. If the goal were cooling, this would be the wrong response entirely.">They are shivering in order to cool down faster</li>
+                        <li data-why="The feeling is real, and it comes from their own control system. They are not misreading anything.">They only feel cold because the blanket is confusing their skin receptors</li>
+                        <li>The hypothalamus has raised the set point, so at 37 °C they were below target and the loop is warming them towards it</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>Feedback loops do not aim at 37 °C because 37 is a magic number — they aim at whatever the hypothalamus currently holds as the target, and infection moves it. The proof is what happens when the fever breaks: the set point drops, the person is suddenly above target, and they sweat heavily.</p>
+                    </div>
+                </div>
+
+                <div class="quiz-variant" data-answer="2">
+                    <p class="quiz-stem">An hour ago a feverish person was shivering. Their fever has now broken: they are at 38.5 °C, barely cooler than before, and sweating heavily. Why has the response reversed?</p>
+                    <ol class="quiz-options">
+                        <li data-why="Their temperature has hardly moved — half a degree, in the wrong direction for this explanation. What changed is the value it is being compared with.">Their temperature climbed sharply in the last hour, which triggered a different response</li>
+                        <li>The set point has dropped back towards 37 °C, so the same reading that was below target is now above it</li>
+                        <li data-why="Nothing was broken at either moment. The sweat glands were available the whole time; the hypothalamus simply had no reason to use them while the target was still high.">Their sweat glands were not working earlier and have now recovered</li>
+                        <li data-why="The body does not cycle between the two. Each response is triggered by the reading sitting on one particular side of the set point, and only one side at a time.">The body alternates between shivering and sweating so that the two average out at 37 °C</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>A feedback loop never asks what the temperature is. It asks which side of the target the temperature is on — so moving the target reverses the response without the reading having to change at all. Fever shows this twice: once on the way up, and once on the way down.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-q" data-review="loop">
+                <div class="quiz-variant" data-answer="2">
+                    <p class="quiz-stem">A graph of body temperature over time wobbles gently above and below 37 °C and never sits exactly on it. What does that show?</p>
+                    <ol class="quiz-options">
+                        <li data-why="Small oscillation is normal and universal. A flat line would be the surprising result.">A control system that is not working properly</li>
+                        <li>A working feedback loop — a correcting system can only correct after the variable has already moved</li>
+                        <li data-why="The wobble is far larger than measurement noise, and it is systematic: it goes up, gets corrected, goes down, gets corrected.">Measurement error in the thermometer, rather than real change</li>
+                        <li data-why="The set point is not moving here. What is moving is the temperature, around a fixed target.">The set point moving up and down continuously</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>This is the feature people read past. Homeostasis means "held within a range", not "held perfectly still". A small permanent wobble is the unavoidable signature of a loop that detects a change and then opposes it.</p>
+                    </div>
+                </div>
+
+                <div class="quiz-variant" data-answer="4">
+                    <p class="quiz-stem">A healthy person's blood glucose is measured every ten minutes after a large meal. It climbs above the 4–6 mmol/L fasting range, peaks, and is back inside it two hours later. What does that pattern show?</p>
+                    <ol class="quiz-options">
+                        <li data-why="4–6 mmol/L is the fasting range. Everyone rises above it after eating — what matters is whether the level comes back, and here it does.">Diabetes, since a healthy level should never leave the 4–6 range</li>
+                        <li data-why="No loop holds a variable fixed. Body temperature wobbles by 0.8 °C around its set point for exactly the same reason.">Faulty measurement, since a working loop holds the value fixed</li>
+                        <li data-why="Nothing moves the glucose set point here. The reading moved; the target it is compared with did not.">The set point being raised temporarily while the meal is absorbed</li>
+                        <li>A working negative feedback loop — insulin can only be released once the glucose has already risen</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>A correcting system is always a step behind the thing it corrects, so the honest signature of a working loop is a bounded excursion followed by a return — not a flat line. Glucose shows in two hours what temperature shows in a few minutes, and for the same reason.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-q" data-review="loop">
+                <div class="quiz-variant" data-answer="1">
+                    <p class="quiz-stem">Someone's sweat glands do not work, but everything else about their temperature control is normal. Which component of the loop has failed?</p>
+                    <ol class="quiz-options">
+                        <li>The effector — the instruction is sent correctly but one of the structures that should carry it out cannot</li>
+                        <li data-why="The receptors are fine. They detect the rise in temperature exactly as they should; the problem is further along the chain.">The receptor, because the rise in temperature is not detected</li>
+                        <li data-why="The hypothalamus is intact and still comparing the reading with the set point. Nothing about the decision has gone wrong.">The control centre, because the hypothalamus makes the wrong decision</li>
+                        <li data-why="The stimulus still occurs — the person still gets hot. A stimulus is something that happens to the body, not something the body provides.">The stimulus, because the body no longer gets hot</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>Locating a fault on the five-component diagram lets you predict the symptoms. Overheating becomes dangerous, because evaporation is by far the most powerful cooling mechanism a human has — but cold weather is unaffected, since shivering and vasoconstriction use entirely different effectors.</p>
+                    </div>
+                </div>
+
+                <div class="quiz-variant" data-answer="3">
+                    <p class="quiz-stem">Extensive scarring has destroyed the thermoreceptors in someone's skin, though those inside the hypothalamus are untouched. They now start shivering in a cold room only once their core has already cooled. Which component has failed?</p>
+                    <ol class="quiz-options">
+                        <li data-why="Shivering still happens — it simply starts late. The skeletal muscle carries out the instruction normally once the instruction is given.">The effector, because shivering no longer happens</li>
+                        <li data-why="The set point is unchanged and the comparison is still being made correctly. The hypothalamus is working from fewer readings, not making worse decisions.">The control centre, because the hypothalamus no longer holds a set point</li>
+                        <li>The receptor — one of the two places the body senses temperature is no longer reporting</li>
+                        <li data-why="The cold room is still there and still cools the body. A stimulus is something that happens to the body, whether or not the body notices it.">The stimulus, because a cold room no longer counts as a change</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>This is the first place the thermostat analogy breaks. A thermostat has one sensor; you have two sets, and the skin ones exist to give early warning — they let the body respond to a cold room before the core has cooled at all. Lose them and the loop still works, but it can only start correcting once the damage is already done.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-q" data-review="negative">
+                <div class="quiz-variant" data-answer="3">
+                    <p class="quiz-stem">What does insulin actually do to the glucose in your blood?</p>
+                    <ol class="quiz-options">
+                        <li data-why="Nothing destroys it. If it were destroyed, glucagon could not release it again from the liver a few hours later.">Destroys it, so the concentration falls</li>
+                        <li data-why="Insulin does not carry anything. It is a hormone travelling in the plasma, and the moving is done by transporters in the cells that receive its message.">Carries it into cells, one molecule at a time</li>
+                        <li>Nothing directly — it is a message telling cells to take glucose in and store it, mostly as glycogen</li>
+                        <li data-why="Insulin is released when glucose is high, not low, and its effect is to lower it. This is the loop running backwards.">Converts glycogen back into glucose to raise the level</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>Insulin's content is roughly: <em>there is plenty, take some in and store it.</em> Cells that receive it insert GLUT4 transporters and start absorbing. Because the glucose is stored rather than destroyed, the whole process is reversible — which is precisely what glucagon does a few hours later.</p>
+                    </div>
+                </div>
+
+                <div class="quiz-variant" data-answer="1">
+                    <p class="quiz-stem">You have not eaten since the morning and your blood glucose is drifting below 4 mmol/L. The pancreas releases glucagon. What does glucagon do to the glucose in your blood?</p>
+                    <ol class="quiz-options">
+                        <li>Nothing directly — it is a message telling the liver to break glycogen down and release glucose into the blood</li>
+                        <li data-why="Nothing is created. The glucose released was stored as glycogen after an earlier meal, which is why the store eventually runs out if you keep fasting.">Makes new glucose out of nothing, so the level rises</li>
+                        <li data-why="Glucagon carries nothing. It is a hormone travelling in the plasma; the liver does the releasing and the blood does the transporting.">Carries stored glucose out of the liver and delivers it to the brain</li>
+                        <li data-why="That is insulin's message, and it would lower the level further. Glucagon is released when glucose is low and its job is to raise it.">Tells cells to take glucose in and store it</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>Insulin and glucagon are both messages from the same organ, and neither touches a glucose molecule. Their opposite effects come entirely from who hears them and what those cells then do — which is why one hormone can undo the other's work a few hours later.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-q" data-review="negative">
+                <div class="quiz-variant" data-answer="2">
+                    <p class="quiz-stem">A patient has high blood glucose and high blood insulin at the same time. Which type of diabetes does that point to, and which component has failed?</p>
+                    <ol class="quiz-options">
+                        <li data-why="In type 1 the beta cells are destroyed, so there is little or no insulin. High insulin rules it out.">Type 1 — the control centre, since the beta cells are destroyed</li>
+                        <li>Type 2 — the effector, since the message is being sent but the cells are no longer responding to it</li>
+                        <li data-why="The receptors are the beta cells detecting glucose, and they are clearly detecting it: that is why insulin is high.">Type 2 — the receptor, since glucose is no longer detected</li>
+                        <li data-why="High glucose in the blood always means the loop has failed somewhere. The question is where.">Neither — high insulin means the loop is working normally</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>The message is being sent and is not being heard, so the fault is at the effector. Notice you can read the treatment straight off the diagram: type 1 needs the missing message supplied by injection, type 2 needs the effectors made sensitive again through activity, diet and medicines.</p>
+                    </div>
+                </div>
+
+                <div class="quiz-variant" data-answer="4">
+                    <p class="quiz-stem">A second patient has high blood glucose and almost no detectable insulin, and their glucose falls to normal as soon as insulin is injected. Which type of diabetes does that point to, and which component has failed?</p>
+                    <ol class="quiz-options">
+                        <li data-why="If the effectors were at fault, insulin would be present and often high, and injecting more would help little. Here there is almost none, and the injection works immediately.">Type 2 — the effector, since the cells have stopped responding to insulin</li>
+                        <li data-why="The liver is not at fault. It stores glycogen perfectly well the moment the message arrives, which is exactly what the injection demonstrates.">Type 1 — the effector, since the liver can no longer store glycogen</li>
+                        <li data-why="Supplying the missing message is precisely how a failed control centre is treated. The injection working is evidence for the diagnosis, not against it.">Neither — injected insulin would not work if the loop itself were broken</li>
+                        <li>Type 1 — the control centre, since the beta cells that should release insulin have been destroyed</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>Two patients, the same raised glucose, two different broken components — and the treatment follows from which one it is rather than from the symptom they share. That is the whole value of the five-component model: it tells you where to intervene.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-q" data-review="positive">
+                <div class="quiz-variant" data-answer="1">
+                    <p class="quiz-stem">A clot forming in an undamaged coronary artery is positive feedback. A loop holding your temperature at 37 °C is negative feedback. What do those words describe?</p>
+                    <ol class="quiz-options">
+                        <li>The direction of the loop — negative opposes the change, positive amplifies it</li>
+                        <li data-why="This is the most common misreading, and this pair of examples is chosen to break it: the positive one can kill you and the negative one keeps you alive.">Whether the loop is harmful or helpful to the body</li>
+                        <li data-why="Both kinds run on the same five components with the same vocabulary. Only the final arrow differs.">Whether the loop involves hormones or nerves</li>
+                        <li data-why="Speed varies within each kind. Clotting is fast and childbirth is slow, and both are positive.">Whether the response is fast or slow</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>"Negative" does not mean bad and "positive" does not mean good. They name the direction of the correction, nothing else — and the same clotting mechanism that saved your finger is what makes a thrombosis lethal.</p>
+                    </div>
+                </div>
+
+                <div class="quiz-variant" data-answer="3">
+                    <p class="quiz-stem">A student argues that childbirth must be negative feedback, because it is a normal healthy process that ends with a baby. What is wrong with that reasoning?</p>
+                    <ol class="quiz-options">
+                        <li data-why="The outcome plays no part in the classification. Vomiting, sneezing and clotting all end well, and all four are positive.">Nothing — a process with a healthy outcome is negative feedback by definition</li>
+                        <li data-why="Danger is no more relevant than benefit. A completely safe labour is still positive feedback, because the response still adds to the stimulus.">The reasoning fails only because childbirth is in fact dangerous</li>
+                        <li>The label depends only on direction — each contraction pushes the head harder into the cervix, so the response adds to its own stimulus</li>
+                        <li data-why="Speed is not part of the definition. Clotting is fast and labour is slow, and both are positive.">The reasoning fails because childbirth is far too slow to be positive feedback</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>The word names the sign of one arrow in Figure 1.24 — whether the response returns to cancel the stimulus or to add to it. It says nothing about whether the outcome is wanted, and the clearest evidence for that is that contractions get stronger as labour goes on, which is the mechanism working rather than failing.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-q" data-review="positive">
+                <div class="quiz-variant" data-answer="3">
+                    <p class="quiz-stem">Positive feedback amplifies itself, so each turn of the loop is bigger than the last. What stops vomiting, sneezing, clotting and childbirth from running forever?</p>
+                    <ol class="quiz-options">
+                        <li data-why="Nothing switches on to oppose them. Adding a negative loop on top would be a different design from the one the body actually uses.">A negative feedback loop switches on to cancel them</li>
+                        <li data-why="They do not simply run down. Contractions in labour get stronger, not weaker, right up to the birth.">The body runs out of energy and the loop weakens</li>
+                        <li>Each one ends by destroying its own stimulus — the clot seals the hole, the sneeze removes the irritant, the birth removes the stretch</li>
+                        <li data-why="Nothing is timing them. Labour has no fixed length, and a sneeze fires when the stimulus crosses a threshold rather than when a clock runs out.">A timer in the control centre shuts them off after a set period</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>It does keep going — right up until the thing causing it no longer exists. And when that safeguard is absent, the same mechanism turns lethal: a clot growing in an undamaged vessel has no hole to seal, so nothing stops it.</p>
+                    </div>
+                </div>
+
+                <div class="quiz-variant" data-answer="2">
+                    <p class="quiz-stem">Someone swallows a toxin and begins to vomit. Each retch is more violent than the one before, and then, with nothing having switched on to oppose it, the vomiting stops. Why?</p>
+                    <ol class="quiz-options">
+                        <li data-why="Nothing counts or decides. The vomiting centre keeps responding for as long as it is being stimulated, and simply stops being stimulated.">The vomiting centre issues a final instruction to stop once enough has been expelled</li>
+                        <li>The retching was driven by irritation and stretch, and both are gone once the stomach is empty</li>
+                        <li data-why="The contractions get stronger, not weaker, right up to the last one. Fatigue does not end any of the four loops in this chapter.">The stomach muscles tire, so the contractions gradually weaken</li>
+                        <li data-why="No opposing loop switches on. All four positive loops here end by removing their own stimulus rather than by being cancelled from outside.">A negative feedback loop takes over and returns the stomach to normal</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>The safeguard is not in the mechanism — it is in the situation. Vomiting stops because the loop consumes the thing feeding it, and so does sneezing, and so does clotting. Put the identical mechanism somewhere with nothing to consume, such as an undamaged artery, and there is nothing to stop it.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</main>
+
+<script src="../assets/toc.js?v=330"></script>
+<script src="../assets/course.js?v=330"></script>
+</body>
+</html>

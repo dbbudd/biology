@@ -1,0 +1,684 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1.2 What Is Alive, and How Is It Built? — Biology</title>
+<link rel="stylesheet" href="../assets/course.css?v=330">
+<script>if('scrollRestoration' in history)history.scrollRestoration='manual';</script>
+</head>
+<body data-root="../" data-chapter="u1-what-is-alive">
+
+<main class="main" role="main">
+
+    <section id="intro">
+        <div class="chapter-eyebrow">Unit 1 — Biochemistry &amp; Homeostasis</div>
+        <h1>1.2 What Is Alive, and How Is It Built?</h1>
+        <p class="lead">Chapter 1.1 took you inside one membrane. This chapter zooms all the way out — and then asks the question that ought to have come first: what exactly was it that the membrane was keeping alive?</p>
+
+        <div class="chapter-meta"></div>
+
+        <div data-progression></div>
+
+        <div class="callout callout-recall">
+            <p>In 1.1 you saw a membrane hold a boundary: heads towards the water, tails away from it, an oily core in the middle that oxygen crosses freely and sodium cannot cross at all. You also ran a cell in the <a href="ch01-cell-membrane.html#osmosis">osmosis simulation</a> and watched it settle at a size where water crossed equally in both directions.</p>
+            <p>That simulation was the first <strong>model</strong> in this course, and it is worth noticing what it was not. It was not a cell. It had ninety water particles instead of about ten billion trillion, it was flat, and the membrane was a drawn circle. It was still useful — because a model does not have to be accurate to be useful. It has to be accurate <em>about the thing you are using it for</em>. That distinction is what the second half of this chapter is about.</p>
+        </div>
+
+        <div class="objectives">
+            <h4>By the end of this chapter you should be able to</h4>
+            <ul>
+                <li>List the characteristics shared by all living things, and apply them to a case that is genuinely hard to classify.</li>
+                <li>Put the levels of organisation in order from atom to biosphere, and give a real example at each level.</li>
+                <li>Explain what an emergent property is, and why it means a body is more than a list of its parts.</li>
+                <li>Say what a model is for, judge how good a particular model is, and name a place where it stops being true.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="alive" data-kind="Core" data-standards="HS-LS1-2" data-time="10 min" data-track>
+        <h2>What makes something alive</h2>
+
+        <p>This looks like an easy question until you try to answer it precisely. A candle flame consumes fuel, gives off heat, grows, moves, responds to a draught, and can even reproduce — light one candle from another and now there are two flames. Every one of those is something living things do. Yet nobody thinks a flame is alive.</p>
+
+        <p>So biologists do not define life with a single property. They use a <strong>list</strong>, and the rule is that a living thing has to show <em>all</em> of them. Miss one and you are out.</p>
+
+        <table>
+            <thead>
+                <tr><th>Characteristic</th><th>What it means</th><th>What it looks like in you</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>Order</strong></td><td>Built of one or more <span class="term">cell</span>s, arranged in a highly organised structure</td><td>Every part of you is made of cells, and no part of you is a random pile</td></tr>
+                <tr><td><strong>Energy processing</strong></td><td>Takes in energy and uses it to run chemical reactions — <span class="term">metabolism</span></td><td>You eat, and use the energy to build, move, think and stay warm</td></tr>
+                <tr><td><strong>Growth and development</strong></td><td>Gets larger and changes form according to instructions it carries</td><td>You were 3 kg once and the instructions for the rest were already inside you</td></tr>
+                <tr><td><strong>Response to the environment</strong></td><td>Detects changes outside itself and does something about them</td><td>You pull your hand off a hot pan before you have thought about it</td></tr>
+                <tr><td><strong>Regulation</strong></td><td>Keeps its internal conditions steady — <span class="term">homeostasis</span></td><td>Your core temperature stays near 37 °C in a Hong Kong summer and a cold classroom</td></tr>
+                <tr><td><strong>Reproduction</strong></td><td>Produces new individuals of the same kind</td><td>Every cell in you can, in principle, divide and make more of itself</td></tr>
+                <tr><td><strong>Adaptation over time</strong></td><td>Populations change across generations to suit their surroundings</td><td>Not something you do — something your species does, over thousands of years</td></tr>
+            </tbody>
+        </table>
+
+        <p>Now run the flame through the list. It processes energy, grows, moves and responds — four out of seven. But it is not made of cells, it does not regulate itself (it burns hotter in a draught rather than correcting), and it does not carry heritable instructions that change over generations. It fails three, so it is not alive.</p>
+
+        <p>The list is more interesting when the case is genuinely hard. Below are three of them.</p>
+
+        <figure class="diagram">
+            <svg viewBox="0 0 780 330" xmlns="http://www.w3.org/2000/svg" role="img"
+                 aria-labelledby="alive-title alive-desc">
+            <title id="alive-title">Three difficult cases tested against the seven characteristics of life</title>
+            <desc id="alive-desc">A grid with seven characteristics down the left and three candidates across
+                the top: a candle flame, a virus and a dry oak seed. The candle flame shows energy processing,
+                growth, response and reproduction but has no cells, no regulation and no adaptation. The virus
+                shows only reproduction, and only inside a host cell, plus adaptation over generations; it has
+                no cells, no metabolism, no growth and no regulation. The dry seed shows order, growth,
+                reproduction and adaptation, and its metabolism, response and regulation are paused rather than
+                absent. Only the seed is alive.</desc>
+            <style>
+                .diagram svg .ah { font-size: 12.5px; font-weight: 700; fill: var(--text); }
+                .diagram svg .ar { font-size: 12px; fill: var(--text); }
+                .diagram svg .an { font-size: 10.5px; fill: var(--text-secondary); }
+                .diagram svg .cellbg { fill: var(--bg-surface); stroke: var(--border); stroke-width: 1; }
+                .diagram svg .yes { fill: #2e7d32; }
+                .diagram svg .no { fill: var(--red); }
+                .diagram svg .maybe { fill: #b26a00; }
+                [data-theme="dark"] .diagram svg .yes { fill: #7fc98a; }
+                [data-theme="dark"] .diagram svg .maybe { fill: #e0b755; }
+                [data-theme="sepia"] .diagram svg .yes { fill: #4a6b3d; }
+                .diagram svg .glyph { font-size: 15px; font-weight: 800; text-anchor: middle; }
+            </style>
+
+            <text x="210" y="22" class="ah" text-anchor="middle">A candle flame</text>
+            <text x="380" y="22" class="ah" text-anchor="middle">A virus</text>
+            <text x="550" y="22" class="ah" text-anchor="middle">A dry acorn</text>
+            <text x="700" y="22" class="an" text-anchor="middle">verdict</text>
+
+            <!-- rows -->
+            <g>
+                <text x="8" y="56" class="ar">Order — made of cells</text>
+                <rect x="140" y="40" width="140" height="24" class="cellbg"/><text x="210" y="57" class="glyph no">&#10007;</text>
+                <rect x="310" y="40" width="140" height="24" class="cellbg"/><text x="380" y="57" class="glyph no">&#10007;</text>
+                <rect x="480" y="40" width="140" height="24" class="cellbg"/><text x="550" y="57" class="glyph yes">&#10003;</text>
+
+                <text x="8" y="86" class="ar">Energy processing</text>
+                <rect x="140" y="70" width="140" height="24" class="cellbg"/><text x="210" y="87" class="glyph yes">&#10003;</text>
+                <rect x="310" y="70" width="140" height="24" class="cellbg"/><text x="380" y="87" class="glyph no">&#10007;</text>
+                <rect x="480" y="70" width="140" height="24" class="cellbg"/><text x="550" y="87" class="glyph maybe">~</text>
+
+                <text x="8" y="116" class="ar">Growth and development</text>
+                <rect x="140" y="100" width="140" height="24" class="cellbg"/><text x="210" y="117" class="glyph yes">&#10003;</text>
+                <rect x="310" y="100" width="140" height="24" class="cellbg"/><text x="380" y="117" class="glyph no">&#10007;</text>
+                <rect x="480" y="100" width="140" height="24" class="cellbg"/><text x="550" y="117" class="glyph yes">&#10003;</text>
+
+                <text x="8" y="146" class="ar">Response to environment</text>
+                <rect x="140" y="130" width="140" height="24" class="cellbg"/><text x="210" y="147" class="glyph yes">&#10003;</text>
+                <rect x="310" y="130" width="140" height="24" class="cellbg"/><text x="380" y="147" class="glyph no">&#10007;</text>
+                <rect x="480" y="130" width="140" height="24" class="cellbg"/><text x="550" y="147" class="glyph maybe">~</text>
+
+                <text x="8" y="176" class="ar">Regulation (homeostasis)</text>
+                <rect x="140" y="160" width="140" height="24" class="cellbg"/><text x="210" y="177" class="glyph no">&#10007;</text>
+                <rect x="310" y="160" width="140" height="24" class="cellbg"/><text x="380" y="177" class="glyph no">&#10007;</text>
+                <rect x="480" y="160" width="140" height="24" class="cellbg"/><text x="550" y="177" class="glyph maybe">~</text>
+
+                <text x="8" y="206" class="ar">Reproduction</text>
+                <rect x="140" y="190" width="140" height="24" class="cellbg"/><text x="210" y="207" class="glyph maybe">~</text>
+                <rect x="310" y="190" width="140" height="24" class="cellbg"/><text x="380" y="207" class="glyph maybe">~</text>
+                <rect x="480" y="190" width="140" height="24" class="cellbg"/><text x="550" y="207" class="glyph yes">&#10003;</text>
+
+                <text x="8" y="236" class="ar">Adaptation over generations</text>
+                <rect x="140" y="220" width="140" height="24" class="cellbg"/><text x="210" y="237" class="glyph no">&#10007;</text>
+                <rect x="310" y="220" width="140" height="24" class="cellbg"/><text x="380" y="237" class="glyph yes">&#10003;</text>
+                <rect x="480" y="220" width="140" height="24" class="cellbg"/><text x="550" y="237" class="glyph yes">&#10003;</text>
+            </g>
+
+            <line x1="640" y1="36" x2="640" y2="248" stroke="var(--border)" stroke-width="1"/>
+            <text x="700" y="120" class="ah no" text-anchor="middle">not alive</text>
+            <text x="700" y="150" class="ah maybe" text-anchor="middle">disputed</text>
+            <text x="700" y="180" class="ah yes" text-anchor="middle">alive</text>
+
+            <text x="8" y="278" class="an">&#10003; clearly yes &#183; ~ only under some conditions, or only with help &#183; &#10007; no</text>
+            <text x="8" y="298" class="an">The flame fails three. The virus fails four, and only reproduces inside a cell it has hijacked.</text>
+            <text x="8" y="318" class="an">The acorn fails none — its chemistry is paused, not absent, and water restarts it.</text>
+            </svg>
+            <figcaption><b>Figure 1.3</b> — The same seven tests, three candidates. Notice that the interesting column is the middle one. A virus has genes, evolves, and is unmistakably part of the living world — but it has no cell, runs no chemistry of its own, and can only copy itself by taking over a cell that <em>is</em> alive. Biologists genuinely disagree about whether it counts, and the disagreement is about the definition rather than about the virus.</figcaption>
+        </figure>
+
+        <div class="callout callout-misconception">
+            <p>"Movement" is not on the list, and this catches people out. An oak tree is alive and does not move; a river moves and is not. What matters is not whether something moves but whether it <em>responds</em> — whether the movement is a reaction to something detected.</p>
+        </div>
+
+        <div class="callout callout-key">
+            <p>The dry acorn is the most useful case on that chart. Sitting in a drawer it is doing almost nothing measurable — no visible metabolism, no growth, no response. It is still alive, because the machinery is intact and paused rather than destroyed. Add water and it restarts. That tells you the definition of life is about <em>capability</em>, not about what a thing happens to be doing at the moment you look at it.</p>
+        </div>
+    </section>
+
+    <section id="hierarchy" data-kind="Core" data-standards="HS-LS1-2" data-time="14 min" data-track>
+        <h2>From atom to biosphere</h2>
+
+        <p>Every living thing is built the same way: small parts assembled into larger parts, over and over, with each level made entirely out of the level below it. Biologists call this the <strong>hierarchy of organisation</strong>, and once you can see it you can locate almost any biological question at a level.</p>
+
+        <figure class="diagram dense wide">
+            <svg viewBox="0 0 820 580" xmlns="http://www.w3.org/2000/svg" role="img"
+                 aria-labelledby="hier-title hier-desc">
+            <title id="hier-title">The levels of biological organisation from atom to biosphere</title>
+            <desc id="hier-desc">Eleven levels stacked from atom at the bottom to biosphere at the top,
+                each band a little wider than the one below to show that every level is built out of the
+                level beneath it. The bands are coloured in three groups. The bottom three — atom, a
+                carbon atom; molecule, a glucose molecule; and organelle, a mitochondrion — are grey,
+                because nothing there is alive. A line across the diagram separates them from the rest,
+                labelled: nothing below this line is alive, an organelle is machinery, not an organism.
+                Above it, in blue, are the five levels inside a single body: cell, one cell lining your
+                small intestine, tagged as the smallest living thing; tissue, the epithelium lining the
+                intestine; organ, the small intestine; organ system, the digestive system; and organism,
+                you. A second line above those is labelled: above this line, more than one organism. The
+                top three, in amber, are population, everyone in your class; community and ecosystem,
+                every living thing in Hong Kong and the place; and biosphere, all life on Earth.</desc>
+            <style>
+                /* Three zones, three colours. Each zone sets its own fill and stroke, and the dark
+                   overrides target those same zone classes - nothing sets colour on .h-band itself,
+                   so a theme rule can never out-specify a zone rule. */
+                .h-band   { stroke-width: 1.3; }
+                .h-chem   { fill: hsl(0 0% 45% / 0.10);    stroke: hsl(0 0% 45% / 0.55); }
+                .h-body   { fill: hsl(210 52% 42% / 0.10); stroke: hsl(210 52% 42% / 0.55); }
+                .h-beyond { fill: hsl(28 62% 42% / 0.12);  stroke: hsl(28 62% 42% / 0.55); }
+                .h-pivot  { stroke-width: 2.4; stroke: hsl(210 52% 42%); }
+                .h-chip   { stroke: none; }
+                .h-c-chem { fill: hsl(0 0% 40%); }
+                .h-c-body { fill: hsl(210 52% 42%); }
+                .h-c-beyond { fill: hsl(28 66% 33%); }
+                .h-num    { font-size: 11.5px; font-weight: 800; fill: #fff; text-anchor: middle; }
+                .h-name   { font-size: 12.5px; font-weight: 700; fill: var(--text); }
+                .h-eg     { font-size: 11px; fill: var(--text-secondary); }
+                .h-div    { stroke-width: 1.6; stroke-dasharray: 6 4; }
+                .h-div-a  { stroke: var(--red); }
+                .h-div-b  { stroke: hsl(28 62% 42%); }
+                .h-divlbl { font-size: 11px; font-weight: 700; }
+                .h-div-a-t{ fill: var(--red); }
+                .h-div-b-t{ fill: hsl(28 66% 31%); }
+                .h-divsub { font-size: 10px; fill: var(--text-secondary); }
+                .h-tag    { font-size: 10.5px; font-weight: 700; fill: hsl(210 56% 35%); }
+                .h-leg    { font-size: 10.5px; fill: var(--text-secondary); }
+                .h-foot   { font-size: 10.5px; fill: var(--text-secondary); font-style: italic; }
+                [data-theme="dark"] .h-chem   { fill: hsl(0 0% 72% / 0.12);    stroke: hsl(0 0% 72% / 0.6); }
+                [data-theme="dark"] .h-body   { fill: hsl(210 62% 72% / 0.13); stroke: hsl(210 62% 72% / 0.6); }
+                [data-theme="dark"] .h-beyond { fill: hsl(28 70% 70% / 0.14);  stroke: hsl(28 70% 70% / 0.6); }
+                [data-theme="dark"] .h-pivot  { stroke: hsl(210 62% 72%); }
+                [data-theme="dark"] .h-c-chem { fill: hsl(0 0% 72%); }
+                [data-theme="dark"] .h-c-body { fill: hsl(210 62% 72%); }
+                [data-theme="dark"] .h-c-beyond { fill: hsl(28 70% 70%); }
+                [data-theme="dark"] .h-num    { fill: #16202b; }
+                [data-theme="dark"] .h-div-b  { stroke: hsl(28 70% 70%); }
+                [data-theme="dark"] .h-div-b-t{ fill: hsl(28 70% 70%); }
+                [data-theme="dark"] .h-tag    { fill: hsl(210 62% 72%); }
+            </style>
+            <rect class="h-band h-chem" x="20" y="482" width="300" height="34" rx="6"/>
+            <rect class="h-chip h-c-chem" x="28" y="489" width="26" height="20" rx="5"/>
+            <text class="h-num" x="41" y="503">1</text>
+            <text class="h-name" x="62" y="498">Atom</text>
+            <text class="h-eg"   x="62" y="511">a carbon atom</text>
+            <rect class="h-band h-chem" x="20" y="443" width="324" height="34" rx="6"/>
+            <rect class="h-chip h-c-chem" x="28" y="450" width="26" height="20" rx="5"/>
+            <text class="h-num" x="41" y="464">2</text>
+            <text class="h-name" x="62" y="459">Molecule</text>
+            <text class="h-eg"   x="62" y="472">a glucose molecule</text>
+            <rect class="h-band h-chem" x="20" y="404" width="348" height="34" rx="6"/>
+            <rect class="h-chip h-c-chem" x="28" y="411" width="26" height="20" rx="5"/>
+            <text class="h-num" x="41" y="425">3</text>
+            <text class="h-name" x="62" y="420">Organelle</text>
+            <text class="h-eg"   x="62" y="433">a mitochondrion</text>
+            <rect class="h-band h-body h-pivot" x="20" y="339" width="372" height="34" rx="6"/>
+            <rect class="h-chip h-c-body" x="28" y="346" width="26" height="20" rx="5"/>
+            <text class="h-num" x="41" y="360">4</text>
+            <text class="h-name" x="62" y="355">Cell</text>
+            <text class="h-eg"   x="62" y="368">one cell lining your small intestine</text>
+            <rect class="h-band h-body" x="20" y="300" width="396" height="34" rx="6"/>
+            <rect class="h-chip h-c-body" x="28" y="307" width="26" height="20" rx="5"/>
+            <text class="h-num" x="41" y="321">5</text>
+            <text class="h-name" x="62" y="316">Tissue</text>
+            <text class="h-eg"   x="62" y="329">the epithelium lining the intestine</text>
+            <rect class="h-band h-body" x="20" y="261" width="420" height="34" rx="6"/>
+            <rect class="h-chip h-c-body" x="28" y="268" width="26" height="20" rx="5"/>
+            <text class="h-num" x="41" y="282">6</text>
+            <text class="h-name" x="62" y="277">Organ</text>
+            <text class="h-eg"   x="62" y="290">the small intestine</text>
+            <rect class="h-band h-body" x="20" y="222" width="444" height="34" rx="6"/>
+            <rect class="h-chip h-c-body" x="28" y="229" width="26" height="20" rx="5"/>
+            <text class="h-num" x="41" y="243">7</text>
+            <text class="h-name" x="62" y="238">Organ system</text>
+            <text class="h-eg"   x="62" y="251">the digestive system</text>
+            <rect class="h-band h-body" x="20" y="183" width="468" height="34" rx="6"/>
+            <rect class="h-chip h-c-body" x="28" y="190" width="26" height="20" rx="5"/>
+            <text class="h-num" x="41" y="204">8</text>
+            <text class="h-name" x="62" y="199">Organism</text>
+            <text class="h-eg"   x="62" y="212">you</text>
+            <rect class="h-band h-beyond" x="20" y="118" width="492" height="34" rx="6"/>
+            <rect class="h-chip h-c-beyond" x="28" y="125" width="26" height="20" rx="5"/>
+            <text class="h-num" x="41" y="139">9</text>
+            <text class="h-name" x="62" y="134">Population</text>
+            <text class="h-eg"   x="62" y="147">everyone in your class</text>
+            <rect class="h-band h-beyond" x="20" y="79" width="516" height="34" rx="6"/>
+            <rect class="h-chip h-c-beyond" x="28" y="86" width="26" height="20" rx="5"/>
+            <text class="h-num" x="41" y="100">10</text>
+            <text class="h-name" x="62" y="95">Community and ecosystem</text>
+            <text class="h-eg"   x="62" y="108">every living thing in Hong Kong, and the place</text>
+            <rect class="h-band h-beyond" x="20" y="40" width="540" height="34" rx="6"/>
+            <rect class="h-chip h-c-beyond" x="28" y="47" width="26" height="20" rx="5"/>
+            <text class="h-num" x="41" y="61">11</text>
+            <text class="h-name" x="62" y="56">Biosphere</text>
+            <text class="h-eg"   x="62" y="69">all life on Earth</text>
+            <line class="h-div h-div-b" x1="20" y1="167.5" x2="522" y2="167.5"/>
+            <text class="h-divlbl h-div-b-t" x="532" y="166.5">above this line, more than one organism</text>
+            <text class="h-divsub" x="532" y="179.5">population, ecosystem, biosphere &#8212; Unit 3 lives up here</text>
+            <line class="h-div h-div-a" x1="20" y1="388.5" x2="402" y2="388.5"/>
+            <text class="h-divlbl h-div-a-t" x="412" y="387.5">nothing below this line is alive</text>
+            <text class="h-divsub" x="412" y="400.5">an organelle is machinery, not an organism</text>
+            <text class="h-tag" x="402" y="360">&#9664; the smallest living thing</text>
+            <rect class="h-band h-chem" x="20" y="535" width="16" height="14" rx="3"/>
+            <text class="h-leg" x="43" y="546">not alive &#8212; chemistry</text>
+            <rect class="h-band h-body" x="183.6" y="535" width="16" height="14" rx="3"/>
+            <text class="h-leg" x="206.6" y="546">alive, inside one body</text>
+            <rect class="h-band h-beyond" x="352.79999999999995" y="535" width="16" height="14" rx="3"/>
+            <text class="h-leg" x="375.79999999999995" y="546">more than one organism</text>
+            <text class="h-foot" x="20" y="568">Each level is made entirely out of the level below it. The bands widen going up to show that &#8212; they are not drawn to scale.</text>
+            </svg>
+            <figcaption><b>Figure 1.4</b> — Eleven levels, read from the bottom up, with each band a little wider than the one below because each level is built out of the one beneath it. Two boundaries matter more than the rest, and both are drawn across the stack rather than described in words. The lower one is the important one: everything below it is chemistry that happens equally well in a test tube, and an organelle is machinery rather than an organism. The cell is the first level that passes all seven tests from the last section — which is why <span class="term">cell theory</span> says every living thing is made of cells, and every cell comes from another cell.</figcaption>
+        </figure>
+
+        <figure class="shot pair">
+            <img class="painting" src="../images/u1/goodsell-e-coli.jpeg" alt="A painting of a slice through a bacterium, crowded with coloured molecules. Green layers of wall and membrane run along one edge; a tangle of yellow DNA fills the centre; small purple ribosomes are packed around it with almost no empty space." loading="lazy">
+            <img class="painting" src="../images/u1/goodsell-cytoplasm.jpeg" alt="A painting of a tiny patch of cytoplasm packed with molecules: a thick hollow tube, a knobbly fibre and thin fibres cross it, surrounded by many blue ribosomes and other proteins with almost no gaps." loading="lazy">
+            <figcaption><b>Figure 1.5</b> — Between the molecule rung and the cell rung of the ladder. <strong>A painting, not a photograph.</strong> Nothing this small can be photographed, so David Goodsell paints it from real molecular data, with every molecule at its true shape and relative size, magnified about a million times. <em>Left:</em> a slice through a whole living cell, the bacterium <i>E. coli</i>. The green layers along the edge are its wall and membranes, the yellow tangle is its DNA, and the purple dots are ribosomes building proteins. <em>Right:</em> a small patch of the cytoplasm inside one of your own cells, crossed by fibres of the cytoskeleton, with ribosomes in blue. Look at how little empty space there is. A cell is not a bag of water with a few parts floating in it: it is packed with molecules as tightly as a crowded train carriage, and that crowding is part of how it works. <span class="fig-credit">Credits: <a href="https://pdb101.rcsb.org/sci-art/goodsell-gallery/escherichia-coli-bacterium" target="_blank" rel="noopener">Illustration by David S. Goodsell, RCSB Protein Data Bank</a>, doi: <a href="https://doi.org/10.2210/rcsb_pdb/goodsell-gallery-028" target="_blank" rel="noopener">10.2210/rcsb_pdb/goodsell-gallery-028</a>, <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>; <a href="https://pdb101.rcsb.org/sci-art/goodsell-gallery/biosites-cytoplasm" target="_blank" rel="noopener">Illustration by David S. Goodsell</a>, doi: <a href="https://doi.org/10.2210/rcsb_pdb/goodsell-gallery-006" target="_blank" rel="noopener">10.2210/rcsb_pdb/goodsell-gallery-006</a>, <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>.</span></figcaption>
+        </figure>
+
+        <h3>Why the levels exist at all</h3>
+
+        <p>Here is the point that makes the ladder worth learning rather than just memorising. At each level, the assembled thing can do something that none of its parts can do on their own. That is called an <span class="term">emergent property</span>.</p>
+
+        <ul>
+            <li><strong>Two hydrogen atoms and an oxygen atom</strong> are gases. Bond them and you get water — a liquid that dissolves things, moderates temperature and climbs up a tree. Nothing about hydrogen predicts that.</li>
+            <li><strong>One intestinal cell</strong> can absorb glucose. It cannot absorb a meal. A sheet of them, folded, joined edge to edge and served by capillaries, can absorb a meal.</li>
+            <li><strong>A stomach</strong> can churn and acidify. It cannot feed you. It needs a mouth in front of it and an intestine behind it.</li>
+        </ul>
+
+        <p>This is why "the body is the sum of its parts" is wrong, and why HS-LS1-2 asks you to build a <em>model</em> of interacting systems rather than a labelled diagram. A list of components tells you nothing about what the assembly can do. The arrangement is the point.</p>
+
+        <p>Build the ladder yourself now. Order the levels first, then put a real body on them — and then, in the last stage, find the places where the ladder stops being true.</p>
+
+        <div class="sim" data-sim="u1-hierarchy">
+            <div class="sim-header">
+                <h4>Build the hierarchy, then break it</h4>
+                <span class="sim-kind">Interactive</span>
+            </div>
+        </div>
+
+        <div class="callout callout-try">
+            <ol>
+                <li>Do the ordering stage without scrolling back to Figure 1.4. Getting it wrong and reading the reason is worth far more than copying it correctly.</li>
+                <li>In the second stage, try the oak tree after the human. If the model is any good it should survive the change of organism entirely. Does it?</li>
+                <li>In the third stage, three of the five claims break the model. Before you read each explanation, ask yourself: is the problem with the body, or with the diagram?</li>
+            </ol>
+        </div>
+
+        <div class="callout callout-misconception">
+            <p>Students often place <span class="term">organelle</span> above cell, reasoning that organs are big so organelles must be too. The names are misleading: an <em>organelle</em> is a "little organ" <em>inside</em> a cell — a mitochondrion, a nucleus, a ribosome. It is one level below the cell, not one above it.</p>
+        </div>
+    </section>
+
+    <section id="models" data-kind="Core" data-standards="HS-LS1-2" data-time="10 min" data-track>
+        <h2>Models: useful and wrong at the same time</h2>
+
+        <p>Everything you have met so far in this unit is a <span class="term">model</span> — the bilayer diagram in 1.1, the osmosis simulation, the ladder in Figure 1.4. So it is worth being precise about what a model is and what it is for.</p>
+
+        <p>A model is a deliberately simplified stand-in for something you cannot easily look at, hold or test directly. You can build it out of almost anything: a drawing, a physical object, an equation, a computer program, an analogy. The point is never to be a copy. The point is to be <em>simple enough to reason with</em> while keeping the features you actually care about.</p>
+
+        <figure class="diagram dense wide">
+            <svg viewBox="0 0 820 525" xmlns="http://www.w3.org/2000/svg" role="img"
+                 aria-labelledby="rm-title rm-desc">
+            <title id="rm-title">A student-built model of the respiratory system, marked up for what it gets right and wrong</title>
+            <desc id="rm-desc">A photograph of a model made from coloured modelling clay on a black
+                board, labelled by hand: nasal cavity, mouth, pharynx, larynx, trachea, bronchi,
+                bronchiole, lung, alveoli and diaphragm. Six numbered markers sit on the photograph.
+                Three are green, for what the model gets right: the order of the parts, running nose to
+                pharynx to larynx to trachea to bronchi in the correct sequence; the branching pattern,
+                where the airway divides and divides again into both lungs; and the diaphragm, modelled
+                as a sheet underneath the lungs where it belongs. Three are red, for what it gets wrong:
+                it is solid clay all the way through where a real lung is hollow; its airway stops after
+                about four divisions where a real one keeps dividing roughly twenty-three times; and its
+                alveoli, modelled as about twenty bunches of beads at the tips of the bronchioles, can be
+                counted, where a real pair of lungs holds hundreds of millions of them.</desc>
+            <style>
+                .r-h1    { font-size: 13px; font-weight: 700; fill: var(--text); }
+                .r-frame { fill: none; stroke: var(--border); stroke-width: 1; }
+                .r-mk    { stroke: #fff; stroke-width: 2; }
+                .r-mk-y  { fill: #2e7d32; }
+                .r-mk-n  { fill: #a3242c; }
+                .r-mknum { font-size: 11px; font-weight: 800; fill: #fff; text-anchor: middle; }
+                .r-gh    { font-size: 11px; font-weight: 800; letter-spacing: 0.06em; }
+                .r-gh-y  { fill: #1f5b23; }
+                .r-gh-n  { fill: var(--red); }
+                .r-kt    { font-size: 12px; font-weight: 700; fill: var(--text); }
+                .r-kd    { font-size: 10.5px; fill: var(--text-secondary); }
+                .r-foot  { font-size: 10.5px; font-style: italic; fill: var(--text-secondary); }
+                /* the markers sit on a dark photograph, so their white ring is pinned in every theme */
+                [data-theme="dark"] .r-gh-y { fill: #7fc98a; }
+                [data-theme="dark"] .r-mk-y { fill: #2e7d32; }
+                [data-theme="dark"] .r-gh-n { fill: #e8878f; }
+            </style>
+            <text class="r-h1" x="12" y="26">One model, two questions</text>
+            <image href="../images/u1/respiratory-model.jpg" x="12" y="44" width="340" height="460.8" preserveAspectRatio="xMidYMid meet"/>
+            <rect class="r-frame" x="12" y="44" width="340" height="460.8" rx="4"/>
+            <circle class="r-mk r-mk-y" cx="198.7" cy="260.4" r="11"/>
+            <text class="r-mknum" x="198.7" y="264.2">1</text>
+            <circle class="r-mk r-mk-y" cx="147.3" cy="341.6" r="11"/>
+            <text class="r-mknum" x="147.3" y="345.4">2</text>
+            <circle class="r-mk r-mk-y" cx="228.4" cy="439" r="11"/>
+            <text class="r-mknum" x="228.4" y="442.8">3</text>
+            <circle class="r-mk r-mk-n" cx="250.1" cy="380.4" r="11"/>
+            <text class="r-mknum" x="250.1" y="384.2">4</text>
+            <circle class="r-mk r-mk-n" cx="141" cy="379.5" r="11"/>
+            <text class="r-mknum" x="141" y="383.3">5</text>
+            <circle class="r-mk r-mk-n" cx="154.5" cy="412" r="11"/>
+            <text class="r-mknum" x="154.5" y="415.8">6</text>
+            <text class="r-gh r-gh-y" x="376" y="70">WHAT IT GETS RIGHT</text>
+            <circle class="r-mk r-mk-y" cx="387" cy="88" r="10"/>
+            <text class="r-mknum" x="387" y="91.6">1</text>
+            <text class="r-kt" x="408" y="92">The order of the parts</text>
+            <text class="r-kd" x="408" y="106">nose → pharynx → larynx → trachea → bronchi, in the right sequence</text>
+            <circle class="r-mk r-mk-y" cx="387" cy="144" r="10"/>
+            <text class="r-mknum" x="387" y="147.6">2</text>
+            <text class="r-kt" x="408" y="148">The branching pattern</text>
+            <text class="r-kd" x="408" y="162">the airway divides, and divides again, into both lungs</text>
+            <circle class="r-mk r-mk-y" cx="387" cy="200" r="10"/>
+            <text class="r-mknum" x="387" y="203.6">3</text>
+            <text class="r-kt" x="408" y="204">The diaphragm underneath</text>
+            <text class="r-kd" x="408" y="218">a sheet below the lungs, which is where it belongs</text>
+            <text class="r-gh r-gh-n" x="376" y="252">WHAT IT GETS WRONG</text>
+            <circle class="r-mk r-mk-n" cx="387" cy="270" r="10"/>
+            <text class="r-mknum" x="387" y="273.6">4</text>
+            <text class="r-kt" x="408" y="274">Solid where a lung is hollow</text>
+            <text class="r-kd" x="408" y="288">clay all the way through — there is no air space anywhere in it</text>
+            <circle class="r-mk r-mk-n" cx="387" cy="326" r="10"/>
+            <text class="r-mknum" x="387" y="329.6">5</text>
+            <text class="r-kt" x="408" y="330">The airway stops after about four divisions</text>
+            <text class="r-kd" x="408" y="344">a real one keeps dividing roughly twenty-three times</text>
+            <circle class="r-mk r-mk-n" cx="387" cy="382" r="10"/>
+            <text class="r-mknum" x="387" y="385.6">6</text>
+            <text class="r-kt" x="408" y="386">You can count the alveoli</text>
+            <text class="r-kd" x="408" y="400">about twenty bunches here; a real pair of lungs holds hundreds of millions</text>
+            <text class="r-foot" x="376" y="446">Good for learning the layout. No use for explaining gas exchange —</text>
+            <text class="r-foot" x="376" y="460">and knowing which of those it is good for is the whole skill.</text>
+            </svg>
+            <figcaption><b>Figure 1.6</b> — A student-built model of the respiratory system, with the two questions worth asking of any model marked directly on it. Note what the red markers are <em>not</em> saying. The alveoli have not been left out — they are there, bunched at the tip of every bronchiole, and they are the most numerous thing in the model. The problem is the count: about twenty bunches standing in for hundreds of millions, which is why the model can teach you the layout of the airway and can tell you nothing about gas exchange. What has been left out is not a part. It is a scale.</figcaption>
+        </figure>
+
+        <h3>What makes one model better than another</h3>
+
+        <p>Not accuracy. A perfectly accurate model of a lung would be a lung, and would be exactly as hard to understand. Judge a model on these instead:</p>
+
+        <table>
+            <thead>
+                <tr><th>Ask</th><th>Why it matters</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>What is it <strong>for</strong>?</td><td>A model is good or bad only relative to a question. The osmosis simulation is excellent for water movement and worthless for cell structure.</td></tr>
+                <tr><td>What has been <strong>left out</strong>?</td><td>Everything left out is a decision, and every decision is somewhere the model can mislead you.</td></tr>
+                <tr><td>Does it show <strong>relationships</strong>, or just parts?</td><td>Shapes, arrows and lines that show what acts on what beat an anatomically perfect drawing with no arrows.</td></tr>
+                <tr><td>Can you use it to <strong>predict</strong>?</td><td>A model you can run — change an input, see the output — is doing far more work than one you can only look at.</td></tr>
+                <tr><td>Where does it <strong>break</strong>?</td><td>If you cannot name a place it fails, you have not finished understanding it.</td></tr>
+            </tbody>
+        </table>
+
+        <div class="callout callout-example">
+            <p>A well-known one: the atom drawn as a tiny solar system, with electrons circling a nucleus. It is wrong in almost every physical detail — electrons do not orbit, and are not little balls. It is still taught, because it gets one thing right that matters enormously: most of the atom is empty space, with the mass concentrated in the middle. Used for that, it is a good model. Used to predict chemical bonding, it fails.</p>
+        </div>
+
+        <div class="callout callout-key">
+            <p>When HS-LS1-2 says "develop and use a model", the assessment is not asking for a beautiful diagram. It is asking you to choose what to include, show what acts on what, and be able to say where your model would let you down. A rough sketch with correct arrows scores better than a perfect drawing with none.</p>
+        </div>
+
+        <h3>Where this goes next</h3>
+
+        <p>You now have a ladder with eleven rungs, and this unit spends its time on rungs four to eight — cell, tissue, organ, organ system, organism. The obvious next question is what actually happens on those rungs when a body does something.</p>
+
+        <p>So we pick one job and follow it all the way up. Chapter 1.3 takes a cheese sandwich and asks what has to happen to it, organ by organ, before any of it can become part of you — and at every stage the answer turns out to depend on the <em>shape</em> of the structure doing the work. Teeth, folds, villi. Structure first, function second, every single time.</p>
+    </section>
+
+    <section id="check" data-kind="Practice" data-time="8 min">
+        <h2>Check your understanding</h2>
+
+        <div class="check">
+            <details class="check-q" id="q-fire-alive" data-track>
+                <summary>A student argues that fire is alive because it grows, moves, uses energy and reproduces. Give the strongest possible reply.</summary>
+                <div class="check-a">
+                    <p>Agree with the four they have listed, because all four are genuinely true — then point out that the definition requires all seven, not any four. Fire is not made of cells, so it fails <em>order</em>. It does not regulate itself: a flame in a draught burns hotter rather than correcting back towards a set point, which is the opposite of homeostasis. And it carries no heritable instructions, so a population of flames cannot adapt over generations.</p>
+                    <p>The deeper reply is that the list is not a checklist someone invented to keep fire out. Each item describes something that only turns up together with the others in things descended from a common ancestor. Fire shows some of the outward signs without any of the underlying machinery.</p>
+                </div>
+            </details>
+
+            <details class="check-q" id="q-emergent" data-track>
+                <summary>Explain what is meant by an emergent property, using a level of organisation from this chapter, and say why the idea matters for HS-LS1-2.</summary>
+                <div class="check-a">
+                    <p>An emergent property is something an assembled system can do that none of its components can do alone. One intestinal cell can pull a glucose molecule across its membrane. It cannot absorb a meal — that needs a whole sheet of such cells, joined edge to edge, folded into villi, each villus served by a capillary and a lacteal, in a tube long enough to give the food time. Absorbing a meal is a property of the arrangement, not of any cell in it.</p>
+                    <p>It matters for HS-LS1-2 because the standard asks for a model of <em>interacting</em> systems. If the parts were simply additive, a labelled list would be a complete answer. Because the behaviour comes out of the interactions, the model has to show what acts on what — which is why arrows earn marks and labels do not.</p>
+                </div>
+            </details>
+
+            <details class="check-q" id="q-model-limits" data-track>
+                <summary>The osmosis simulation in Chapter 1.1 shows about ninety water particles crossing a circular membrane. Name two things it deliberately gets wrong, and explain why it is still a good model.</summary>
+                <div class="check-a">
+                    <p>Two of many: the number of particles is out by roughly twenty orders of magnitude, and the membrane is drawn as a plain line rather than a phospholipid bilayer with proteins in it. It is also two-dimensional, has no cytoplasm, no organelles and no cell wall, and the particles are perfect circles.</p>
+                    <p>It is still a good model because of what it was built to do: show that water moves in both directions at once, that the net direction depends on the difference in solute concentration, and that the cell stops changing size when the concentrations match. All three of those are true, and all three are hard to see in a real cell. A model with ten billion trillion particles would be more accurate and completely useless — you could not watch it. The right question is never "is this model accurate?" but "is it accurate about the thing I am using it for?"</p>
+                </div>
+            </details>
+        </div>
+
+        <h3>Quick check</h3>
+
+        <p>These mark themselves, and point you back to the right section when an answer goes wrong.</p>
+
+        <div class="quiz" data-quiz>
+
+            <div class="quiz-q" data-review="alive">
+                <div class="quiz-variant" data-answer="4">
+                    <p class="quiz-stem">An oak tree does not move. A river does. Which of these is the useful thing to say about that?</p>
+                    <ol class="quiz-options">
+                        <li data-why="Movement is not on the list of seven at all, so nothing about the tree is failing.">The tree fails one of the seven characteristics, but passes the other six</li>
+                        <li data-why="A river responds to nothing. It goes downhill because of gravity, and it detects nothing on the way.">The river responds to its surroundings, so it meets at least one characteristic</li>
+                        <li data-why="Plants do move — leaves track light and roots grow towards water — but that is not what settles this question either.">The tree does move, just too slowly to see, so it passes after all</li>
+                        <li>Movement is not one of the characteristics; what matters is whether something responds to what it detects</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>This is the trap the list is designed to avoid. Moving is not evidence of life and staying still is not evidence against it. The characteristic is <strong>response</strong> — whether the change is a reaction to something the organism detected.</p>
+                    </div>
+                </div>
+
+                <div class="quiz-variant" data-answer="2">
+                    <p class="quiz-stem">A sunflower turns its leaves towards the light over the course of a day. A flag on a pole moves whenever the wind blows. Which of these is evidence of life?</p>
+                    <ol class="quiz-options">
+                        <li data-why="Movement is not one of the seven. If it were, a river and a flag would both have to qualify.">Both, since movement is one of the seven characteristics</li>
+                        <li>The sunflower only — its movement is a reaction to something it detected, while the flag is simply being pushed</li>
+                        <li data-why="Correct about movement, but it throws away the point: the sunflower is responding, and response is on the list.">Neither, because movement is not on the list of seven at all</li>
+                        <li data-why="Distance and speed decide nothing. A river travels far further than any leaf and detects nothing on the way.">The flag only, because it moves further and faster than the leaves do</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>The test is where the change comes from. A flag is pushed from outside; a sunflower detects something and acts on it. The same test is what separates a plant tracking the light from a river running downhill.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-q" data-review="alive">
+                <div class="quiz-variant" data-answer="2">
+                    <p class="quiz-stem">A dry acorn in a drawer shows no measurable metabolism, no growth and no response. Why is it still alive?</p>
+                    <ol class="quiz-options">
+                        <li data-why="Four out of seven is a fail. The rule is that a living thing shows all of them — that is why the candle flame is out.">Because it still meets four of the seven characteristics, which is enough</li>
+                        <li>Because its machinery is intact and paused rather than destroyed — add water and it restarts</li>
+                        <li data-why="An acorn is not a stage of anything. It is a seed, and it is alive in the drawer, not merely about to be.">Because it will become alive later, when it germinates</li>
+                        <li data-why="Being made of cells is only one of the seven. A dead leaf is made of cells too.">Because it is made of cells, and anything made of cells is alive</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>The acorn is the most useful case on the chart because it separates two things students merge: what something is <em>doing</em> when you look at it, and what it is <em>capable of</em>. The definition of life is about capability.</p>
+                    </div>
+                </div>
+
+                <div class="quiz-variant" data-answer="4">
+                    <p class="quiz-stem">The same acorn is ground to powder, and the powder is then watered. Nothing happens. What has changed?</p>
+                    <ol class="quiz-options">
+                        <li data-why="It was alive in the drawer. Dry is not the same as dead, which is the entire reason the acorn is on the chart.">Nothing has changed — it was never alive in the drawer either</li>
+                        <li data-why="Counting does not settle it. Sitting in the drawer it showed almost none of them measurably and was alive throughout.">It has dropped below four of the seven characteristics, so it no longer qualifies</li>
+                        <li data-why="Time is not the problem. Nothing is waiting to restart, because the structures a restart depends on are no longer there.">It needs longer, because a damaged seed restarts more slowly than an intact one</li>
+                        <li>Its machinery has been destroyed rather than paused, so the capability that made it alive has gone</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>Alive and dead are separated by whether the machinery could run again, not by whether it is running now. That is why an acorn in a drawer and an acorn in powder sit on opposite sides of the line, although neither of them is doing anything at all.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-q" data-review="alive">
+                <div class="quiz-variant" data-answer="3">
+                    <p class="quiz-stem">Biologists disagree about whether a virus is alive. What is the disagreement actually about?</p>
+                    <ol class="quiz-options">
+                        <li data-why="Viruses have been studied in enormous detail. Nobody is waiting for more data before deciding.">Whether we know enough about viruses yet to say</li>
+                        <li data-why="A virus does evolve — that is one of the few characteristics it clearly meets, and it is part of why the case is hard.">Whether viruses really change over generations</li>
+                        <li>Where to draw the line on a definition, given that a virus has genes and evolves but has no cell and runs no chemistry of its own</li>
+                        <li data-why="Viruses are unmistakably part of the living world and matter enormously. The difficulty is the definition, not their importance.">Whether viruses are important enough to bother classifying</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>The virus fails four of the seven: no cell, no metabolism, no growth, no regulation. It only copies itself by hijacking a cell that <em>is</em> alive. Nothing about the virus is unknown — the argument is about where a human-made definition should cut.</p>
+                    </div>
+                </div>
+
+                <div class="quiz-variant" data-answer="1">
+                    <p class="quiz-stem">On Figure 1.3 the candle flame passes more of the seven tests than the virus does, yet nobody argues about the flame. Why is the virus the disputed case?</p>
+                    <ol class="quiz-options">
+                        <li>Because what the virus passes — heritable instructions that change across generations — is something only living things show, while everything the flame passes turns up in non-living processes too</li>
+                        <li data-why="Then the flame would be the difficult one, since it passes more of the tests than the virus does. Nobody argues about the flame.">Because the closer something comes to passing all seven, the harder it is to classify</li>
+                        <li data-why="Viruses have been examined in enormous detail. No part of the argument turns on thin evidence.">Because viruses are too small to test properly, so the evidence about them is thin</li>
+                        <li data-why="Neither is made of cells. Order is one of the four the virus fails, which is exactly why the case is hard.">Because a flame is not made of cells and a virus is</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>The seven do not all carry equal weight when a hard case has to be decided. Giving off heat and getting larger are things ordinary chemistry does unaided; carrying genes that change across generations is not. The flame shows the outward signs without the machinery, and the virus shows the machinery without the cell.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-q" data-review="hierarchy">
+                <div class="quiz-variant" data-answer="1">
+                    <p class="quiz-stem">Where does an organelle such as a mitochondrion sit in the hierarchy of organisation?</p>
+                    <ol class="quiz-options">
+                        <li>One level below the cell — a molecule builds an organelle, and organelles build a cell</li>
+                        <li data-why="This is the usual mistake, and it comes from the name: organs are big, so organelles sound big. An organelle is a little organ inside a cell.">Just above the organ, because it is a smaller version of one</li>
+                        <li data-why="A tissue is a group of similar cells. An organelle is inside a single cell, several rungs lower.">Between tissue and organ</li>
+                        <li data-why="It has a definite place. Every level is made entirely out of the level below it, and organelles are made of molecules.">It is not on the ladder, because it is not alive</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>Atom, molecule, <strong>organelle</strong>, cell, tissue, organ, organ system. The name is what misleads people: <em>organelle</em> means "little organ", and the little organs live inside a cell.</p>
+                    </div>
+                </div>
+
+                <div class="quiz-variant" data-answer="3">
+                    <p class="quiz-stem">A student writes the levels inside a body as cell, then organ, then tissue, then organ system. What is wrong with that?</p>
+                    <ol class="quiz-options">
+                        <li data-why="The order is fixed, because each level is made entirely out of the level below it. An organ is built of tissues and never the other way round.">Nothing — organ and tissue are the same size, so either order will do</li>
+                        <li data-why="A tissue is a group of similar cells, so the cell has to come first. The epithelium is made of intestinal cells, not the reverse.">Cell should come after tissue, because a single cell is the simpler thing</li>
+                        <li>Organ and tissue are the wrong way round — the epithelium lining your intestine is a tissue, and the small intestine built out of it is an organ</li>
+                        <li data-why="The digestive system is built out of organs, including the small intestine, so it belongs above them. That part of the list is right.">Organ system should come before organ, since the system is what organs belong to</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>The test for any two neighbouring rungs is always the same one: is the upper level made entirely out of the lower? A small intestine is made of epithelium, muscle and nerve — and no epithelium is made of small intestines.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-q" data-review="hierarchy">
+                <div class="quiz-variant" data-answer="4">
+                    <p class="quiz-stem">One intestinal cell can absorb a glucose molecule, but cannot absorb a meal. What does that illustrate?</p>
+                    <ol class="quiz-options">
+                        <li data-why="It is a perfectly good cell. Nothing about it is weak or unfinished.">That intestinal cells are unusually weak and need help</li>
+                        <li data-why="Adding identical parts is not the point. A heap of loose cells still could not absorb a meal — it is the folding, joining and blood supply that do it.">That the body simply needs a large number of the same part</li>
+                        <li data-why="It is very much a biological question, and it is the one HS-LS1-2 asks you to model.">That absorption is a chemical question, not a biological one</li>
+                        <li>An emergent property — the assembly can do something none of its parts can do alone</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>Absorbing a meal is a property of the arrangement: a sheet of cells, folded into villi, each villus served by a capillary and a lacteal, in a tube long enough to give the food time. This is why a model needs arrows showing what acts on what, rather than labels naming parts.</p>
+                    </div>
+                </div>
+
+                <div class="quiz-variant" data-answer="2">
+                    <p class="quiz-stem">Hydrogen and oxygen are both gases. Bonded together they make water — a liquid that dissolves things, moderates temperature and climbs up a tree. What does that illustrate?</p>
+                    <ol class="quiz-options">
+                        <li data-why="They appear at every rung, including this one. That is why the ladder in Figure 1.4 starts at the atom rather than at the cell.">That emergent properties only begin once you reach the level of the cell</li>
+                        <li>An emergent property — the assembled molecule behaves in ways that neither kind of atom does on its own</li>
+                        <li data-why="The atoms are unchanged: the water still contains hydrogen and oxygen. What is new is the arrangement, not the ingredients.">That the atoms are altered into something other than hydrogen and oxygen</li>
+                        <li data-why="Nothing below the cell is alive. Emergence happens at every rung of the ladder, living or not, so it is no test for life.">That water must itself be alive, since it behaves so unlike its parts</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>Emergence is not something rare that happens near the top of the ladder — it is what every rung is for. It is also why a list of components never answers a biological question: the behaviour is carried by the arrangement, and a list throws the arrangement away.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-q" data-review="models">
+                <div class="quiz-variant" data-answer="2">
+                    <p class="quiz-stem">Two students model the respiratory system. One builds a beautiful, anatomically accurate clay lung. The other draws a rough sketch with arrows showing air moving in, oxygen crossing into blood, and the diaphragm pulling down. Which is the better model?</p>
+                    <ol class="quiz-options">
+                        <li data-why="Accuracy is not the criterion. A perfectly accurate model of a lung would be a lung, and would be exactly as hard to understand.">The clay lung, because a model should be as accurate as possible</li>
+                        <li>The sketch, if the question is how breathing works — it shows what acts on what, which the clay lung does not</li>
+                        <li data-why="Neither is better in general. A model is good or bad only in relation to a particular question.">Neither — a model cannot be judged better or worse</li>
+                        <li data-why="Effort is not a criterion either. The clay lung might well be the better model for learning the layout of the airways.">The clay lung, because more work went into it</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>Judge a model by what it is <em>for</em>. The clay lung is good for the layout and useless for gas exchange, since it is solid where the real thing is hollow and shows no alveoli at all. A rough sketch with correct arrows does more work than a perfect drawing with none.</p>
+                    </div>
+                </div>
+
+                <div class="quiz-variant" data-answer="4">
+                    <p class="quiz-stem">A student reaches for the clay model in Figure 1.6 to explain why a lung offers so much surface for gas exchange. What is the problem?</p>
+                    <ol class="quiz-options">
+                        <li data-why="A model is good or bad only in relation to a question. This one answers a different question from the one being asked.">Nothing — the model is anatomically correct, so it will serve any question about the lung</li>
+                        <li data-why="They have not been left out. They are there, bunched at the tip of every bronchiole, and they are the most numerous thing in the model.">The alveoli have been left out of the model altogether</li>
+                        <li data-why="The order is one of the things the model gets right: nose, pharynx, larynx, trachea, bronchi, in the correct sequence.">The model puts the parts of the airway in the wrong order</li>
+                        <li>Its alveoli can be counted — about twenty bunches standing in for hundreds of millions, so the one feature the question depends on is the feature the model has lost</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>What a model leaves out is not always a part. Here it is a scale. The alveoli are present and countable, and being countable is precisely what a real lung's alveoli are not — which is why the same model teaches the layout well and explains gas exchange not at all.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-q" data-review="models">
+                <div class="quiz-variant" data-answer="3">
+                    <p class="quiz-stem">The atom is often drawn as a tiny solar system, with electrons circling a nucleus. Electrons do not orbit and are not little balls. Why is the model still taught?</p>
+                    <ol class="quiz-options">
+                        <li data-why="There are better models, and chemists use them. This one survives because it is simple, not because it is all we have.">Because nobody has thought of a better picture yet</li>
+                        <li data-why="It is genuinely wrong about almost every physical detail. Being useful and being accurate are separate questions.">Because it is close enough to accurate for school purposes</li>
+                        <li>Because it gets one important thing right — most of an atom is empty space with the mass in the middle — and that is what it is used for</li>
+                        <li data-why="Simplicity on its own is not a virtue. A simple model that got nothing right would be worthless.">Because a simple model is always better than a complicated one</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>Used for the distribution of mass, it is a good model. Used to predict chemical bonding, it fails completely. That is the habit this section is asking for: not "is this model accurate?" but "is it accurate about the thing I am using it for — and where does it break?"</p>
+                    </div>
+                </div>
+
+                <div class="quiz-variant" data-answer="1">
+                    <p class="quiz-stem">The osmosis simulation in Chapter 1.1 uses about ninety water particles instead of ten billion trillion, is flat, and draws the membrane as a plain circle. Why is it a good model in spite of all that?</p>
+                    <ol class="quiz-options">
+                        <li>Because it is accurate about what it is used for — that water crosses in both directions at once, and that the net direction depends on the difference in concentration</li>
+                        <li data-why="It is out by roughly twenty orders of magnitude, which is not close to anything. Its usefulness comes from somewhere other than its accuracy.">Because ninety particles is close enough to the real number for school purposes</li>
+                        <li data-why="Models differ enormously in quality. The judgement is not abandoned — it is made against a particular question instead.">Because no model is ever accurate, so one is as good as another</li>
+                        <li data-why="Cost is not the reason. A version with ten billion trillion particles would be more accurate and completely useless, because you could not watch it.">Because a more accurate version would simply be too expensive to build</li>
+                    </ol>
+                    <div class="quiz-why">
+                        <p>A model that kept every detail would be the thing itself, and just as hard to look at. Each simplification here was bought deliberately, and the price is real: the same simulation that shows water movement beautifully can tell you nothing whatever about what a membrane is made of.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</main>
+
+<script src="../assets/toc.js?v=330"></script>
+<script src="../assets/course.js?v=330"></script>
+</body>
+</html>

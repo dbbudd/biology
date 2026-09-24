@@ -1,0 +1,567 @@
+/* =============================================================
+   PRESENT — slides, player, presenter view and the topic picker
+   -------------------------------------------------------------
+   Loaded after course.css, so the reader's theme tokens (--bg,
+   --text, --border …) and the unit colour recipe (--unit-h with
+   --u-sat / --u-light per theme) are available.
+
+   Every slide is a size container. Its type is measured in cqw —
+   hundredths of the slide's own width — so a slide looks the same
+   on a projector, in the presenter view and as a thumbnail, and
+   nothing reflows when the window changes shape. --fit steps all
+   of it down together when a long section would overflow.
+   ============================================================= */
+
+/* ===== THE SLIDE ===== */
+.pr-slide {
+    --pr-accent: hsl(var(--unit-h, 210) var(--u-sat) var(--u-light));
+    --pr-soft: hsl(var(--unit-h, 210) var(--u-sat) var(--u-light) / var(--u-soft));
+    --fit: 1;
+    container-type: size;
+    position: absolute; inset: 0;
+    background: var(--bg); color: var(--text);
+    font-family: var(--body-font); line-height: 1.35;
+    overflow: hidden; text-align: left;
+}
+.pr-inner {
+    position: absolute; inset: 0;
+    display: grid; grid-template-rows: auto minmax(0, 1fr) auto;
+    padding: 3.6cqw 5cqw 0;
+    border-top: 0.55cqw solid var(--pr-accent);
+}
+.pr-slide p, .pr-slide ul, .pr-slide ol, .pr-slide li, .pr-slide h2 { margin: 0; padding: 0; border: 0; }
+.pr-head { margin-bottom: 2cqw; min-width: 0; }
+.pr-eyebrow {
+    font-size: clamp(8px, calc(1.2cqw * var(--fit)), 28px); font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--pr-accent);
+    margin-bottom: 0.6cqw !important;
+}
+.pr-slide .pr-title {
+    font-size: clamp(12px, calc(3.3cqw * var(--fit)), 96px); line-height: 1.12;
+    font-weight: 700; letter-spacing: -0.01em; color: var(--text);
+    text-wrap: balance;
+}
+.pr-body { min-height: 0; overflow: hidden; position: relative; }
+.pr-foot {
+    display: flex; align-items: center; gap: 1.5cqw;
+    border-top: 1px solid var(--border); margin-top: 1.2cqw;
+    padding: 1cqw 0 1.3cqw;
+    font-size: clamp(7px, 1.05cqw, 24px); color: var(--text-secondary);
+}
+.pr-foot-meta { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pr-foot-n { font-variant-numeric: tabular-nums; font-weight: 600; color: var(--text); }
+.pr-foot-link { color: var(--text-secondary); white-space: nowrap; }
+.pr-foot-link:hover { color: var(--pr-accent); }
+
+/* bullets */
+.pr-bullets { list-style: none; display: grid; gap: calc(1.5cqw * var(--fit)); }
+.pr-bullets > li {
+    position: relative; padding-left: 2.6cqw !important;
+    font-size: clamp(10px, calc(2.2cqw * var(--fit)), 64px); line-height: 1.34;
+    max-width: 62em; text-wrap: pretty;
+}
+.pr-bullets > li::before {
+    content: ''; position: absolute; left: 0.2cqw; top: calc(0.62em);
+    width: 0.8cqw; height: 0.8cqw; border-radius: 0.15cqw; background: var(--pr-accent);
+}
+.pr-bullets > li.pr-key { font-weight: 600; }
+.pr-key-tag {
+    display: inline-block; vertical-align: 0.15em; margin-right: 0.3em;
+    font-size: 0.5em; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--pr-accent); border: 1px solid currentColor; border-radius: 999px; padding: 0.05em 0.6em;
+}
+
+/* unit and chapter title slides */
+.pr-t-unit .pr-inner, .pr-t-chapter .pr-inner {
+    border-top: 0; border-left: 1.4cqw solid var(--pr-accent);
+    padding: 6cqw 7cqw 0 7cqw;
+}
+/* title slides sit a little above the middle, as a title does */
+.pr-t-unit .pr-inner, .pr-t-chapter .pr-inner { grid-template-rows: minmax(0, 1fr) auto minmax(0, auto) minmax(0, 1.4fr) auto; }
+.pr-t-unit .pr-head, .pr-t-chapter .pr-head { grid-row: 2; }
+.pr-t-unit .pr-body, .pr-t-chapter .pr-body { grid-row: 3; }
+.pr-t-unit .pr-foot, .pr-t-chapter .pr-foot { grid-row: 5; }
+.pr-t-unit .pr-title, .pr-t-chapter .pr-title { font-size: clamp(14px, calc(5cqw * var(--fit)), 140px); }
+.pr-t-unit .pr-eyebrow, .pr-t-chapter .pr-eyebrow { font-size: clamp(9px, calc(1.6cqw * var(--fit)), 40px); }
+.pr-chapter-list {
+    list-style: none; counter-reset: ch; display: grid; gap: calc(0.9cqw * var(--fit)) 4cqw;
+    font-size: clamp(9px, calc(1.8cqw * var(--fit)), 48px); color: var(--text-secondary);
+}
+.pr-chapter-list.pr-two-col { grid-template-columns: 1fr 1fr; grid-auto-flow: column; }
+.pr-chapter-list li { border-left: 0.35cqw solid var(--pr-soft); padding-left: 1.2cqw !important; }
+.pr-question-label {
+    font-size: clamp(8px, calc(1.2cqw * var(--fit)), 28px); font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--text-secondary); margin-bottom: 0.8cqw !important;
+}
+.pr-question {
+    font-size: clamp(12px, calc(3.4cqw * var(--fit)), 96px); line-height: 1.2; font-weight: 600;
+    color: var(--pr-accent); max-width: 30em; text-wrap: balance;
+}
+.pr-lead {
+    margin-top: calc(3cqw * var(--fit)) !important; max-width: 46em;
+    font-size: clamp(10px, calc(1.9cqw * var(--fit)), 52px); color: var(--text-secondary); line-height: 1.45;
+}
+
+/* callout slides */
+.pr-callout {
+    border-left: 0.7cqw solid var(--border-tight); background: var(--bg-tight);
+    border-radius: 0 1cqw 1cqw 0; padding: calc(2.4cqw * var(--fit)) 3cqw;
+}
+.pr-callout-try { border-left-color: var(--border-guidance); background: var(--bg-guidance); }
+/* Note, Example, Looking back and Where this goes next. Each takes the same accent
+   the reader gives that callout, so a block looks the same on the page and on the wall. */
+.pr-callout-note    { border-left-color: var(--border-guidance); background: var(--bg-guidance); }
+.pr-callout-example { border-left-color: var(--border-example);  background: var(--bg-example); }
+.pr-callout-recall  { border-left-color: var(--light-teal);      background: var(--bg-guidance); }
+.pr-callout-ahead   { border-left-color: var(--text-secondary);  background: var(--bg-surface); }
+/* The eyebrow keeps the ordinary label colour rather than the callout accent. Measured
+   over the real composited ground, --border-guidance and --light-teal land at 3.8-4.3:1
+   as eyebrow text, under the 4.5:1 a label needs, and this label is read from the back
+   of a room. The tinted box and its border below carry the type instead. */
+.pr-t-aside .pr-eyebrow { color: var(--text-secondary); }
+/* The brand yellow is a 1.4:1 border on the light ground and 2.3:1 on sepia -- fine on
+   paper, invisible on a projector -- so the example rule is darkened for those two only,
+   the same local lift course.css already makes for brand red and blue inside diagrams. */
+.pr-callout-example { border-left-color: #8a6b00; }
+[data-theme="dark"] .pr-callout-example { border-left-color: var(--border-example); }
+.pr-callout .pr-bullets > li::before { background: var(--border-tight); }
+/* These must follow the generic marker rule above: both are (0,2,2), so at equal
+   specificity the later one wins and the variant accent would otherwise be overwritten
+   by --border-tight. The example marker takes the same darkened amber as its border. */
+.pr-callout-note .pr-bullets > li::before    { background: var(--border-guidance); }
+.pr-callout-example .pr-bullets > li::before { background: #8a6b00; }
+.pr-callout-recall .pr-bullets > li::before  { background: var(--light-teal); }
+.pr-callout-ahead .pr-bullets > li::before   { background: var(--text-secondary); }
+[data-theme="dark"] .pr-callout-example .pr-bullets > li::before { background: var(--border-example); }
+.pr-t-misconception .pr-eyebrow { color: var(--border-tight); }
+.pr-t-prompt .pr-eyebrow { color: var(--border-guidance); }
+.pr-prompt-intro {
+    font-size: clamp(10px, calc(2.2cqw * var(--fit)), 64px); font-weight: 600; line-height: 1.34;
+    margin-bottom: calc(1.4cqw * var(--fit)) !important;
+}
+.pr-prompt-items {
+    list-style: none; counter-reset: q; display: grid; gap: calc(1.1cqw * var(--fit));
+    font-size: clamp(9px, calc(1.95cqw * var(--fit)), 56px); line-height: 1.34;
+}
+.pr-prompt-items li { counter-increment: q; position: relative; padding-left: 3cqw !important; }
+.pr-prompt-items li::before {
+    content: counter(q); position: absolute; left: 0; top: 0.1em;
+    width: 1.35em; height: 1.35em; border-radius: 50%; font-size: 0.8em; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--border-guidance); color: #fff;
+}
+
+/* figures */
+.pr-figure { position: absolute; inset: 0; display: flex; gap: 2cqw; align-items: stretch; justify-content: center; }
+.pr-img { flex: 1 1 0; min-width: 0; display: flex; align-items: center; justify-content: center; }
+.pr-img img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; display: block; border-radius: 0.4cqw; }
+.pr-svg { flex: 1 1 auto; min-width: 0; display: flex; justify-content: center; }
+/* carries .diagram for the figures' own rules; its box styling is not wanted */
+.pr-svg.diagram { border: 0; background: none; padding: 0; border-radius: 0; }
+.pr-svg.diagram > svg { min-width: 0; }
+.pr-svg svg { width: 100%; height: 100%; max-width: 100%; display: block; }
+.pr-svg svg { --dg-line: var(--text-secondary); --dg-fill: var(--bg); --dg-ink: var(--text); }
+.pr-svg svg text { fill: var(--dg-ink); font-family: var(--body-font); }
+.pr-t-figure .pr-title { font-size: clamp(11px, 2.4cqw, 68px); }
+
+/* ===== TEXT BESIDE ITS FIGURE ===== */
+/* A part yielding only a bullet or two used to make a near-empty slide followed by
+   its picture; they share one slide now. .pr-figure is normally inset:0 inside the
+   body, so it has to be un-absoluted to take part in the grid. The figure column is
+   bounded to the row height so it can never be what overflows: fit() answers an
+   overflow by shrinking type, which fixes long text and does nothing for a tall
+   image. Only the text column can drive it. */
+.pr-split {
+    display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.6fr);
+    gap: 4cqw; align-items: center; height: 100%; min-height: 0;
+}
+.pr-split > .pr-figure { position: relative; inset: auto; height: 100%; min-height: 0; }
+.pr-split .pr-bullets { margin: 0; }
+.pr-split .pr-svg svg { max-height: 100%; }
+/* A portrait projector or a phone preview has no room for two columns. */
+@container (max-aspect-ratio: 4/3) {
+    .pr-split {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: auto minmax(0, 1fr); gap: 2.4cqw; align-items: start;
+    }
+}
+.pr-t-figure .pr-head { margin-bottom: 1.4cqw; }
+
+/* tables */
+.pr-table-wrap table { margin: 0; width: 100%; font-size: clamp(6px, calc(1.6cqw * var(--fit)), 44px); line-height: 1.3; }
+.pr-table-wrap th { font-size: 0.92em; }
+.pr-table-wrap th, .pr-table-wrap td { padding: 0.5em 0.7em; }
+
+/* interactive, video and question slides */
+.pr-placeholder, .pr-video-play {
+    position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 1.2cqw; text-align: center; border-radius: 1.2cqw; padding: 3cqw;
+}
+.pr-placeholder { border: 0.2cqw dashed var(--pr-accent); background: var(--pr-soft); color: var(--text); }
+.pr-ph-icon { font-size: 5cqw; line-height: 1; color: var(--pr-accent); }
+.pr-ph-title { font-size: 2.6cqw; font-weight: 700; }
+.pr-ph-hint { font-size: 1.5cqw; color: var(--text-secondary); }
+.pr-t-sim.pr-is-live .pr-head { margin-bottom: 1cqw; }
+.pr-t-sim.pr-is-live .pr-title { font-size: clamp(11px, 2.2cqw, 60px); }
+.pr-live { position: absolute; inset: 0; overflow: auto; overscroll-behavior: contain; }
+.pr-live .sim { margin: 0 auto; max-width: 64rem; }
+.pr-sim-fallback { font-size: 1.4cqw; padding: 1cqw 0 !important; color: var(--text-secondary); }
+.pr-video { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+.pr-video-play, .pr-video-frame {
+    position: relative; inset: auto; height: 100%; aspect-ratio: 16 / 9; max-width: 100%;
+    background: linear-gradient(160deg, var(--dark-blue), #123); color: #fff; border: 0; cursor: pointer; font-family: inherit;
+}
+.pr-video-frame { border-radius: 1.2cqw; overflow: hidden; }
+.pr-video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.pr-video-icon {
+    width: 7cqw; height: 7cqw; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 2.6cqw; padding-left: 0.5cqw; background: rgba(255,255,255,0.15); border: 0.2cqw solid rgba(255,255,255,0.7);
+}
+.pr-video-play:hover .pr-video-icon { background: var(--red); }
+.pr-video-label { font-size: 2.2cqw; font-weight: 600; max-width: 34ch; }
+.pr-video-hint { font-size: 1.3cqw; opacity: 0.8; }
+.pr-stem { font-size: clamp(10px, calc(2.5cqw * var(--fit)), 70px); font-weight: 600; line-height: 1.3; margin-bottom: calc(1.8cqw * var(--fit)) !important; max-width: 50em; }
+.pr-options { list-style: none; display: grid; gap: calc(1cqw * var(--fit)); font-size: clamp(9px, calc(2cqw * var(--fit)), 56px); }
+.pr-options li {
+    display: flex; gap: 1.2cqw; align-items: baseline; padding: calc(0.7cqw * var(--fit)) 1.2cqw !important;
+    border: 0.12cqw solid var(--border) !important; border-radius: 0.8cqw;
+}
+.pr-opt-letter { font-weight: 700; color: var(--pr-accent); min-width: 1.2em; }
+.pr-options li.pr-correct { border-color: var(--ok) !important; background: var(--ok-bg); border-width: 0.25cqw !important; }
+.pr-options li.pr-correct .pr-opt-letter { color: var(--ok); }
+.pr-why, .pr-answer {
+    margin-top: calc(1.6cqw * var(--fit)) !important; font-size: clamp(9px, calc(1.8cqw * var(--fit)), 50px); line-height: 1.4;
+    border-left: 0.5cqw solid var(--ok); padding-left: 1.5cqw !important; color: var(--text);
+}
+.pr-answer p { margin-bottom: 0.6em !important; }
+.pr-reveal-btn {
+    margin-top: calc(2cqw * var(--fit)); font: inherit; font-size: clamp(9px, 1.5cqw, 36px); font-weight: 600;
+    padding: 0.6cqw 1.6cqw; border-radius: 999px; cursor: pointer;
+    border: 0.15cqw solid var(--pr-accent); color: var(--pr-accent); background: transparent;
+}
+.pr-reveal-btn:hover { background: var(--pr-soft); }
+.pr-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* ===== THUMBNAILS =====
+   A thumbnail is the real slide drawn at 1280 × 720 and scaled down. */
+.pr-thumb {
+    position: relative; display: block; width: 100%; aspect-ratio: 16 / 9;
+    overflow: hidden; border-radius: 6px; background: var(--bg);
+    border: 1px solid var(--border); box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+.pr-scale { position: absolute; left: 0; top: 0; width: 1280px; height: 720px; transform-origin: 0 0; pointer-events: none; }
+
+/* ===== PLAYER ===== */
+.pp {
+    position: fixed; inset: 0; z-index: 2000; background: #000; color: #fff;
+    font-family: var(--body-font); overflow: hidden; outline: none;
+}
+.pp-stage { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; touch-action: pan-y; }
+.pp-slot { position: relative; overflow: hidden; background: var(--bg); }
+.pp-slot > .pr-slide { transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1), opacity 0.45s ease; }
+.pp-slot > .pr-slide.pr-enter { opacity: 0; transform: translateX(5%); }
+.pp-slot > .pr-slide.pr-enter.pr-back { transform: translateX(-5%); }
+.pp-slot > .pr-slide.pr-leave { opacity: 0; transform: translateX(-5%); pointer-events: none; }
+.pp-slot > .pr-slide.pr-leave.pr-back { transform: translateX(5%); }
+@media (prefers-reduced-motion: reduce) {
+    .pp-slot > .pr-slide { transition: opacity 0.15s linear; }
+    .pp-slot > .pr-slide.pr-enter, .pp-slot > .pr-slide.pr-leave { transform: none !important; }
+}
+.pp-black { position: absolute; inset: 0; background: #000; z-index: 30; display: flex; align-items: flex-end; justify-content: center; }
+.pp-black span { font-size: 0.8rem; color: #555; padding: 1rem; }
+.pp-controls {
+    position: absolute; left: 50%; bottom: 1rem; transform: translateX(-50%); z-index: 40;
+    display: flex; align-items: center; gap: 0.25rem; padding: 0.3rem;
+    background: rgba(20, 20, 20, 0.88); border-radius: 999px; box-shadow: 0 4px 18px rgba(0,0,0,0.35);
+    transition: opacity 0.25s;
+}
+.pp.pp-idle .pp-controls:not(:focus-within) { opacity: 0; pointer-events: none; }
+.pp.pp-idle { cursor: none; }
+.pp-btn, .pv-btn {
+    font: inherit; font-size: 0.85rem; color: #fff; background: transparent; border: 0; cursor: pointer;
+    padding: 0.45rem 0.8rem; border-radius: 999px; white-space: nowrap; line-height: 1.2;
+}
+.pp-btn:hover, .pv-btn:hover { background: rgba(255,255,255,0.14); }
+.pp-btn:focus-visible, .pv-btn:focus-visible, .pr-thumb-btn:focus-visible, .prm button:focus-visible,
+.prm input:focus-visible, .prm select:focus-visible, .pp-fs button:focus-visible, .pr-reveal-btn:focus-visible,
+.pr-video-play:focus-visible, .pr-foot-link:focus-visible { outline: 3px solid var(--yellow); outline-offset: 2px; }
+.pp-count { font-size: 0.85rem; font-variant-numeric: tabular-nums; padding: 0 0.6rem; color: #ddd; }
+.pp-hud {
+    position: absolute; top: 1rem; right: 1rem; z-index: 45; background: rgba(20,20,20,0.9); color: #fff;
+    font-size: 1.1rem; padding: 0.5rem 0.9rem; border-radius: 8px; font-variant-numeric: tabular-nums;
+}
+.pp-toast {
+    position: absolute; top: 1rem; left: 50%; transform: translateX(-50%); z-index: 45; max-width: min(46rem, 92vw);
+    background: rgba(20,20,20,0.92); color: #fff; font-size: 0.9rem; padding: 0.6rem 1rem; border-radius: 8px; text-align: center;
+}
+.pp-notes {
+    position: absolute; left: 0; right: 0; bottom: 0; z-index: 35; max-height: 45%;
+    background: var(--bg); color: var(--text); border-top: 3px solid var(--red);
+    display: flex; flex-direction: column; box-shadow: 0 -8px 30px rgba(0,0,0,0.4);
+}
+.pp-notes-warn { background: var(--red); color: #fff; font-size: 0.8rem; font-weight: 600; padding: 0.35rem 1rem; }
+.pp-notes-body { overflow: auto; padding: 1rem 1.5rem 1.5rem; font-size: 1.15rem; line-height: 1.55; }
+.pp-fs {
+    position: absolute; inset: 0; z-index: 60; background: rgba(0,0,0,0.82);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; text-align: center; padding: 2rem;
+}
+.pp-fs-go {
+    font: inherit; font-size: clamp(1.4rem, 4vw, 3rem); font-weight: 700; color: #000; background: #fff;
+    border: 0; border-radius: 16px; padding: 1.2rem 2.4rem; cursor: pointer;
+}
+.pp-fs p { color: #ccc; max-width: 36rem; font-size: 1rem; }
+.pp-fs-stay { font: inherit; color: #ccc; background: none; border: 0; text-decoration: underline; cursor: pointer; }
+
+/* notes typography, shared by the peek panel and the presenter view */
+.pr-notes-content p, .pr-notes-content ul, .pr-notes-content ol { margin: 0 0 0.75em; }
+.pr-notes-content ul, .pr-notes-content ol { padding-left: 1.3em; }
+.pr-notes-content li { margin-bottom: 0.3em; }
+.pr-note-h { font-size: 0.72em; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-secondary); margin: 1em 0 0.4em; border: 0; padding: 0; }
+.pr-note-h:first-child { margin-top: 0; }
+.pr-note-block { border-left: 3px solid var(--light-teal); padding-left: 0.8em; margin: 0 0 0.9em; }
+.pr-note-label { display: block; font-size: 0.7em; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-secondary); }
+.pr-note-empty { color: var(--text-secondary); font-style: italic; }
+.pr-notes-content .callout::before { content: none; }
+
+/* grid overlay (G) */
+.pg {
+    position: absolute; inset: 0; z-index: 50; overflow: auto; background: rgba(12,12,12,0.97); color: #fff;
+    padding: 1.25rem 1.5rem 3rem;
+}
+.pg-head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; position: sticky; top: -1.25rem; background: rgba(12,12,12,0.97); padding: 0.75rem 0; z-index: 2; }
+.pg-head h2 { font-size: 1.1rem; margin: 0; color: #fff; border: 0; padding: 0; }
+.pr-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem 1rem; }
+.pr-grid-divider { grid-column: 1 / -1; font-size: 0.85rem; font-weight: 700; margin: 0.75rem 0 -0.25rem; padding: 0 0 0.3rem; border-bottom: 1px solid currentColor; opacity: 0.85; }
+.pr-thumb-btn {
+    display: block; width: 100%; min-width: 0; padding: 0; border: 0; background: none; cursor: pointer; text-align: left; color: inherit; font: inherit; border-radius: 8px;
+}
+.pr-thumb-btn .pr-thumb-num { display: flex; gap: 0.4rem; font-size: 0.75rem; margin-top: 0.3rem; opacity: 0.85; }
+.pr-thumb-btn .pr-thumb-num b { font-variant-numeric: tabular-nums; }
+.pr-thumb-btn .pr-thumb-num span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pr-thumb-btn:hover .pr-thumb { outline: 2px solid var(--light-teal); }
+.pr-thumb-btn.is-current .pr-thumb { outline: 3px solid var(--yellow); outline-offset: 1px; }
+
+/* ===== PRESENTER VIEW ===== */
+.pv {
+    position: fixed; inset: 0; z-index: 2000; display: grid;
+    grid-template-rows: auto auto minmax(0, 1fr) auto;
+    background: #16181b; color: #eee; font-family: var(--body-font); outline: none;
+}
+.pv-bar { display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem 1rem; padding: 0.55rem 1rem; background: #0d0e10; border-bottom: 1px solid #2a2d31; }
+.pv-title { font-weight: 700; font-size: 0.9rem; min-width: 0; flex: 1 1 14rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pv-count { font-size: 1.05rem; font-variant-numeric: tabular-nums; }
+.pv-count strong { font-size: 1.3rem; }
+.pv-timer { display: flex; align-items: center; gap: 0.2rem; }
+.pv-elapsed, .pv-clock { font-size: 1.3rem; font-variant-numeric: tabular-nums; font-weight: 600; min-width: 4.2ch; }
+.pv-clock { color: #aaa; font-weight: 400; }
+.pv-actions { display: flex; flex-wrap: wrap; gap: 0.25rem; }
+.pv-btn { border: 1px solid #3a3e44; border-radius: 6px; font-size: 0.82rem; }
+.pv-btn.is-on { background: var(--yellow); color: #000; border-color: var(--yellow); }
+.pv-btn.primary { background: #fff; color: #000; border-color: #fff; }
+.pv-btn[disabled] { opacity: 0.4; cursor: default; }
+.pv-link-status { font-size: 0.78rem; color: #aaa; }
+.pv-link-status.ok { color: #7fc98a; }
+.pv-notice { font-size: 0.88rem; padding: 0.5rem 1rem; background: #3b2f10; color: #ffe7a3; border-bottom: 1px solid #5a4717; display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; align-items: center; }
+.pv-notice.warn { background: #4a1c20; color: #ffd6d9; border-color: #6d2a30; }
+.pv-notice.ok { background: #173222; color: #c9f0d3; border-color: #24503a; }
+.pv-main { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); gap: 1rem; padding: 1rem; min-height: 0; }
+.pv-col { display: flex; flex-direction: column; gap: 0.6rem; min-height: 0; min-width: 0; }
+.pv-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9aa0a6; margin: 0; border: 0; padding: 0; }
+.pv-frame { position: relative; flex: 1 1 auto; min-height: 0; display: flex; align-items: flex-start; justify-content: center; }
+.pv-frame .pr-thumb { box-shadow: 0 6px 24px rgba(0,0,0,0.5); border-color: #333; }
+.pv-next-frame { flex: 0 0 auto; height: 28%; min-height: 110px; }
+.pv-nav { display: flex; gap: 0.5rem; justify-content: center; }
+.pv-nav .pv-btn { font-size: 1rem; padding: 0.6rem 1.2rem; }
+.pv-notes { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; background: #202327; border-radius: 8px; border: 1px solid #2f3338; }
+.pv-notes-head { display: flex; align-items: center; gap: 0.3rem; padding: 0.45rem 0.6rem 0.45rem 0.9rem; border-bottom: 1px solid #2f3338; }
+.pv-notes-head .pv-label { flex: 1; }
+.pv-notes-body {
+    overflow: auto; padding: 0.9rem 1.1rem 1.4rem; line-height: 1.55; font-size: var(--pv-notes-size, 1.25rem);
+    --text: #eee; --text-secondary: #a9b0b7; --light-teal: #7ea3c8; --dfn-bg: rgba(126,163,200,0.18); --dfn-border: #7ea3c8;
+}
+.pv-notes-body a { color: #9cc3ec; }
+.pv-strip { display: flex; gap: 0.5rem; overflow-x: auto; padding: 0.6rem 1rem 0.8rem; background: #0d0e10; border-top: 1px solid #2a2d31; scroll-padding: 0 40%; }
+.pv-strip .pr-grid { display: flex; gap: 0.5rem; grid-template-columns: none; }
+.pv-strip .pr-thumb-btn { flex: 0 0 136px; }
+.pv-strip { overflow-y: hidden; }
+.pv-strip .pr-thumb-num { color: #bbb; }
+@media (max-width: 860px) {
+    .pv-main { grid-template-columns: 1fr; overflow: auto; }
+    .pv-frame { min-height: 200px; }
+}
+
+/* ===== PICKER (in the reader) ===== */
+.prm-backdrop {
+    position: fixed; inset: 0; z-index: 1900; background: rgba(0,0,0,0.5);
+    display: flex; align-items: center; justify-content: center; padding: 1.5rem;
+}
+.prm {
+    background: var(--bg); color: var(--text); border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+    width: min(56rem, 100%); max-height: calc(100vh - 3rem); display: flex; flex-direction: column; overflow: hidden;
+    font-family: var(--body-font); line-height: 1.5;
+}
+.prm.prm-wide { width: min(92rem, 100%); height: calc(100vh - 3rem); }
+.prm-head { display: flex; align-items: flex-start; gap: 1rem; padding: 1rem 1.25rem 0.85rem; border-bottom: 1px solid var(--border); }
+.prm-head-text { flex: 1; min-width: 0; }
+.prm-head h2 { margin: 0; padding: 0; border: 0; font-size: 1.25rem; }
+.prm-head p { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--text-secondary); }
+.prm-x { font: inherit; font-size: 1.4rem; line-height: 1; background: none; border: 0; color: var(--text-secondary); cursor: pointer; padding: 0.25rem 0.5rem; border-radius: 6px; }
+.prm-x:hover { background: var(--bg-surface); color: var(--text); }
+.prm-body { overflow: auto; padding: 1rem 1.25rem; flex: 1 1 auto; min-height: 0; }
+.prm-foot { display: flex; align-items: center; flex-wrap: wrap; gap: 0.6rem 1rem; padding: 0.8rem 1.25rem; border-top: 1px solid var(--border); background: var(--bg-surface); }
+.prm-foot .prm-spacer { flex: 1; }
+.prm-count { font-weight: 700; font-variant-numeric: tabular-nums; }
+.prm-btn {
+    font: inherit; font-size: 0.88rem; font-weight: 600; padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer;
+    border: 1px solid var(--border); background: var(--bg); color: var(--text); white-space: nowrap;
+}
+.prm-btn:hover { border-color: var(--light-teal); }
+.prm-btn.primary { background: var(--dark-blue); color: #fff; border-color: var(--dark-blue); }
+[data-theme="dark"] .prm-btn.primary { background: #cfe0f0; color: #0b1a26; border-color: #cfe0f0; }
+[data-theme="sepia"] .prm-btn.primary { background: #3e2f1c; color: #f5edd6; border-color: #3e2f1c; }
+.prm-btn[disabled] { opacity: 0.45; cursor: default; }
+.prm-btn.small { font-size: 0.78rem; padding: 0.3rem 0.65rem; font-weight: 500; }
+.prm-row { display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem 1rem; margin-bottom: 0.9rem; }
+.prm-row label { font-weight: 600; font-size: 0.9rem; }
+.prm select { font: inherit; font-size: 0.9rem; padding: 0.35rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); color: var(--text); }
+.prm-status { font-size: 0.85rem; color: var(--text-secondary); margin: 0 0 0.8rem; }
+.prm-status.error { color: var(--red); }
+.prm-bar { height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; margin-top: 0.35rem; max-width: 20rem; }
+.prm-bar i { display: block; height: 100%; background: var(--red); width: 0; transition: width 0.2s; }
+.prm-options { border: 1px solid var(--border); border-radius: 8px; padding: 0.5rem 0.9rem 0.6rem; margin: 0 0 1rem; display: flex; flex-wrap: wrap; gap: 0.3rem 1.4rem; }
+.prm-options legend { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-secondary); padding: 0 0.3rem; }
+.prm-check { display: inline-flex; align-items: center; gap: 0.45rem; font-size: 0.9rem; cursor: pointer; }
+.prm-check input { width: 1.05rem; height: 1.05rem; accent-color: var(--dark-blue); }
+[data-theme="dark"] .prm-check input { accent-color: #7ea3c8; }
+.prm-tools { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.6rem; }
+.prm-tree, .prm-tree ul { list-style: none; margin: 0; padding: 0; }
+.prm-ch { border: 1px solid var(--border); border-radius: 8px; margin-bottom: 0.45rem; border-left: 4px solid hsl(var(--unit-h, 210) var(--u-sat) var(--u-light)); }
+.prm-ch-row { display: flex; align-items: center; gap: 0.4rem; padding: 0.35rem 0.6rem 0.35rem 0.35rem; }
+.prm-disclose { font: inherit; background: none; border: 0; color: var(--text-secondary); cursor: pointer; width: 1.8rem; height: 1.8rem; border-radius: 6px; flex: none; }
+.prm-disclose:hover { background: var(--bg-surface); }
+.prm-disclose span { display: inline-block; transition: transform 0.15s; }
+.prm-disclose[aria-expanded="true"] span { transform: rotate(90deg); }
+.prm-ch-row .prm-check { flex: 1; font-weight: 600; min-width: 0; }
+.prm-num { font-variant-numeric: tabular-nums; color: hsl(var(--unit-h, 210) var(--u-sat) var(--u-light)); margin-right: 0.2rem; }
+.prm-n { font-size: 0.78rem; color: var(--text-secondary); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.prm-secs { padding: 0 0.6rem 0.5rem 2.6rem !important; }
+.prm-secs li { display: flex; align-items: center; gap: 0.5rem; padding: 0.12rem 0; margin: 0; }
+.prm-secs .prm-check { flex: 1; min-width: 0; }
+.prm-kind { font-size: 0.66rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-secondary); border: 1px solid var(--border); border-radius: 999px; padding: 0 0.45rem; white-space: nowrap; }
+.prm-kind.practice { color: var(--red); border-color: currentColor; }
+.prm-note { font-size: 0.8rem; color: var(--text-secondary); }
+.prm-screens { border: 1px solid var(--border); border-radius: 8px; padding: 0.6rem 0.9rem; margin-bottom: 1rem; font-size: 0.88rem; background: var(--bg-surface); }
+.prm-screens p { margin: 0 0 0.4rem; }
+.prm-screens p:last-child { margin-bottom: 0; }
+.prm-screens .prm-row { margin: 0.4rem 0 0; }
+.prm-screens.warn { border-color: var(--border-tight); background: var(--bg-tight); }
+.prm-alert { border-left: 4px solid var(--red); background: var(--bg-tight); padding: 0.5rem 0.8rem; font-size: 0.88rem; margin: 0 0 0.9rem; border-radius: 0 6px 6px 0; }
+.prm .pr-grid-divider { color: var(--text); }
+.prm .pr-thumb-num { color: var(--text-secondary); }
+@media (max-width: 640px) {
+    .prm-backdrop { padding: 0; }
+    .prm, .prm.prm-wide { max-height: 100vh; height: 100vh; border-radius: 0; }
+    .prm-secs { padding-left: 1rem !important; }
+}
+
+/* ===== present.html ===== */
+body.present-page { background: #000; min-height: 100vh; }
+.present-msg {
+    position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 0.8rem; padding: 2rem; text-align: center; color: #eee; background: #111; font-family: var(--body-font);
+}
+.present-msg h1 { font-size: 1.4rem; color: #fff; }
+.present-msg a { color: #9cc3ec; }
+.present-msg .prm-bar { width: 16rem; background: #333; }
+
+/* Several of these elements set display, which would beat the hidden attribute. */
+.pp[hidden], .pv[hidden], .prm-backdrop[hidden], .present-msg[hidden],
+.pp [hidden], .pv [hidden], .prm [hidden], .pr-slide [hidden] { display: none !important; }
+
+/* ===== SKIPPING SLIDES (preview grid) =====
+   Each thumbnail has its own include box in the corner; the thumbnail itself
+   still starts the show. A skipped slide stays in place, dimmed and labelled. */
+.pr-grid-divider { display: flex; align-items: center; flex-wrap: wrap; gap: 0.3rem 1rem; }
+.pr-grid-divider h3 { flex: 1 1 auto; min-width: 0; font-size: inherit; font-weight: 700; margin: 0; padding: 0; border: 0; color: inherit; }
+.pr-divider-tools { display: flex; gap: 0.35rem; font-weight: 400; }
+.pr-cell { position: relative; min-width: 0; }
+.pr-include {
+    position: absolute; top: 6px; right: 6px; z-index: 2; display: flex; align-items: center; justify-content: center;
+    width: 2rem; height: 2rem; border-radius: 6px; background: rgba(255,255,255,0.95);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.35); cursor: pointer;
+}
+.pr-include input { width: 1.15rem; height: 1.15rem; margin: 0; cursor: pointer; accent-color: #002a42; }
+.pr-include:focus-within { outline: 3px solid var(--yellow); outline-offset: 1px; }
+.pr-cell.is-skipped .pr-thumb { background: repeating-linear-gradient(135deg, var(--bg-surface) 0 8px, var(--bg) 8px 16px); }
+.pr-cell.is-skipped .pr-scale { opacity: 0.28; filter: grayscale(1); }
+.pr-skipped-tag {
+    display: none; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+    background: #2b2b2b; color: #fff; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 0.25rem 0.75rem; border-radius: 999px;
+}
+.pr-cell.is-skipped .pr-skipped-tag { display: block; }
+.pr-cell.is-skipped .pr-thumb-num span { text-decoration: line-through; }
+.prm-grid-bar {
+    display: flex; align-items: center; flex-wrap: wrap; gap: 0.4rem 1rem; margin: 0 0 0.8rem;
+    position: sticky; top: -1rem; z-index: 3; background: var(--bg); padding: 0.5rem 0;
+}
+.prm-include-count { font-weight: 700; font-variant-numeric: tabular-nums; }
+.prm-skip-msg { color: var(--red); font-size: 0.85rem; font-weight: 600; }
+/* The translate row sits under the include row. It is not sticky: two stacked sticky
+   bars would eat a third of the preview on a laptop. */
+.prm-trbar { position: static; margin-top: -0.4rem; padding-top: 0; gap: 0.4rem 0.7rem; }
+.prm-select {
+    font: inherit; font-size: 0.85rem; padding: 0.3rem 0.5rem; border-radius: 6px;
+    border: 1px solid var(--border); background: var(--bg); color: var(--text); max-width: 15rem;
+}
+.prm-check { display: inline-flex; align-items: center; gap: 0.35rem; }
+.prm-tr-status { font-size: 0.85rem; color: var(--text-secondary); flex: 1 1 14rem; min-width: 0; }
+[data-theme="dark"] .prm-skip-msg { color: var(--light-red); }
+
+/* ===== VIDEO POSTERS =====
+   The poster fills the play button, cropped past YouTube's letterbox bars,
+   with a dark gradient so the title and play icon stay readable on any image. */
+.pr-video-play { overflow: hidden; }
+.pr-video-thumb { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.pr-video-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.35) 45%, rgba(0,0,0,0.8) 100%); }
+.pr-video-icon, .pr-video-label, .pr-video-hint { position: relative; z-index: 1; text-shadow: 0 1px 6px rgba(0,0,0,0.6); }
+.pr-video-icon { background: rgba(0,0,0,0.45); }
+
+/* ===== CREAM SLIDES (light theme) =====
+   The generated figures are drawn on #F9F5E9, so light slides use the same
+   cream and a figure sits on the slide without a visible box. Surfaces and
+   borders inside a slide are warm tints that read on cream. The letterbox
+   around the stage and the presenter chrome follow the reader's theme
+   (course.css, "TOOL PAGES FOLLOW THE THEME"). */
+[data-theme="light"] .pr-slide, [data-theme="light"] .pr-thumb, [data-theme="light"] .pp-slot {
+    --bg: #F9F5E9; --bg-surface: #F2ECDC; --border: #E3DAC4; --bg-nav: #EFE8D6;
+    --u-light: 29%;          /* a shade darker than the reader, so every unit hue passes 4.5:1 on cream */
+    background: #F9F5E9;
+}
+[data-theme="light"] .pr-slide .pr-callout-try { background: #EDEBE0; }
+[data-theme="light"] .pr-slide .pr-callout-mis { background: #F6E6DC; }
+
+/* ===== PRINT / PDF =====
+   present-export.js builds a .pr-print container holding every slide, adds
+   .pr-printing to <html> and calls print(). A slide is position:absolute inset:0
+   inside a size container, so each page just needs to BE the slide size and the
+   cqw type scales to it. The container is display:none until printing, and the
+   rest of the page is hidden while it is up so the dialog previews slides only. */
+.pr-print { display: none; }
+html.pr-printing body > *:not(.pr-print) { display: none !important; }
+html.pr-printing .pr-print { display: block; background: #fff; }
+html.pr-printing { overflow: auto; }
+/* The @page rule is NOT set here. present.js loads this stylesheet onto the chapter
+   page as soon as anyone opens Present, and a bare @page would then resize the
+   reader's own printing too. present-export.js injects it for the duration of the
+   export and takes it away again. */
+.pr-print-page {
+    position: relative; width: 13.333in; height: 7.5in; overflow: hidden;
+    page-break-after: always; break-after: page; page-break-inside: avoid; break-inside: avoid;
+}
+.pr-print-page:last-child { page-break-after: auto; break-after: auto; }
+@media print {
+    .pr-print-page { box-shadow: none; }
+    /* the reader link is a dead end on paper */
+    .pr-print .pr-foot-link { display: none; }
+}
