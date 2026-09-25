@@ -17,7 +17,7 @@
 (function () {
     'use strict';
 
-    const ASSET_V = 330;   // bump when shipping changes to sims/
+    const ASSET_V = 332;   // bump when shipping changes to sims/
     const COURSE  = window.COURSE || { title: 'Course', chapters: [], glossary: {} };
     const ROOT    = document.body.dataset.root || '';
     const CHAP_ID = document.body.dataset.chapter || null;
@@ -148,8 +148,21 @@
     </span>
 </div>`;
 
-        document.body.insertAdjacentHTML('afterbegin', toolbar);
+        // Skip link: the first thing a keyboard or screen-reader user reaches,
+        // so they can jump past the toolbar and the course menu to the reading.
+        // Hidden until it has focus. The reading column takes focus itself
+        // (tabindex -1), so the next Tab continues from the chapter, not the menu.
+        const skip = main ? '<a class="skip-link" href="#main-content">Skip to content</a>' : '';
+        if (main && !main.id) main.id = 'main-content';
+        if (main) main.setAttribute('tabindex', '-1');
+        document.body.insertAdjacentHTML('afterbegin', skip + toolbar);
         document.body.insertAdjacentHTML('beforeend', readingPos);
+        const skipLink = document.querySelector('.skip-link');
+        if (skipLink) skipLink.addEventListener('click', e => {
+            e.preventDefault();
+            main.focus({ preventScroll: true });
+            main.scrollIntoView({ block: 'start' });
+        });
     }
 
     function sidebarHTML() {

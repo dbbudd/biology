@@ -1,3 +1,19 @@
+/* ===== DYSLEXIA-FRIENDLY FONT =====
+   OpenDyslexic, bundled so the "Dyslexic" choice in the Aa panel shows the real
+   font on every device. A browser downloads it only when a student picks it.
+   SIL Open Font License: vendor/fonts/opendyslexic/LICENSE. Italics are slanted
+   by the browser; only regular and bold are bundled. */
+@font-face {
+    font-family: 'OpenDyslexic';
+    src: url('../vendor/fonts/opendyslexic/opendyslexic-latin-400-normal.woff2') format('woff2');
+    font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+    font-family: 'OpenDyslexic';
+    src: url('../vendor/fonts/opendyslexic/opendyslexic-latin-700-normal.woff2') format('woff2');
+    font-weight: 700; font-style: normal; font-display: swap;
+}
+
 /* ===== CSS CUSTOM PROPERTIES ===== */
 :root {
     --red: #aa272f;
@@ -1746,6 +1762,32 @@ figure.shot.pair figcaption { grid-column: 1 / -1; }
 [data-theme="dark"] .callout-recall::before { color: #9dc4e8; }
 .callout-ahead { background: var(--bg-surface); border-color: var(--text-secondary); }
 .callout-ahead::before { content: 'Where this goes next'; color: var(--text-secondary); }
+
+/* Skip link: off screen until a keyboard user tabs to it, then shown above the
+   toolbar. The reading column it jumps to shows no outline of its own. */
+.skip-link {
+    position: fixed; top: 0.5rem; left: 0.5rem; z-index: 1000;
+    transform: translateY(-200%);
+    background: var(--bg); color: var(--text); font-weight: 700; font-size: 0.9rem;
+    padding: 0.6rem 1rem; border-radius: 8px; text-decoration: none;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+}
+.skip-link:focus { transform: none; outline: 2px solid var(--blue); outline-offset: 2px; }
+main.main:focus { outline: none; }
+@media print { .skip-link { display: none; } }
+
+/* Callout labels are small bold text, so they need 4.5 : 1 against their tint.
+   The border colors are decoration and stay as they are; only the label text
+   is darkened where it fell short (DESIGN.md, Known gaps).
+     light: Example was gold on cream (1.45 : 1), Looking back was teal (4.24 : 1)
+     sepia: Example 2.14, Looking back 3.39, Note and Try this 3.27
+   Dark already passes. */
+[data-theme="light"] .callout-example::before { color: #8a6a00; }
+[data-theme="light"] .callout-recall::before  { color: #3f5f80; }
+[data-theme="sepia"] .callout-example::before { color: #6e5510; }
+[data-theme="sepia"] .callout-recall::before  { color: #3a5570; }
+[data-theme="sepia"] .callout-note::before,
+[data-theme="sepia"] .callout-try::before     { color: #485840; }
 
 /* ===== QUICK CHECK (auto-marked multiple choice) =====
    Authored as a .quiz containing .quiz-q blocks; course.js makes it

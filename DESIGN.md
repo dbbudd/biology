@@ -288,7 +288,7 @@ by adding it chapter by chapter.
 |---|---|---|
 | Text size | Change body text from 75% to 150%, in 10% steps | Toolbar, Aa panel; `--font-scale` |
 | Three themes | Light, sepia (lower glare) and dark. Dark is chosen automatically when the device prefers it | Aa panel; `[data-theme]` |
-| Font choice | Sans-serif, serif, or a dyslexia-friendly font | Aa panel; `--body-font` |
+| Font choice | Sans-serif, serif, or OpenDyslexic, a dyslexia-friendly font bundled with the site | Aa panel; `--body-font` |
 | Focus mode | Hide the sidebar and center the reading column | Toolbar, Focus |
 | Listen | Hear the page read aloud with the current sentence highlighted. Click any sentence to start there; arrow keys step; Esc stops. Speed control. Natural US or British neural voices run in the browser with no account, and device voices are the fallback | Toolbar, Listen; `listen-voice.js` |
 | Described figures | Every image has alt text. Every SVG diagram has a `<title>` and `<desc>` that states what it shows | Chapter HTML |
@@ -366,16 +366,30 @@ by adding it chapter by chapter.
 - **Videos load only when clicked**, so opening a chapter makes no request to a video site.
 - **The reader stands alone.** A student who missed every lesson can learn from it.
 
-### Known gaps to fix
+### Accessibility fixes and known gaps
 
-A replication should fix these rather than copy them.
+Fixed on 24 September 2026:
 
-- There is no "skip to content" link for keyboard and screen-reader users.
-- The dyslexia-friendly font option names OpenDyslexic but does not load it, so most devices show
-  Comic Sans instead. Bundle the font with `@font-face`, or rename the option.
-- Two callout labels fail WCAG AA contrast for small text in the light theme: "Example" is yellow
-  `#ffcd00` on `#fefce8` (1.45 : 1), and "Looking back" is teal `#577899` on `#eff6ff` (4.24 : 1).
-  The tokens `label-example` (`#8a6a00`) and `label-recall` (`#3f5f80`) are the corrected values.
+- **Skip link.** "Skip to content" is the first element on every page. It is hidden until a
+  keyboard user reaches it, and it moves focus to the reading column.
+- **Callout label contrast.** Callout labels are small bold text, so they need 4.5 : 1. The border
+  colors stay as they are (they are decoration); only the label text changed:
+
+  | Label | Theme | Before | After |
+  |---|---|---|---|
+  | Example | light | `#ffcd00`, 1.45 : 1 | `#8a6a00`, 4.90 : 1 |
+  | Looking back | light | `#577899`, 4.24 : 1 | `#3f5f80`, 6.11 : 1 |
+  | Example | sepia | `#b89a40`, 2.14 : 1 | `#6e5510`, 5.58 : 1 |
+  | Looking back | sepia | `#577899`, 3.39 : 1 | `#3a5570`, 5.69 : 1 |
+  | Note, Try this | sepia | `#6b7d5e`, 3.27 : 1 | `#485840`, 5.62 : 1 |
+
+- **Dyslexia-friendly font.** OpenDyslexic (regular and bold, SIL Open Font License) is bundled
+  in `vendor/fonts/opendyslexic/` with `@font-face` rules at the top of `course.css`. Before, the
+  option fell back to Comic Sans on most devices. The files load only when a student chooses the
+  font.
+
+Still to fix:
+
 - Natural voices are English only. Listen reads other languages with the device's own voices, and
   greys out when the device has none.
 
@@ -447,8 +461,8 @@ visit; after that, the student's choice is remembered.
 
 One sans-serif family for everything: **Segoe UI**, falling back to the device's system font
 (`system-ui`, `-apple-system`). It is already on every school device, so the site loads no font
-files. Students can switch to a serif (Georgia) or a dyslexia-friendly font; headings follow the
-body choice.
+files by default. Students can switch to a serif (Georgia) or to OpenDyslexic, which is bundled
+and downloads only when chosen; headings follow the body choice.
 
 - **Body 1rem, line height 1.7.** Generous spacing for long reading and for EAL readers.
 - **Headings are bold with line height 1.3.** Heading 2 carries a 2px rule underneath it and starts
@@ -538,8 +552,8 @@ Nothing else has a shadow. Separation comes from white space, borders and tints.
   | `callout-misconception` | Common misconception | tint-key | accent |
   | `callout-try` | Try this | tint-guidance | secondary |
   | `callout-note` | Note | tint-guidance | secondary |
-  | `callout-recall` | Looking back | tint-guidance | teal |
-  | `callout-example` | Example | tint-example | highlight (see Known gaps) |
+  | `callout-recall` | Looking back | tint-guidance | teal border; label `label-recall` |
+  | `callout-example` | Example | tint-example | highlight border; label `label-example` |
   | `callout-ahead` | Where this goes next | surface | text-secondary |
 
 - **Section tags and standard chips**: small-capital labels above a section heading. The section
@@ -596,6 +610,6 @@ To start a new course from this site:
    HKIS. Keep the roles (primary, accent, secondary) and check contrast in all three themes.
 4. **Write chapters from an existing chapter file**, keeping the structure in the Layout section.
 5. **Copy `Writing Style.md`** and change its subject-specific rules and examples.
-6. **Fix the known gaps** listed in the UDL section.
+6. **Fix any gaps still listed** in the UDL section.
 7. **Bump `ASSET_V`** in `course.js` and the `?v=` on every HTML file whenever shared CSS or
    JavaScript changes, so students' browsers load the new version.
