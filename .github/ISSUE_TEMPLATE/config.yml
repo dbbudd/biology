@@ -1,0 +1,19 @@
+# What the public sees when they try to open an issue
+#
+# The repository is public, so anyone can open an issue here. That cannot be
+# prevented while issues exist, and it does not need to be — what matters is
+# that nothing is automated or published on the strength of a stranger's issue.
+# See "Provenance" in AGENT-CONTRACT.md.
+#
+# Blank issues are off so that a stray "hello" does not arrive looking like a
+# change request, and the link sends people to the route that actually works.
+
+blank_issues_enabled: false
+
+contact_links:
+  - name: Ask for a change to the course (teachers)
+    url: https://hkis.sharepoint.com/sites/HSStudents/SitePages/Biology.aspx
+    about: Use the chat on the Biology page. You do not need a GitHub account.
+  - name: Report a problem with the site itself
+    url: https://hkis.sharepoint.com/sites/HSStudents/SitePages/Biology.aspx
+    about: Layout, images and simulations are handled by the site owner, not through a change request.

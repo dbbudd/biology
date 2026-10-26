@@ -186,6 +186,45 @@ GET https://dbbudd.github.io/biology/{chapter}.html
 Compare the ETag or `Last-Modified`. Announcing "published" before the build
 lands is the fastest way to lose a teacher's trust.
 
+## Provenance — who is allowed to be automated
+
+The repository is public. Anyone with a GitHub account can open an issue, and
+no workflow setting changes that while issues exist. What can be controlled is
+what gets *acted on* and what gets *published*.
+
+Three signals, and only the first is a real boundary:
+
+| Signal | Trustworthy? | Why |
+| --- | --- | --- |
+| The bot's token created the issue | **yes** | only the flow holds it |
+| The issue carries `change-request` | **mostly** | applying a label needs write or triage access |
+| The body has the form's headings | **no** | anyone can type them |
+
+### Rules
+
+1. **Only the flow creates issues that are automated.** It opens them with the
+   service identity, so the author is a collaborator. Anything authored by a
+   stranger is left alone: no Copilot assignment, no labels, no workflow.
+2. **Do not add a workflow that assigns Copilot to any labelled issue.** The
+   label is a reasonable signal, but a maintainer who labels a stranger's issue
+   has just invited the agent to work for them. That should stay a deliberate
+   act, not an automatic consequence.
+3. **Publishing is already safe.** `publish-draft.yml` runs only for
+   `PUBLISH_ACTOR`, so no issue — trusted or not — can publish anything by
+   itself.
+4. **Nothing is displayed from an untrusted author.** The change log shows an
+   issue only if it is labelled (write access) or written by
+   OWNER/MEMBER/COLLABORATOR. A stranger copying the form's headings is hidden.
+5. **Reduce the noise rather than police it.** `blank_issues_enabled: false`
+   and a contact link send people to the SharePoint route; interaction limits
+   (Settings → Moderation) throttle new accounts if it ever becomes a problem.
+
+### What a stranger's issue does today
+
+Nothing. It sits in the issue list. It does not consume AI credits, does not
+appear in the change log, and cannot publish. That is the intended behaviour,
+and it is worth re-testing after any change to the workflows.
+
 ## Labels
 
 | Label | Set by | Meaning |

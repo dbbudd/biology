@@ -75,15 +75,32 @@
         return out.join(' ').trim();
     }
 
-    /* A change request is either labelled, or — when the label has not been
-       created in the repository yet — recognisable by the form's headings. */
+    /* Who is allowed to appear in a teacher-facing log.
+       The repository is public, so anyone with a GitHub account can open an
+       issue, and a stranger copying the form's headings would otherwise show
+       up here as if a teacher had asked for something. */
+    var TRUSTED_ASSOCIATIONS = ['OWNER', 'MEMBER', 'COLLABORATOR'];
+
+    function isTrusted(issue) {
+        var association = String(issue.author_association || '').toUpperCase();
+        return TRUSTED_ASSOCIATIONS.indexOf(association) !== -1;
+    }
+
+    /* A change request is:
+         - labelled `change-request`, which only someone with write access can
+           apply, so the label is itself the trust signal; or
+         - shaped like the form AND written by a trusted author.
+       Fallback two exists because GitHub drops a label from an issue form when
+       that label does not exist yet. */
     function isRequest(issue) {
         if (!issue || issue.pull_request) return false;
+
         var labels = (issue.labels || []).map(function (l) {
             return (typeof l === 'string' ? l : l.name) || '';
         });
         if (labels.indexOf('change-request') !== -1) return true;
-        return /###\s*Which chapter or section\?/i.test(issue.body || '');
+
+        return isTrusted(issue) && /###\s*Which chapter or section\?/i.test(issue.body || '');
     }
 
     function titleOf(item) {
