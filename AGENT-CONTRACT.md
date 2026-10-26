@@ -84,14 +84,22 @@ What to look at:
 | Signal | Means |
 | --- | --- |
 | a linked pull request appears | the agent has started |
-| PR label `draft-ready` | checks pass, ready to show the teacher |
-| PR label `approved` | published — via dispatch from the chat, or a maintainer's label |
-| PR closed without merge | rejected, or superseded |
+| issue comment `<!-- draft-ready -->` | checks pass, ready to show the teacher |
+| the issue closes | published (the merge closes it via `Fixes #N`) |
+| PR closed without merge | rejected, or superseded — tell the teacher |
 
-To show the teacher what changed, read the PR comment that starts with
-`<!-- draft-review -->`. It contains before/after sentences generated from the
-diff itself — not the agent's own description of its work. Show that. When
-the agent's summary and the diff disagree, trust the diff.
+Polling the issue is enough. The PR is the agent's workspace; the issue is the
+teacher's thread, and the workflow mirrors what matters across.
+
+To show the teacher what changed, read the comment on the **issue** that starts
+with `<!-- draft-ready -->`. It is a copy of the pull request's review comment:
+before/after sentences generated from the diff itself, not the agent's own
+description of its work. Show that. When the agent's summary and the diff
+disagree, trust the diff.
+
+Everything a teacher needs is therefore in one thread — the issue. The chat does
+not have to find or read the pull request to answer "what did it change?": the
+issue carries the request, the draft summary, and the final publish line.
 
 ## 3. Publish
 

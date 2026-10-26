@@ -92,3 +92,47 @@ jobs:
           NUMBER: ${{ github.event.pull_request.number }}
           REPO: ${{ github.repository }}
         run: gh api -X POST "repos/$REPO/issues/$NUMBER/labels" -f labels[]=draft-ready > /dev/null || true
+
+      # A teacher's request lives in an issue; the work happens on a pull
+      # request. Without this, the story is split across two places and the
+      # chat has to know about both. Mirroring the summary back onto the issue
+      # means one thread per request: asked, drafted, published.
+      - name: Tell the requesting issue the draft is ready
+        if: steps.checks.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NUMBER: ${{ github.event.pull_request.number }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+
+          ISSUE=$(gh pr view "$NUMBER" --repo "$REPO" --json closingIssuesReferences \
+            --jq '.closingIssuesReferences[0].number // empty')
+          if [ -z "$ISSUE" ]; then
+            echo "No linked issue; nothing to mirror."
+            exit 0
+          fi
+
+          MARKER='<!-- draft-ready -->'
+          {
+            echo "$MARKER"
+            echo '**Draft ready.**'
+            echo
+            cat draft-summary.md
+            echo
+            echo '---'
+            echo "Ask for changes, or say **publish** when this is what you wanted."
+            echo
+            echo "_The draft itself is on pull request #${NUMBER}._"
+          } > issue-comment.md
+
+          EXISTING=$(gh api --paginate "repos/$REPO/issues/$ISSUE/comments" \
+            --jq ".[] | select(.body | contains(\"$MARKER\")) | .id" | head -1 || true)
+
+          if [ -n "${EXISTING:-}" ]; then
+            gh api -X PATCH "repos/$REPO/issues/comments/$EXISTING" -F body=@issue-comment.md > /dev/null
+            echo "updated the draft comment on issue #$ISSUE"
+          else
+            gh api -X POST "repos/$REPO/issues/$ISSUE/comments" -F body=@issue-comment.md > /dev/null
+            echo "posted the draft comment on issue #$ISSUE"
+          fi

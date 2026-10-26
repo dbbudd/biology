@@ -1,0 +1,53 @@
+# Make sure the workflow's labels exist
+#
+# These labels are the vocabulary the whole change process runs on. Their
+# absence fails silently in three different places:
+#
+#   - an issue form drops `change-request` and the request looks unlabelled,
+#   - the change log falls back to shape-matching to recover it,
+#   - nobody can apply `approved` because it is not in the picker.
+#
+# So this creates them, and updates them if they already exist. It runs on any
+# workflow change, which is enough: these are set once and almost never edited.
+# Run it by hand from the Actions tab if a label is ever deleted by accident.
+
+name: Ensure labels
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/ensure-labels.yml'
+
+permissions:
+  issues: write
+
+jobs:
+  labels:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create or update the labels
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+
+          # name | colour | description
+          while IFS='|' read -r name colour description; do
+            [ -z "$name" ] && continue
+            if gh label create "$name" --repo "$REPO" --color "$colour" \
+                 --description "$description" --force > /dev/null 2>&1; then
+              echo "ok       $name"
+            else
+              echo "::error::could not create the label '$name'"
+              exit 1
+            fi
+          done <<'LABELS'
+          change-request|1d76db|A change a teacher asked for in the course chat
+          draft-ready|0e8a16|The draft is written and the checks pass, waiting for a teacher
+          approved|2ea043|Publish this - a person's decision, never the agent's
+          owner-change|d93f0b|Allows an edit outside chapters/ - maintainer only
+          needs-owner|b60205|Stuck: needs someone who can see the whole site
+          LABELS
