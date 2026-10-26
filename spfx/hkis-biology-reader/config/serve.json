@@ -16,6 +16,18 @@
           }
         }
       }
+    },
+    "changes": {
+      "pageUrl": "https://hkis.sharepoint.com/sites/HSStudents/SitePages/biology-changes.aspx",
+      "customActions": {
+        "ce93d2e6-350b-4ccf-b71c-cee0bb30cac2": {
+          "location": "ClientSideExtension.ApplicationCustomizer",
+          "properties": {
+            "targetPath": "/SitePages/biology-changes.aspx",
+            "debug": true
+          }
+        }
+      }
     }
   }
 }

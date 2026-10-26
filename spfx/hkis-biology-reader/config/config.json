@@ -9,6 +9,14 @@
           "manifest": "./src/extensions/biologyReaderChrome/BiologyReaderChromeApplicationCustomizer.manifest.json"
         }
       ]
+    },
+    "biology-changes-application-customizer": {
+      "components": [
+        {
+          "entrypoint": "./lib/extensions/biologyChanges/BiologyChangesApplicationCustomizer.js",
+          "manifest": "./src/extensions/biologyChanges/BiologyChangesApplicationCustomizer.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},

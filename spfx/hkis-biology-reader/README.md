@@ -39,6 +39,46 @@ survives renames, and its decision is printed to the console with `debug: true`.
 The guard compares the current path against `pageContext.web.serverRelativeUrl`,
 so it also survives the *site* being renamed or moved.
 
+## The second customizer — `biology-changes.aspx`
+
+The same package carries a second, independent customizer for the teacher's
+page. Separate bundle, separate registration, separate path guard: a mistake in
+one cannot take the other down.
+
+It is **two thirds useful with no backend at all**:
+
+| Part | Source | Needs a service |
+| --- | --- | --- |
+| Chapter picker | the reader's own `toc.js`, parsed | no |
+| "Being worked on" / "Published" | the public GitHub API | no |
+| Submit a request | the change service | **yes** |
+| Publish a draft | the change service | **yes** |
+
+With `serviceUrl` empty the page shows a plain notice, the form is disabled,
+and the publish buttons are absent — it does not pretend. Fill in `serviceUrl`
+(and `serviceResource` for an Entra-protected API) and the same page becomes
+fully functional without a rebuild.
+
+**No token lives here, and none can.** A customizer is client-side JavaScript;
+a credential in it is readable in the browser by anyone who can load the page.
+The writes go to a server-side endpoint that holds the credential and knows the
+caller's identity from their Entra token — see `sharepoint/SECURE-API.md`.
+
+### Registering it
+
+`elements.xml` and `ClientSideInstance.xml` both carry the second action, so
+adding the app to the site provisions both. It is scoped to
+`/SitePages/biology-changes.aspx` by the same runtime guard the reader uses.
+
+### Developing against it
+
+```bash
+npx gulp serve --config changes
+```
+
+`config/serve.json` points the `changes` configuration at the real page with
+`debug: true`.
+
 ## Build
 
 Node 22 is required — SPFx 1.23 refuses to build on 24.

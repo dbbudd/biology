@@ -6,4 +6,10 @@
         ComponentId="5f88978a-36cd-4486-ae75-c04002a99315"
         Properties="{&quot;targetPath&quot;:&quot;/SitePages/Biology.aspx&quot;,&quot;readerUrl&quot;:&quot;https://dbbudd.github.io/biology/&quot;,&quot;headerSelector&quot;:&quot;#spSiteHeader&quot;,&quot;zIndex&quot;:800,&quot;enabled&quot;:true,&quot;debug&quot;:false}">
     </ClientSideComponentInstance>
+    <ClientSideComponentInstance
+        Title="Biology changes"
+        Location="ClientSideExtension.ApplicationCustomizer"
+        ComponentId="ce93d2e6-350b-4ccf-b71c-cee0bb30cac2"
+        Properties="{&quot;targetPath&quot;:&quot;/SitePages/biology-changes.aspx&quot;,&quot;serviceUrl&quot;:&quot;&quot;,&quot;serviceResource&quot;:&quot;&quot;,&quot;debug&quot;:false}">
+    </ClientSideComponentInstance>
 </Elements>
