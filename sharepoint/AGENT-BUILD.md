@@ -171,6 +171,58 @@ Get `head_sha` immediately before dispatching: `GET /repos/dbbudd/biology/pulls/
 If the dispatch fails because the draft moved, that is the guard working — show
 the teacher the new draft and ask again.
 
+## 4a. Can it start without a human clicking "Assign"?
+
+Yes, but not with the call you would try first.
+
+**The naive approach fails.** `POST /issues/{n}/assignees` with a bot login
+works for people but is widely reported not to take for the Copilot agent, and
+a GitHub App installation token is very unlikely to be allowed to assign it.
+
+**What is documented to work** is GitHub's own Agentic Workflows project
+(`gh-aw`), which implements two safe outputs for exactly this:
+
+| Safe output | What it does |
+| --- | --- |
+| `assign-to-agent` | Assign Copilot to an existing issue or pull request |
+| `create-agent-session` | Spawn a session from the workflow directly — the agent works on the described task and opens a PR, with no issue assignment at all |
+
+Both require a **fine-grained personal access token**, not an app token. That is
+the practical constraint on the whole design: the service identity must be a
+dedicated *user account* holding a fine-grained PAT, scoped to this repository,
+with issues read/write and pull requests read/write.
+
+`create-agent-session` is the more attractive option here: the flow creates the
+session directly, so there is no issue to assign and one fewer moving part.
+
+### Test before building anything on it
+
+Ten minutes, one throwaway issue, and it settles the architecture:
+
+```bash
+curl -sS -X POST \
+  -H "Authorization: Bearer $PAT" \
+  -H "Accept: application/vnd.github+json" \
+  -H "X-GitHub-Api-Version: 2022-11-28" \
+  https://api.github.com/repos/dbbudd/biology/issues/N/assignees \
+  -d '{"assignees":["copilot-swe-agent"]}'
+```
+
+- **A PR appears** → the simple path works; build the flow around it.
+- **A 201 with no agent activity, or a 422** → the simple path does not work.
+  Adopt `gh-aw` (`gh extension install github/gh-aw`), write the workflow as a
+  `.md` file with `assign-to-agent`, and let it compile the Actions workflow.
+
+Do not build the chat or the form until this passes. Everything downstream
+assumes an agent can be started by a machine, and if it cannot, the design
+changes rather than the plumbing.
+
+### If it cannot be automated at all
+
+Then the honest fallback is one human click per draft: the flow creates the
+issue and pings the owner, who presses Assign. That is 30 seconds of human
+time per request, and it is a real cost worth measuring before accepting.
+
 ## 5. Identity and secrets
 
 - The flow runs as a **service identity** — a GitHub App or a dedicated
