@@ -155,6 +155,86 @@ Two design points in that transcript matter more than the plumbing:
 - **Publish is a separate, deliberate action** on a specific draft the teacher
   has seen. Never auto-merge on "looks good".
 
+## 4a. Full-page app instead of an Embed web part
+
+If the page should look like an application rather than a document with an
+iframe in it, the SharePoint mechanism is a **single part app page**: a
+locked-layout page that hosts one web part and cannot be edited in the
+browser. That is the "only the site navigation is visible" effect.
+
+It is a web part manifest setting, not a special page type:
+
+```json
+"requiresCustomScript": false,
+"supportedHosts": ["SharePointWebPart", "SharePointFullPage"]
+```
+
+With `SharePointFullPage` in `supportedHosts`, the web part appears as a
+choice when creating a page, and the resulting page has no title bar, no
+command bar and no editing affordances. Convert an existing page with:
+
+```powershell
+Set-PnPPage -Identity "Course" -LayoutType SingleWebPartAppPage
+```
+
+What this buys over the Embed web part:
+
+| | Embed web part | Full-page SPFx app |
+| --- | --- | --- |
+| Height | you set it, and it is always wrong on some device | fills the content area |
+| Domain allowlist | required (HTML Field Security) | not the gate — your code creates the frame |
+| Editing the page | anyone with edit rights can | locked layout |
+| Theme / URL sync with the reader | no | yes, via `postMessage` |
+| Cost | none | app catalog deployment, tenant admin approval, a build pipeline |
+
+What it does **not** buy:
+
+- **It is still an iframe.** Nested scroll regions are the real accessibility
+  cost: a keyboard user tabs into a scrollable region inside a scrollable
+  page, and screen readers announce it. The Embed web part has the same
+  problem, so this is inherent to keeping the reader static.
+- **It does not escape storage partitioning.** The reader's `localStorage`
+  progress is still partitioned by the top-level SharePoint site.
+- **You must not use `100vh`.** The suite navigation occupies height; size the
+  frame from its container with a `ResizeObserver`, or it will always overflow
+  by the height of the nav.
+- **The back button still needs work.** The reader is 47 separate pages;
+  to make browser Back behave, have the reader `postMessage` its location to
+  the web part, which mirrors it into the page's hash and reloads the frame
+  on `popstate`. That is a change to `assets/course.js` — owner territory.
+
+## 4b. A new site, or a page on an existing one?
+
+A page on an existing site, unless the audience differs.
+
+The page is a shell: a locked layout holding one frame onto a public site. It
+needs no site of its own, and a new site costs a permission group, a
+navigation entry, a retention decision and a URL to communicate — for a page
+that will look the same wherever it sits.
+
+Choose an existing site that:
+
+1. already has the audience (teachers who will use the agent, students who
+   will read),
+2. is not the tenant's root site,
+3. sits in a hub, if one exists, so it inherits navigation.
+
+Create a new communication site instead **only** if the course needs a
+different audience from the site that would host it — for example, a
+student-facing course on a site where staff material also lives. Permissions
+are the one thing a page cannot borrow.
+
+Two practical notes for whichever you pick:
+
+- **The app catalog decides how cheap this is.** If SPFx apps are deployed to
+  the *tenant* app catalog, the web part is available on any site and the site
+  choice becomes free. If they live in a *site* app catalog, the page has to
+  live on that site.
+- **The agent needs a home too.** A Copilot Studio agent published to
+  SharePoint is scoped to a site, and the teachers need access to it. Put the
+  reader page and the agent on the same site, or teachers end up crossing
+  sites to ask for a change.
+
 ## 5. Previews: the security trap
 
 Unpublished drafts must not become public. This kills the obvious approach.

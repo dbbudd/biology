@@ -73,6 +73,7 @@ jobs:
             --exclude='.DS_Store' \
             --exclude='models/source/' \
             --exclude='images/**/_*' \
+            --exclude='sharepoint/' \
             --exclude='*.md' \
             ./ _site/
           if [ ! -f _site/.nojekyll ]; then
