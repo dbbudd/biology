@@ -208,11 +208,49 @@ delegation possible. Keep it.
 
 ### Phase 0 — prove the embed (about an hour, no AI)
 
-1. Admin adds `dbbudd.github.io` to the site collection's allowed embed
-   domains.
-2. Add an Embed web part to a test SharePoint page.
-3. Check three things inside the frame: reading works, the theme switch
-   persists, and the reader is usable at the height the web part allows.
+**A. Confirm the GitHub side is publishing.** It already is; this is the
+checklist to confirm it, and to fix it if it ever stops.
+
+1. `https://github.com/dbbudd/biology/settings/pages`
+2. Source: **Deploy from a branch**. Branch: **main**, folder: **/(root)**.
+   (If it says GitHub Actions, that is fine too — but then
+   `PAGES_FROM_ACTIONS` must be set, and `publish.yml` does the work.)
+3. Tick **Enforce HTTPS**.
+4. Open `https://dbbudd.github.io/biology/` in a private window — no login —
+   and confirm it loads.
+
+**B. Allowlist the domain in SharePoint** (site collection administrator —
+this is the "approval" step).
+
+1. Go to the site collection root.
+2. **Settings** (gear) → **Site settings**. If `Site settings` is not listed,
+   use **Site information → View all site settings**.
+3. Under **Site Collection Administration** → **HTML Field Security**.
+4. Choose **Allow contributors to insert iframes only from the following
+   domains**.
+5. Add `dbbudd.github.io` and confirm.
+   Use the host only, no `https://`, no path.
+
+Without this, the Embed web part shows *"Embedding content from this website
+isn't allowed."* — and that message means the allowlist, not the site.
+
+**C. Build the page.**
+
+1. **New → Site page** in the SharePoint site.
+2. **+** → **Embed** web part.
+3. Paste `https://dbbudd.github.io/biology/` into the *Website address or
+   embed code* field.
+4. Set the height: **about 1200 px**, not the default. The reader has its own
+   toolbar and needs room; at 400 px it looks broken and is not.
+
+**D. Check these four things inside the frame.**
+
+1. A chapter opens and the sidebar works.
+2. The theme switch (light / sepia / dark) changes the page and survives a
+   reload.
+3. A simulation runs (the interactive is the reason the reader exists).
+4. Reading is possible without horizontal scrolling on the device teachers
+   will use.
 
 Known wrinkle to expect: the reader stores reading progress in
 `localStorage`. Modern browsers partition storage for third-party frames, so
@@ -259,17 +297,36 @@ records today's count per file and fails only when a file gets *worse*. A
 conversion pass lowers it with `node scripts/check-content.js
 --update-baseline`.
 
-### Phase 2 — the agent, minimal (a week or two)
+### Phase 2 — the agent — **repository side built, chat side is yours**
 
-- Copilot Studio agent published to SharePoint, holding: the course map, the
-  writing style, the allowed-edit list, and a refusal path ("that changes a
-  simulation, ask the site owner").
-- One flow: brief → GitHub issue → assign to Copilot → poll PR → post
-  summary and preview → publish button.
-- Decision needed first: **Copilot Studio capacity**. Publishing an agent to
-  SharePoint via Copilot Studio consumes Copilot Studio capacity, even when
-  used inside SharePoint. If the school only has Microsoft 365 Copilot
-  licences, this is a purchase, not a setting.
+Everything the repository does is done. What remains is the conversation.
+
+Built:
+
+| File | What it does |
+| --- | --- |
+| `.github/copilot-instructions.md` | Copilot reads this automatically. Scope, house style, and what to refuse. |
+| `scripts/describe-change.js` | Turns a diff into before/after sentences a teacher can approve |
+| `.github/workflows/draft-review.yml` | One kept-up-to-date review comment per PR, plus the `draft-ready` label |
+| `.github/workflows/approve.yml` | `approved` label → refuses red builds → merges → rebuilds Pages |
+| `.github/workflows/rollback.yml` | One action to reverse a published change, through a PR |
+| `AGENT-CONTRACT.md` | The four calls the chat has to make, and the failure modes |
+
+To connect the chat, only three things are needed:
+
+1. **Expose three GitHub calls** to Copilot Studio / Power Automate: create
+   issue, poll, apply `approved`. Exact shapes are in `AGENT-CONTRACT.md`.
+2. **Capture the Copilot assignee login once** (Settings → Copilot → Coding
+   agent must be on) rather than hard-coding it.
+3. **Give the agent a refusal path.** `copilot-instructions.md` already tells
+   it to stop and label `needs-owner`; the chat has to have something to say
+   when that label appears.
+
+Decision needed first: **Copilot Studio capacity**. Publishing an agent to
+SharePoint via Copilot Studio consumes Copilot Studio capacity, even when
+used inside SharePoint. If the school only has Microsoft 365 Copilot
+licences, this is a purchase, not a setting.
+
 
 ### Phase 3 — quality and trust
 
