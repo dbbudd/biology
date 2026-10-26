@@ -1,0 +1,156 @@
+# Publish a draft a teacher approved, without a developer in the loop
+#
+# The chat calls this when a teacher says "publish". Nothing in GitHub needs a
+# developer standing by: the approval happened in the conversation, and this
+# workflow's job is to check that the thing being published is the thing that
+# was approved, then merge it.
+#
+# THE TRUST MODEL, plainly:
+#
+#   The permission is not the request body. It is `github.actor`, which comes
+#   from the token that dispatched the run. Only the bot account named in the
+#   repository variable PUBLISH_ACTOR can dispatch; until that variable is
+#   set, the job is skipped. So a forged dispatch from anywhere else does
+#   nothing.
+#
+#   Everything in `inputs` is a *claim*. Two of them are load-bearing and are
+#   verified against GitHub rather than trusted:
+#     - head_sha  must match the pull request's current head. This is what
+#                 stops "teacher approved draft A, bot published draft B"
+#                 when the agent pushed again after the teacher looked.
+#     - the files changed must be inside the content allowlist.
+#
+#   `approved_by` cannot be verified from GitHub — it is a claim made by the
+#   chat. It is recorded so the audit trail names a person, and the chat is
+#   the system of record for who asked.
+
+name: Publish approved draft
+
+on:
+  workflow_dispatch:
+    inputs:
+      pull_request:
+        description: 'Pull request number'
+        required: true
+      head_sha:
+        description: 'The exact commit the teacher approved (headRefOid they were shown)'
+        required: true
+      approved_by:
+        description: 'Teacher who approved, as an email or UPN'
+        required: true
+      request:
+        description: 'Issue number the change came from (optional, for the audit line)'
+        required: false
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+concurrency:
+  group: publish-${{ inputs.pull_request }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    # Fail closed: no variable, no publishing.
+    if: vars.PUBLISH_ACTOR != '' && github.actor == vars.PUBLISH_ACTOR
+    runs-on: ubuntu-latest
+    steps:
+      - name: Refuse anything that is not the approved commit
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          PR: ${{ inputs.pull_request }}
+          APPROVED: ${{ inputs.head_sha }}
+        run: |
+          set -euo pipefail
+          gh pr view "$PR" --repo "$REPO" \
+            --json number,isDraft,headRefOid,mergeStateStatus,title > pr.json
+          cat pr.json
+
+          HEAD=$(jq -r .headRefOid pr.json)
+          DRAFT=$(jq -r .isDraft pr.json)
+
+          if [ "$DRAFT" = 'true' ]; then
+            echo "::error::The draft is still marked as a draft. Mark it ready first."
+            exit 1
+          fi
+
+          if [ "$HEAD" != "$APPROVED" ]; then
+            echo "::error::The draft changed after it was approved (approved $APPROVED, now $HEAD). Show the teacher the new version and ask again."
+            exit 1
+          fi
+
+      - name: Refuse anything outside the content allowlist
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          PR: ${{ inputs.pull_request }}
+        run: |
+          set -euo pipefail
+          gh pr view "$PR" --repo "$REPO" --json files --jq '.files[].path' > changed.txt
+          cat changed.txt
+          OUTSIDE=$(grep -vE '^chapters/|^assets/toc\.js$' changed.txt || true)
+          if [ -n "$OUTSIDE" ]; then
+            echo "::error::This draft touches files outside chapters/ and assets/toc.js, so it is not a teacher change:"
+            echo "$OUTSIDE"
+            echo "A maintainer should review it. Merge it by hand, or use the approved label."
+            exit 1
+          fi
+
+      - name: Run the content checks
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          PR: ${{ inputs.pull_request }}
+        run: |
+          set -euo pipefail
+          # Check out the exact approved commit and verify it here rather than
+          # trusting the pull request's check runs, which belong to an earlier
+          # commit if anything has been pushed since.
+          git init -q .
+          git remote add origin "https://x-access-token:${GH_TOKEN}@github.com/${REPO}.git"
+          gh pr checkout "$PR" --repo "$REPO"
+          node scripts/check-content.js
+
+      # Only meaningful if branch protection still requires an approval. It is
+      # recorded as the bot, with the teacher named in the body, so the history
+      # shows why the approval exists rather than pretending a person clicked.
+      - name: Record the teacher's approval
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          PR: ${{ inputs.pull_request }}
+          WHO: ${{ inputs.approved_by }}
+        run: |
+          set -euo pipefail
+          gh pr review "$PR" --repo "$REPO" --approve \
+            --body "Approved by ${WHO} in the course chat. Publishing the commit they were shown." \
+            || echo "Review not required by branch protection; continuing."
+
+      - name: Publish
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          PR: ${{ inputs.pull_request }}
+          WHO: ${{ inputs.approved_by }}
+          APPROVED: ${{ inputs.head_sha }}
+          REQUEST: ${{ inputs.request }}
+        run: |
+          set -euo pipefail
+          TITLE=$(jq -r .title pr.json)
+          gh pr merge "$PR" --repo "$REPO" --squash --delete-branch --subject "$TITLE (#$PR)"
+
+          BODY=$(printf 'Published.\n\nApproved by **%s** in the course chat. Draft verified at `%s` before merging.\nRequest: #%s\n\nThe site rebuilds in a minute or two.' \
+            "$WHO" "${APPROVED:0:7}" "${REQUEST:-none}")
+          gh pr comment "$PR" --repo "$REPO" --body "$BODY"
+
+      - name: Make sure the site rebuilds
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          sleep 5
+          gh api -X POST "repos/$REPO/pages/builds" > /dev/null && echo "Pages build requested"

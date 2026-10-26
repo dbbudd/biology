@@ -85,7 +85,7 @@ What to look at:
 | --- | --- |
 | a linked pull request appears | the agent has started |
 | PR label `draft-ready` | checks pass, ready to show the teacher |
-| PR label `approved` | published (your own action) |
+| PR label `approved` | published — via dispatch from the chat, or a maintainer's label |
 | PR closed without merge | rejected, or superseded |
 
 To show the teacher what changed, read the PR comment that starts with
@@ -95,21 +95,76 @@ the agent's summary and the diff disagree, trust the diff.
 
 ## 3. Publish
 
-The teacher's "Publish" is one call. It must only be made when a human has
-said so in the conversation:
+There are two paths, and the difference is **where the request came from**, not
+who the teacher is.
+
+### The trusted path — the chat dispatches a workflow
+
+When the request originated in SharePoint, publishing is a workflow dispatch.
+No developer stands by, and no GitHub label is involved.
+
+```http
+POST /repos/dbbudd/biology/actions/workflows/publish-draft.yml/dispatches
+{
+  "ref": "main",
+  "inputs": {
+    "pull_request": "7",
+    "head_sha": "a869c307d7e2128db1e82e37830c81e98a99e8f3",
+    "approved_by": "teacher@hkis.edu.hk",
+    "request": "1"
+  }
+}
+```
+
+`publish-draft.yml` then:
+
+1. **Checks who dispatched it.** `github.actor` must equal the repository
+   variable `PUBLISH_ACTOR`. If that variable is unset, the job skips. The
+   token, not the request body, is the permission.
+2. **Checks the draft is the one that was approved.** `head_sha` must equal the
+   pull request's current head. This is the important one: if the agent pushed
+   again after the teacher read it, the publish is refused and the chat must
+   show the new version and ask again.
+3. **Checks the scope.** Every changed file must be under `chapters/` or be
+   `assets/toc.js`. Anything else is refused as a maintainer change.
+4. Re-runs the content checks against the approved commit.
+5. Records an approval review naming the teacher, merges, comments with the
+   approver and the verified commit, and asks Pages to rebuild.
+
+`approved_by` cannot be verified from GitHub — it is the chat's claim, recorded
+so the history names a person. The chat is the system of record for who asked.
+
+**Do not put the model in charge of these inputs.** The PR number, head SHA and
+approver should come from the chat's own state after the teacher confirms; the
+model should decide only *whether* the teacher approved, never *what* to
+publish.
+
+### The manual path — everything else
+
+Anything that did not come from the trusted origin:
+
+- a pull request a person opened,
+- a draft that touches `sims/`, `assets/`, `images/`, `vendor/` or `.github/`,
+- a change to the reader shell rather than chapter text.
+
+Those publish by adding the `approved` label, which a maintainer applies:
 
 ```http
 POST /repos/dbbudd/biology/issues/{pr_number}/labels
 { "labels": ["approved"] }
 ```
 
-`approve.yml` then refuses if the PR is a draft or the checks are not green,
-merges it, and asks Pages to rebuild.
+`approve.yml` refuses a draft or a red build, merges, and rebuilds. This path
+exists so that "trusted origin" never becomes "any origin": the day the chat
+takes a request it should not have, the blast radius is one refused workflow,
+not an unexplained change to the site's shell.
 
-Add the label with a **service identity that has write access**, because the
-label is the permission check. Do not expose a generic "add label" action to
-the chat model — expose exactly this one, with the PR number supplied by your
-own state, never by the model.
+| Situation | Path |
+| --- | --- |
+| Chapter text, requested in SharePoint, teacher said publish | dispatch |
+| Any PR touching anything outside `chapters/` | manual label |
+| A PR a person opened | manual label |
+| Chat is down, urgent fix | manual label |
 
 ## 4. Read back
 
