@@ -56,8 +56,10 @@ jobs:
           gh pr merge "$NUMBER" --repo "$REPO" --squash --delete-branch \
             --subject "$(gh pr view "$NUMBER" --repo "$REPO" --json title --jq .title) (#$NUMBER)"
 
+          # Measured on this repo: the first build after a quiet period took
+          # about two minutes. Do not promise "instantly".
           gh pr comment "$NUMBER" --repo "$REPO" --body \
-            'Published. The site rebuilds in about a minute.'
+            'Published. The site rebuilds in a minute or two — check the live page before telling anyone it is up.'
 
       # A push made with GITHUB_TOKEN does not start another workflow run, and
       # a branch-based Pages build is normally triggered by that same push.
