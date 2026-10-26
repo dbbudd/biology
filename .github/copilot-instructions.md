@@ -68,8 +68,10 @@ The description is read by a biology teacher, not a developer.
   leaf* and added a summary line to each section."
 - Show the sentences that changed, before and after.
 - Never write "refactored", "markup", "diff", or file paths as the main point.
-- Tick the science checkbox only if you have actually re-read the changed
-  sentence for accuracy.
+- Fill in the "Checks" boxes only after actually running the checks.
+- **Never touch the "Reviewer sign-off" section.** Leave its boxes unticked.
+  It is the record that a human read the change, and it stops being evidence
+  if you tick it yourself.
 
 ## What happens next
 

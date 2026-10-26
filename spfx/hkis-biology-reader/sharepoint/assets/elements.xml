@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Deployed with the package, so installing the app on a site is the whole
+    registration. No PnP script, no manual custom action.
+
+    There is deliberately no RegistrationType/RegistrationId: the action is
+    registered on the web, so it survives the page being renamed, and the
+    component itself refuses to render anywhere except targetPath. See
+    isTargetPage() in BiologyReaderChromeApplicationCustomizer.ts.
+
+    Location is the site's SitePages library; targetPath is what the component
+    compares against.
+-->
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+    <CustomAction
+        Title="Biology reader"
+        Location="ClientSideExtension.ApplicationCustomizer"
+        ClientSideComponentId="5f88978a-36cd-4486-ae75-c04002a99315"
+        ClientSideComponentProperties="{&quot;targetPath&quot;:&quot;/SitePages/Biology.aspx&quot;,&quot;readerUrl&quot;:&quot;https://dbbudd.github.io/biology/&quot;,&quot;headerSelector&quot;:&quot;#spSiteHeader&quot;,&quot;zIndex&quot;:800,&quot;enabled&quot;:true,&quot;debug&quot;:false}">
+    </CustomAction>
+</Elements>

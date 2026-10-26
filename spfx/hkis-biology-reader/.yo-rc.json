@@ -1,0 +1,24 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "hkis-biology-reader",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": true,
+    "componentType": "extension",
+    "extensionType": "ApplicationCustomizer",
+    "template": "none",
+    "componentName": "BiologyReaderChrome",
+    "componentDescription": "Full-facade wrapper for the Biology course reader on Biology.aspx",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.22.3",
+    "sdksVersions": {},
+    "version": "1.23.0",
+    "libraryName": "hkis-biology-reader",
+    "libraryId": "c4a1e2f0-9d3b-4b6a-8f7e-2b5c9d1a4e63",
+    "solutionShortDescription": "Biology course reader chrome",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false
+  }
+}

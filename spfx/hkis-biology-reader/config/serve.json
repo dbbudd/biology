@@ -1,0 +1,21 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/spfx-serve.schema.json",
+  "port": 4321,
+  "https": true,
+  "initialPage": "https://hkis.sharepoint.com/sites/HSStudents/SitePages/Biology.aspx",
+  "serveConfigurations": {
+    "default": {
+      "pageUrl": "https://hkis.sharepoint.com/sites/HSStudents/SitePages/Biology.aspx",
+      "customActions": {
+        "5f88978a-36cd-4486-ae75-c04002a99315": {
+          "location": "ClientSideExtension.ApplicationCustomizer",
+          "properties": {
+            "targetPath": "/SitePages/Biology.aspx",
+            "readerUrl": "https://dbbudd.github.io/biology/",
+            "debug": true
+          }
+        }
+      }
+    }
+  }
+}

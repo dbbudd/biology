@@ -1,5 +1,10 @@
 # Wrapping the reader in a full-page SPFx web part
 
+> **Superseded for the chosen approach.** The build that was actually made is an
+> Application Customizer, in `spfx/hkis-biology-reader/` — see its README. This
+> document is kept for the web-part alternative and for the reasoning behind the
+> layout and scoping decisions, which apply to either.
+
 Target page: `https://hkis.sharepoint.com/sites/HSStudents/SitePages/Biology.aspx`
 
 This is a change to a web part you already have, not a new project. It is

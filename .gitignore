@@ -15,3 +15,13 @@ _reference/
 
 # Node
 node_modules/
+
+# SPFx build output and the npm cache used when the harness sandbox blocks ~/.npm
+spfx/.npm-cache/
+spfx/*/node_modules/
+spfx/*/dist/
+spfx/*/lib/
+spfx/*/temp/
+spfx/*/release/
+spfx/*/sharepoint/solution/
+*.sppkg

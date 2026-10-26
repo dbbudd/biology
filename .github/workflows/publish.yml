@@ -74,6 +74,7 @@ jobs:
             --exclude='models/source/' \
             --exclude='images/**/_*' \
             --exclude='sharepoint/' \
+            --exclude='spfx/' \
             --exclude='*.md' \
             ./ _site/
           if [ ! -f _site/.nojekyll ]; then

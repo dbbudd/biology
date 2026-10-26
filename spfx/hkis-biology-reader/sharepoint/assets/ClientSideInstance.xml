@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+    <ClientSideComponentInstance
+        Title="Biology reader"
+        Location="ClientSideExtension.ApplicationCustomizer"
+        ComponentId="5f88978a-36cd-4486-ae75-c04002a99315"
+        Properties="{&quot;targetPath&quot;:&quot;/SitePages/Biology.aspx&quot;,&quot;readerUrl&quot;:&quot;https://dbbudd.github.io/biology/&quot;,&quot;headerSelector&quot;:&quot;#spSiteHeader&quot;,&quot;zIndex&quot;:800,&quot;enabled&quot;:true,&quot;debug&quot;:false}">
+    </ClientSideComponentInstance>
+</Elements>

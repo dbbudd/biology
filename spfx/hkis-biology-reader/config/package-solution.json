@@ -1,0 +1,46 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "hkis-biology-reader-client-side-solution",
+    "id": "c4a1e2f0-9d3b-4b6a-8f7e-2b5c9d1a4e63",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "HKIS Biology",
+      "websiteUrl": "https://hkis.sharepoint.com/sites/HSStudents",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.23.0"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "Full-page chrome for the Biology course reader. Activates only on /sites/HSStudents/SitePages/Biology.aspx."
+      },
+      "longDescription": {
+        "default": "An Application Customizer that frames the static Biology course reader across the page, below the site navigation, and leaves every other page in the site untouched. The page is chosen at runtime by comparing the current path to a configured target, so the registration can stay site-wide and still survive the page being renamed."
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "Biology reader chrome deployment",
+        "description": "Deploys the custom action that mounts the reader on Biology.aspx",
+        "id": "0e7c4b21-58f0-4b8f-9a3c-1d6e7f2a8b94",
+        "version": "1.0.0.0",
+        "assets": {
+          "elementManifests": [
+            "elements.xml",
+            "ClientSideInstance.xml"
+          ]
+        }
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/hkis-biology-reader.sppkg"
+  }
+}
