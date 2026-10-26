@@ -1,0 +1,70 @@
+# ---
+# This is the brief a teacher's request is turned into before any work
+# starts. The chatbot fills in the same fields when it opens an issue for
+# the coding agent; the form exists so a person can open one by hand.
+# ---
+name: Course change
+description: Ask for a change to the course reader.
+title: "[change] "
+labels: ["change-request"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Describe the change the way you would describe it to a colleague.
+        You do not need to know which file it lives in.
+
+        One change per request, please. A draft that does three things is
+        three times as hard to check.
+
+  - type: input
+    id: where
+    attributes:
+      label: Which chapter or section?
+      description: The title you see in the sidebar, or the unit number, is enough.
+      placeholder: e.g. 2.3 Two Halves of One Process, the part about the stroma
+    validations:
+      required: true
+
+  - type: textarea
+    id: change
+    attributes:
+      label: What should change?
+      description: What is wrong now, and what should it say or do instead?
+      placeholder: |
+        The paragraph starting "The stroma is where..." assumes students
+        already know what a gradient is. Slow it down and define it first.
+    validations:
+      required: true
+
+  - type: textarea
+    id: done
+    attributes:
+      label: How will we know it is right?
+      description: Optional. A test the draft has to pass.
+      placeholder: A reader who has not met the term before can follow the paragraph without leaving the page.
+    validations:
+      required: false
+
+  - type: dropdown
+    id: scope
+    attributes:
+      label: What kind of change is it?
+      options:
+        - Wording only
+        - Rewrite a section
+        - Add or move a section
+        - Fix a mistake (science)
+        - Something structural (needs the site owner)
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: Before submitting
+      options:
+        - label: This changes chapter text only — no layouts, styles, simulations or images.
+          required: true
+        - label: I have read the draft when it arrives and it says what I meant.
+          required: false

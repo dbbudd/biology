@@ -1,0 +1,69 @@
+# Put a chapter back the way it was
+#
+# A published change turns out to be wrong. Reverting through a pull request
+# rather than a force-push keeps the history readable and means the revert
+# itself goes through the same checks.
+#
+# Run from Actions -> "Roll back a published change" -> Run workflow.
+
+name: Roll back a published change
+
+on:
+  workflow_dispatch:
+    inputs:
+      commit:
+        description: 'Commit sha to undo (find it in the chapter history or the merge notification)'
+        required: true
+      reason:
+        description: 'Why, in plain language (goes in the pull request)'
+        required: true
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  revert:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: main
+
+      - name: Revert onto a branch
+        env:
+          SHA: ${{ inputs.commit }}
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git switch -c "revert/$SHA"
+          git revert --no-edit "$SHA"
+
+      - name: Open the pull request
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SHA: ${{ inputs.commit }}
+          REASON: ${{ inputs.reason }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          git push -u origin "revert/$SHA"
+          BODY=$(printf 'Reverts %s.\n\n**Why:** %s\n\nMerging this undoes that change and puts the page back the way it was.' "$SHA" "$REASON")
+          gh pr create --repo "$REPO" --base main --head "revert/$SHA" \
+            --title "Roll back ${SHA:0:7}" \
+            --body "$BODY"
+
+      # Do not apply `approved` here: that label would fire approve.yml while
+      # the checks are still running, and the merge would be refused. Ask for
+      # auto-merge instead and let the checks finish first. If the repository
+      # does not allow auto-merge, a maintainer presses Merge.
+      - name: Merge once the checks pass
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SHA: ${{ inputs.commit }}
+          REPO: ${{ github.repository }}
+        run: |
+          gh pr merge --repo "$REPO" --squash --auto "revert/$SHA" \
+            || echo "Auto-merge is unavailable; merge the pull request by hand."

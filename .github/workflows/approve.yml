@@ -1,0 +1,72 @@
+# Publish an approved draft
+#
+# The teacher's "Publish" button ends here: the chat applies the `approved`
+# label, this merges the pull request, and Pages rebuilds.
+#
+# Only someone with write access to the repository can apply a label, so the
+# label is the permission check. Do not add a path that lets the agent apply
+# it on its own — that would make the approval step meaningless.
+
+name: Publish approved draft
+
+on:
+  pull_request:
+    types: [labeled]
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  merge:
+    if: github.event.label.name == 'approved'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Refuse to publish a draft or a red build
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NUMBER: ${{ github.event.pull_request.number }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          STATUS=$(gh pr view "$NUMBER" --repo "$REPO" --json isDraft,mergeStateStatus)
+          echo "$STATUS"
+
+          if [ "$(echo "$STATUS" | jq -r .isDraft)" = 'true' ]; then
+            echo "error: this pull request is still a draft" >&2
+            exit 1
+          fi
+
+          case "$(echo "$STATUS" | jq -r .mergeStateStatus)" in
+            CLEAN|HAS_HOOKS)
+              echo "mergeable" ;;
+            *)
+              echo "error: not mergeable (checks failing, conflicts, or review required)" >&2
+              exit 1 ;;
+          esac
+
+      - name: Merge
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NUMBER: ${{ github.event.pull_request.number }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          gh pr merge "$NUMBER" --repo "$REPO" --squash --delete-branch \
+            --subject "$(gh pr view "$NUMBER" --repo "$REPO" --json title --jq .title) (#$NUMBER)"
+
+          gh pr comment "$NUMBER" --repo "$REPO" --body \
+            'Published. The site rebuilds in about a minute.'
+
+      # A push made with GITHUB_TOKEN does not start another workflow run, and
+      # a branch-based Pages build is normally triggered by that same push.
+      # Ask for a build explicitly rather than relying on it. Harmless if a
+      # build has already started.
+      - name: Make sure the site rebuilds
+        if: always()
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: sleep 5 && gh api -X POST "repos/$REPO/pages/builds" > /dev/null && echo "Pages build requested"

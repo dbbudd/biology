@@ -1,0 +1,94 @@
+# Draft review
+#
+# Every pull request that touches course content gets one comment, kept up to
+# date in place: what changed in before/after sentences, and whether the
+# checks pass. This is the thing a teacher looks at when the chat says
+# "draft ready" — not the Files changed tab.
+#
+# The comment is written by scripts/describe-change.js from the diff itself,
+# so it states what actually changed, not what the agent says it changed.
+
+name: Draft review
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+jobs:
+  describe:
+    name: Describe the change for review
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Describe what changed
+        env:
+          BASE: ${{ github.event.pull_request.base.sha }}
+          HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          node scripts/describe-change.js "$BASE" "$HEAD" > draft-summary.md
+          node scripts/describe-change.js "$BASE" "$HEAD" --json > draft-summary.json
+          cat draft-summary.md
+
+      - name: Run the content checks
+        id: checks
+        continue-on-error: true
+        run: node scripts/check-content.js
+
+      - name: Post or update the review comment
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NUMBER: ${{ github.event.pull_request.number }}
+          BASE: ${{ github.event.pull_request.base.sha }}
+          HEAD: ${{ github.event.pull_request.head.sha }}
+          CHECKS: ${{ steps.checks.outcome }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+
+          MARKER='<!-- draft-review -->'
+          {
+            echo "$MARKER"
+            cat draft-summary.md
+            echo
+            echo '---'
+            if [ "$CHECKS" = 'success' ]; then
+              echo '**Checks pass.** Content structure, links and spelling are clean.'
+            else
+              echo '**Checks failed.** Do not publish until the red check on this pull request is fixed.'
+            fi
+            echo
+            echo '_Approve by asking the agent to publish, or by adding the `approved` label._'
+          } > comment.md
+
+          EXISTING=$(gh api --paginate "repos/$REPO/issues/$NUMBER/comments" \
+            --jq ".[] | select(.body | contains(\"$MARKER\")) | .id" | head -1 || true)
+
+          if [ -n "${EXISTING:-}" ]; then
+            gh api -X PATCH "repos/$REPO/issues/comments/$EXISTING" -F body=@comment.md > /dev/null
+            echo "updated comment $EXISTING"
+          else
+            gh api -X POST "repos/$REPO/issues/$NUMBER/comments" -F body=@comment.md > /dev/null
+            echo "created review comment"
+          fi
+
+      # The chat layer polls this label to know a draft is waiting for a
+      # teacher. Failure is not fatal: the label may not exist yet.
+      - name: Mark the draft ready for review
+        if: steps.checks.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NUMBER: ${{ github.event.pull_request.number }}
+          REPO: ${{ github.repository }}
+        run: gh api -X POST "repos/$REPO/issues/$NUMBER/labels" -f labels[]=draft-ready > /dev/null || true

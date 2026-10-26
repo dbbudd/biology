@@ -387,7 +387,7 @@ window.COURSE = {
             title: '4.8 Loops That Keep You Steady',
             summary: 'Negative feedback, the HPG axis, the menstrual cycle, and how to plan an investigation into a feedback system.',
             keywords: 'homeostasis negative feedback positive feedback hormone endocrine GnRH FSH LH testosterone oestrogen progesterone HPG axis ovarian cycle menstrual cycle ovulation hCG growth hormone experimental design hypothesis independent variable dependent variable control',
-            sims: ['Anatomy of a loop', 'Feedback model builder'], time: '30 min', sections: 7,
+            sims: ['Anatomy of a loop', 'Feedback model builder'], time: '30 min', sections: 10,
             standards: ['HS-LS1-3', 'HS-LS1-2'],
             question: 'How does a body decide when to release an egg, or when to stop growing?',
             kind: 'Lesson', status: 'ready'

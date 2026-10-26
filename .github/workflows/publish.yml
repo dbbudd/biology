@@ -1,0 +1,89 @@
+# Publish the reader to GitHub Pages
+#
+# OFF BY DEFAULT, on purpose.
+#
+# Right now Pages builds straight from the main branch, which is simpler and
+# needs no workflow. This file exists for the day the site needs something a
+# branch build cannot do — a preview deployment per pull request, or the
+# build-rate limit lifted.
+#
+# To switch over:
+#   1. Settings -> Pages -> Build and deployment -> Source: GitHub Actions
+#   2. Settings -> Secrets and variables -> Actions -> Variables ->
+#      New repository variable:  PAGES_FROM_ACTIONS = true
+#
+# Until step 2 the job skips, so this file is harmless while it waits.
+
+name: Publish
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: vars.PAGES_FROM_ACTIONS == 'true'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      # Publishing from a branch has no gate at all: a broken commit goes
+      # live. Once Pages builds through this workflow, a failing check stops
+      # the deploy and the site stays on its last good state.
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Content checks must pass before publishing
+        run: node scripts/check-content.js
+
+      - uses: actions/configure-pages@v5
+
+      # Everything the site needs, and nothing it does not: working material
+      # (image originals, Blender sources, the handbook templates), the check
+      # scripts, and repository documents stay out of the published tree.
+      #
+      # Note the narrow `images/**/_*` pattern. Do not widen it to `**/_*`:
+      # sims/_ui.js and sims/_organ3d.js are live assets the reading shell
+      # loads, and excluding them takes out every 3D simulation.
+      - name: Assemble the site
+        run: |
+          mkdir -p _site
+          rsync -a \
+            --exclude='.git/' \
+            --exclude='.github/' \
+            --exclude='_site/' \
+            --exclude='node_modules/' \
+            --exclude='scripts/' \
+            --exclude='_reference/' \
+            --exclude='.claude/' \
+            --exclude='.DS_Store' \
+            --exclude='models/source/' \
+            --exclude='images/**/_*' \
+            --exclude='*.md' \
+            ./ _site/
+          if [ ! -f _site/.nojekyll ]; then
+            echo "error: .nojekyll missing from the build" >&2
+            exit 1
+          fi
+          du -sh _site
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - id: deploy
+        uses: actions/deploy-pages@v4

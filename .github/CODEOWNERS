@@ -1,0 +1,22 @@
+# Who owns what
+#
+# Used with "Require review from Code Owners" in the branch protection rule
+# for main. Content is deliberately *not* listed: teachers and the agent edit
+# chapters/ freely. Everything below is shared by every page, so a change
+# there can break forty-seven chapters at once and needs eyes that can see
+# the whole.
+
+# The reading shell
+/assets/            @dbbudd
+/sims/              @dbbudd
+/vendor/            @dbbudd
+/models/            @dbbudd
+
+# Whether any of this runs
+/.github/           @dbbudd
+
+# The rules the content is written to
+/DESIGN.md          @dbbudd
+/Writing%20Style.md @dbbudd
+/CLAUDE.md          @dbbudd
+/UNIT-BUILD-PROCESS.md @dbbudd

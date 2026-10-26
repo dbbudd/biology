@@ -1,0 +1,27 @@
+#!/bin/sh
+# Run the content checks without needing node on your PATH.
+#
+# Same reason as scripts/check: the terminal pane's shell does not source
+# ~/.zshrc, where nvm lives, so a bare `node` fails there.
+#
+#   ./scripts/content-check                checks only
+#   ./scripts/content-check --diff main    also check what may change
+
+DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+
+NODE=$(command -v node 2>/dev/null)
+if [ -z "$NODE" ]; then
+    for n in $(ls -d "$HOME"/.nvm/versions/node/*/bin/node 2>/dev/null | sort -V -r); do
+        [ -x "$n" ] && NODE="$n" && break
+    done
+fi
+[ -z "$NODE" ] && [ -x /opt/homebrew/bin/node ] && NODE=/opt/homebrew/bin/node
+[ -z "$NODE" ] && [ -x /usr/local/bin/node ] && NODE=/usr/local/bin/node
+
+if [ -z "$NODE" ]; then
+    echo "content-check: could not find node. Install it, or run:" >&2
+    echo "  source ~/.nvm/nvm.sh && node \"$DIR/check-content.js\" $*" >&2
+    exit 127
+fi
+
+exec "$NODE" "$DIR/check-content.js" "$@"

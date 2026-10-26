@@ -1,0 +1,44 @@
+# Content checks
+#
+# Runs on every pull request and on every push to main. Nothing here builds
+# the site — it is plain static HTML — so these are the only things standing
+# between a change and the live page.
+
+name: Content checks
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  content:
+    name: Content and structure
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # The path check diffs against the base commit, so it needs history.
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Contents, sections, links, colours, spelling
+        run: node scripts/check-content.js
+
+      - name: Body-map still resolves
+        run: ./scripts/check
+
+      # Runs last so the content report above is the first thing a teacher's
+      # agent sees when it opens the failed check.
+      - name: Only course content may change
+        if: github.event_name == 'pull_request'
+        env:
+          BASE: ${{ github.event.pull_request.base.sha }}
+        run: node scripts/check-content.js --diff "$BASE"
