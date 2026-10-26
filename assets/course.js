@@ -202,6 +202,8 @@
         if (CHAP_ID === 'glossary') html += '<div class="nav-onpage" id="nav-onpage"></div>';
         html += navItem(`${ROOT}reference/standards.html`, '', 'Curriculum Standards', '', CHAP_ID === 'standards');
         if (CHAP_ID === 'standards') html += '<div class="nav-onpage" id="nav-onpage"></div>';
+        html += navItem(`${ROOT}reference/changelog.html`, '', 'Change log', '', CHAP_ID === 'changelog');
+        if (CHAP_ID === 'changelog') html += '<div class="nav-onpage" id="nav-onpage"></div>';
         html += '</div>';
         return html;
     }

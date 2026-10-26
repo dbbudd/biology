@@ -1,0 +1,127 @@
+/* =============================================================
+   CHANGE LOG
+   -------------------------------------------------------------
+   The teacher-facing view of what has changed in the reader.
+   Deliberately plain: three states, a date, and sentences from
+   the change itself. No branch names, no pull request numbers,
+   nothing that assumes the reader has seen GitHub.
+
+   All colours come from the design tokens so the light, sepia and
+   dark themes keep working (see DESIGN.md).
+   ============================================================= */
+
+.cl-lead {
+    margin: 0 0 2rem;
+    color: var(--text-secondary);
+}
+
+.cl-section {
+    margin: 0 0 2.5rem;
+}
+
+.cl-section-title {
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin: 0 0 0.9rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.cl-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.cl-item {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--bg-surface);
+    padding: 1rem 1.1rem;
+    margin: 0 0 0.75rem;
+}
+
+.cl-head {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.35rem;
+}
+
+.cl-title {
+    font-weight: 600;
+    margin: 0;
+    font-size: 1.02rem;
+}
+
+.cl-chip {
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 0.15rem 0.45rem;
+    border-radius: 3px;
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    white-space: nowrap;
+}
+
+.cl-chip--published {
+    color: var(--ok);
+    border-color: var(--ok-border, var(--ok));
+    background: var(--ok-bg, transparent);
+}
+
+.cl-when {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-left: auto;
+    white-space: nowrap;
+}
+
+.cl-where {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin: 0.15rem 0 0.5rem;
+}
+
+.cl-summary {
+    margin: 0;
+    line-height: 1.55;
+}
+
+.cl-empty,
+.cl-error {
+    border: 1px dashed var(--border);
+    border-radius: 6px;
+    padding: 1rem 1.1rem;
+    color: var(--text-secondary);
+    margin: 0 0 0.75rem;
+}
+
+.cl-retry {
+    font: inherit;
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text);
+    padding: 0.3rem 0.7rem;
+    cursor: pointer;
+    margin-top: 0.6rem;
+}
+
+.cl-retry:hover { background: var(--bg-tight); }
+
+.cl-note {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+}
+
+@media (max-width: 600px) {
+    .cl-when { margin-left: 0; width: 100%; }
+}
