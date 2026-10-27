@@ -95,14 +95,16 @@ export function createService({ github, agentAssignee }) {
         } catch {
           draft = undefined;
         }
+        const status = statusOf(issue, draft);
         requests.push({
           request: issue.number,
           title: String(issue.title || '').replace(/^\[change\]\s*/i, ''),
-          status: statusOf(issue, draft),
+          status,
           createdAt: issue.created_at,
           updatedAt: issue.updated_at,
           draftNumber: draft ? draft.number : null,
-          canPublish: statusOf(issue, draft) === 'ready',
+          canPublish: status === 'ready',
+          history: buildHistory(issue, draft),
         });
       }
 
@@ -186,6 +188,25 @@ export function createService({ github, agentAssignee }) {
       return { published: true, draft: draft.number, ...result };
     },
   };
+}
+
+/**
+ * The progress trail for one request, in the order a teacher experiences it.
+ *
+ * Every step is optional after the first: a request with no draft yet has only
+ * 'requested', and a published one has all four. The page renders what it gets
+ * rather than assuming a shape, which is what keeps it honest while a draft is
+ * still moving.
+ */
+export function buildHistory(issue, draft) {
+  const steps = [{ step: 'requested', at: issue && issue.created_at }];
+
+  if (draft) {
+    steps.push({ step: 'drafting', at: draft.createdAt });
+    if (draft.readyAt) steps.push({ step: 'ready', at: draft.readyAt });
+    if (draft.mergedAt) steps.push({ step: 'published', at: draft.mergedAt });
+  }
+  return steps.filter((s) => Boolean(s.at));
 }
 
 /** The marker written into the issue body when the request was created. */

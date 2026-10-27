@@ -237,6 +237,30 @@ $ok: var(--themeSuccessText, #107c10);
   filter: brightness(0.92);
 }
 
+.trail {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin-top: 0.6rem;
+  font-size: 0.78rem;
+  color: $muted;
+}
+
+.trailStep {
+  white-space: nowrap;
+}
+
+.trailStepNow {
+  white-space: nowrap;
+  font-weight: 600;
+  color: $ink;
+}
+
+.trailArrow {
+  color: $line;
+}
+
 .summary {
   margin: 0.4rem 0 0;
   font-size: 0.9rem;

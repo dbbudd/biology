@@ -44,6 +44,13 @@ interface IMineRequest {
   updatedAt?: string;
   draftNumber?: number;
   canPublish?: boolean;
+  history?: IHistoryStep[];
+}
+
+/** One step of a request's progress, as the teacher experiences it. */
+interface IHistoryStep {
+  step: 'requested' | 'drafting' | 'ready' | 'published';
+  at: string;
 }
 
 interface IGitHubItem {
@@ -344,6 +351,7 @@ export default class BiologyChangesApplicationCustomizer extends BaseApplication
         done,
         ready,
         completeKey: ready ? String(r.request) : undefined,
+        trail: this.trail(r.history),
       });
     });
     this.fill('#bc-mine', items, 'You have not asked for any changes yet.');
@@ -418,6 +426,7 @@ export default class BiologyChangesApplicationCustomizer extends BaseApplication
     done?: boolean;
     ready?: boolean;
     completeKey?: string;
+    trail?: string;
   }): string {
     const date = o.when
       ? new Date(o.when).toLocaleDateString(undefined, {
@@ -440,8 +449,39 @@ export default class BiologyChangesApplicationCustomizer extends BaseApplication
           <span class="${styles.when}">${escapeHtml(date)}</span>
         </div>
         ${summary}
+        ${o.trail || ''}
         ${action ? `<div class="${styles.itemActions}">${action}</div>` : ''}
       </li>`;
+  }
+
+  /**
+   * A request's progress, newest step emphasised.
+   *
+   * Rendered from whatever steps exist rather than assuming all four: a
+   * request with no draft yet has one step, and inventing the rest would
+   * imply progress that has not happened.
+   */
+  private trail(steps: IHistoryStep[] | undefined): string {
+    if (!steps || !steps.length) return '';
+
+    const labels: { [key: string]: string } = {
+      requested: 'Requested',
+      drafting: 'Drafting',
+      ready: 'Ready',
+      published: 'Published',
+    };
+
+    const parts = steps.map((s, i): string => {
+      const when = s.at
+        ? new Date(s.at).toLocaleDateString(undefined, { day: 'numeric', month: 'short' })
+        : '';
+      const current = i === steps.length - 1;
+      const cls = current ? styles.trailStepNow : styles.trailStep;
+      return `<span class="${cls}">${escapeHtml(labels[s.step] || s.step)}${when ? ' ' + escapeHtml(when) : ''}</span>`;
+    });
+
+    const arrow = `<span class="${styles.trailArrow}">→</span>`;
+    return `<div class="${styles.trail}">${parts.join(arrow)}</div>`;
   }
 
   private fill(selector: string, html: string[], empty: string): void {

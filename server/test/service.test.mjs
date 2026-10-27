@@ -23,7 +23,10 @@ function fakeGitHub(overrides = {}) {
   const calls = [];
   const state = {
     issueNumber: 42,
-    draft: { number: 7, headSha: 'abc123', merged: false, title: 'Draft', url: 'u' },
+    draft: {
+      number: 7, headSha: 'abc123', merged: false, title: 'Draft', url: 'u',
+      createdAt: '2026-10-27T09:05:00Z', labels: [],
+    },
     ...overrides,
   };
 
@@ -274,4 +277,51 @@ test('completing is the same decision as publishing', async () => {
   await service.complete(42, {}, teacher);
   const [, dispatched] = github.calls.find(([name]) => name === 'dispatchPublish');
   assert.equal(dispatched.approvedBy, teacher.email);
+});
+
+
+test('history lists the steps that actually happened, in order', async () => {
+  const { buildHistory } = await import('../service.mjs');
+
+  const requestedOnly = buildHistory({ created_at: '2026-10-27T09:00:00Z' }, undefined);
+  assert.deepEqual(requestedOnly.map((s) => s.step), ['requested']);
+
+  const all = buildHistory(
+    { created_at: '2026-10-27T09:00:00Z', state: 'closed' },
+    {
+      createdAt: '2026-10-27T09:05:00Z',
+      readyAt: '2026-10-27T09:20:00Z',
+      mergedAt: '2026-10-27T09:30:00Z',
+      labels: ['draft-ready'],
+    }
+  );
+  assert.deepEqual(all.map((s) => s.step), ['requested', 'drafting', 'ready', 'published']);
+  assert.deepEqual(all.map((s) => s.at), [
+    '2026-10-27T09:00:00Z',
+    '2026-10-27T09:05:00Z',
+    '2026-10-27T09:20:00Z',
+    '2026-10-27T09:30:00Z',
+  ]);
+});
+
+test('a step with no timestamp is dropped rather than shown blank', async () => {
+  const { buildHistory } = await import('../service.mjs');
+  const steps = buildHistory(
+    { created_at: '2026-10-27T09:00:00Z' },
+    { createdAt: '2026-10-27T09:05:00Z', labels: [] }
+  );
+  assert.deepEqual(steps.map((s) => s.step), ['requested', 'drafting']);
+});
+
+test('each listed request carries its own history', async () => {
+  const github = fakeGitHub({
+    issues: [
+      { number: 5, title: '[change] a', state: 'open', body: '<!-- requested-by: lee@hkis.edu.hk -->', created_at: '2026-10-27T09:00:00Z', updated_at: '2026-10-27T09:10:00Z' },
+    ],
+  });
+  github.state.draft = { number: 9, headSha: 's', merged: false, labels: ['draft-ready'], createdAt: '2026-10-27T09:05:00Z', readyAt: '2026-10-27T09:08:00Z' };
+
+  const out = await createService({ github }).listRequests(teacher);
+  assert.equal(out.requests[0].status, 'ready');
+  assert.deepEqual(out.requests[0].history.map((s) => s.step), ['requested', 'drafting', 'ready']);
 });

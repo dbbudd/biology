@@ -140,7 +140,15 @@ jobs:
         run: |
           set -euo pipefail
           TITLE=$(jq -r .title pr.json)
-          gh pr merge "$PR" --repo "$REPO" --squash --delete-branch --subject "$TITLE (#$PR)"
+
+          # The happy path: the checks are already green, so this merges now.
+          # If they are still running, ask for auto-merge instead of failing —
+          # the teacher has already made the decision, and the merge is the
+          # same once the checks finish. Anything else is a real refusal.
+          if ! gh pr merge "$PR" --repo "$REPO" --squash --delete-branch --subject "$TITLE (#$PR)"; then
+            echo "immediate merge refused; trying auto-merge"
+            gh pr merge "$PR" --repo "$REPO" --squash --delete-branch --auto --subject "$TITLE (#$PR)"
+          fi
 
           BODY=$(printf 'Published.\n\nApproved by **%s** in the course chat. Draft verified at `%s` before merging.\nRequest: #%s\n\nThe site rebuilds in a minute or two.' \
             "$WHO" "${APPROVED:0:7}" "${REQUEST:-none}")

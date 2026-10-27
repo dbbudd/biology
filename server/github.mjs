@@ -137,6 +137,26 @@ export function createGitHubClient(options = {}) {
 
       const prNumber = linked[linked.length - 1].source.issue.number;
       const pr = await request('GET', `/repos/${repo}/pulls/${prNumber}`);
+
+      // When the draft became ready is not a field on the pull request; it is
+      // the moment the review workflow applied the label. Timeline events are
+      // the only place that timestamp exists, and a failure here must not stop
+      // the draft being published — hence the swallow.
+      let readyAt;
+      try {
+        const events = await request(
+          'GET',
+          `/repos/${repo}/issues/${prNumber}/timeline?per_page=100`,
+          undefined
+        );
+        const labelled = (events || []).filter(
+          (e) => e.event === 'labeled' && e.label && String(e.label.name).toLowerCase() === 'draft-ready'
+        );
+        if (labelled.length) readyAt = labelled[labelled.length - 1].created_at;
+      } catch {
+        readyAt = undefined;
+      }
+
       return {
         number: pr.number,
         headSha: pr.head && pr.head.sha,
@@ -145,6 +165,9 @@ export function createGitHubClient(options = {}) {
         url: pr.html_url,
         isDraft: Boolean(pr.draft),
         labels: (pr.labels || []).map((l) => (typeof l === 'string' ? l : l.name)),
+        createdAt: pr.created_at,
+        mergedAt: pr.merged_at || undefined,
+        readyAt,
       };
     },
 
