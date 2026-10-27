@@ -64,7 +64,29 @@ a credential in it is readable in the browser by anyone who can load the page.
 The writes go to a server-side endpoint that holds the credential and knows the
 caller's identity from their Entra token — see `sharepoint/SECURE-API.md`.
 
-### Registering it
+#### Full-viewport mode
+
+By default the reader now hides SharePoint's suite bar and site header so the
+panel fills the viewport, rather than starting below the header. The selectors
+are lifted from the `hkis-handbook` customizer, which has run this in
+production — including `[class*="shyHeader"]`, because SharePoint hashes those
+class names and an exact match silently stops working after a tenant update.
+
+The hiding is scoped by a body class (`bio-reader-chrome-hidden`), not applied
+globally. That matters: this customizer is registered site-wide, and an
+unscoped `display:none` would strip the header off every other page in the site
+the moment it loaded.
+
+To go back to sitting politely below the header, register the action with
+`"hideChrome": false`. It defaults to on so that an app upgrade delivers the
+change through the bundle, which upgrades always do — custom-action properties
+do not always propagate on upgrade.
+
+**Trade-off:** with the chrome hidden there is no site navigation on that page.
+Readers leave via the browser back button or the site URL. That is usually what
+you want for a course reader; it is worth deciding deliberately.
+
+## Registering it
 
 `elements.xml` and `ClientSideInstance.xml` both carry the second action, so
 adding the app to the site provisions both. It is scoped to

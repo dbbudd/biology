@@ -37,6 +37,13 @@ export interface IBiologyReaderChromeApplicationCustomizerProperties {
   zIndex?: number;
   /** Set false to disable without unregistering. */
   enabled?: boolean;
+  /**
+   * Hide the SharePoint suite bar and site header so the reader fills the
+   * viewport. On by default; set false to go back to sitting below the header. Selectors are taken from the hkis-handbook customizer, which runs
+   * this in production. Note the [class*="shyHeader"] rule: SharePoint hashes
+   * those class names, so an exact match stops working after an update.
+   */
+  hideChrome?: boolean;
   /** Log the match decision to the browser console. */
   debug?: boolean;
 }
@@ -47,6 +54,7 @@ interface ISettings {
   headerSelector: string;
   zIndex: number;
   enabled: boolean;
+  hideChrome: boolean;
   debug: boolean;
 }
 
@@ -55,9 +63,12 @@ const DEFAULTS = {
   readerUrl: 'https://dbbudd.github.io/biology/',
   headerSelector: '#spSiteHeader',
   zIndex: 800,
+  hideChrome: true,
 };
 
 const PANEL_ID = 'biology-reader-panel';
+const CHROME_CLASS = 'bio-reader-chrome-hidden';
+const CHROME_STYLE_ID = 'bio-reader-chrome-style';
 const HEADER_RETRIES = 20;
 const HEADER_RETRY_MS = 250;
 
@@ -93,6 +104,7 @@ export default class BiologyReaderChromeApplicationCustomizer extends BaseApplic
       headerSelector: p.headerSelector || DEFAULTS.headerSelector,
       zIndex: typeof p.zIndex === 'number' ? p.zIndex : DEFAULTS.zIndex,
       enabled: p.enabled !== false,
+      hideChrome: p.hideChrome !== false,
       debug: p.debug === true,
     };
   }
@@ -195,6 +207,7 @@ export default class BiologyReaderChromeApplicationCustomizer extends BaseApplic
 
     panel.appendChild(frame);
     document.body.appendChild(panel);
+    this.applyChrome();
 
     // The page underneath must not scroll, or two scrollbars fight each other.
     this.bodyOverflow = document.body.style.overflow;
@@ -251,6 +264,12 @@ export default class BiologyReaderChromeApplicationCustomizer extends BaseApplic
       return;
     }
 
+    // With the chrome hidden there is nothing above the panel to measure.
+    if (this.settings.hideChrome) {
+      this.panel.style.top = '0px';
+      return;
+    }
+
     const header = document.querySelector(this.settings.headerSelector);
     let top = 0;
     if (header) {
@@ -260,7 +279,57 @@ export default class BiologyReaderChromeApplicationCustomizer extends BaseApplic
     this.panel.style.top = top + 'px';
   }
 
+  /**
+   * Hide SharePoint's own chrome so the panel can fill the viewport.
+   *
+   * Scoped by a body class, not a global rule: this customizer is registered
+   * site-wide, so an unscoped `display:none` would strip the header from every
+   * other page in the site as soon as it loaded.
+   */
+  private applyChrome(): void {
+    if (!this.settings.hideChrome) {
+      return;
+    }
+
+    document.body.classList.add(CHROME_CLASS);
+
+    if (document.getElementById(CHROME_STYLE_ID)) {
+      return;
+    }
+
+    const prefix = '#' + CHROME_CLASS + ' ';
+    const style = document.createElement('style');
+    style.id = CHROME_STYLE_ID;
+    style.textContent = [
+      prefix + '#SuiteNavWrapper,',
+      prefix + '#SuiteNavPlaceHolder,',
+      prefix + '#sp-appBar,',
+      prefix + '[data-sp-feature-tag="Suite Navigation Placeholder"],',
+      prefix + '[data-automation-id="suiteNavWrapper"],',
+      prefix + '.ms-Suitebar,',
+      prefix + 'header.spoMainBar,',
+      prefix + 'header[data-automation-id="suiteHeader"],',
+      prefix + '[data-automation-id="SiteHeader"],',
+      prefix + '.spSiteHeader,',
+      prefix + 'div[data-automation-id="SiteHeader"],',
+      prefix + '[class*="shyHeader"] { display: none !important; }',
+      prefix + '#spPageCanvasContent { padding-top: 0 !important; }',
+    ].join('\n');
+
+    document.head.appendChild(style);
+  }
+
+  private removeChrome(): void {
+    document.body.classList.remove(CHROME_CLASS);
+    const style = document.getElementById(CHROME_STYLE_ID);
+    if (style && style.parentNode) {
+      style.parentNode.removeChild(style);
+    }
+  }
+
   private teardown(): void {
+    this.removeChrome();
+
     if (this.headerTimer !== undefined) {
       window.clearTimeout(this.headerTimer);
       this.headerTimer = undefined;

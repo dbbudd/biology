@@ -3,9 +3,9 @@
   "solution": {
     "name": "hkis-biology-reader-client-side-solution",
     "id": "c4a1e2f0-9d3b-4b6a-8f7e-2b5c9d1a4e63",
-    "version": "1.2.0.0",
+    "version": "1.4.0.0",
     "includeClientSideAssets": true,
-    "skipFeatureDeployment": true,
+    "skipFeatureDeployment": false,
     "isDomainIsolated": false,
     "developer": {
       "name": "HKIS Biology",
@@ -28,9 +28,9 @@
     "features": [
       {
         "title": "Biology reader and changes deployment",
-        "description": "Deploys the custom action that mounts the reader on Biology.aspx",
+        "description": "Deploys the custom actions for the reader and the changes page",
         "id": "0e7c4b21-58f0-4b8f-9a3c-1d6e7f2a8b94",
-        "version": "1.2.0.0",
+        "version": "1.4.0.0",
         "assets": {
           "elementManifests": [
             "elements.xml",
