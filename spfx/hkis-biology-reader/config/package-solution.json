@@ -3,7 +3,7 @@
   "solution": {
     "name": "hkis-biology-reader-client-side-solution",
     "id": "c4a1e2f0-9d3b-4b6a-8f7e-2b5c9d1a4e63",
-    "version": "1.7.0.0",
+    "version": "1.8.0.0",
     "includeClientSideAssets": true,
     "skipFeatureDeployment": false,
     "isDomainIsolated": false,
@@ -16,7 +16,7 @@
     },
     "metadata": {
       "shortDescription": {
-        "default": "The Biology course reader page, plus the teacher page for requesting changes."
+        "default": "The Biology course reader page, plus a teacher page that links to the change-request form."
       },
       "longDescription": {
         "default": "An Application Customizer that frames the static Biology course reader across the page, below the site navigation, and leaves every other page in the site untouched. The page is chosen at runtime by comparing the current path to a configured target, so the registration can stay site-wide and still survive the page being renamed."
@@ -30,7 +30,7 @@
         "title": "Biology reader and changes deployment",
         "description": "Deploys the custom actions for the reader and the changes page",
         "id": "0e7c4b21-58f0-4b8f-9a3c-1d6e7f2a8b94",
-        "version": "1.7.0.0",
+        "version": "1.8.0.0",
         "assets": {
           "elementManifests": [
             "elements.xml",
