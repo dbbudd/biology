@@ -17,7 +17,11 @@
 (function () {
     'use strict';
 
-    const ASSET_V = 332;   // bump when shipping changes to sims/
+    const ASSET_V = 333;   // bump when shipping changes to sims/
+
+    // Where "Log an issue" goes: the change request form, so a student or a
+    // teacher lands on a short form rather than an empty issue box.
+    const ISSUE_URL = 'https://github.com/dbbudd/biology/issues/new/choose';
     const COURSE  = window.COURSE || { title: 'Course', chapters: [], glossary: {} };
     const ROOT    = document.body.dataset.root || '';
     const CHAP_ID = document.body.dataset.chapter || null;
@@ -138,6 +142,8 @@
 <div class="overlay" id="overlay" onclick="toggleNav()"></div>
 <div id="term-popover"></div>`;
 
+        // The issue link is the one way out of the reader. It is a plain
+        // anchor: no fetch, no token, nothing that can fail on this page.
         const readingPos = `
 <div class="reading-pos">
     <span class="reading-pos-section" id="rp-section"></span>
@@ -145,6 +151,7 @@
         <span id="rp-label"></span>
         <span class="reading-pos-bar"><span class="reading-pos-bar-fill" id="rp-bar-fill"></span></span>
         <span id="rp-pct">0%</span>
+        <a class="issue-link" href="${ISSUE_URL}" target="_blank" rel="noopener">Log an issue</a>
     </span>
 </div>`;
 

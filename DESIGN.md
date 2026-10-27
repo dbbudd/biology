@@ -358,6 +358,22 @@ by adding it chapter by chapter.
 | Sustaining effort and persistence (8) | Short sections with time estimates; visible progress; instant feedback on every quick-check question; a second version of each question to try after reviewing |
 | Emotional capacity (9) | Self-checks are private and never graded; wrong answers explain why and link to the section to review; misconceptions are presented as common, not as failures; "Try this" tasks say rough answers are fine |
 
+### Feedback: the one way out of the reader
+
+The footer bar carries a single red **Log an issue** link, on every page. It
+opens the course's change-request form in a new tab.
+
+- **It is the only outbound control in the reading shell.** Everything else on
+  the page is for reading; this is the one place a student or teacher can say
+  the content is wrong, unclear or missing.
+- **It is an ordinary link, not a script.** No request is made from the reader,
+  nothing is sent until the person submits the form, and it works with the
+  site's network policy unchanged.
+- **It appears after the progress readout**, in the same bar as the reading
+  position, so it is available without competing with the text.
+- **On a phone the progress bar gives up its space first**, so the way to report
+  a problem survives at 320px.
+
 ### Access without barriers
 
 - **No account and no tracking.** Settings and progress are stored in the student's own browser.

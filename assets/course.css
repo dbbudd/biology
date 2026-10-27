@@ -305,6 +305,26 @@ strong { font-weight: 600; }
 }
 .reading-pos-section { font-weight: 600; color: var(--text); }
 .reading-pos-progress { display: flex; align-items: center; gap: 0.5rem; }
+
+/* The issue link sits in the footer bar, after the progress readout: the one
+   way out of the reader, available on every page. Red because it is the only
+   call to action down there, and it should not compete with the reading. */
+.issue-link {
+    display: inline-flex; align-items: center;
+    background: var(--red); color: #fff;
+    border-radius: 999px; padding: 0.15rem 0.7rem;
+    font-weight: 600; font-size: 0.72rem; line-height: 1.6;
+    text-decoration: none; white-space: nowrap;
+}
+.issue-link:hover { background: #c33039; color: #fff; }
+.issue-link:focus-visible { outline: 2px solid var(--text); outline-offset: 2px; }
+
+/* On a phone the footer already fights for space; keep the link but drop the
+   progress bar rather than the way to report a problem. */
+@media (max-width: 640px) {
+    .reading-pos-bar, #rp-label { display: none; }
+    .issue-link { font-size: 0.68rem; padding: 0.1rem 0.55rem; }
+}
 .reading-pos-bar {
     width: 80px; height: 4px; background: var(--border); border-radius: 2px; overflow: hidden;
 }
