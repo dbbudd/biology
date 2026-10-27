@@ -5,11 +5,26 @@ The four operations the teacher page calls. No dependencies, no framework —
 
 ```
 POST /requests                  create a request and start a draft
-GET  /requests/:id              what the page polls
+GET  /requests                  this teacher's own requests, with status
+GET  /requests/:id              one request
 POST /requests/:id/corrections  pass the teacher's correction through
-POST /requests/:id/publish      dispatch the publish workflow
+POST /requests/:id/complete     publish (alias: /publish)
 GET  /health                    what is configured (never the token)
 ```
+
+`GET /requests` returns a status in the teacher's vocabulary and nothing else:
+
+| status | means |
+| --- | --- |
+| `requested` | the issue exists, nothing drafted yet |
+| `drafting` | the agent has a draft open, checks not done |
+| `ready` | the draft passed its checks; `canPublish` is true |
+| `published` | merged, and therefore live |
+
+Attribution comes from a `<!-- requested-by: … -->` marker written into the
+issue body at creation. It is an HTML comment, so every parser in the repo
+strips it before showing text, and the service can list "my requests" without
+a database.
 
 ## Why this exists
 

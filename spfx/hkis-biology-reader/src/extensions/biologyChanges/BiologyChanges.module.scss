@@ -190,6 +190,12 @@ $ok: var(--themeSuccessText, #107c10);
 }
 
 .chip,
+.chipReady {
+  color: #8a6d00;
+  border-color: #c8a200;
+  background: rgba(255, 205, 0, 0.16);
+}
+
 .chipDone {
   font-size: 0.7rem;
   letter-spacing: 0.05em;

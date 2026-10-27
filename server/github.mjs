@@ -63,9 +63,13 @@ export function createGitHubClient(options = {}) {
   return {
     repo,
 
-    /** The issue body shape every parser in the repo depends on. */
-    buildIssueBody({ chapter, change, doneWhen }) {
-      return [
+    /**
+     * The issue body shape every parser in the repo depends on, plus a
+     * machine-readable note of who asked. The marker is an HTML comment, so
+     * the change log and the summaries strip it before anyone reads the text.
+     */
+    buildIssueBody({ chapter, change, doneWhen, requestedBy }) {
+      const lines = [
         '### Which chapter or section?',
         chapter,
         '',
@@ -74,16 +78,26 @@ export function createGitHubClient(options = {}) {
         '',
         '### How will we know it is right?',
         doneWhen || 'Not specified.',
-      ].join('\n');
+      ];
+      if (requestedBy) lines.push('', `<!-- requested-by: ${requestedBy} -->`);
+      return lines.join('\n');
     },
 
-    async createRequest({ chapter, change, doneWhen }) {
+    async createRequest({ chapter, change, doneWhen, requestedBy }) {
       const issue = await request('POST', `/repos/${repo}/issues`, {
         title: `[change] ${String(chapter).slice(0, 120)}`,
-        body: this.buildIssueBody({ chapter, change, doneWhen }),
+        body: this.buildIssueBody({ chapter, change, doneWhen, requestedBy }),
         labels: ['change-request'],
       });
       return { number: issue.number, url: issue.html_url, title: issue.title };
+    },
+
+    /** Every change request, newest first. Status is worked out per request. */
+    async listRequests() {
+      return request(
+        'GET',
+        `/repos/${repo}/issues?labels=change-request&state=all&per_page=100&sort=updated`
+      );
     },
 
     /**
@@ -129,6 +143,8 @@ export function createGitHubClient(options = {}) {
         merged: Boolean(pr.merged_at),
         title: pr.title,
         url: pr.html_url,
+        isDraft: Boolean(pr.draft),
+        labels: (pr.labels || []).map((l) => (typeof l === 'string' ? l : l.name)),
       };
     },
 

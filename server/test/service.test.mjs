@@ -55,6 +55,9 @@ function fakeGitHub(overrides = {}) {
     async findDraft() {
       return state.draft;
     },
+    async listRequests() {
+      return state.issues || [];
+    },
     async commentOnThread(number, body) {
       calls.push(['commentOnThread', number, body]);
       return { url: 'u' };
@@ -214,4 +217,61 @@ test('a required role is enforced, and left unset allows any signed-in caller', 
   assert.doesNotThrow(() => authorise(actor, { TEACHER_ROLE: 'Teacher' }));
   assert.throws(() => authorise(actor, { TEACHER_ROLE: 'CourseEditor' }), AuthError);
   assert.throws(() => authorise(undefined, {}), AuthError);
+});
+
+
+test('a request carries a marker naming who asked', async () => {
+  const github = fakeGitHub();
+  const service = createService({ github });
+  await service.createRequest({ chapter: '2.3', change: 'x' }, teacher);
+
+  const [, posted] = github.calls.find(([name]) => name === 'createRequest');
+  assert.equal(posted.requestedBy, teacher.email);
+});
+
+test('the listing shows a teacher only their own requests', async () => {
+  const github = fakeGitHub();
+  github.state.issues = [
+    { number: 1, title: '[change] mine', state: 'open', body: '<!-- requested-by: lee@hkis.edu.hk -->', updated_at: '2026-10-27T01:00:00Z' },
+    { number: 2, title: '[change] someone else', state: 'open', body: '<!-- requested-by: other@hkis.edu.hk -->', updated_at: '2026-10-27T02:00:00Z' },
+    { number: 3, title: '[change] also mine, closed', state: 'closed', body: '<!-- requested-by: lee@hkis.edu.hk -->', updated_at: '2026-10-26T01:00:00Z' },
+  ];
+  const service = createService({ github });
+  const out = await service.listRequests(teacher);
+
+  assert.deepEqual(out.requests.map((r) => r.request), [1, 3]);
+  assert.equal(out.requests[0].status, 'drafting', 'open + draft with no ready label');
+  assert.equal(out.requests[1].status, 'published', 'closed is published');
+});
+
+test('status translates GitHub states into teacher words', async () => {
+  const { statusOf } = await import('../service.mjs');
+  assert.equal(statusOf({ state: 'open' }, undefined), 'requested');
+  assert.equal(statusOf({ state: 'open' }, { labels: [] }), 'drafting');
+  assert.equal(statusOf({ state: 'open' }, { labels: ['draft-ready'] }), 'ready');
+  assert.equal(statusOf({ state: 'open' }, { labels: ['draft-ready'], merged: true }), 'published');
+  assert.equal(statusOf({ state: 'closed' }, undefined), 'published');
+});
+
+test('only a ready draft offers the complete action', async () => {
+  const github = fakeGitHub({
+    issues: [
+      { number: 5, title: '[change] a', state: 'open', body: '<!-- requested-by: lee@hkis.edu.hk -->', updated_at: '2026-10-27T01:00:00Z' },
+    ],
+    draft: { number: 9, headSha: 's', merged: false, labels: [] },
+  });
+  const out = await createService({ github }).listRequests(teacher);
+  assert.equal(out.requests[0].canPublish, false, 'drafting must not offer publish');
+
+  github.state.draft = { number: 9, headSha: 's', merged: false, labels: ['draft-ready'] };
+  const ready = await createService({ github }).listRequests(teacher);
+  assert.equal(ready.requests[0].canPublish, true);
+});
+
+test('completing is the same decision as publishing', async () => {
+  const github = fakeGitHub();
+  const service = createService({ github });
+  await service.complete(42, {}, teacher);
+  const [, dispatched] = github.calls.find(([name]) => name === 'dispatchPublish');
+  assert.equal(dispatched.approvedBy, teacher.email);
 });

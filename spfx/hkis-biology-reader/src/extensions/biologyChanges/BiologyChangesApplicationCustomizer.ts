@@ -28,6 +28,24 @@ interface IGitHubLabel {
   name?: string;
 }
 
+/** The parts of a fetch or AadHttpClient response this code relies on. */
+interface IHttpResult {
+  ok: boolean;
+  status: number;
+  json: () => Promise<unknown>;
+}
+
+/** One row of GET /requests — the shape the change service returns. */
+interface IMineRequest {
+  request: number;
+  title: string;
+  status: 'requested' | 'drafting' | 'ready' | 'published';
+  createdAt?: string;
+  updatedAt?: string;
+  draftNumber?: number;
+  canPublish?: boolean;
+}
+
 interface IGitHubItem {
   number?: number;
   title?: string;
@@ -75,7 +93,6 @@ const DEFAULTS = {
 const PANEL_ID = 'biology-changes-panel';
 const HEADER_RETRIES = 20;
 const HEADER_RETRY_MS = 250;
-const TRUSTED_ASSOCIATIONS = ['OWNER', 'MEMBER', 'COLLABORATOR'];
 
 const stripTrailingSlash = (value: string): string => value.replace(/\/+$/, '');
 
@@ -180,13 +197,14 @@ export default class BiologyChangesApplicationCustomizer extends BaseApplication
     // per-button listeners would leak with each render.
     panel.addEventListener('click', (ev: Event): void => {
       const target = ev.target as HTMLElement | null;
-      const button = target ? (target.closest('[data-publish]') as HTMLElement | null) : null;
+      const button = target ? (target.closest('[data-complete]') as HTMLElement | null) : null;
       if (!button) return;
       ev.preventDefault();
-      this.publish(button.getAttribute('data-publish') || '').catch(() => undefined);
+      this.complete(button.getAttribute('data-complete') || '').catch(() => undefined);
     });
 
     this.loadChapters().catch(() => undefined);
+    this.loadMine().catch(() => undefined);
     this.loadActivity().catch(() => undefined);
   }
 
@@ -235,12 +253,12 @@ export default class BiologyChangesApplicationCustomizer extends BaseApplication
           </section>
 
           <section class="${styles.section}">
-            <h2 class="${styles.cardTitle}">Being worked on</h2>
-            <ul class="${styles.list}" id="bc-progress"><li class="${styles.empty}">Loading…</li></ul>
+            <h2 class="${styles.cardTitle}">Your requests</h2>
+            <ul class="${styles.list}" id="bc-mine"><li class="${styles.empty}">Loading…</li></ul>
           </section>
 
           <section class="${styles.section}">
-            <h2 class="${styles.cardTitle}">Published</h2>
+            <h2 class="${styles.cardTitle}">Recently published in the course</h2>
             <ul class="${styles.list}" id="bc-published"><li class="${styles.empty}">Loading…</li></ul>
           </section>
         </div>
@@ -275,85 +293,75 @@ export default class BiologyChangesApplicationCustomizer extends BaseApplication
     }
   }
 
+  /** The course-wide list of what has gone live. Public data, no service needed. */
   private async loadActivity(): Promise<void> {
     const base = this.settings.apiBase;
     const repo = this.settings.repo;
-    const opts: RequestInit = { credentials: 'omit' };
-
-    let issues: IGitHubItem[] = [];
     let pulls: IGitHubItem[] = [];
 
     try {
-      const [issuesRes, pullsRes] = await Promise.all([
-        fetch(`${base}/repos/${repo}/issues?state=all&per_page=30`, opts),
-        fetch(`${base}/repos/${repo}/pulls?state=all&per_page=30`, opts),
-      ]);
-      if (issuesRes.ok) issues = (await issuesRes.json()) as IGitHubItem[];
-      if (pullsRes.ok) pulls = (await pullsRes.json()) as IGitHubItem[];
+      const res = await fetch(`${base}/repos/${repo}/pulls?state=all&per_page=30`, {
+        credentials: 'omit',
+      });
+      if (res.ok) pulls = (await res.json()) as IGitHubItem[];
     } catch (err) {
-      if (this.settings.debug) console.warn('[BiologyChanges] activity unavailable', err);
+      if (this.settings.debug) console.warn('[BiologyChanges] published list unavailable', err);
     }
 
-    this.renderActivity(issues, pulls);
+    this.renderPublished(pulls);
   }
 
-  private isRequest(issue: IGitHubItem): boolean {
-    if (!issue || issue.pull_request) return false;
-
-    const labels = (issue.labels || []).map((l) => (typeof l === 'string' ? l : l.name || ''));
-    if (labels.indexOf('change-request') !== -1) return true;
-
-    const trusted =
-      TRUSTED_ASSOCIATIONS.indexOf(String(issue.author_association || '').toUpperCase()) !== -1;
-    return trusted && this.section(issue.body, 'Which chapter or section?').length > 0;
+  /**
+   * This teacher's own requests, from the change service. The status words are
+   * the teacher's: requested, drafting, ready to publish, published.
+   */
+  private async loadMine(): Promise<void> {
+    if (!this.settings.serviceUrl) {
+      this.fill('#bc-mine', [], 'Connect the change service to see your requests here.');
+      return;
+    }
+    try {
+      const data = await this.call<{ requests?: IMineRequest[] }>('/requests', 'GET');
+      this.renderMine((data && data.requests) || []);
+    } catch (err) {
+      this.fill('#bc-mine', [], 'Your requests could not be loaded just now.');
+      if (this.settings.debug) console.warn('[BiologyChanges] own requests unavailable', err);
+    }
   }
 
-  private renderActivity(issues: IGitHubItem[], pulls: IGitHubItem[]): void {
-    if (!this.panel) return;
-    const canPublish = this.settings.serviceUrl.length > 0;
-    const byNewest = (a: IGitHubItem, b: IGitHubItem): number =>
-      Date.parse(b.updated_at || '') - Date.parse(a.updated_at || '');
+  private renderMine(requests: IMineRequest[]): void {
+    const items = requests.map((r) => {
+      const chip = r.status === 'published' ? 'Published'
+        : r.status === 'ready' ? 'Ready to publish'
+        : r.status === 'drafting' ? 'Drafting'
+        : 'Requested';
+      const done = r.status === 'published';
+      const ready = r.status === 'ready';
+      return this.item({
+        title: r.title,
+        chip,
+        when: r.updatedAt,
+        done,
+        ready,
+        completeKey: ready ? String(r.request) : undefined,
+      });
+    });
+    this.fill('#bc-mine', items, 'You have not asked for any changes yet.');
+  }
 
-    const requested = issues
-      .filter((i) => this.isRequest(i) && i.state === 'open')
-      .sort(byNewest)
-      .map((i) =>
-        this.item({
-          title: String(i.title || ''),
-          chip: 'Requested',
-          when: i.created_at,
-          summary: this.section(i.body, 'What should change?'),
-        })
-      );
-
-    const drafting = pulls
-      .filter((p) => !p.merged_at)
-      .sort(byNewest)
-      .map((p) =>
-        this.item({
-          title: this.plainTitle(p.title),
-          chip: 'Drafting',
-          when: p.created_at,
-          summary: this.section(p.body, 'What changed'),
-          publishKey: canPublish && p.number !== undefined ? String(p.number) : undefined,
-        })
-      );
-
-    const published = pulls
+  private renderPublished(pulls: IGitHubItem[]): void {
+    const items = pulls
       .filter((p) => p.merged_at)
       .sort((a, b) => Date.parse(b.merged_at || '') - Date.parse(a.merged_at || ''))
-      .map((p) =>
-        this.item({
-          title: this.plainTitle(p.title),
-          chip: 'Published',
-          when: p.merged_at || undefined,
-          summary: this.section(p.body, 'What changed'),
-          done: true,
-        })
-      );
+      .map((p) => this.item({
+        title: this.plainTitle(p.title),
+        chip: 'Published',
+        when: p.merged_at || undefined,
+        summary: this.section(p.body, 'What changed'),
+        done: true,
+      }));
 
-    this.fill('#bc-progress', requested.concat(drafting), 'Nothing is in progress right now.');
-    this.fill('#bc-published', published, 'Nothing has been published yet.');
+    this.fill('#bc-published', items, 'Nothing has been published yet.');
   }
 
   private plainTitle(title?: string): string {
@@ -408,7 +416,8 @@ export default class BiologyChangesApplicationCustomizer extends BaseApplication
     when?: string;
     summary?: string;
     done?: boolean;
-    publishKey?: string;
+    ready?: boolean;
+    completeKey?: string;
   }): string {
     const date = o.when
       ? new Date(o.when).toLocaleDateString(undefined, {
@@ -418,8 +427,8 @@ export default class BiologyChangesApplicationCustomizer extends BaseApplication
         })
       : '';
 
-    const action = o.publishKey
-      ? `<button class="${styles.publish}" type="button" data-publish="${escapeHtml(o.publishKey)}">Publish</button>`
+    const action = o.completeKey
+      ? `<button class="${styles.publish}" type="button" data-complete="${escapeHtml(o.completeKey)}">Publish</button>`
       : '';
     const summary = o.summary ? `<p class="${styles.summary}">${escapeHtml(o.summary)}</p>` : '';
 
@@ -427,7 +436,7 @@ export default class BiologyChangesApplicationCustomizer extends BaseApplication
       <li class="${styles.item}">
         <div class="${styles.itemHead}">
           <span class="${styles.itemTitle}">${escapeHtml(o.title)}</span>
-          <span class="${o.done ? styles.chipDone : styles.chip}">${escapeHtml(o.chip)}</span>
+          <span class="${o.done ? styles.chipDone : o.ready ? styles.chipReady : styles.chip}">${escapeHtml(o.chip)}</span>
           <span class="${styles.when}">${escapeHtml(date)}</span>
         </div>
         ${summary}
@@ -455,25 +464,51 @@ export default class BiologyChangesApplicationCustomizer extends BaseApplication
 
   /** Every write goes through the service, which learns who is asking from the
       Entra token. The form never asserts an identity. */
-  private async call(servicePath: string, body: unknown): Promise<boolean> {
+  private async call<T = unknown>(
+    servicePath: string,
+    method: 'GET' | 'POST',
+    body?: unknown
+  ): Promise<T> {
     const s = this.settings;
-    if (!s.serviceUrl) return false;
+    if (!s.serviceUrl) throw new Error('change service is not configured');
+
+    const hasBody = body !== undefined;
+    let res: IHttpResult;
 
     if (s.serviceResource) {
+      // AadHttpClient attaches the signed-in teacher's token, which is how the
+      // service knows who is asking instead of believing the page.
       const client = await this.context.aadHttpClientFactory.getClient(s.serviceResource);
-      const res = await client.post(`${s.serviceUrl}${servicePath}`, AadHttpClient.configurations.v1, {
-        body: JSON.stringify(body),
+      const url = `${s.serviceUrl}${servicePath}`;
+      const config = AadHttpClient.configurations.v1;
+      const init = {
         headers: { 'Content-Type': 'application/json' },
-      });
-      return res.ok;
+        body: hasBody ? JSON.stringify(body) : undefined,
+      };
+      res = method === 'GET'
+        ? await client.get(url, config) as unknown as IHttpResult
+        : await client.post(url, config, init) as unknown as IHttpResult;
+    } else {
+      res = await fetch(`${s.serviceUrl}${servicePath}`, {
+        method,
+        headers: hasBody ? { 'Content-Type': 'application/json' } : undefined,
+        body: hasBody ? JSON.stringify(body) : undefined,
+      }) as unknown as IHttpResult;
     }
 
-    const res = await fetch(`${s.serviceUrl}${servicePath}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
-    });
-    return res.ok;
+    if (!res.ok) {
+      let message = 'The change service refused the request.';
+      try {
+        const payload = await res.json() as { error?: string };
+        if (payload && payload.error) message = payload.error;
+      } catch {
+        /* keep the generic message */
+      }
+      throw new Error(message);
+    }
+
+    if (res.status === 204) return undefined as unknown as T;
+    return await res.json() as T;
   }
 
   private async submitRequest(): Promise<void> {
@@ -498,29 +533,30 @@ export default class BiologyChangesApplicationCustomizer extends BaseApplication
 
     this.say('Starting…');
     try {
-      const ok = await this.call('/requests', { chapter, change, doneWhen });
-      if (!ok) throw new Error('service refused');
-      this.say('Draft started. It usually takes 5–20 minutes; this page will show it.');
+      await this.call('/requests', 'POST', { chapter, change, doneWhen });
+      this.say('Draft started. It usually takes 5–20 minutes; this page will show its status.');
       const form = this.panel.querySelector('#bc-form') as HTMLFormElement | null;
       if (form) form.reset();
-      await this.loadActivity();
+      await this.loadMine();
     } catch (err) {
       this.say('That did not go through. Try again, or ask the site owner.');
       if (this.settings.debug) console.error('[BiologyChanges] submit failed', err);
     }
   }
 
-  private async publish(pullRequest: string): Promise<void> {
-    if (!pullRequest) return;
+  /** The teacher's decision to publish. The service records who made it. */
+  private async complete(requestNumber: string): Promise<void> {
+    if (!requestNumber) return;
     this.say('Publishing…');
     try {
-      const ok = await this.call(`/requests/${encodeURIComponent(pullRequest)}/publish`, {});
-      if (!ok) throw new Error('service refused');
+      await this.call(`/requests/${encodeURIComponent(requestNumber)}/complete`, 'POST', {});
       this.say('Published. The site rebuilds in a minute or two.');
+      await this.loadMine();
       await this.loadActivity();
     } catch (err) {
-      this.say('Publishing did not go through. The draft may have changed — look again.');
-      if (this.settings.debug) console.error('[BiologyChanges] publish failed', err);
+      const message = err instanceof Error ? err.message : 'Publishing did not go through.';
+      this.say(message);
+      if (this.settings.debug) console.error('[BiologyChanges] complete failed', err);
     }
   }
 

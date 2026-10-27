@@ -63,6 +63,7 @@ function route(pathname) {
   if (parts.length === 2) return { action: 'get', id };
   if (parts.length === 3 && parts[2] === 'corrections') return { action: 'correct', id };
   if (parts.length === 3 && parts[2] === 'publish') return { action: 'publish', id };
+  if (parts.length === 3 && parts[2] === 'complete') return { action: 'publish', id };
   return undefined;
 }
 
@@ -113,6 +114,10 @@ export function createHttpServer(env = process.env) {
 
       if (matched.action === 'create' && req.method === 'POST') {
         send(201, await service.createRequest(body, actor));
+        return;
+      }
+      if (matched.action === 'create' && req.method === 'GET') {
+        send(200, await service.listRequests(actor));
         return;
       }
       if (matched.action === 'get' && req.method === 'GET') {

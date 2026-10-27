@@ -44,7 +44,12 @@ export function createService({ github, agentAssignee }) {
         ? input.doneWhen.trim().slice(0, MAX_FIELD)
         : '';
 
-      const issue = await github.createRequest({ chapter, change, doneWhen });
+      const issue = await github.createRequest({
+        chapter,
+        change,
+        doneWhen,
+        requestedBy: actor.email || actor.name,
+      });
 
       // A teacher's name goes on the request in a comment, so the history names
       // a person even though the issue author is the service identity.
@@ -64,6 +69,45 @@ export function createService({ github, agentAssignee }) {
       }
 
       return { request: issue.number, url: issue.url, assignment };
+    },
+
+    /**
+     * GET /requests — this teacher's own requests and where each one is.
+     *
+     * Status is deliberately in the teacher's vocabulary: requested, drafting,
+     * ready to publish, published. The GitHub words (issue open, PR draft,
+     * labels, checks) never reach the page.
+     */
+    async listRequests(actor) {
+      if (!actor) throw new ServiceError(401, 'Not signed in');
+
+      const issues = await github.listRequests();
+      const who = actor.email || actor.name;
+      const mine = (issues || [])
+        .filter((i) => !i.pull_request && requestedBy(i.body) === who)
+        .slice(0, 20);
+
+      const requests = [];
+      for (const issue of mine) {
+        let draft;
+        try {
+          draft = await github.findDraft(issue.number);
+        } catch {
+          draft = undefined;
+        }
+        requests.push({
+          request: issue.number,
+          title: String(issue.title || '').replace(/^\[change\]\s*/i, ''),
+          status: statusOf(issue, draft),
+          createdAt: issue.created_at,
+          updatedAt: issue.updated_at,
+          draftNumber: draft ? draft.number : null,
+          canPublish: statusOf(issue, draft) === 'ready',
+        });
+      }
+
+      requests.sort((a, b) => String(b.updatedAt).localeCompare(String(a.updatedAt)));
+      return { requests };
     },
 
     /** GET /requests/:id — what the page polls. */
@@ -108,6 +152,11 @@ export function createService({ github, agentAssignee }) {
       return { draft: draft.number };
     },
 
+    /** POST /requests/:id/complete — same decision, under the page's word for it. */
+    async complete(id, input, actor) {
+      return this.publish(id, input, actor);
+    },
+
     /** POST /requests/:id/publish — the teacher's decision, recorded. */
     async publish(id, input, actor) {
       if (!actor) throw new ServiceError(401, 'Not signed in');
@@ -137,6 +186,25 @@ export function createService({ github, agentAssignee }) {
       return { published: true, draft: draft.number, ...result };
     },
   };
+}
+
+/** The marker written into the issue body when the request was created. */
+export function requestedBy(body) {
+  const match = /<!--\s*requested-by:\s*(.+?)\s*-->/.exec(String(body || ''));
+  return match ? match[1].trim() : '';
+}
+
+/**
+ * requested  - an issue, nothing drafted yet
+ * drafting   - the agent has opened a draft but the checks are not done
+ * ready      - the draft passed its checks and can be published
+ * published  - merged, and therefore live
+ */
+export function statusOf(issue, draft) {
+  if (!issue || issue.state === 'closed' || (draft && draft.merged)) return 'published';
+  if (!draft) return 'requested';
+  const labels = (draft.labels || []).map((l) => String(l).toLowerCase());
+  return labels.includes('draft-ready') ? 'ready' : 'drafting';
 }
 
 /** The draft summary is the comment generated from the diff, not the agent's own. */
