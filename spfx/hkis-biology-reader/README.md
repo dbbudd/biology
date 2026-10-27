@@ -64,27 +64,35 @@ a credential in it is readable in the browser by anyone who can load the page.
 The writes go to a server-side endpoint that holds the credential and knows the
 caller's identity from their Entra token — see `sharepoint/SECURE-API.md`.
 
-#### Full-viewport mode
+#### What happens to SharePoint's own bars
 
-By default the reader now hides SharePoint's suite bar and site header so the
-panel fills the viewport, rather than starting below the header. The selectors
-are lifted from the `hkis-handbook` customizer, which has run this in
-production — including `[class*="shyHeader"]`, because SharePoint hashes those
-class names and an exact match silently stops working after a tenant update.
+`chromeMode` decides, and it is the difference between three quite different
+layouts:
 
-The hiding is scoped by a body class (`bio-reader-chrome-hidden`), not applied
-globally. That matters: this customizer is registered site-wide, and an
-unscoped `display:none` would strip the header off every other page in the site
-the moment it loaded.
+| `chromeMode` | Suite bar (light blue) | Site header (site card) | Reader starts |
+| --- | --- | --- | --- |
+| `'all'` | hidden | hidden | top of the window |
+| `'header'` *(default)* | **kept** | hidden | under the suite bar |
+| `'none'` | kept | kept | under the site header |
 
-To go back to sitting politely below the header, register the action with
-`"hideChrome": false`. It defaults to on so that an app upgrade delivers the
-change through the bundle, which upgrades always do — custom-action properties
-do not always propagate on upgrade.
+`'header'` is the default because the suite bar is the one that reaches other
+sites and search, while the site header card is the part that wastes vertical
+space on a page with its own navigation.
 
-**Trade-off:** with the chrome hidden there is no site navigation on that page.
-Readers leave via the browser back button or the site URL. That is usually what
-you want for a course reader; it is worth deciding deliberately.
+The suite bar's height is **measured**, not assumed at 48 px — it differs
+between tenants and between compact and full navigation modes.
+
+Selectors are lifted from the `hkis-handbook` customizer, which runs this in
+production, including `[class*="shyHeader"]`: SharePoint hashes those class
+names, so an exact match silently stops working after a tenant update.
+
+Hiding is scoped by a body class (`bio-reader-chrome-hidden`), never applied
+globally. This customizer is registered site-wide, and an unscoped
+`display:none` would strip the header from every other page in the site the
+moment it loaded.
+
+Older registrations that pass `hideChrome: true` / `false` still work; they map
+to `'all'` / `'none'`.
 
 ## Registering it
 

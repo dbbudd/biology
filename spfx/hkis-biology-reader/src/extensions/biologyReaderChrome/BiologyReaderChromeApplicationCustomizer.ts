@@ -38,11 +38,17 @@ export interface IBiologyReaderChromeApplicationCustomizerProperties {
   /** Set false to disable without unregistering. */
   enabled?: boolean;
   /**
-   * Hide the SharePoint suite bar and site header so the reader fills the
-   * viewport. On by default; set false to go back to sitting below the header. Selectors are taken from the hkis-handbook customizer, which runs
-   * this in production. Note the [class*="shyHeader"] rule: SharePoint hashes
-   * those class names, so an exact match stops working after an update.
+   * Which of SharePoint's own bars to remove:
+   *   'all'    - suite bar and site header; the reader fills the window.
+   *   'header' - site header only; the reader starts under the SharePoint bar,
+   *              which is the one giving access to other sites and search.
+   *              This is the default.
+   *   'none'   - nothing removed; the reader sits below the site header.
+   *
+   * `hideChrome: true/false` is still honoured and maps to 'all' / 'none'.
    */
+  chromeMode?: string;
+  /** Deprecated in favour of chromeMode. */
   hideChrome?: boolean;
   /** Log the match decision to the browser console. */
   debug?: boolean;
@@ -54,7 +60,7 @@ interface ISettings {
   headerSelector: string;
   zIndex: number;
   enabled: boolean;
-  hideChrome: boolean;
+  chromeMode: string;
   debug: boolean;
 }
 
@@ -63,11 +69,33 @@ const DEFAULTS = {
   readerUrl: 'https://dbbudd.github.io/biology/',
   headerSelector: '#spSiteHeader',
   zIndex: 800,
-  hideChrome: true,
+  chromeMode: 'header',
 };
 
 const PANEL_ID = 'biology-reader-panel';
 const CHROME_CLASS = 'bio-reader-chrome-hidden';
+
+/* SharePoint's bars, by every id and attribute different tenant versions use.
+   Taken from the hkis-handbook customizer, which runs this in production. */
+const SUITE_SELECTORS = [
+  '#SuiteNavWrapper',
+  '#SuiteNavPlaceHolder',
+  '#sp-appBar',
+  '[data-sp-feature-tag="Suite Navigation Placeholder"]',
+  '[data-automation-id="suiteNavWrapper"]',
+  '.ms-Suitebar',
+  'header.spoMainBar',
+  'header[data-automation-id="suiteHeader"]',
+];
+
+/* The site header card. Its class names are hashed, hence the prefix match:
+   an exact selector silently stops working after a SharePoint update. */
+const HEADER_SELECTORS = [
+  '[data-automation-id="SiteHeader"]',
+  '.spSiteHeader',
+  'div[data-automation-id="SiteHeader"]',
+  '[class*="shyHeader"]',
+];
 const CHROME_STYLE_ID = 'bio-reader-chrome-style';
 const HEADER_RETRIES = 20;
 const HEADER_RETRY_MS = 250;
@@ -104,7 +132,8 @@ export default class BiologyReaderChromeApplicationCustomizer extends BaseApplic
       headerSelector: p.headerSelector || DEFAULTS.headerSelector,
       zIndex: typeof p.zIndex === 'number' ? p.zIndex : DEFAULTS.zIndex,
       enabled: p.enabled !== false,
-      hideChrome: p.hideChrome !== false,
+      chromeMode: p.chromeMode
+        || (p.hideChrome === true ? 'all' : p.hideChrome === false ? 'none' : DEFAULTS.chromeMode),
       debug: p.debug === true,
     };
   }
@@ -264,9 +293,16 @@ export default class BiologyReaderChromeApplicationCustomizer extends BaseApplic
       return;
     }
 
-    // With the chrome hidden there is nothing above the panel to measure.
-    if (this.settings.hideChrome) {
+    if (this.settings.chromeMode === 'all') {
       this.panel.style.top = '0px';
+      return;
+    }
+
+    if (this.settings.chromeMode === 'header') {
+      // The site header is gone, so the panel starts where the SharePoint bar
+      // ends. Measured, not assumed: its height differs between tenants and
+      // between compact and full navigation modes.
+      this.panel.style.top = Math.round(this.suiteBarBottom()) + 'px';
       return;
     }
 
@@ -286,8 +322,20 @@ export default class BiologyReaderChromeApplicationCustomizer extends BaseApplic
    * site-wide, so an unscoped `display:none` would strip the header from every
    * other page in the site as soon as it loaded.
    */
+  private suiteBarBottom(): number {
+    for (let i = 0; i < SUITE_SELECTORS.length; i++) {
+      const el = document.querySelector(SUITE_SELECTORS[i]);
+      if (el) {
+        return Math.max(0, el.getBoundingClientRect().bottom);
+      }
+    }
+    return 48;
+  }
+
   private applyChrome(): void {
-    if (!this.settings.hideChrome) {
+    const mode = this.settings.chromeMode;
+
+    if (mode !== 'all' && mode !== 'header') {
       return;
     }
 
@@ -298,23 +346,24 @@ export default class BiologyReaderChromeApplicationCustomizer extends BaseApplic
     }
 
     const prefix = '#' + CHROME_CLASS + ' ';
+    const rules: string[] = [];
+
+    if (mode === 'all') {
+      SUITE_SELECTORS.forEach((sel: string): void => {
+        rules.push(prefix + sel + ',');
+      });
+    }
+    HEADER_SELECTORS.forEach((sel: string): void => {
+      rules.push(prefix + sel + ',');
+    });
+
+    // The last selector takes the declaration; the rest are a comma list.
+    rules[rules.length - 1] = rules[rules.length - 1].replace(/,$/, '') + ' { display: none !important; }';
+    rules.push(prefix + '#spPageCanvasContent { padding-top: 0 !important; }');
+
     const style = document.createElement('style');
     style.id = CHROME_STYLE_ID;
-    style.textContent = [
-      prefix + '#SuiteNavWrapper,',
-      prefix + '#SuiteNavPlaceHolder,',
-      prefix + '#sp-appBar,',
-      prefix + '[data-sp-feature-tag="Suite Navigation Placeholder"],',
-      prefix + '[data-automation-id="suiteNavWrapper"],',
-      prefix + '.ms-Suitebar,',
-      prefix + 'header.spoMainBar,',
-      prefix + 'header[data-automation-id="suiteHeader"],',
-      prefix + '[data-automation-id="SiteHeader"],',
-      prefix + '.spSiteHeader,',
-      prefix + 'div[data-automation-id="SiteHeader"],',
-      prefix + '[class*="shyHeader"] { display: none !important; }',
-      prefix + '#spPageCanvasContent { padding-top: 0 !important; }',
-    ].join('\n');
+    style.textContent = rules.join('\n');
 
     document.head.appendChild(style);
   }
