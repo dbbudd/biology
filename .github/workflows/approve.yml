@@ -30,8 +30,12 @@ jobs:
           REPO: ${{ github.repository }}
         run: |
           set -euo pipefail
-          STATUS=$(gh pr view "$NUMBER" --repo "$REPO" --json isDraft,mergeStateStatus)
-          echo "$STATUS"
+          gh pr view "$NUMBER" --repo "$REPO" \
+            --json isDraft,mergeStateStatus,headRefOid > status.json
+          cat status.json
+          STATUS=$(cat status.json)
+          HEAD=$(jq -r .headRefOid status.json)
+          echo "verified head: $HEAD" 
 
           if [ "$(echo "$STATUS" | jq -r .isDraft)" = 'true' ]; then
             echo "error: this pull request is still a draft" >&2
@@ -53,7 +57,9 @@ jobs:
           REPO: ${{ github.repository }}
         run: |
           set -euo pipefail
+          HEAD=$(jq -r .headRefOid status.json)
           gh pr merge "$NUMBER" --repo "$REPO" --squash --delete-branch \
+            --match-head-commit "$HEAD" \
             --subject "$(gh pr view "$NUMBER" --repo "$REPO" --json title --jq .title) (#$NUMBER)"
 
           # Measured on this repo: the first build after a quiet period took

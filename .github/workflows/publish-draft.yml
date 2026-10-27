@@ -46,6 +46,7 @@ permissions:
   contents: write
   pull-requests: write
   issues: write
+  pages: read
 
 concurrency:
   group: publish-${{ inputs.pull_request }}
@@ -99,20 +100,38 @@ jobs:
             exit 1
           fi
 
-      - name: Run the content checks
+      # The published content is never executed here.
+      #
+      # This job holds a write token, and check-content.js evaluates
+      # assets/toc.js (an editable file) inside node:vm — which is not a
+      # security boundary. So instead of running the checker against the PR,
+      # read the result the unprivileged checks workflow already recorded for
+      # this exact commit. If there is no green result for the approved SHA,
+      # nothing is published.
+      - name: Require a green content check for the approved SHA
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
-          PR: ${{ inputs.pull_request }}
+          APPROVED: ${{ inputs.head_sha }}
         run: |
           set -euo pipefail
-          # Check out the exact approved commit and verify it here rather than
-          # trusting the pull request's check runs, which belong to an earlier
-          # commit if anything has been pushed since.
-          git init -q .
-          git remote add origin "https://x-access-token:${GH_TOKEN}@github.com/${REPO}.git"
-          gh pr checkout "$PR" --repo "$REPO"
-          node scripts/check-content.js
+
+          gh api --paginate "repos/$REPO/commits/$APPROVED/check-runs" > runs.json || true
+          TOTAL=$(jq '[.check_runs[]] | length' runs.json)
+          PASSED=$(jq '[.check_runs[] | select(.name == "Content and structure" and .conclusion == "success")] | length' runs.json)
+          FAILED=$(jq '[.check_runs[] | select(.conclusion == "failure" or .conclusion == "cancelled")] | length' runs.json)
+
+          echo "check runs for ${APPROVED:0:7}: total=$TOTAL, content-ok=$PASSED, failed=$FAILED"
+
+          if [ "$FAILED" -gt 0 ]; then
+            echo "::error::A check on this commit failed. Fix it before publishing."
+            exit 1
+          fi
+          if [ "$PASSED" -eq 0 ]; then
+            echo "::error::No successful content check for this commit. Wait for checks to finish, then publish again."
+            exit 1
+          fi
+
 
       # Only meaningful if branch protection still requires an approval. It is
       # recorded as the bot, with the teacher named in the body, so the history
@@ -145,9 +164,13 @@ jobs:
           # If they are still running, ask for auto-merge instead of failing —
           # the teacher has already made the decision, and the merge is the
           # same once the checks finish. Anything else is a real refusal.
-          if ! gh pr merge "$PR" --repo "$REPO" --squash --delete-branch --subject "$TITLE (#$PR)"; then
-            echo "immediate merge refused; trying auto-merge"
-            gh pr merge "$PR" --repo "$REPO" --squash --delete-branch --auto --subject "$TITLE (#$PR)"
+          if ! gh pr merge "$PR" --repo "$REPO" --squash --delete-branch \
+                 --match-head-commit "$APPROVED" --subject "$TITLE (#$PR)"; then
+            echo "immediate merge refused; trying auto-merge pinned to the approved commit"
+            # --auto waits for checks, so without --match-head-commit it could
+            # fire minutes later against a head that moved after approval.
+            gh pr merge "$PR" --repo "$REPO" --squash --delete-branch --auto \
+              --match-head-commit "$APPROVED" --subject "$TITLE (#$PR)"
           fi
 
           BODY=$(printf 'Published.\n\nApproved by **%s** in the course chat. Draft verified at `%s` before merging.\nRequest: #%s\n\nThe site rebuilds in a minute or two.' \
@@ -162,3 +185,39 @@ jobs:
         run: |
           sleep 5
           gh api -X POST "repos/$REPO/pages/builds" > /dev/null && echo "Pages build requested"
+
+      # A merge is not a publication. Say so only once the site is actually
+      # serving the merged commit; otherwise the teacher-facing status would
+      # claim something that has not happened.
+      - name: Confirm the site serves the change
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          PR: ${{ inputs.pull_request }}
+        run: |
+          set -euo pipefail
+
+          MERGE=$(gh pr view "$PR" --repo "$REPO" --json mergeCommit --jq '.mergeCommit.oid // empty')
+          if [ -z "$MERGE" ]; then
+            echo "no merge commit recorded yet; nothing to verify"
+            exit 0
+          fi
+
+          for attempt in 1 2 3 4 5 6 7 8 9 10 11 12; do
+            sleep 15
+            BUILD=$(gh api "repos/$REPO/pages/builds/latest" 2>/dev/null || echo '{}')
+            STATUS=$(echo "$BUILD" | jq -r '.status // empty')
+            COMMIT=$(echo "$BUILD" | jq -r '.commit // empty')
+            echo "attempt $attempt: pages status=$STATUS commit=${COMMIT:0:7} want=${MERGE:0:7}"
+
+            if [ "$STATUS" = "built" ] && [ "$COMMIT" = "$MERGE" ]; then
+              gh pr comment "$PR" --repo "$REPO" --body \
+                "Live and verified: the site is serving commit \`${MERGE:0:7}\`."
+              exit 0
+            fi
+          done
+
+          # Best effort: never turn a successful merge into a failed workflow.
+          gh pr comment "$PR" --repo "$REPO" --body \
+            "Merged, but the deployment is not confirmed yet. Check the live page before telling anyone it is up."
