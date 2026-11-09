@@ -18,21 +18,21 @@
   min-height: 3rem;
   padding: 0 1rem;
   background: var(--navy);
-  color: #ffffff;
+  color: var(--on-navy);
   font-family: var(--body-font, system-ui, sans-serif);
   font-size: 0.85rem;
 }
 
 .st-embed-back {
-  color: #ffffff;
-  text-decoration: underline;
+  color: var(--on-navy);
+  text-decoration: none;
   text-underline-offset: 2px;
   padding: 0.2rem 0.35rem;
   border-radius: 6px;
 }
 
 .st-embed-back:hover {
-  background: rgba(255, 255, 255, 0.14);
+  background: var(--on-navy-fill-strong);
 }
 
 .st-embed-back:focus-visible {

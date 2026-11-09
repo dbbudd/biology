@@ -5,6 +5,8 @@ import "./globals.css";
 import "./globals-reading.css";
 import "./globals-embed.css";
 import "./globals-translate.css";
+// Loaded last: the 2026-11-09 visual refresh, tokens only.
+import "./globals-refresh.css";
 
 export const metadata: Metadata = {
   title: "ScrollyTale · The Sealed Garden",

@@ -491,6 +491,13 @@ export default function Explore({ tale }: { tale: Tale }) {
             rows={2}
             value={draft}
             onChange={(e) => setDraft(e.target.value)}
+            // Enter sends, Shift+Enter breaks the line. isComposing keeps
+            // Chinese and Japanese input methods from sending mid-word.
+            onKeyDown={(e) => {
+              if (e.key !== "Enter" || e.shiftKey || e.nativeEvent.isComposing) return;
+              e.preventDefault();
+              if (!busy && draft.trim()) e.currentTarget.form?.requestSubmit();
+            }}
             aria-describedby={HINT_ID}
             placeholder="A guess, a question, anything."
           />
@@ -499,7 +506,7 @@ export default function Explore({ tale }: { tale: Tale }) {
           </button>
         </div>
         <p id={HINT_ID} className="st-composer-hint">
-          {ladder ? "Type something to send." : OPENING_HINT}
+          {ladder ? "Press Enter to send. Press Shift and Enter for a new line." : OPENING_HINT}
         </p>
         {ladder?.prerequisite && (
           <button

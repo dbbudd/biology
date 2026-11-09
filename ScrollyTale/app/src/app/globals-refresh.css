@@ -1,0 +1,162 @@
+/* ScrollyTale refresh (2026-11-09). Loaded last, so it can be removed in one
+   line. Tokens only: every color is a custom property, so light, sepia and
+   dark all keep working. Motion is cut by the reduced-motion rule in
+   globals.css, which covers everything inside .st-root. */
+:root {
+  --on-navy: #ffffff;
+  --on-navy-soft: rgba(255, 255, 255, 0.82);
+  --on-navy-line: rgba(255, 255, 255, 0.26);
+  --on-navy-fill: rgba(255, 255, 255, 0.1);
+  --on-navy-fill-strong: rgba(255, 255, 255, 0.2);
+  --lift: 0 10px 28px rgba(0, 0, 0, 0.08);
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+/* ---- shell: the footer sits at the foot of the screen, not mid-page ---- */
+.st-root:not(.st-embedded) { display: flex; flex-direction: column; padding-bottom: 2rem; }
+.st-root > .st-page { flex: 1 0 auto; display: flex; flex-direction: column; }
+.st-page > .st-main { flex: 1 0 auto; width: 100%; box-sizing: border-box; }
+.st-page > .st-footer, .st-root > .st-footer { margin-top: auto; }
+
+/* ---- toolbar: quieter tools, one clear "on" state ---- */
+.st-root .st-tool {
+  border-color: transparent;
+  background: var(--on-navy-fill);
+  color: var(--on-navy);
+  min-height: 2rem;
+  padding: 0 0.8rem;
+  transition: background 0.15s ease;
+}
+.st-root .st-tool:hover { background: var(--on-navy-fill-strong); }
+.st-root .st-tool:focus-visible { outline: 2px solid var(--yellow); outline-offset: 2px; }
+.st-root .st-tool.is-on { background: var(--yellow); color: var(--text-on-yellow, #1a1a1a); }
+
+/* ---- the opening: a headline, then the story at reading width ---- */
+.st-explore .st-title {
+  font-size: clamp(1.75rem, 1.1rem + 2.2vw, 2.5rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  margin-bottom: 1.4rem;
+}
+.st-explore .st-origin { font-size: 1.075rem; max-width: 64ch; }
+.st-explore p { text-wrap: pretty; }
+
+@keyframes st-rise {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+.st-explore > .st-title,
+.st-explore > .st-origin,
+.st-explore > .st-composer,
+.st-thread > * { animation: st-rise 0.36s var(--ease-out) both; }
+.st-explore > .st-origin { animation-delay: 0.06s; }
+.st-explore > .st-composer { animation-delay: 0.12s; }
+
+/* ---- composer: a conversation box, not a form ---- */
+.st-root .st-composer {
+  border-radius: 16px;
+  padding: 0.9rem 1rem 0.75rem;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.st-root .st-composer:focus-within {
+  border-color: var(--border-guidance);
+  box-shadow: 0 0 0 3px var(--bg-guidance), var(--lift);
+}
+.st-root .st-composer-label {
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 0.6rem;
+}
+.st-root .st-composer-row { align-items: flex-end; }
+.st-root .st-composer-row textarea {
+  field-sizing: content;
+  min-height: 2.9rem;
+  max-height: 12rem;
+  resize: none;
+  box-sizing: border-box;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg-surface);
+  color: var(--text);
+  font: inherit;
+  line-height: 1.5;
+  padding: 0.65rem 0.85rem;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.st-root .st-composer-row textarea:focus { outline: none; border-color: var(--border-guidance); background: var(--bg); }
+.st-root .st-composer-row .st-primary {
+  min-height: 2.9rem;
+  border-radius: 10px;
+  padding: 0 1.3rem;
+  transition: filter 0.15s ease, transform 0.1s ease;
+}
+.st-root .st-composer-row .st-primary:not(:disabled):hover { filter: brightness(1.15); }
+.st-root .st-composer-row .st-primary:not(:disabled):active { transform: translateY(1px); }
+.st-root .st-composer-row .st-primary:disabled {
+  background: var(--disabled-bg);
+  color: var(--disabled-text);
+  cursor: not-allowed;
+}
+.st-root .st-composer-hint { margin-top: 0.5rem; font-size: 0.8rem; color: var(--text-secondary); }
+
+.st-root .st-chips { gap: 0.45rem; margin-bottom: 0.7rem; }
+.st-root .st-chip {
+  min-height: 2rem;
+  padding: 0 0.85rem;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+}
+.st-root .st-chip:hover { border-color: var(--border-guidance); background: var(--bg-guidance); }
+.st-root .st-chip:active { transform: translateY(1px); }
+.st-root .st-chip:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
+
+/* ---- reference pages: a readable way back ---- */
+.st-root .st-embed-bar { gap: 0.6rem; min-height: 3.25rem; padding: 0 0.75rem; background: var(--navy); color: var(--on-navy); }
+.st-root .st-embed-back,
+.st-root .st-embed-back:link,
+.st-root .st-embed-back:visited {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 2.25rem;
+  padding: 0 0.9rem 0 0.7rem;
+  border-radius: 999px;
+  background: var(--on-navy-fill);
+  color: var(--on-navy);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: background 0.15s ease;
+}
+.st-root .st-embed-back::before { content: "\2190"; content: "\2190" / ""; }
+.st-root .st-embed-back:hover { background: var(--on-navy-fill-strong); }
+.st-root .st-embed-back:focus-visible { outline: 2px solid var(--yellow); outline-offset: 2px; }
+.st-root .st-embed-title {
+  padding-left: 0.75rem;
+  border-left: 1px solid var(--on-navy-line);
+  color: var(--on-navy-soft);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 640px) {
+  .st-root .st-chips { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
+  .st-root .st-composer { border-radius: 14px; padding: 0.75rem 0.8rem 0.65rem; }
+}
+
+/* The shell fills the viewport, so a short step keeps the footer at the
+   foot of the screen instead of leaving a band of empty page below it. */
+.st-root:not(.st-embedded) { display: flex; flex-direction: column; }
+.st-root:not(.st-embedded) > .st-page { flex: 1 0 auto; display: flex; flex-direction: column; }
+.st-root:not(.st-embedded) > .st-page > .st-main { flex: 1 0 auto; width: 100%; box-sizing: border-box; }
