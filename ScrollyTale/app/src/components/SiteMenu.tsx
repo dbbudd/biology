@@ -135,6 +135,11 @@ export default function SiteMenu({ open, onClose, unit, toggleRef }: Props) {
                 Curriculum Mapping
               </Link>
             </li>
+            <li>
+              <Link className="st-menu-link" href="/changelog" onClick={onClose}>
+                Change log
+              </Link>
+            </li>
           </ul>
         </div>
       </nav>

@@ -17,7 +17,7 @@
 (function () {
     'use strict';
 
-    const ASSET_V = 333;   // bump when shipping changes to sims/
+    const ASSET_V = 335;   // bump when shipping changes to sims/
 
     // Where "Log an issue" goes: the change request form, so a student or a
     // teacher lands on a short form rather than an empty issue box.
@@ -29,6 +29,23 @@
     const chapIdx = chapters.findIndex(c => c.id === CHAP_ID);
     const chapter = chapIdx >= 0 ? chapters[chapIdx] : null;
     const main    = document.querySelector('main.main');
+
+    // ===== EMBED FLAGS =====
+    // The tale shows these reference pages inside a frame, so it asks for the
+    // content without a second toolbar, and it passes the theme it is already
+    // showing. Both are read-only hints. Neither one writes to storage, so an
+    // embedded visit cannot re-theme the reader for a student who opens it
+    // directly afterwards.
+    const EMBED_Q = new URLSearchParams(location.search);
+    const BARE = EMBED_Q.get('chrome') === '0';
+    const THEME_HINT = (function () {
+        const t = EMBED_Q.get('theme');
+        return (t === 'light' || t === 'sepia' || t === 'dark') ? t : null;
+    })();
+    // A framed page has no toolbar above it and no sidebar beside it, so it
+    // takes the reader's own focus layout (content centred, nothing pinned) and
+    // drops the top offset that would have reserved room for the toolbar.
+    if (BARE) document.body.classList.add('focus-mode', 'embed-bare');
 
     // ===== UNITS =====
     // COURSE.units is the ordered registry; a chapter's `unit` is an id in it.
@@ -268,6 +285,9 @@
 
     // ===== THEME =====
     function initTheme() {
+        // A frame that passed a theme decides, so the page does not flicker to
+        // the reader's stored choice inside the tale.
+        if (THEME_HINT) { setThemeDOM(THEME_HINT); return; }
         const saved = P.get('theme', null);
         if (saved) setThemeDOM(saved);
         else if (matchMedia('(prefers-color-scheme:dark)').matches) setThemeDOM('dark');
@@ -920,6 +940,8 @@
     function wireSearch() {
         const searchInput = document.getElementById('search-input');
         const searchResults = document.getElementById('search-results');
+        // The search box lives in the toolbar, which an embedded page omits.
+        if (!searchInput || !searchResults) return;
 
         searchInput.addEventListener('input', function () {
             const q = this.value.trim().toLowerCase();
@@ -1894,7 +1916,7 @@
 
     // ===== INIT =====
     if (main && chapter) main.style.setProperty('--unit-h', unitOf(chapter.unit).hue);
-    renderChrome();
+    if (!BARE) renderChrome();
     renderSectionMeta();
     initTheme();
     applyScale();

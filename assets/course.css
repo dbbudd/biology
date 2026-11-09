@@ -592,6 +592,12 @@ body.focus-mode .sidebar { transform: translateX(-100%); }
 body.focus-mode .main { margin-left: auto; margin-right: auto; max-width: calc(var(--content-max-width) + 6rem); }
 body.focus-mode .reading-pos { left: 0; }
 
+/* ===== EMBEDDED PAGE ===== */
+/* The tale frames these pages. Focus layout already centres the column and
+   hides the sidebar; the only thing left is the gap the toolbar would have
+   occupied, which an embedded page does not have. */
+body.embed-bare .main { margin-top: 0; }
+
 /* ===== OVERLAY ===== */
 .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 40; }
 .overlay.active { display: block; }

@@ -1,0 +1,56 @@
+/* The three reference pages are the reader's own documents in a frame, so this
+   file styles only the frame's frame: the bar above it and the page around it.
+   Everything inside the frame is the reader's stylesheet, untouched. */
+
+.st-embedded {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.st-embed-bar {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 3rem;
+  padding: 0 1rem;
+  background: var(--navy);
+  color: #ffffff;
+  font-family: var(--body-font, system-ui, sans-serif);
+  font-size: 0.85rem;
+}
+
+.st-embed-back {
+  color: #ffffff;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  padding: 0.2rem 0.35rem;
+  border-radius: 6px;
+}
+
+.st-embed-back:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.st-embed-back:focus-visible {
+  outline: 2px solid var(--yellow);
+  outline-offset: 2px;
+}
+
+.st-embed-title {
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+/* The frame takes every pixel the bar leaves, so the reader page scrolls
+   inside it rather than the tale scrolling a page that is already full. */
+.st-embed-frame {
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: 0;
+  border: 0;
+  background: var(--bg);
+}

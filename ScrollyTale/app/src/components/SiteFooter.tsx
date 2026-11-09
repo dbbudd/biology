@@ -16,6 +16,7 @@ export default function SiteFooter({ unit }: Props) {
         <nav className="st-footer-nav" aria-label="Reference">
           <a href="/glossary">Glossary</a>
           <a href="/curriculum">Curriculum Mapping</a>
+          <a href="/changelog">Change log</a>
         </nav>
       </div>
     </footer>
