@@ -8,6 +8,7 @@ import {
   completionFor,
   type ConceptDecision,
 } from "../../../lib/tutor/concept";
+import { guardDecision } from "../../../lib/tutor/guard";
 
 /**
  * One box for everything the student writes.
@@ -59,6 +60,16 @@ export async function POST(request: Request) {
     reveal: words === 0 ? "none" : words < 5 ? "simpler" : "next",
   };
 
+  // Deterministic rules run before a provider is chosen, so a message that the
+  // rules can judge costs no network call. Null means the model decides.
+  const decision = guardDecision(text, {
+    current: concept.term,
+    known: (t) => node(t)?.term ?? null,
+  });
+  if (decision) {
+    return NextResponse.json({ decision, provider: "guard", fellBack: false });
+  }
+
   const provider = modelProvider();
   if (!provider) {
     return NextResponse.json({ decision: fallback, provider: DEFAULT_PROVIDER, fellBack: false });
@@ -86,7 +97,7 @@ export async function POST(request: Request) {
     )) as Record<string, unknown>;
 
     return NextResponse.json({
-      decision: coerceConcept(raw, fallback, (t) => Boolean(node(t))),
+      decision: coerceConcept(raw, fallback, (t) => Boolean(node(t)), concept.term),
       provider: provider.id,
       fellBack: false,
     });

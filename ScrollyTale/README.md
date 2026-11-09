@@ -45,6 +45,30 @@ Curiosity-led traversal beside the guided tale. One box takes any thought, and t
 content is revealed a piece at a time in the order the student discovers it. No chapter list,
 no step count, no menu of what is coming, and no minimum length on what they write.
 
+Three starter chips above the box fill in a sentence, so a student who does not know how to
+begin still has somewhere to put the first word. They fill the box and stop: the student
+sends.
+
+Movement through the lesson is not left to the model. `src/lib/tutor/guard.ts` answers the
+messages that can be judged by rule, before any provider is chosen, so they cost no network
+call:
+
+| Message | Decision |
+| --- | --- |
+| empty, or punctuation only | `stay` |
+| `ok`, `yes`, `yeah ok`, `hmm`, `idk` | `stay` |
+| the concept already on screen | `stay` |
+| only the name of another glossary term | `switch` to it |
+| anything else | the provider decides |
+
+`stay` holds the position and asks for something more specific. A message that merely
+contains a glossary word is not a request to leave the concept: "energy is released" reaches
+the model, while "energy" alone switches. A false negative costs nothing; an unwanted jump
+costs the student their thread.
+
+The same rule applies after the model answers. A `switch` to a term the glossary does not
+hold, or to the concept already open, is coerced to `stay` rather than reloading the page.
+
 ```bash
 npm run toc     # rebuilds the concept graph from assets/toc.js and chapters/
 ```

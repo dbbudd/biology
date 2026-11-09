@@ -4,7 +4,19 @@ import { extractJson } from "./prompt";
 
 const BASE = (process.env.DEEPSEEK_BASE ?? "https://api.deepseek.com").replace(/\/$/, "");
 const MODEL = process.env.DEEPSEEK_MODEL ?? "deepseek-chat";
-const TIMEOUT_MS = Number(process.env.TUTOR_TIMEOUT_MS ?? 30000);
+
+/**
+ * setTimeout(fn, NaN) fires on the next tick, so a malformed TUTOR_TIMEOUT_MS
+ * would abort every request immediately instead of letting it run. Anything
+ * that is not a finite positive number falls back to the default. The same
+ * helper is inlined in ollama.ts, so neither provider imports the other.
+ */
+function timeoutMs(fallback: number): number {
+  const configured = Number(process.env.TUTOR_TIMEOUT_MS);
+  return Number.isFinite(configured) && configured > 0 ? configured : fallback;
+}
+
+const TIMEOUT_MS = timeoutMs(30_000);
 
 function key(): string | undefined {
   return process.env.DEEPSEEK_API_KEY?.trim() || undefined;

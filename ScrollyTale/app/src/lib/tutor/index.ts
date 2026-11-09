@@ -13,16 +13,79 @@ import {
   type TutorResult,
 } from "./types";
 
+/**
+ * The shape every provider shares, whichever of the two interfaces it comes
+ * from. It is all the availability cache needs, and all it touches.
+ */
+interface ProviderBase {
+  id: string;
+  label: string;
+  model?: string;
+  available(): Promise<boolean>;
+}
+
+const AVAILABILITY_TTL_MS = 10_000;
+
+interface Probe {
+  /** when this answer stops being trusted */
+  expires: number;
+  /** the shared in-flight or settled answer, so callers join one probe */
+  answer: Promise<boolean>;
+}
+
+const probes = new Map<string, Probe>();
+
+/**
+ * An availability probe is free for the bank, cheap for DeepSeek, and a real
+ * HTTP request with a 1500 ms ceiling for Ollama. A single message used to ask
+ * up to three times — the route, decide(), and providerStatus() — so students
+ * paid for that probe on every message. The answer is now shared per provider
+ * id for ten seconds.
+ *
+ * The promise is stored, not just its value, so two callers in the same tick
+ * join one probe rather than racing two. Unavailable is cached like anything
+ * else and expires with the TTL; nothing here is cached permanently.
+ */
+function withCachedAvailability<T extends ProviderBase>(provider: T): T {
+  const available = (): Promise<boolean> => {
+    const now = Date.now();
+    const cached = probes.get(provider.id);
+    if (cached && cached.expires > now) return cached.answer;
+
+    const answer = provider.available();
+    probes.set(provider.id, { expires: now + AVAILABILITY_TTL_MS, answer });
+    // A rejected probe says something about the probe, not about the provider,
+    // so its entry is dropped and the next call tries again instead of caching
+    // the error for ten seconds.
+    answer.catch(() => {
+      if (probes.get(provider.id)?.answer === answer) probes.delete(provider.id);
+    });
+    return answer;
+  };
+
+  return { ...provider, available };
+}
+
 const PROVIDERS: Record<string, TutorProvider | ModelProvider> = {
-  bank: bankProvider,
-  ollama: ollamaProvider,
-  deepseek: deepseekProvider,
+  bank: withCachedAvailability(bankProvider),
+  ollama: withCachedAvailability(ollamaProvider),
+  deepseek: withCachedAvailability(deepseekProvider),
 };
 
 export const DEFAULT_PROVIDER = process.env.TUTOR_PROVIDER ?? "bank";
 
 export function providerFor(id?: string): TutorProvider | ModelProvider {
-  return PROVIDERS[id ?? DEFAULT_PROVIDER] ?? bankProvider;
+  return PROVIDERS[id ?? DEFAULT_PROVIDER] ?? PROVIDERS.bank;
+}
+
+/**
+ * The bank decides; the model providers complete. This is the one place the
+ * union is told apart, so the callers below never need a cast.
+ */
+function isModelProvider(
+  provider: TutorProvider | ModelProvider,
+): provider is ModelProvider {
+  return "complete" in provider;
 }
 
 /** What the bank would say. Used as the shape every provider must respect. */
@@ -87,7 +150,9 @@ export async function decide(
     };
   }
 
-  if (!("complete" in provider)) return { decision: fallback, provider: "bank", latencyMs: 0, fellBack: true, error: "No model" };
+  if (!isModelProvider(provider)) {
+    return { decision: fallback, provider: "bank", latencyMs: 0, fellBack: true, error: "No model" };
+  }
 
   if (!(await provider.available())) {
     return {
@@ -100,7 +165,7 @@ export async function decide(
   }
 
   try {
-    const raw = (await (provider as ModelProvider).complete({
+    const raw = (await provider.complete({
       system: SYSTEM,
       user: userMessage(input),
     })) as Partial<TutorDecision>;
@@ -125,8 +190,7 @@ export async function decide(
 /** A model provider, or null when the configured one is the authored bank. */
 export function modelProvider(id?: string): ModelProvider | null {
   const provider = providerFor(id);
-  if (!("complete" in provider)) return null;
-  return provider as ModelProvider;
+  return isModelProvider(provider) ? provider : null;
 }
 
 export async function providerStatus() {

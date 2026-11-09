@@ -250,13 +250,42 @@ What happens after they write:
 
 1. `/api/thread` reads the message against the concept on screen and returns one decision:
    `next` (show the next piece), `simpler` (go back a level), `switch` (they asked about a
-   different idea, with its term), or `none`.
+   different idea, with its term), `stay` (hold position and ask for something more specific,
+   revealing nothing), or `none`.
 2. The reader content is revealed **in the order it is discovered**. A section is never shown
    whole: each piece appears when the student has earned it, and stays on screen above the
    box, so the page grows into the content they have uncovered.
 3. The reply is one short sentence. It never states the explanation and never praises. The
    model may answer a substantive guess with a question instead of new content, which is
    often the better move.
+
+### How the decision is made
+
+Moving through the lesson is a product rule, not a judgement to hand to a model. `guard.ts`
+runs first, before a provider is even chosen, so a message the rules can judge costs no
+network call:
+
+| Message | Decision |
+| --- | --- |
+| empty, or no letters at all | `stay` |
+| a bare acknowledgement: `ok`, `yes`, `yeah ok`, `got it`, `hmm`, `idk` | `stay` |
+| the name of the concept already on screen, and nothing else | `stay` |
+| an explicit question naming a glossary term, or only that term's name | `switch` |
+| anything else | the provider decides |
+
+A message that merely *contains* a glossary word is not a switch. "energy is released" is a
+thought about the concept in front of the student, so it reaches the model; "energy" alone
+switches. The rule only fires when the term accounts for every content word, which trades a
+false negative for the absence of a false positive. An unwanted jump costs the student the
+thread they were following.
+
+The same policy applies to what comes back. `coerceConcept` turns a `switch` to a term the
+glossary does not hold — or to the concept already open — into `stay`, so a bad model reply
+cannot reload the page under the student and erase the conversation.
+
+`stay` exists because an acknowledgement is not evidence. Before it, `ok` returned `next` and
+advanced the lesson on a non-answer.
+
 
 ### Starting simple
 
@@ -283,10 +312,19 @@ worth its two seconds here is not yet measured — that is the next fixture set.
 
 ### Known gaps
 
-- A `switch` reply may still define the new term before the ladder opens it.
+- A `switch` reply may still define the new term before the ladder opens it. The guard's own
+  bridge does not ("That is a different idea. Moving to Enzyme."), but a model-issued one can.
 - `simpler` can produce a sentence that explains rather than points, which breaks the
   no-answer rule. The prompt forbids it; the model does not always comply.
+- The guard is glossary-gated, so a student who asks about an idea the glossary lacks is not
+  switched. `Photosynthesis` is one such term: it has no entry in
+  `src/data/concepts.generated.json`, so `what is photosynthesis` reaches the model and any
+  `switch` to it would be coerced back to `stay`. That is a data gap in `assets/toc.js`, not a
+  guard bug.
 - Nothing measures these yet. They belong in the fixture harness alongside the tutor.
+- Explore announces guide replies through a polite live region, but newly revealed content
+  blocks are not announced.
+
 
 ## 13. Reading is pulled, never linked out
 

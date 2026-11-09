@@ -1,7 +1,20 @@
 import type { Strength } from "../types";
-import type { Completion, ModelProvider } from "./complete";
+import type { Completion } from "./complete";
 
-export type Reveal = "next" | "simpler" | "switch" | "none";
+/**
+ * What happens to the lesson position after one student message.
+ *
+ *   next     they are with you, show the next piece
+ *   simpler  they are lost or vague, go back a level
+ *   switch   they asked about a different idea; put its name in `term`
+ *   stay     hold position, ask for something more specific. Reveal nothing.
+ *   none     nothing useful to add
+ *
+ * `stay` exists so an acknowledgement or a one-word non-answer cannot advance
+ * the lesson. A deterministic guard in ./guard can return it before the model
+ * is asked at all.
+ */
+export type Reveal = "next" | "simpler" | "switch" | "none" | "stay";
 
 export interface ConceptDecision {
   strength: Strength;
@@ -23,13 +36,19 @@ Reply with JSON only:
   "next"    they are with you, show the next piece
   "simpler" they are lost or vague, go back a level
   "switch"  they asked about a different idea; put its name in "term"
+  "stay"    hold position and ask for something more specific. Reveal nothing.
   "none"    nothing useful to add
+
+Rules for "stay":
+- An acknowledgement ("ok", "yes", "got it", "thanks"), a one-word non-answer, or a message with no substance must be "stay", never "next". These are not evidence that the student followed the last piece.
+- Use "stay" when the message is too vague to judge. Do not guess that they are ready.
 
 Rules for "say":
 - Never state the correct explanation. Never answer their question.
 - Never praise.
 - Never tell the student what they think or what confuses them. Do not write "you are confused", "you think", "you are mixing". If the message is short, vague or off topic, write one neutral sentence or nothing.
 - Plain English, no contractions. "It is", never "it's".
+- American spelling.
 
 Rules for "switch":
 - If their message names a biology idea that is not the current concept, reveal must be "switch" and "term" must be that idea, written as a glossary name such as "Enzyme".
@@ -65,12 +84,22 @@ export function completionFor(input: ConceptInput): Completion {
 }
 
 const STRENGTHS: Strength[] = ["empty", "thin", "emerging", "strong"];
-const REVEALS: Reveal[] = ["next", "simpler", "switch", "none"];
+const REVEALS: Reveal[] = ["next", "simpler", "switch", "none", "stay"];
 
+/**
+ * Reject a reply that would move the student somewhere they cannot go.
+ *
+ * A `switch` is only allowed to a term the glossary holds and that is not the
+ * concept already open. Switching to where the student already is would reload
+ * the same page and throw away their thread. When the move is impossible the
+ * lesson holds position instead of inventing a reveal, so a bad model reply
+ * costs nothing rather than costing the student their place.
+ */
 export function coerceConcept(
   raw: Record<string, unknown>,
   fallback: ConceptDecision,
   known: (term: string) => boolean,
+  current?: string,
 ): ConceptDecision {
   const strength = STRENGTHS.includes(raw.strength as Strength)
     ? (raw.strength as Strength)
@@ -85,8 +114,11 @@ export function coerceConcept(
 
   if (reveal === "switch") {
     const term = typeof raw.term === "string" ? raw.term.trim() : "";
-    if (term && known(term)) return { strength, say, reveal, term };
-    return { strength, say, reveal: "next" };
+    const here = current?.trim().toLowerCase() ?? "";
+    if (!term || !known(term) || term.toLowerCase() === here) {
+      return { strength, say, reveal: "stay" };
+    }
+    return { strength, say, reveal, term };
   }
 
   return { strength, say, reveal };

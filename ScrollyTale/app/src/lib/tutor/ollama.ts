@@ -1,11 +1,21 @@
-import type { Beat } from "../types";
 import type { Completion, ModelProvider } from "./complete";
 import { extractJson } from "./prompt";
-import type { TutorDecision, TutorInput } from "./types";
 
 const BASE = (process.env.OLLAMA_BASE ?? "http://localhost:11434").replace(/\/$/, "");
 export const OLLAMA_MODEL = process.env.TUTOR_MODEL ?? "qwen3:30b-a3b";
-const TIMEOUT_MS = Number(process.env.TUTOR_TIMEOUT_MS ?? 60000);
+
+/**
+ * setTimeout(fn, NaN) fires on the next tick, so a malformed TUTOR_TIMEOUT_MS
+ * would abort every request immediately instead of letting it run. Anything
+ * that is not a finite positive number falls back to the default. The same
+ * helper is inlined in deepseek.ts, so neither provider imports the other.
+ */
+function timeoutMs(fallback: number): number {
+  const configured = Number(process.env.TUTOR_TIMEOUT_MS);
+  return Number.isFinite(configured) && configured > 0 ? configured : fallback;
+}
+
+const TIMEOUT_MS = timeoutMs(60_000);
 
 /**
  * The model classifies one answer and returns ids. The system prompt carries no

@@ -43,13 +43,23 @@ interface Reply {
   decision: {
     strength: string;
     say: string;
-    reveal: "next" | "simpler" | "switch" | "none";
+    reveal: "next" | "simpler" | "switch" | "none" | "stay";
     term?: string;
   };
 }
 
 const SEED = "Cellular respiration";
 const LAST_KEY = "bio_explore";
+const HINT_ID = "st-say-hint";
+
+/* Starter phrases. Each fills the box and leaves the caret ready for the student
+   to finish the sentence. The label is the visible text; the name says what the
+   chip does when a screen reader reaches it out of context. */
+const STARTERS = [
+  { key: "think", label: "I think", text: "I think ", name: "Start a sentence with I think" },
+  { key: "what", label: "What is a", text: "What is a ", name: "Start a question with What is a" },
+  { key: "lost", label: "I am lost.", text: "I am lost.", name: "Start with I am lost" },
+];
 
 let counter = 0;
 const nextId = () => `l${++counter}`;
@@ -69,7 +79,9 @@ export default function Explore() {
   const [busy, setBusy] = useState(false);
   const [note, setNote] = useState<string | null>(null);
   const [seen, setSeen] = useState<string[]>([]);
+  const [announcement, setAnnouncement] = useState("");
   const endRef = useRef<HTMLDivElement | null>(null);
+  const sayRef = useRef<HTMLTextAreaElement | null>(null);
 
   const load = useCallback(async (params: Record<string, string>) => {
     setBusy(true);
@@ -92,17 +104,22 @@ export default function Explore() {
       );
 
       const opening: Line[] = [];
+      let openingGuide = "";
       if (body.prerequisite) {
+        openingGuide = `This rests on ${body.prerequisite.term}: ${body.prerequisite.definition}`;
         opening.push({
           id: nextId(),
           kind: "guide",
-          text: `This rests on ${body.prerequisite.term}: ${body.prerequisite.definition}`,
+          text: openingGuide,
         });
       }
       if (body.blocks[0]) {
         opening.push({ id: nextId(), kind: "content", html: body.blocks[0].html });
       }
       setLines(opening);
+      // Keep the live region reading the newest guide line, or clear it when a
+      // new topic opens with no guide line of its own.
+      setAnnouncement(openingGuide);
       setRevealed(body.blocks.length > 0 ? 1 : 0);
       window.scrollTo({ top: 0, behavior: "smooth" });
     } catch {
@@ -127,6 +144,19 @@ export default function Explore() {
     setLines((prev) => [...prev, { id: nextId(), kind: "content", html: block.html }]);
     setRevealed(index + 1);
     return true;
+  }
+
+  function fillDraft(text: string) {
+    setDraft(text);
+    const box = sayRef.current;
+    if (!box) return;
+    box.focus();
+    // The controlled value lands after this render, so place the caret at the
+    // end of the new text once it is in the box. Sending stays the student's job.
+    requestAnimationFrame(() => {
+      const end = box.value.length;
+      box.setSelectionRange(end, end);
+    });
   }
 
   async function send(event: React.FormEvent) {
@@ -155,9 +185,15 @@ export default function Explore() {
       const decision = body.decision;
 
       setLines((prev) => [...prev, { id: nextId(), kind: "guide", text: decision.say }]);
+      setAnnouncement(decision.say);
 
       if (decision.reveal === "switch" && decision.term) {
         await load({ term: decision.term, seen: seen.join(",") });
+        return;
+      }
+
+      if (decision.reveal === "stay") {
+        // Hold position: the guide asks for more substance and reveals nothing.
         return;
       }
 
@@ -166,29 +202,38 @@ export default function Explore() {
           await load({ term: ladder.prerequisite.term, seen: seen.join(",") });
           return;
         }
-        setRevealed(1);
-        setLines((prev) => [
-          ...prev,
-          {
-            id: nextId(),
-            kind: "content",
-            html: ladder.blocks[0].html,
-          },
-        ]);
+        // Show the first block only when the student has not seen it yet, so a
+        // second "simpler" never repeats a paragraph already on screen.
+        if (revealed === 0) {
+          const first = ladder.blocks[0];
+          if (first) {
+            setLines((prev) => [
+              ...prev,
+              { id: nextId(), kind: "content", html: first.html },
+            ]);
+            setRevealed(1);
+          }
+        }
         return;
       }
 
       if (decision.reveal === "next") {
-        const target = Math.min(revealed, ladder.blocks.length - 1);
-        if (revealed < ladder.blocks.length) {
-          pushBlock(target);
+        // revealed counts the blocks already shown, so the next unseen block
+        // sits at blocks[revealed].
+        const unseen = ladder.blocks[revealed];
+        if (revealed < ladder.blocks.length && unseen) {
+          pushBlock(revealed);
         } else if (ladder.next) {
           setLines((prev) => [
             ...prev,
             { id: nextId(), kind: "guide", text: `There is more here: ${ladder.next!.term}` },
           ]);
+          setAnnouncement(`There is more here: ${ladder.next!.term}`);
         }
       }
+
+      // Any other reveal value ("none", or one this build does not know yet)
+      // changes no content and no count; the guide line above is the reply.
     } catch {
       setNote("That did not reach the guide. Try again.");
     } finally {
@@ -203,7 +248,7 @@ export default function Explore() {
       <div className="st-eyebrow">Explore</div>
       {ladder && <h1 className="st-title">{ladder.node.term}</h1>}
 
-      <div className="st-thread">
+      <div className="st-thread" aria-busy={busy}>
         {lines.map((line) =>
           line.kind === "content" ? (
             <div
@@ -220,24 +265,46 @@ export default function Explore() {
         <div ref={endRef} />
       </div>
 
+      <p className="st-sr-only" role="status" aria-live="polite">
+        {announcement}
+      </p>
+
       {note && <p className="st-warn">{note}</p>}
 
       <form className="st-composer" onSubmit={send}>
         <label htmlFor="st-say" className="st-composer-label">
           What are you thinking or wondering?
         </label>
+        <div className="st-chips">
+          {STARTERS.map((starter) => (
+            <button
+              key={starter.key}
+              type="button"
+              className="st-chip"
+              aria-label={starter.name}
+              onClick={() => fillDraft(starter.text)}
+            >
+              {starter.label}
+            </button>
+          ))}
+        </div>
         <div className="st-composer-row">
           <textarea
             id="st-say"
+            ref={sayRef}
             rows={2}
             value={draft}
             onChange={(e) => setDraft(e.target.value)}
+            aria-describedby={HINT_ID}
             placeholder="A guess, a question, anything."
           />
           <button type="submit" className="st-primary" disabled={busy || !draft.trim()}>
             {busy ? "…" : "Send"}
           </button>
         </div>
+        <p id={HINT_ID} className="st-composer-hint">
+          Type something to send.
+        </p>
         {ladder?.prerequisite && (
           <button
             type="button"
