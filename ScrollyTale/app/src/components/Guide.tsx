@@ -7,9 +7,11 @@ interface Props {
   nudges: number;
   onPark: (question: string) => void;
   parked: boolean;
+  /** which provider chose this move, when it was not the authored bank */
+  provider?: string;
 }
 
-export function Guide({ move, nudges, onPark, parked }: Props) {
+export function Guide({ move, nudges, onPark, parked, provider }: Props) {
   return (
     <div className="st-guide">
       <div className="st-guide-head">
@@ -25,6 +27,7 @@ export function Guide({ move, nudges, onPark, parked }: Props) {
             : nudges === 1
               ? "One nudge given"
               : "Two nudges given"}
+          {provider ? ` · decided by ${provider}` : ""}
         </span>
         {!parked && (
           <button type="button" onClick={() => onPark(move.say)}>

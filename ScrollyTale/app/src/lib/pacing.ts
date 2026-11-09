@@ -41,9 +41,9 @@ export function evaluate(
   const missing = concepts.filter((c) => !matched.includes(c));
 
   let strength: Strength = "empty";
-  if (words.length >= 6) strength = "thin";
-  if (words.length >= 12 && matched.length >= 1) strength = "emerging";
-  if (words.length >= 18 && matched.length >= 2) strength = "strong";
+  if (words.length > 0) strength = "thin";
+  if (words.length >= 6 && matched.length >= 1) strength = "emerging";
+  if (words.length >= 16 && matched.length >= 2) strength = "strong";
 
   const repeated =
     !!previous && normalised.length > 0 && normalised === normalise(previous.text);

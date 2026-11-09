@@ -39,9 +39,25 @@ showing one beat in a demo.
 - Course progress: a tracked section is ticked in `bio_progress` when the student works it,
   so the reader and the tale agree.
 
+## The tutor
+
+Three providers behind one contract, chosen by `TUTOR_PROVIDER`:
+
+- `bank` — authored, deterministic, no dependency. The default and the floor.
+- `ollama` — a local model. Set `TUTOR_PROVIDER=ollama` and `TUTOR_MODEL`, then `ollama serve`.
+- `deepseek` — the hosted API. Needs `DEEPSEEK_API_KEY` in the server environment.
+
+All three return ids only, never prose, so none can return the explanation the step is
+holding back. Any failure falls back to the bank.
+
+```bash
+npm run fixtures -- --provider bank
+npm run fixtures -- --provider ollama
+```
+
 ## What does not exist yet
 
-- No LLM. The guide is an authored bank, and it must keep working without a key.
+- No hosted model in use. The DeepSeek adapter is written and inert without a key.
 - No accounts and no server storage. Everything is on one device.
 - No deployment. Nothing is published.
 

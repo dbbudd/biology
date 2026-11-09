@@ -173,7 +173,71 @@ Rules a bridge must keep:
 `/api/guide-check?beat=&text=` answers "what would the guide do with this sentence" in
 development. It is the fastest way to test a bridge without typing into the player.
 
-## 11. Reading is pulled, never linked out
+## 11. The tutor
+
+One contract, three providers, chosen by `TUTOR_PROVIDER`.
+
+| id | runs | needs | cost |
+| --- | --- | --- | --- |
+| `bank` | always | nothing | none |
+| `ollama` | this Mac | `ollama serve`, a model | none |
+| `deepseek` | HTTPS | `DEEPSEEK_API_KEY` in the server env | metered |
+
+```ts
+{ depth, strength, missing[], moveId, bridgeId }
+```
+
+Ids only. There is no field a provider could use to return prose, so a model that
+ignores the prompt still cannot hand the student the explanation.
+
+`/api/tutor`
+
+- `GET` returns the active provider, its label and whether it is available.
+- `POST { beatId, text }` returns the decision plus `provider`, `latencyMs`, `fellBack`.
+- Text is capped at 1200 characters, the beat must exist in the tale, and the address is
+  limited to 60 requests a minute. That ceiling is per address, not per student, because a
+  class shares one.
+- A provider that is unavailable, slow or malformed falls back to the bank and says so in
+  `fellBack`. The step never shows an error for a model problem.
+- `provider` may be overridden in the body outside production, which is how the harness
+  scores providers side by side.
+
+Policy is not delegated. After classification, `applyPolicy` withholds reading when the
+answer already explains the idea, and uses the beat's own bridge for an empty answer. A
+model classifies well and still over-scaffolds; that judgement belongs to the product.
+
+### Measuring it
+
+`fixtures.ts` holds 22 student-shaped answers with expected strength and bridge.
+`npm run fixtures -- --provider bank|ollama` scores a provider on the same set.
+
+Hard checks apply to every provider: ids must belong to the beat, `missing` must be real
+concepts, and nothing prose-shaped may come back. The expectations are soft and only
+compare quality.
+
+Baseline on 2026-11-09, twenty-two fixtures:
+
+| provider | hard failures | strength | bridge | depth | latency (median) |
+| --- | --- | --- | --- | --- | --- |
+| `bank` | 0 | 20/22 | 17/22 | 22/22 | 5 ms |
+| `ollama` qwen3:30b-a3b | 0 | 21/22 | 19/22 | 22/22 | 2.0 s |
+
+The model earns its place on the two quality measures and costs two seconds. That is the
+comparison to re-run when DeepSeek arrives, before anything else is built on top of it.
+
+### Adding the API key later
+
+Nothing to rewrite:
+
+1. `DEEPSEEK_API_KEY=...` in the server environment only.
+2. `TUTOR_PROVIDER=deepseek`.
+3. `npm run fixtures -- --provider deepseek` and compare against the table above.
+
+The key is read in `deepseek.ts`, travels as an `authorization` header, is never placed in
+a prompt, never logged, and is never sent to the browser. With no key the provider reports
+itself unavailable and the bank answers.
+
+## 12. Reading is pulled, never linked out
 
 A student who leaves the tale to browse the reader leaves the inquiry. So the player never
 sends them there.
@@ -191,7 +255,7 @@ sends them there.
 
 Adding a new chapter to a tale does not add a copy of its text here. It adds a pointer.
 
-## 12. Branding and accessibility
+## 13. Branding and accessibility
 
 The tale is the same product as the reader, so it borrows rather than redraws.
 
@@ -213,7 +277,7 @@ declares the same tokens), rewrites `[data-theme]` rules to the player's root, a
 Not yet: Translate. The reader sends sentences to the on-device translator; the tale does
 not, so a translated step is a gap to close, not a claim to make.
 
-## 13. Course progress
+## 14. Course progress
 
 The reader stores progress as `bio_progress`, keyed chapter then section, for sections that
 opt in with `data-track`.
@@ -227,14 +291,14 @@ This is a deliberate reading of "do not overload `bio_progress`": tale state sta
 Nothing else is added to it. If that is the wrong call, the switch is one function in
 `src/lib/prefs.ts`.
 
-## 14. Not in this build
+## 15. Not in this build
 
 - No LLM call, no key, no `/api/tutor`.
 - No accounts, no server storage, no analytics.
 - No standards inference beyond the local word check, and no claim that a band is a grade.
 - No deployment. Both servers are local.
 
-## 15. Reader base URL
+## 16. Reader base URL
 
 `NEXT_PUBLIC_READER_BASE`, default `http://localhost:4321`.
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import type { Bridge, Commit, Tale, TaleState } from "../lib/types";
+import type { Bridge, Commit, Move, Tale, TaleState } from "../lib/types";
 import { bandFor, budgetFor, evaluate, pickBridge, pickMove } from "../lib/pacing";
 import { loadState, latestCommit, saveState } from "../lib/notebook";
 import {
@@ -43,6 +43,12 @@ export default function TaleWorkspace({ tale, chapters }: Props) {
   const [showEarlier, setShowEarlier] = useState(false);
   const [bridge, setBridge] = useState<Bridge | null>(null);
   const [bridgeCovered, setBridgeCovered] = useState<string[]>([]);
+  const [tutorMove, setTutorMove] = useState<Move | null>(null);
+  const [tutor, setTutor] = useState<{
+    provider: string;
+    label: string;
+    available: boolean;
+  } | null>(null);
   const [progress, setProgress] = useState({ done: 0, total: 0, chaptersStarted: 0, chapters: 0 });
   const [done, setDone] = useState<Record<string, Record<string, boolean>>>({});
 
@@ -63,6 +69,13 @@ export default function TaleWorkspace({ tale, chapters }: Props) {
     setState(loaded);
     setPrefs(readPrefs());
     refreshProgress();
+
+    fetch("/api/tutor")
+      .then((r) => r.json())
+      .then((d) =>
+        setTutor({ provider: d.provider, label: d.label, available: Boolean(d.available) }),
+      )
+      .catch(() => setTutor(null));
   }, [tale.id, tale.beats.length, refreshProgress]);
 
   const beat = state
@@ -78,10 +91,11 @@ export default function TaleWorkspace({ tale, chapters }: Props) {
     () => (state ? evaluate(draft, concepts, prior) : null),
     [draft, concepts, prior, state],
   );
-  const move = useMemo(
+  const localMove = useMemo(
     () => (ev ? pickMove(beat, ev, nudges) : beat.moves[0]),
     [beat, ev, nudges],
   );
+  const move = tutorMove ?? localMove;
   const budget = state ? budgetFor(tale, state, beat) : null;
 
   useEffect(() => {
@@ -167,15 +181,52 @@ export default function TaleWorkspace({ tale, chapters }: Props) {
     return { commit, evidence };
   }
 
-  function submit() {
+  /** Ask the configured provider. Any failure keeps the local decision. */
+  async function askTutor(beatId: string, text: string) {
+    // No model, or a model that is not running, means no wait and no failure.
+    if (!tutor || tutor.provider === "bank" || !tutor.available) return null;
+    try {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 25_000);
+      const res = await fetch("/api/tutor", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ beatId, text }),
+        signal: controller.signal,
+      });
+      clearTimeout(timer);
+      if (!res.ok) return null;
+      return (await res.json()) as {
+        decision: { moveId: string; bridgeId: string | null; strength: string };
+        fellBack: boolean;
+      };
+    } catch {
+      return null;
+    }
+  }
+
+  async function submit() {
     if (!state || !ev) return;
     const strongEnough = ev.strength === "strong" || ev.strength === "emerging";
 
     if (!strongEnough && nudges < 2) {
       update({ ...state, nudges: { ...state.nudges, [beat.id]: nudges + 1 } });
       setNudged(true);
-      setBridge(pickBridge(beat, ev) ?? null);
       setBridgeCovered(ev.matched);
+
+      const fromTutor = await askTutor(beat.id, draft);
+      const chosenMove = fromTutor?.decision.moveId
+        ? (beat.moves.find((m) => m.id === fromTutor.decision.moveId) ?? null)
+        : null;
+      setTutorMove(chosenMove);
+
+      const chosenBridge = fromTutor?.decision.bridgeId
+        ? ((beat.bridges ?? []).find((b) => b.id === fromTutor.decision.bridgeId) ?? null)
+        : fromTutor
+          ? null
+          : (pickBridge(beat, ev) ?? null);
+
+      setBridge(chosenBridge);
       return;
     }
 
@@ -196,6 +247,7 @@ export default function TaleWorkspace({ tale, chapters }: Props) {
     setDraft(draftFor({ ...state, commits: [...state.commits, recorded.commit] }, next));
     setNudged(false);
     setBridge(null);
+    setTutorMove(null);
     setBridgeCovered([]);
     setShowEarlier(false);
     refreshProgress();
@@ -215,6 +267,7 @@ export default function TaleWorkspace({ tale, chapters }: Props) {
     setDraft(draftFor(state, next));
     setNudged(false);
     setBridge(null);
+    setTutorMove(null);
     setBridgeCovered([]);
     setShowEarlier(false);
   }
@@ -226,6 +279,7 @@ export default function TaleWorkspace({ tale, chapters }: Props) {
     setDraft(draftFor(state, next));
     setNudged(false);
     setBridge(null);
+    setTutorMove(null);
     setBridgeCovered([]);
     setShowEarlier(false);
   }
@@ -254,6 +308,7 @@ export default function TaleWorkspace({ tale, chapters }: Props) {
     setDraft("");
     setNudged(false);
     setBridge(null);
+    setTutorMove(null);
     setBridgeCovered([]);
     setShowEarlier(false);
     setListening(false);
@@ -393,7 +448,13 @@ export default function TaleWorkspace({ tale, chapters }: Props) {
               />
 
               {nudged && !bridge && (
-                <Guide move={move} nudges={nudges} onPark={park} parked={false} />
+                <Guide
+                  move={move}
+                  nudges={nudges}
+                  onPark={park}
+                  parked={false}
+                  provider={tutor && tutor.provider !== "bank" ? tutor.label : undefined}
+                />
               )}
 
               <div className="st-actions">
