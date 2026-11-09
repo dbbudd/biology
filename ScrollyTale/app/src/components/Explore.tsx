@@ -28,7 +28,10 @@ interface Payload {
   next: Reveal | null;
 }
 
-const SEEDS = ["Cellular respiration", "Food web", "Matter", "Enzyme"];
+/** Where a first visit begins. Fixed, so two students in a room start in the
+ *  same place and a teacher can talk to the screen they are all looking at. */
+const SEED = "Cellular respiration";
+const LAST_KEY = "bio_explore";
 
 /**
  * Curiosity-led traversal.
@@ -59,6 +62,7 @@ export default function Explore() {
         const body = (await res.json()) as Payload;
         setNode(body.node);
         setNext(body.next);
+        window.localStorage.setItem(LAST_KEY, body.node.term);
         setSeen((prev) =>
           prev.some((p) => p.toLowerCase() === body.node.term.toLowerCase())
             ? prev
@@ -74,8 +78,9 @@ export default function Explore() {
   );
 
   useEffect(() => {
-    const seed = SEEDS[Math.floor(Math.random() * SEEDS.length)];
-    void load({ term: seed });
+    // Return to where this student left off, so a thread is not lost on reload.
+    const last = window.localStorage.getItem(LAST_KEY);
+    void load({ term: last || SEED });
   }, [load]);
 
   function open(term: string) {

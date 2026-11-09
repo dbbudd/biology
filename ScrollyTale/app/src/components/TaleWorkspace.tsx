@@ -45,7 +45,10 @@ export default function TaleWorkspace({ tale, chapters }: Props) {
   const [bridge, setBridge] = useState<Bridge | null>(null);
   const [bridgeCovered, setBridgeCovered] = useState<string[]>([]);
   const [tutorMove, setTutorMove] = useState<Move | null>(null);
-  const [mode, setMode] = useState<Mode>("guided");
+  // Explore first: a student should meet ideas before a structure. The guided
+  // path stays one click away, and a shared #mode=guided or #beat= link still
+  // lands on the assessed steps.
+  const [mode, setMode] = useState<Mode>("explore");
   const [tutor, setTutor] = useState<{
     provider: string;
     label: string;
@@ -62,7 +65,7 @@ export default function TaleWorkspace({ tale, chapters }: Props) {
   useEffect(() => {
     const loaded = loadState(tale.id);
     const params = new URLSearchParams(window.location.hash.slice(1));
-    // #explore opens the curiosity surface directly; a link a teacher can share.
+    if (params.get("mode") === "guided" || params.has("beat")) setMode("guided");
     if (params.get("mode") === "explore") setMode("explore");
     if (params.has("beat")) {
       const jump = Number(params.get("beat"));
