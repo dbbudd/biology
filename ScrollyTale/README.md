@@ -41,9 +41,9 @@ showing one beat in a demo.
 
 ## Explore
 
-Curiosity-led traversal beside the guided tale. Opens with the one idea a concept rests on,
-then one written block at a time with a question between each. No chapter list, no step
-count, no menu of what is coming.
+Curiosity-led traversal beside the guided tale. One box takes any thought, and the reader
+content is revealed a piece at a time in the order the student discovers it. No chapter list,
+no step count, no menu of what is coming, and no minimum length on what they write.
 
 ```bash
 npm run toc     # rebuilds the concept graph from assets/toc.js and chapters/

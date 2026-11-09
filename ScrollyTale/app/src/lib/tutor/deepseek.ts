@@ -1,6 +1,6 @@
-import type { Beat } from "../types";
-import { SYSTEM, extractJson, userMessage } from "./prompt";
-import type { TutorDecision, TutorInput, TutorProvider } from "./types";
+import type { Completion, ModelProvider } from "./complete";
+import { extractJson } from "./prompt";
+
 
 const BASE = (process.env.DEEPSEEK_BASE ?? "https://api.deepseek.com").replace(/\/$/, "");
 const MODEL = process.env.DEEPSEEK_MODEL ?? "deepseek-chat";
@@ -17,7 +17,7 @@ function key(): string | undefined {
  * never placed in the prompt, never logged, and never reaches the browser. With
  * no key the provider reports itself unavailable and the bank answers instead.
  */
-async function decide(input: TutorInput, _beat: Beat): Promise<TutorDecision> {
+async function complete(request: Completion): Promise<unknown> {
   const secret = key();
   if (!secret) throw new Error("No key configured");
 
@@ -38,8 +38,8 @@ async function decide(input: TutorInput, _beat: Beat): Promise<TutorDecision> {
         max_tokens: 300,
         response_format: { type: "json_object" },
         messages: [
-          { role: "system", content: SYSTEM },
-          { role: "user", content: userMessage(input) },
+          { role: "system", content: request.system },
+          { role: "user", content: request.user },
         ],
       }),
     });
@@ -54,16 +54,16 @@ async function decide(input: TutorInput, _beat: Beat): Promise<TutorDecision> {
     if (typeof parsed !== "object" || parsed === null) {
       throw new Error("The model returned no object");
     }
-    return parsed as TutorDecision;
+    return parsed;
   } finally {
     clearTimeout(timer);
   }
 }
 
-export const deepseekProvider: TutorProvider = {
+export const deepseekProvider: ModelProvider = {
   id: "deepseek",
   label: `DeepSeek · ${MODEL}`,
   model: MODEL,
+  complete,
   available: async () => Boolean(key()),
-  decide,
 };

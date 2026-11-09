@@ -1,6 +1,7 @@
 import type { Beat } from "../types";
-import { SYSTEM, extractJson, userMessage } from "./prompt";
-import type { TutorDecision, TutorInput, TutorProvider } from "./types";
+import type { Completion, ModelProvider } from "./complete";
+import { extractJson } from "./prompt";
+import type { TutorDecision, TutorInput } from "./types";
 
 const BASE = (process.env.OLLAMA_BASE ?? "http://localhost:11434").replace(/\/$/, "");
 export const OLLAMA_MODEL = process.env.TUTOR_MODEL ?? "qwen3:30b-a3b";
@@ -11,7 +12,7 @@ const TIMEOUT_MS = Number(process.env.TUTOR_TIMEOUT_MS ?? 60000);
  * answer key, so a model that ignores every instruction still cannot state the
  * explanation the step is holding back.
  */
-async function decide(input: TutorInput, _beat: Beat): Promise<TutorDecision> {
+async function complete(request: Completion): Promise<unknown> {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), TIMEOUT_MS);
 
@@ -27,8 +28,8 @@ async function decide(input: TutorInput, _beat: Beat): Promise<TutorDecision> {
         think: false,
         options: { temperature: 0.2, num_ctx: 4096, num_predict: 300 },
         messages: [
-          { role: "system", content: SYSTEM },
-          { role: "user", content: userMessage(input) },
+          { role: "system", content: request.system },
+          { role: "user", content: request.user },
         ],
       }),
     });
@@ -40,16 +41,17 @@ async function decide(input: TutorInput, _beat: Beat): Promise<TutorDecision> {
     if (typeof parsed !== "object" || parsed === null) {
       throw new Error("The model returned no object");
     }
-    return parsed as TutorDecision;
+    return parsed;
   } finally {
     clearTimeout(timer);
   }
 }
 
-export const ollamaProvider: TutorProvider = {
+export const ollamaProvider: ModelProvider = {
   id: "ollama",
   label: `Ollama · ${OLLAMA_MODEL}`,
   model: OLLAMA_MODEL,
+  complete,
   available: async () => {
     try {
       const res = await fetch(`${BASE}/api/tags`, { signal: AbortSignal.timeout(1500) });
@@ -60,5 +62,4 @@ export const ollamaProvider: TutorProvider = {
       return false;
     }
   },
-  decide,
 };

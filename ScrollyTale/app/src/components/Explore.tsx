@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 interface Teaches {
   chapter: string;
@@ -34,75 +34,81 @@ interface Ladder {
   next: Reveal | null;
 }
 
+type Line =
+  | { id: string; kind: "content"; html: string }
+  | { id: string; kind: "guide"; text: string }
+  | { id: string; kind: "student"; text: string };
+
+interface Reply {
+  decision: {
+    strength: string;
+    say: string;
+    reveal: "next" | "simpler" | "switch" | "none";
+    term?: string;
+  };
+}
+
 const SEED = "Cellular respiration";
 const LAST_KEY = "bio_explore";
 
-const QUESTIONS = [
-  "What does that say in your own words?",
-  "What did that add to the part before?",
-  "What would someone get wrong here?",
-];
-
-const STOP = new Set([
-  "the", "a", "an", "and", "or", "of", "to", "in", "on", "at", "by", "for",
-  "with", "is", "are", "was", "were", "be", "it", "its", "this", "that", "as",
-  "so", "because", "not", "no", "do", "does", "did", "can", "will", "would",
-]);
-
-function contentWords(text: string): number {
-  return text
-    .toLowerCase()
-    .replace(/[^a-z0-9\s'-]/g, " ")
-    .split(/\s+/)
-    .filter((w) => w.length > 2 && !STOP.has(w)).length;
-}
+let counter = 0;
+const nextId = () => `l${++counter}`;
 
 /**
- * Curiosity-led, one small piece at a time.
+ * One box, any thought.
  *
- * A section is not shown whole. It opens with the one idea the concept rests
- * on, then a few hundred words become a handful of paragraphs, each with one
- * question, and the answer is what unlocks the next.
+ * The student writes whatever they are thinking: a guess, a question, a
+ * complaint. The model judges how much they can take next and the reader
+ * content is revealed a piece at a time, in the order it is discovered.
  */
 export default function Explore() {
   const [ladder, setLadder] = useState<Ladder | null>(null);
-  const [phase, setPhase] = useState<"probe" | "read" | "done">("read");
-  const [step, setStep] = useState(0);
-  const [answer, setAnswer] = useState("");
-  const [nudged, setNudged] = useState(false);
-  const [seen, setSeen] = useState<string[]>([]);
-  const [curiosity, setCuriosity] = useState("");
+  const [lines, setLines] = useState<Line[]>([]);
+  const [revealed, setRevealed] = useState(0);
+  const [draft, setDraft] = useState("");
+  const [busy, setBusy] = useState(false);
   const [note, setNote] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [seen, setSeen] = useState<string[]>([]);
+  const endRef = useRef<HTMLDivElement | null>(null);
 
   const load = useCallback(async (params: Record<string, string>) => {
-    setLoading(true);
+    setBusy(true);
     setNote(null);
-    setAnswer("");
-    setNudged(false);
-    setStep(0);
+    setDraft("");
     try {
       const query = new URLSearchParams(params);
       const res = await fetch(`/api/ladder?${query.toString()}`);
       if (!res.ok) {
-        setNote("Nothing in the course matches that yet. Try naming the idea in one or two words.");
-        setLadder(null);
+        setNote("Nothing in the course matches that yet. Name the idea in one or two words.");
         return;
       }
       const body = (await res.json()) as Ladder;
       setLadder(body);
-      setPhase(body.prerequisite ? "probe" : body.blocks.length > 0 ? "read" : "done");
+      window.localStorage.setItem(LAST_KEY, body.node.term);
       setSeen((prev) =>
         prev.some((p) => p.toLowerCase() === body.node.term.toLowerCase())
           ? prev
           : [...prev, body.node.term],
       );
-      window.localStorage.setItem(LAST_KEY, body.node.term);
+
+      const opening: Line[] = [];
+      if (body.prerequisite) {
+        opening.push({
+          id: nextId(),
+          kind: "guide",
+          text: `This rests on ${body.prerequisite.term}: ${body.prerequisite.definition}`,
+        });
+      }
+      if (body.blocks[0]) {
+        opening.push({ id: nextId(), kind: "content", html: body.blocks[0].html });
+      }
+      setLines(opening);
+      setRevealed(body.blocks.length > 0 ? 1 : 0);
       window.scrollTo({ top: 0, behavior: "smooth" });
     } catch {
-      setNote("Could not reach the concept index.");
+      setNote("Could not reach the course index.");
     } finally {
-      setLoading(false);
+      setBusy(false);
     }
   }, []);
 
@@ -111,185 +117,136 @@ export default function Explore() {
     void load({ term: last || SEED });
   }, [load]);
 
-  function open(term: string) {
-    void load({ term, seen: seen.join(",") });
-    setCuriosity("");
+  useEffect(() => {
+    endRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
+  }, [lines.length]);
+
+  function pushBlock(index: number) {
+    const block = ladder?.blocks[index];
+    if (!block) return false;
+    setLines((prev) => [...prev, { id: nextId(), kind: "content", html: block.html }]);
+    setRevealed(index + 1);
+    return true;
   }
 
-  function elsewhere() {
-    if (!ladder?.node || !ladder.next) return;
-    void load({ term: ladder.node.term, seen: seen.join(","), alternative: ladder.next.term });
-  }
-
-  function ask(event: React.FormEvent) {
+  async function send(event: React.FormEvent) {
     event.preventDefault();
-    const text = curiosity.trim();
-    if (text.length < 3) return;
-    void load({ q: text, seen: seen.join(",") });
-    setCuriosity("");
+    const text = draft.trim();
+    if (!ladder || busy) return;
+    if (text.length === 0) return;
+
+    setDraft("");
+    setBusy(true);
+    setLines((prev) => [...prev, { id: nextId(), kind: "student", text }]);
+
+    try {
+      const res = await fetch("/api/thread", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          term: ladder.node.term,
+          text,
+          revealed,
+          total: ladder.blocks.length,
+        }),
+      });
+      if (!res.ok) throw new Error("no reply");
+      const body = (await res.json()) as Reply;
+      const decision = body.decision;
+
+      setLines((prev) => [...prev, { id: nextId(), kind: "guide", text: decision.say }]);
+
+      if (decision.reveal === "switch" && decision.term) {
+        await load({ term: decision.term, seen: seen.join(",") });
+        return;
+      }
+
+      if (decision.reveal === "simpler") {
+        if (revealed <= 1 && ladder.prerequisite) {
+          await load({ term: ladder.prerequisite.term, seen: seen.join(",") });
+          return;
+        }
+        setRevealed(1);
+        setLines((prev) => [
+          ...prev,
+          {
+            id: nextId(),
+            kind: "content",
+            html: ladder.blocks[0].html,
+          },
+        ]);
+        return;
+      }
+
+      if (decision.reveal === "next") {
+        const target = Math.min(revealed, ladder.blocks.length - 1);
+        if (revealed < ladder.blocks.length) {
+          pushBlock(target);
+        } else if (ladder.next) {
+          setLines((prev) => [
+            ...prev,
+            { id: nextId(), kind: "guide", text: `There is more here: ${ladder.next!.term}` },
+          ]);
+        }
+      }
+    } catch {
+      setNote("That did not reach the guide. Try again.");
+    } finally {
+      setBusy(false);
+    }
   }
 
-  const hidden = useMemo(() => ladder?.blocks.length ?? 0, [ladder]);
-
-  function submitAnswer() {
-    if (contentWords(answer) < 3 && !nudged) {
-      setNudged(true);
-      return;
-    }
-    setAnswer("");
-    setNudged(false);
-
-    if (phase === "probe") {
-      setPhase(ladder && ladder.blocks.length > 0 ? "read" : "done");
-      setStep(0);
-      return;
-    }
-    if (step + 1 < hidden) {
-      setStep(step + 1);
-    } else {
-      setPhase("done");
-    }
-  }
-
-  if (loading && !ladder) {
-    return <p className="st-loading">Following a thread</p>;
-  }
-
-  const prompt =
-    phase === "probe"
-      ? `Say what ${ladder?.prerequisite?.term} means, in your own words.`
-      : QUESTIONS[Math.min(step, QUESTIONS.length - 1)];
+  if (!ladder && busy) return <p className="st-loading">Following a thread</p>;
 
   return (
     <div className="st-explore">
       <div className="st-eyebrow">Explore</div>
+      {ladder && <h1 className="st-title">{ladder.node.term}</h1>}
 
-      {ladder && (
-        <>
-          <h1 className="st-title">{ladder.node.term}</h1>
-
-          {phase === "probe" && ladder.prerequisite && (
-            <>
-              <p className="st-micro-lead">
-                Start with the idea underneath this one. Everything that follows depends on it.
-              </p>
-              <div className="st-reveal">
-                <div className="st-reveal-head">
-                  <span className="st-reveal-dot" aria-hidden="true" />
-                  <span>First, the foundation</span>
-                </div>
-                <p className="st-reveal-term">{ladder.prerequisite.term}</p>
-                <p className="st-reveal-line">{ladder.prerequisite.definition}</p>
-                <div className="st-reveal-actions">
-                  <button
-                    type="button"
-                    className="st-ghost"
-                    onClick={() => open(ladder.prerequisite!.term)}
-                  >
-                    Go deeper on this first
-                  </button>
-                </div>
-              </div>
-            </>
-          )}
-
-          {phase === "read" && ladder.blocks[step] && (
-            <>
-              <div className="st-micro-bar" aria-hidden="true">
-                <span style={{ width: `${((step + 1) / hidden) * 100}%` }} />
-              </div>
-              <div
-                className="st-reader st-micro"
-                dangerouslySetInnerHTML={{ __html: ladder.blocks[step].html }}
-              />
-            </>
-          )}
-
-          {phase === "done" && (
-            <>
-              <p className="st-definition">{ladder.node.definition}</p>
-              {ladder.next ? (
-                <div className="st-reveal">
-                  <div className="st-reveal-head">
-                    <span className="st-reveal-dot" aria-hidden="true" />
-                    <span>There is more here</span>
-                  </div>
-                  <p className="st-reveal-term">{ladder.next.term}</p>
-                  <p className="st-reveal-line">{ladder.next.definition}</p>
-                  <div className="st-reveal-actions">
-                    <button
-                      type="button"
-                      className="st-primary"
-                      onClick={() => open(ladder.next!.term)}
-                    >
-                      Open it
-                    </button>
-                    <button type="button" className="st-ghost" onClick={elsewhere}>
-                      Not that one
-                    </button>
-                  </div>
-                </div>
-              ) : (
-                <p className="st-note">This thread ends here.</p>
-              )}
-            </>
-          )}
-
-          {phase !== "done" && (
-            <div className="st-micro-ask">
-              <label htmlFor="st-answer">{prompt}</label>
-              <textarea
-                id="st-answer"
-                rows={3}
-                value={answer}
-                onChange={(e) => setAnswer(e.target.value)}
-                placeholder="One sentence is enough."
-              />
-              {nudged && (
-                <p className="st-micro-nudge">
-                  Write a little more. A few words that mean something, not the same words back.
-                </p>
-              )}
-              <div className="st-micro-actions">
-                <button type="button" className="st-primary" onClick={submitAnswer}>
-                  Continue
-                </button>
-                {phase === "probe" && (
-                  <button
-                    type="button"
-                    className="st-ghost"
-                    onClick={() => {
-                      setPhase(ladder.blocks.length > 0 ? "read" : "done");
-                      setStep(0);
-                      setAnswer("");
-                      setNudged(false);
-                    }}
-                  >
-                    I already know this
-                  </button>
-                )}
-              </div>
-            </div>
-          )}
-        </>
-      )}
+      <div className="st-thread">
+        {lines.map((line) =>
+          line.kind === "content" ? (
+            <div
+              key={line.id}
+              className="st-reader st-thread-content"
+              dangerouslySetInnerHTML={{ __html: line.html }}
+            />
+          ) : (
+            <p key={line.id} className={`st-thread-${line.kind}`}>
+              {line.text}
+            </p>
+          ),
+        )}
+        <div ref={endRef} />
+      </div>
 
       {note && <p className="st-warn">{note}</p>}
 
-      <form className="st-curious" onSubmit={ask}>
-        <label htmlFor="st-curiosity">What are you curious about?</label>
-        <div className="st-curious-row">
-          <input
-            id="st-curiosity"
-            value={curiosity}
-            onChange={(e) => setCuriosity(e.target.value)}
-            placeholder="Ask about anything that does not make sense"
-            autoComplete="off"
+      <form className="st-composer" onSubmit={send}>
+        <label htmlFor="st-say" className="st-composer-label">
+          What are you thinking or wondering?
+        </label>
+        <div className="st-composer-row">
+          <textarea
+            id="st-say"
+            rows={2}
+            value={draft}
+            onChange={(e) => setDraft(e.target.value)}
+            placeholder="A guess, a question, anything."
           />
-          <button type="submit" className="st-secondary">
-            Go
+          <button type="submit" className="st-primary" disabled={busy || !draft.trim()}>
+            {busy ? "…" : "Send"}
           </button>
         </div>
+        {ladder?.prerequisite && (
+          <button
+            type="button"
+            className="st-composer-alt"
+            onClick={() => load({ term: ladder.prerequisite!.term, seen: seen.join(",") })}
+          >
+            Go back to {ladder.prerequisite.term}
+          </button>
+        )}
       </form>
 
       {seen.length > 1 && (
@@ -298,7 +255,7 @@ export default function Explore() {
           <ul>
             {seen.slice(0, -1).map((term) => (
               <li key={term}>
-                <button type="button" onClick={() => open(term)}>
+                <button type="button" onClick={() => load({ term, seen: seen.join(",") })}>
                   {term}
                 </button>
               </li>

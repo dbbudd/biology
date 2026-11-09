@@ -237,62 +237,56 @@ The key is read in `deepseek.ts`, travels as an `authorization` header, is never
 a prompt, never logged, and is never sent to the browser. With no key the provider reports
 itself unavailable and the bank answers.
 
-## 12. Explore: start simple, build up
+## 12. Explore: one box, content that follows the student
 
-Explore is curiosity-led traversal, next to the guided tale. `#mode=explore` opens it, and
-it is the landing surface.
+Explore is curiosity-led traversal, next to the guided tale. `#mode=explore` opens it, and it
+is the landing surface.
 
-A student never sees a section whole. The material arrives in the order a student can
-actually take it:
+There is **one** input. It takes a guess, a question, a half-thought or a complaint. It is the
+response box and the curiosity box at the same time, because for a student they are the same
+act. Nothing demands a complete answer and nothing enforces a minimum length.
 
-1. **The foundation first.** Every concept has `builtOn` words. The most connected one that
-   the student has not seen becomes the opening step, shown in the reveal box with its own
-   one-sentence definition and a question: *say what it means, in your own words*. Two ways
-   forward: answer and continue, or `Go deeper on this first` to descend into that concept's
-   own ladder.
-2. **One piece at a time.** The teaching section is split into its written blocks (a
-   paragraph, a callout, a figure). One block appears, with one question. The answer is what
-   unlocks the next block. No count, no preview, no list of what is coming.
-3. **One thing revealed.** At the end, the same box offers exactly one next concept, with
-   `Open it` and `Not that one`.
+What happens after they write:
 
-All three use the same blue reveal box, so the pattern reads as one voice.
+1. `/api/thread` reads the message against the concept on screen and returns one decision:
+   `next` (show the next piece), `simpler` (go back a level), `switch` (they asked about a
+   different idea, with its term), or `none`.
+2. The reader content is revealed **in the order it is discovered**. A section is never shown
+   whole: each piece appears when the student has earned it, and stays on screen above the
+   box, so the page grows into the content they have uncovered.
+3. The reply is one short sentence. It never states the explanation and never praises. The
+   model may answer a substantive guess with a question instead of new content, which is
+   often the better move.
 
-### Where the pieces come from
+### Starting simple
 
-`npm run toc` reads `assets/toc.js` and the chapter files and writes
-`src/data/concepts.generated.json`:
+Every concept has `builtOn` words. When one opens, the first line names the most connected
+idea underneath it, and `Go back to <term>` is always available under the box. If a student
+says they are lost at the first piece, the ladder descends to that idea rather than
+repeating.
 
-- every glossary term with its definition,
-- `builtOn` and `leadsTo`, derived with the same plural and exclusion rules as
-  `assets/glossary-map.js`,
-- the section that first teaches it.
+### Where it comes from
+
+`npm run toc` writes `src/data/concepts.generated.json` from `assets/toc.js` and the chapter
+files: every glossary term, its `builtOn` and `leadsTo` edges (same plural and exclusion rules
+as `assets/glossary-map.js`), and the section that first teaches it.
 
 `/api/ladder?term=` returns the concept, its prerequisite, that section split into ordered
-blocks, and the single next concept. Blocks come from `splitBlocks` in `extract.ts`, which
-walks top-level elements rather than guessing at paragraph boundaries.
+blocks, and one next concept. `splitBlocks` in `extract.ts` walks top-level elements, so a
+callout or figure is never cut in half.
 
-Two rules keep a word from pointing at the wrong place: sections that list or check ideas
-(`overview`, `standards`, `targets`, `check`, `do-it`) are only used when no teaching section
-mentions the word, and a heading that names the word beats body text. Before that rule,
-"Food web" opened a page of "I can" statements.
+### Providers
 
-### What is not judged yet
+The same three as the tutor: `bank`, `ollama`, `deepseek`. The bank fallback judges by length
+and presence of a topic change; the model judges level and picks the move. Whether a model is
+worth its two seconds here is not yet measured — that is the next fixture set.
 
-`submitAnswer` checks only that the answer has a few content words. It does not judge
-whether the answer is *right*, so it cannot yet decide to re-explain instead of advancing.
+### Known gaps
 
-That is the next honest gap, and the tutor is the thing that closes it: classify the answer
-against the concept, and either advance, ask narrower, or drop to a prerequisite. Until then
-Explore is a ladder that respects pace but not correctness.
-
-### Asking in your own words
-
-The curiosity box routes free text deterministically: term-name matches weigh most,
-definition overlap needs two distinct words, and a question naming no term opens the section
-it is about. It returns nothing rather than a wrong answer. That routing is the weakest part
-and the clearest place for a model, to be measured against this baseline rather than
-replaced blind.
+- A `switch` reply may still define the new term before the ladder opens it.
+- `simpler` can produce a sentence that explains rather than points, which breaks the
+  no-answer rule. The prompt forbids it; the model does not always comply.
+- Nothing measures these yet. They belong in the fixture harness alongside the tutor.
 
 ## 13. Reading is pulled, never linked out
 

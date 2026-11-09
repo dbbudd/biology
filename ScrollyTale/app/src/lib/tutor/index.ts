@@ -1,5 +1,7 @@
 import type { Beat } from "../types";
+import type { ModelProvider } from "./complete";
 import { evaluate, pickBridge, pickMove } from "../pacing";
+import { SYSTEM, userMessage } from "./prompt";
 import { bankProvider } from "./bank";
 import { deepseekProvider } from "./deepseek";
 import { ollamaProvider } from "./ollama";
@@ -11,7 +13,7 @@ import {
   type TutorResult,
 } from "./types";
 
-const PROVIDERS: Record<string, TutorProvider> = {
+const PROVIDERS: Record<string, TutorProvider | ModelProvider> = {
   bank: bankProvider,
   ollama: ollamaProvider,
   deepseek: deepseekProvider,
@@ -19,7 +21,7 @@ const PROVIDERS: Record<string, TutorProvider> = {
 
 export const DEFAULT_PROVIDER = process.env.TUTOR_PROVIDER ?? "bank";
 
-export function providerFor(id?: string): TutorProvider {
+export function providerFor(id?: string): TutorProvider | ModelProvider {
   return PROVIDERS[id ?? DEFAULT_PROVIDER] ?? bankProvider;
 }
 
@@ -85,6 +87,8 @@ export async function decide(
     };
   }
 
+  if (!("complete" in provider)) return { decision: fallback, provider: "bank", latencyMs: 0, fellBack: true, error: "No model" };
+
   if (!(await provider.available())) {
     return {
       decision: fallback,
@@ -96,7 +100,10 @@ export async function decide(
   }
 
   try {
-    const raw = await provider.decide(input, beat);
+    const raw = (await (provider as ModelProvider).complete({
+      system: SYSTEM,
+      user: userMessage(input),
+    })) as Partial<TutorDecision>;
     return {
       decision: applyPolicy(coerce(raw, input, fallback), fallback),
       provider: provider.id,
@@ -113,6 +120,13 @@ export async function decide(
       error: error instanceof Error ? error.message : "The provider failed",
     };
   }
+}
+
+/** A model provider, or null when the configured one is the authored bank. */
+export function modelProvider(id?: string): ModelProvider | null {
+  const provider = providerFor(id);
+  if (!("complete" in provider)) return null;
+  return provider as ModelProvider;
 }
 
 export async function providerStatus() {
