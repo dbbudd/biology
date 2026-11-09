@@ -1059,3 +1059,227 @@ body {
   clip-path: inset(50%);
   white-space: nowrap;
 }
+
+/* ---------------- focus: depth panel ----------------
+   Focus reopens the second column for the panel that shows what the student has
+   uncovered and the one edge they are closest to. With Focus off, Explore keeps
+   its single 900px reading column. The rule is scoped to a wide screen so the
+   existing `max-width: 1000px` collapse still puts the panel under the stage,
+   and the guided branch keeps its own `.st-root.is-focus .st-main` layout. */
+
+@media (min-width: 1001px) {
+  .st-root.is-focus .st-main.is-explore {
+    max-width: 1240px;
+    grid-template-columns: minmax(0, 1fr) 360px;
+  }
+}
+
+.st-depth-slot { min-width: 0; }
+
+/* Sticky like the notebook column: a long thread scrolls under the panel
+   instead of dragging it off screen. Below 1001px it sits in the flow. */
+@media (min-width: 1001px) {
+  .st-depth-slot {
+    position: sticky;
+    top: 4.2rem;
+    max-height: calc(100vh - 5.5rem);
+    overflow-y: auto;
+  }
+}
+
+.st-depth {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg-surface);
+  color: var(--text);
+  padding: 1.1rem;
+  display: grid;
+  gap: 1rem;
+  font-size: 0.9rem;
+}
+
+.st-depth-block { display: grid; gap: 0.45rem; }
+
+/* The edge is the one thing the panel leads with: a 4px key-idea rule, the
+   sentence at reading size, the reason under it. The live region stays in the
+   tree when it is empty, so `:empty` removes the box without removing it from
+   the accessibility tree. */
+.st-depth-edge {
+  display: grid;
+  gap: 0.3rem;
+  border-left: 4px solid var(--border-accent);
+  background: var(--bg);
+  border-radius: 0 10px 10px 0;
+  padding: 0.7rem 0.8rem 0.75rem;
+}
+
+.st-depth-edge:empty { padding: 0; border: 0; background: none; }
+
+.st-depth-edge-head {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--border-accent);
+}
+
+.st-depth-edge-target { font-size: 1rem; font-weight: 600; line-height: 1.35; }
+
+.st-depth-edge-why { font-size: 0.85rem; line-height: 1.5; color: var(--text-secondary); }
+
+.st-depth-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.st-depth-count {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--text-secondary);
+}
+
+.st-depth-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.st-depth-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.2rem 0.5rem;
+  align-items: start;
+  border-left: 3px solid var(--border);
+  padding: 0.3rem 0 0.3rem 0.65rem;
+}
+
+.st-depth-row-depth { border-left-color: var(--text); }
+.st-depth-row-exhibiting { border-left-color: var(--border-tight); }
+.st-depth-row-developing { border-left-color: var(--border-example); }
+.st-depth-row-emerging { border-left-color: var(--border-guidance); }
+.st-depth-row-not-started { border-left-color: var(--border); }
+
+.st-depth-target { font-size: 0.9rem; line-height: 1.45; }
+
+.st-depth-row-not-started .st-depth-target { color: var(--text-secondary); }
+
+/* Band chips. Every pair of text and background was checked at 4.5 : 1 or
+   better in all three themes: not started is muted but readable, and the two
+   strongest bands are told apart by fill and by weight, not by hue alone. */
+.st-depth-band {
+  justify-self: end;
+  white-space: nowrap;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  padding: 0.1rem 0.45rem;
+  border-radius: 9999px;
+  border: 1px solid var(--border-strong);
+  background: var(--bg);
+  color: var(--text);
+}
+
+.st-depth-band-not-started {
+  background: var(--bg-sunken);
+  color: var(--text-secondary);
+  border-style: dashed;
+  border-color: var(--border-strong);
+  font-weight: 600;
+}
+
+.st-depth-band-emerging { background: var(--bg-guidance); border-color: var(--border-guidance); }
+.st-depth-band-developing { background: var(--bg-example); border-color: var(--border-example); }
+.st-depth-band-exhibiting { background: var(--bg-tight); border-color: var(--border-tight); }
+
+/* The strongest band inverts the theme: the text color becomes the chip and the
+   page background becomes its ink. Both tokens are themed, so it stays the
+   highest treatment in light, sepia and dark without naming a raw color. */
+.st-depth-band-depth {
+  background: var(--text);
+  border-color: var(--text);
+  color: var(--bg);
+}
+
+.st-depth-evidence {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: 0.15rem;
+  margin-top: 0.1rem;
+}
+
+.st-depth-evidence-label {
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.st-depth-quotes {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.2rem;
+}
+
+.st-depth-quotes q { font-size: 0.85rem; font-style: italic; color: var(--text); }
+
+.st-depth-not-yet {
+  margin-top: 0.15rem;
+  border-top: 1px solid var(--border);
+  padding-top: 0.5rem;
+}
+
+.st-depth-not-yet > summary {
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+  list-style-position: inside;
+}
+
+.st-depth-not-yet > summary:focus-visible {
+  outline: 2px solid var(--border-guidance);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.st-depth-not-yet .st-depth-list { margin-top: 0.5rem; }
+
+.st-depth-honest { font-size: 0.72rem; line-height: 1.5; color: var(--text-secondary); }
+
+.st-depth-quiet { font-size: 0.78rem; line-height: 1.5; color: var(--text-secondary); }
+
+.st-depth-fail { border-left: 3px solid var(--border-example); padding-left: 0.6rem; }
+
+.st-depth-terms {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.st-depth-term-row {
+  display: grid;
+  gap: 0.05rem;
+  border-left: 3px solid var(--border);
+  padding-left: 0.65rem;
+}
+
+.st-depth-term { font-size: 0.9rem; font-weight: 600; line-height: 1.4; }
+
+.st-depth-where { font-size: 0.75rem; line-height: 1.45; color: var(--text-secondary); }

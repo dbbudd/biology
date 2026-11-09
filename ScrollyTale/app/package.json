@@ -8,6 +8,7 @@
     "start": "next start -p 3000",
     "lint": "eslint",
     "toc": "node scripts/extract-toc.mjs",
+    "targets": "node scripts/extract-targets.mjs",
     "fixtures": "node scripts/run-fixtures.mjs",
     "reader": "python3 -m http.server 4321 --directory ../.."
   },

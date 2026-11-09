@@ -1,0 +1,774 @@
+{
+  "generatedBy": "scripts/extract-targets.mjs",
+  "units": [
+    {
+      "unit": "u1",
+      "source": "u1-overview",
+      "groups": [
+        {
+          "heading": "Develop and use a model",
+          "standard": "HS-LS1-2",
+          "targets": [
+            {
+              "text": "I can describe the characteristics of a living thing.",
+              "at": [
+                "u1-what-is-alive#alive"
+              ],
+              "kind": null
+            },
+            {
+              "text": "I can describe the hierarchy of organization from atom to organism related to functions carried out in organisms.",
+              "at": [
+                "u1-what-is-alive#hierarchy"
+              ],
+              "kind": null
+            },
+            {
+              "text": "I can explain how different components (tissues, muscles, organs) of the digestive system interact to achieve the digestion of food and absorption of nutrients.",
+              "at": [
+                "u1-digestion#structure",
+                "u1-digestion#chemistry"
+              ],
+              "kind": null
+            },
+            {
+              "text": "I can cite various interactions between the digestive system and other body systems.",
+              "at": [
+                "u1-systems-together#systems",
+                "u1-systems-together#routes"
+              ],
+              "kind": null
+            },
+            {
+              "text": "I can distinguish between the accuracy of a model and the actual body systems and functions it represents.",
+              "at": [
+                "u1-what-is-alive#models"
+              ],
+              "kind": null
+            },
+            {
+              "text": "I can translate data from a graph into a table.",
+              "at": [
+                "u1-investigation#data"
+              ],
+              "kind": null
+            },
+            {
+              "text": "I can model energy and matter inputs/outputs in a living organism and describe the processes involved (metabolism).",
+              "at": [
+                "u1-molecules#energy"
+              ],
+              "kind": "cc"
+            },
+            {
+              "text": "I can model the digestive tract and describe the processes.",
+              "at": [
+                "u1-digestion#structure"
+              ],
+              "kind": "cc"
+            },
+            {
+              "text": "I can use a model (e.g., physical, mathematical, computer models) to simulate systems and interactions within and between systems at different scales.",
+              "at": [
+                "u1-what-is-alive#models",
+                "u1-surface-area#ratio"
+              ],
+              "kind": "cc"
+            },
+            {
+              "text": "Given new data and evidence, I can develop a model to illustrate the relationships between systems or components of a system.",
+              "at": [
+                "u1-surface-area#ratio",
+                "u1-surface-area#consequences"
+              ],
+              "kind": "sep"
+            }
+          ]
+        },
+        {
+          "heading": "Plan and conduct an investigation",
+          "standard": "HS-LS1-3",
+          "targets": [
+            {
+              "text": "I can explain homeostasis and how it ensures survival.",
+              "at": [
+                "u1-homeostasis#what"
+              ],
+              "kind": null
+            },
+            {
+              "text": "I can describe negative homeostatic feedback mechanisms using digestion as an example.",
+              "at": [
+                "u1-homeostasis#negative"
+              ],
+              "kind": null
+            },
+            {
+              "text": "I can describe positive homeostatic feedback mechanisms using childbirth contractions, vomiting, sneezing, blood clotting as examples.",
+              "at": [
+                "u1-homeostasis#positive"
+              ],
+              "kind": null
+            },
+            {
+              "text": "I can manipulate variables to alter the body mass of a human through diet and exercise.",
+              "at": [
+                "u1-investigation#bodymass"
+              ],
+              "kind": null
+            },
+            {
+              "text": "I can plan and conduct an investigation to produce data to serve as the basis for evidence, and in the design: decide on types, how much, and accuracy of data needed to produce reliable measurements and consider limitations on the precision of the data (number of trials, time, data collection methods), and refine the design accordingly.",
+              "at": [
+                "u1-investigation#design",
+                "u1-investigation#limits"
+              ],
+              "kind": "sep"
+            },
+            {
+              "text": "I can explain that feedback (negative or positive) can stabilize or destabilize a system.",
+              "at": [
+                "u1-homeostasis#loop"
+              ],
+              "kind": "cc"
+            }
+          ]
+        },
+        {
+          "heading": "Construct and revise an explanation",
+          "standard": "HS-LS1-6",
+          "targets": [
+            {
+              "text": "I can describe the basic structure and functions of carbohydrates, lipids, proteins, and nucleic acids.",
+              "at": [
+                "u1-molecules#four"
+              ],
+              "kind": null
+            },
+            {
+              "text": "I can analyze the breakdown of glucose and the use of the individual atoms in creating other essential carbon based molecules.",
+              "at": [
+                "u1-molecules#atoms"
+              ],
+              "kind": null
+            },
+            {
+              "text": "I can construct and revise an explanation based on valid and reliable evidence obtained from a variety of sources (including students’ own investigations, models, theories, simulations, peer review).",
+              "at": [
+                "u1-molecules#tests",
+                "u1-molecules#atoms"
+              ],
+              "kind": "sep"
+            },
+            {
+              "text": "I can describe changes of energy and matter in a system in terms of energy and matter flows into, out of, and within that system.",
+              "at": [
+                "u1-molecules#energy"
+              ],
+              "kind": "cc"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "unit": "u2",
+      "source": "u2-overview",
+      "groups": [
+        {
+          "heading": "Energy, matter and the bonds between",
+          "standard": null,
+          "targets": [
+            {
+              "text": "I can differentiate between energy and matter.",
+              "at": [
+                "u2-energy-matter#two-things"
+              ],
+              "kind": null
+            },
+            {
+              "text": "I can explain the idea of bond energy and differentiate between types of energy.",
+              "at": [
+                "u2-energy-matter#kinds",
+                "u2-energy-matter#bonds"
+              ],
+              "kind": null
+            },
+            {
+              "text": "I can develop a model to illustrate transformations of energy and cycling of matter.",
+              "at": [
+                "u2-energy-matter#do-it",
+                "u2-photosynthesis#do-it",
+                "u2-carbon-cycle#do-it"
+              ],
+              "kind": null
+            },
+            {
+              "text": "I can explain that energy cannot be created or destroyed; it only moves between one place and another place, between objects and/or fields, or between systems.",
+              "at": [
+                "u2-energy-matter#conservation",
+                "u2-food-webs#ninety"
+              ],
+              "kind": "cc"
+            }
+          ]
+        },
+        {
+          "heading": "Cellular respiration",
+          "standard": "HS-LS1-7",
+          "targets": [
+            {
+              "text": "I can explain the importance of glucose.",
+              "at": [
+                "u2-respiration#fate"
+              ],
+              "kind": null
+            },
+            {
+              "text": "I can state the inputs and outputs of cellular respiration.",
+              "at": [
+                "u2-respiration#what-it-is",
+                "u2-fermentation#two-ways"
+              ],
+              "kind": null
+            },
+            {
+              "text": "I can describe cellular respiration using the chemical formula to show the inputs and outputs.",
+              "at": [
+                "u2-respiration#what-it-is",
+                "u2-respiration#stages"
+              ],
+              "kind": null
+            },
+            {
+              "text": "I can describe the role of mitochondria in carrying out cell respiration.",
+              "at": [
+                "u2-respiration#mitochondrion"
+              ],
+              "kind": null
+            },
+            {
+              "text": "I can explain that breaking chemical bonds and creating new bonds to form new compounds results in energy transfer.",
+              "at": [
+                "u2-energy-matter#bonds",
+                "u2-respiration#atp"
+              ],
+              "kind": null
+            },
+            {
+              "text": "I can develop a model based on evidence to illustrate the relationships between systems or components of a system.",
+              "at": [
+                "u2-photosynthesis#do-it",
+                "u2-respiration#do-it",
+                "u2-fermentation#oxygen-evidence",
+                "u2-carbon-cycle#do-it"
+              ],
+              "kind": "sep"
+            }
+          ]
+        },
+        {
+          "heading": "Energy through a food web",
+          "standard": "HS-LS2-4",
+          "targets": [
+            {
+              "text": "I can describe the movement of energy within a food web, justify the amount available at each trophic level.",
+              "at": [
+                "u2-food-webs#ninety",
+                "u2-food-webs#pyramid"
+              ],
+              "kind": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "unit": "u3",
+      "source": "u3-overview",
+      "groups": [
+        {
+          "heading": "Populations, ceilings and calculations",
+          "standard": "HS-LS2-1",
+          "targets": [
+            {
+              "text": "I can differentiate between exponential and logistic growth.",
+              "at": [
+                "u3-growth#jcurve",
+                "u3-carrying-capacity#k"
+              ],
+              "kind": null
+            },
+            {
+              "text": "I can describe multiple factors that affect the carrying capacity of an ecosystem.",
+              "at": [
+                "u3-carrying-capacity#k",
+                "u3-carrying-capacity#two-kinds"
+              ],
+              "kind": null
+            },
+            {
+              "text": "I can use calculations to identify changes in populations.",
+              "at": [
+                "u3-reading-data#percent-change",
+                "u3-reading-data#rates"
+              ],
+              "kind": null
+            },
+            {
+              "text": "I can analyze the effects on populations of density-dependent and density-independent factors.",
+              "at": [
+                "u3-carrying-capacity#two-kinds",
+                "u3-carrying-capacity#data"
+              ],
+              "kind": null
+            },
+            {
+              "text": "I can interpret a population graph and determine the possible cause and effect relationships shown in graphical data.",
+              "at": [
+                "u3-reading-data#cycles",
+                "u3-reading-data#cause-effect"
+              ],
+              "kind": null
+            },
+            {
+              "text": "I can recognize proportional relationships between different quantities as scales change, using math (trends, averages, histograms, graphs) of ecosystem factors to identify changes over time in the numbers and types of organisms in ecosystems of different scales.",
+              "at": [
+                "u3-reading-data#scale"
+              ],
+              "kind": "cc"
+            },
+            {
+              "text": "I can analyze results from a computational simulation.",
+              "at": [
+                "u3-growth#lab",
+                "u3-carrying-capacity#sandbox",
+                "u3-change#cascade"
+              ],
+              "kind": "sep"
+            }
+          ]
+        },
+        {
+          "heading": "Stability, change and new ecosystems",
+          "standard": "HS-LS2-6",
+          "targets": [
+            {
+              "text": "I can explain how factors like hunting, seasonal flooding, sea level rise and volcanic eruptions will affect communities in an ecosystem.",
+              "at": [
+                "u3-reading-data#whales",
+                "u3-food-webs#pull",
+                "u3-change#borneo",
+                "u3-succession#two-kinds"
+              ],
+              "kind": null
+            },
+            {
+              "text": "I can evaluate or predict impacts of an invasive species to an ecosystem.",
+              "at": [
+                "u3-change#invasives"
+              ],
+              "kind": null
+            },
+            {
+              "text": "I can explain the process of ecological succession and analyze the factors that cause succession.",
+              "at": [
+                "u3-succession#what",
+                "u3-succession#two-kinds"
+              ],
+              "kind": null
+            },
+            {
+              "text": "I can analyze conditions that affect stability and factors that control rates of change in natural systems.",
+              "at": [
+                "u3-food-webs#competition",
+                "u3-change#new-ecosystem"
+              ],
+              "kind": "cc"
+            },
+            {
+              "text": "I can evaluate and critique established scientific claims, evidence and reasoning.",
+              "at": [
+                "u3-reading-data#cause-effect",
+                "u3-food-webs#paine",
+                "u3-change#cascade"
+              ],
+              "kind": "sep"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "unit": "u4",
+      "source": "u4-overview",
+      "groups": [
+        {
+          "heading": "Cell division and mitosis",
+          "standard": "HS-LS1-4",
+          "targets": [
+            {
+              "text": "I can name and describe the stages of mitosis.",
+              "at": [
+                "u4-mitosis#stages"
+              ],
+              "kind": null
+            },
+            {
+              "text": "I can identify cells in the various stages of mitosis.",
+              "at": [
+                "u4-mitosis#lab"
+              ],
+              "kind": null
+            },
+            {
+              "text": "I can describe controls of the cell cycle and its relationship to cancer.",
+              "at": [
+                "u4-cell-cycle-cancer#checkpoints",
+                "u4-cell-cycle-cancer#cancer"
+              ],
+              "kind": null
+            }
+          ]
+        },
+        {
+          "heading": "Building and maintaining an organism",
+          "standard": "HS-LS1-4, HS-LS1-2",
+          "targets": [
+            {
+              "text": "I can differentiate between sexual and asexual reproduction, and describe the benefits of each.",
+              "at": [
+                "u4-reproduction-modes#two-ways",
+                "u4-reproduction-modes#verdict"
+              ],
+              "kind": null
+            },
+            {
+              "text": "I can explain stem cells and the process of cell differentiation and specialization.",
+              "at": [
+                "u4-differentiation#differentiation",
+                "u4-differentiation#stem"
+              ],
+              "kind": null
+            },
+            {
+              "text": "I can compare the structure and function of the human male and female reproductive systems.",
+              "at": [
+                "u4-gametogenesis#anatomy"
+              ],
+              "kind": null
+            }
+          ]
+        },
+        {
+          "heading": "Meiosis and new genetic combinations",
+          "standard": "HS-LS3-2",
+          "targets": [
+            {
+              "text": "I can differentiate mitosis and meiosis in terms of purpose, number of divisions, and characteristics of the resulting cells.",
+              "at": [
+                "u4-meiosis#compare"
+              ],
+              "kind": null
+            },
+            {
+              "text": "I can describe the ways in which new genetic combinations are created through meiosis.",
+              "at": [
+                "u4-variation#crossing",
+                "u4-variation#assortment",
+                "u4-variation#fertilisation"
+              ],
+              "kind": null
+            }
+          ]
+        },
+        {
+          "heading": "Feedback and homeostasis",
+          "standard": "HS-LS1-3",
+          "targets": [
+            {
+              "text": "I can use a model to explain how negative feedback between hormones maintains homeostasis in the reproductive and growth systems.",
+              "at": [
+                "u4-feedback#hpg",
+                "u4-feedback#growth"
+              ],
+              "kind": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "unit": "u5",
+      "source": "u5-overview",
+      "groups": [
+        {
+          "heading": "Structure of DNA and proteins",
+          "standard": "HS-LS1-1",
+          "targets": [
+            {
+              "text": "I can analyse the structure and function of DNA and evaluate how DNA's structure dictates how it is copied and how it is expressed.",
+              "at": [
+                "u5-dna-structure#pairing",
+                "u5-dna-structure#replication"
+              ],
+              "kind": null
+            },
+            {
+              "text": "I can illustrate the overall flow of genetic information from DNA to RNA to protein and where each process occurs in the cell, including transcription, post-transcriptional processes and translation. (The Central Dogma)",
+              "at": [
+                "u5-central-dogma#dogma",
+                "u5-central-dogma#transcription",
+                "u5-central-dogma#translation"
+              ],
+              "kind": null
+            },
+            {
+              "text": "I can model the flow of DNA to RNA to protein given a section of DNA with an accompanying amino acid chart.",
+              "at": [
+                "u5-central-dogma#do-it",
+                "u5-central-dogma#code-table"
+              ],
+              "kind": null
+            },
+            {
+              "text": "I can construct an explanation of the idea that regions of coding DNA are called genes.",
+              "at": [
+                "u5-dna-structure#nesting"
+              ],
+              "kind": null
+            }
+          ]
+        },
+        {
+          "heading": "DNA, chromosomes and inherited traits",
+          "standard": "HS-LS3-1",
+          "targets": [
+            {
+              "text": "I can illustrate the overall flow of genetic information from DNA to RNA to protein and where each process occurs in the cell.",
+              "at": [
+                "u5-central-dogma#dogma"
+              ],
+              "kind": null
+            },
+            {
+              "text": "I can distinguish between dominant and recessive traits in terms of homozygous and heterozygous alleles.",
+              "at": [
+                "u5-mendel#vocabulary",
+                "u5-mendel#molecular"
+              ],
+              "kind": null
+            }
+          ]
+        },
+        {
+          "heading": "Where genetic variation comes from",
+          "standard": "HS-LS3-2",
+          "targets": [
+            {
+              "text": "I can explain and apply Mendel's laws of genetics (the law of segregation, the law of independent assortment and the law of dominance) to meiosis.",
+              "at": [
+                "u5-mendel#laws",
+                "u4-meiosis#walkthrough",
+                "u4-variation#assortment"
+              ],
+              "kind": null
+            },
+            {
+              "text": "I can predict changes in DNA, RNA or amino acid sequence as a consequence of point and frameshift mutations (e.g. sickle cell anaemia).",
+              "at": [
+                "u5-mutations#types",
+                "u5-mutations#sickle"
+              ],
+              "kind": null
+            },
+            {
+              "text": "I can explain how some viruses, such as HIV (a retrovirus), can change a cell's DNA.",
+              "at": [
+                "u5-mutations#viruses"
+              ],
+              "kind": null
+            }
+          ]
+        },
+        {
+          "heading": "Probability and the distribution of traits",
+          "standard": "HS-LS3-3",
+          "targets": [
+            {
+              "text": "I can analyse and interpret data to predict the outcome of crossing organisms with specific phenotypes and/or genotypes using Punnett squares, for both Mendelian and non-Mendelian traits: incomplete dominance, codominance, multiple alleles, pleiotropy, polygenic inheritance and sex linkage.",
+              "at": [
+                "u5-mendel#punnett",
+                "u5-beyond-mendel#explore"
+              ],
+              "kind": null
+            },
+            {
+              "text": "I can analyse and interpret data found in family pedigrees for inheritance patterns, including genetic disorders caused by a single gene (e.g. haemophilia, colour blindness).",
+              "at": [
+                "u5-pedigrees-environment#pedigrees",
+                "u5-pedigrees-environment#detective"
+              ],
+              "kind": null
+            },
+            {
+              "text": "I can evaluate the effects the environment (stress, diet, behaviour, toxins) has on traits, considering epigenetics.",
+              "at": [
+                "u5-pedigrees-environment#environment"
+              ],
+              "kind": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "unit": "u6",
+      "source": "u6-overview",
+      "groups": [
+        {
+          "heading": "Evidence of common ancestry",
+          "standard": "HS-LS4-1",
+          "targets": [
+            {
+              "text": "I can analyse and identify patterns from multiple lines of evidence: fossil record, molecular biology, comparative anatomy, embryological development and biogeography.",
+              "at": [
+                "u6-common-ancestry#fossils",
+                "u6-common-ancestry#anatomy",
+                "u6-common-ancestry#embryology",
+                "u6-common-ancestry#molecular",
+                "u6-common-ancestry#biogeography"
+              ],
+              "kind": null
+            },
+            {
+              "text": "I can use reasoning to make connections between each line of evidence and the claims of common ancestry and biological evolution.",
+              "at": [
+                "u6-common-ancestry#the-claim",
+                "u6-common-ancestry#whats-next"
+              ],
+              "kind": null
+            },
+            {
+              "text": "I can create and interpret a cladogram showing how a group of organisms most likely diverged from a common ancestor.",
+              "at": [
+                "u6-common-ancestry#cladograms"
+              ],
+              "kind": null
+            }
+          ]
+        },
+        {
+          "heading": "Four factors of natural selection",
+          "standard": "HS-LS4-2",
+          "targets": [
+            {
+              "text": "I can identify the four factors that drive evolution.",
+              "at": [
+                "u6-natural-selection#four-factors"
+              ],
+              "kind": null
+            },
+            {
+              "text": "I can use a variety of evidence, past and present, to support that natural selection drives biological evolution.",
+              "at": [
+                "u6-natural-selection#antibiotic-resistance",
+                "u6-natural-selection#mussels"
+              ],
+              "kind": null
+            },
+            {
+              "text": "I can explain the cause-and-effect relationship between genetic variation, differential reproduction and survival, and the evolution of populations that express the trait.",
+              "at": [
+                "u6-natural-selection#vida",
+                "u6-natural-selection#randomness"
+              ],
+              "kind": null
+            }
+          ]
+        },
+        {
+          "heading": "Adaptation of populations",
+          "standard": "HS-LS4-3",
+          "targets": [
+            {
+              "text": "I can analyse and interpret data to explain the changes in the distribution of traits in a population over time.",
+              "at": [
+                "u6-trait-distributions#three-patterns",
+                "u6-trait-distributions#case-studies"
+              ],
+              "kind": null
+            }
+          ]
+        },
+        {
+          "heading": "Natural selection leads to adaptation",
+          "standard": "HS-LS4-4",
+          "targets": [
+            {
+              "text": "I can analyse the benefits of various plant and animal adaptations.",
+              "at": [
+                "u6-adaptation-speciation#adaptation"
+              ],
+              "kind": null
+            },
+            {
+              "text": "I can explain how natural selection results in organism adaptations.",
+              "at": [
+                "u6-adaptation-speciation#adaptation",
+                "u6-adaptation-speciation#convergent-divergent"
+              ],
+              "kind": null
+            },
+            {
+              "text": "I can synthesise evidence for how natural selection acts on specific biotic and abiotic differences in ecosystems, leading to change over time and the adaptation of populations.",
+              "at": [
+                "u6-adaptation-speciation#adaptation",
+                "u6-adaptation-speciation#convergent-divergent",
+                "u6-trait-distributions#argumentation"
+              ],
+              "kind": null
+            }
+          ]
+        },
+        {
+          "heading": "Environmental change, speciation and extinction",
+          "standard": "HS-LS4-5",
+          "targets": [
+            {
+              "text": "I can evaluate evidence of cause-and-effect relationships for how changes to the environment affect the distribution or extinction of traits in species.",
+              "at": [
+                "u6-environmental-change#three-outcomes",
+                "u6-environmental-change#norfolk-robins"
+              ],
+              "kind": null
+            },
+            {
+              "text": "I can analyse the effects of drought, flood, deforestation, use of fertilisers and overfishing on populations.",
+              "at": [
+                "u6-environmental-change#three-outcomes"
+              ],
+              "kind": null
+            },
+            {
+              "text": "I can explain how environmental factors can influence the ability of individuals of a species to survive and reproduce.",
+              "at": [
+                "u6-environmental-change#three-outcomes",
+                "u6-environmental-change#norfolk-robins"
+              ],
+              "kind": null
+            },
+            {
+              "text": "I can analyse the influence environmental changes have on the number of individuals in a species and the formation or extinction of species.",
+              "at": [
+                "u6-environmental-change#extinction",
+                "u6-adaptation-speciation#species"
+              ],
+              "kind": null
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -22,6 +22,7 @@ import {
 import { speak, speakSupported, stopSpeaking } from "../lib/speak";
 import Toolbar, { type Mode } from "./Toolbar";
 import Explore from "./Explore";
+import DepthPanel from "./DepthPanel";
 import BridgeCard from "./BridgeCard";
 import { Guide } from "./Guide";
 import { Notebook } from "./Notebook";
@@ -518,6 +519,16 @@ export default function TaleWorkspace({ tale, chapters }: Props) {
         )}
 
         {mode === "guided" && <Notebook state={state} onUnpark={unpark} onReset={reset} />}
+
+        {/* Focus opens what the student has uncovered and how far they have
+            moved. It is mounted rather than hidden: a hidden panel would still
+            query, and depth numbers should appear because the student asked for
+            them, not sit behind a class name. */}
+        {prefs.focus && (
+          <div className="st-depth-slot">
+            <DepthPanel />
+          </div>
+        )}
       </main>
     </div>
   );

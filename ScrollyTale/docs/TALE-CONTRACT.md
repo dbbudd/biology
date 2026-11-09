@@ -348,6 +348,37 @@ exactly those two, and Explore skips any move that sets it, because one box has 
 diagram to point at. A future pass should either rewrite those two moves so they stand alone or
 give Explore its own move set.
 
+### Focus: what you have uncovered
+
+Focus opens a side panel. It shows what the student has already walked through, and one edge to
+aim at. It never shows the course outline.
+
+The panel is mounted only while `prefs.focus` is true, and it unmounts rather than hides: a
+hidden panel would still query, and depth numbers should appear because the student asked for
+them.
+
+What it reads:
+
+- Explore mirrors the `student` lines and the concepts visited into `src/lib/uncovered.ts`
+  (`localStorage` key `bio_uncovered`, last 40 messages and 40 terms). The guide's replies and
+  the reader text are not the student's to claim, so they are not mirrored.
+- The panel POSTs those messages to `/api/focus` and renders the reply.
+- Targets come from `src/data/targets.generated.json`, written by `npm run targets` from the
+  `data-at` anchors in each chapter's learning-targets block. The reader stays the source of
+  truth, the same rule as `npm run toc`. 78 targets in 21 groups across 6 units; Unit 2 has 11
+  in 3 groups.
+- Bands are `bandFor(strength, nudges)` from `src/lib/pacing.ts`. That is the existing model, not
+  a new scale. A target is touched when a message contains one of its vocabulary words: the
+  `terms` of the sections it anchors to, plus the content words of the target itself.
+
+Two rules keep it honest. Depth is not reachable from one sentence: a target needs at least two
+touching messages before it can read Exhibiting with Depth, because one sentence can name both of
+a target's words and naming both words is not depth. And the same sentence sent twice counts
+once, so pressing send again cannot manufacture progress.
+
+The panel surfaces one edge, not a checklist. Targets not yet started sit behind a collapsed
+summary, so a student meets their own progress first.
+
 ### Starting simple
 
 Every concept has `builtOn` words. When one opens, the first line names the most connected
@@ -394,6 +425,14 @@ worth its two seconds here is not yet measured — that is the next fixture set.
 - Nothing measures these yet. They belong in the fixture harness alongside the tutor.
 - Explore announces guide replies through a polite live region, but newly revealed content
   blocks are not announced.
+- The Focus band is a heuristic over the student's vocabulary and the model's strength
+  judgement. It cannot see understanding. A student can use every word of a target and explain
+  nothing, and the panel would overstate them. The two guards above make overstatement harder,
+  not impossible.
+- `/api/focus` does not verify that the reported messages came from the same session, because
+  this build has no session identity. A caller can post any messages it likes.
+- A second tab that mounts Explore with no thread overwrites the shared store, briefly blanking
+  the first tab's panel until its next write. `reset` does not clear `bio_uncovered`.
 - The authored step-1 figure gives away the answer the step asks for. Its caption states that
   the glass is a wall to matter and a window to energy, and the diagram labels the same
   conclusion. Explore now withholds it until the student has answered, and withholds the beat's

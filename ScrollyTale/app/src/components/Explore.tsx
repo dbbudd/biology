@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Move, Tale } from "../lib/types";
+import { writeUncovered } from "../lib/uncovered";
 
 interface Teaches {
   chapter: string;
@@ -207,6 +208,17 @@ export default function Explore({ tale }: { tale: Tale }) {
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
   }, [lines.length]);
+
+  /* Mirror what the student has opened and written into the Focus store. The
+     panel reads it; nothing here reads it back. Only the student's own
+     sentences travel: the guide's replies and the reader text are not theirs
+     to claim, and no strength is invented for a sentence no model judged. */
+  useEffect(() => {
+    writeUncovered({
+      terms: seen,
+      messages: lines.flatMap((line) => (line.kind === "student" ? [{ text: line.text }] : [])),
+    });
+  }, [seen, lines]);
 
   function pushBlock(index: number) {
     const block = ladder?.blocks[index];

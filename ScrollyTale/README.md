@@ -64,6 +64,20 @@ Three starter chips above the box fill in a sentence, so a student who does not 
 begin still has somewhere to put the first word. They fill the box and stop: the student
 sends.
 
+### Focus
+
+One click opens a side panel with two things: the concepts the student has actually opened,
+and the unit's Learning Targets with the band they have reached. It is not the course
+outline. It shows what is already theirs, plus the one edge they are closest to.
+
+Targets are extracted from each chapter's learning-targets block by `npm run targets`, the
+same rule as `npm run toc`: the reader stays the source of truth. Bands reuse `bandFor` from
+`src/lib/pacing.ts`. Depth cannot be reached from one sentence: a target needs at least two
+touching messages, and the same sentence sent twice counts once.
+
+The panel unmounts when Focus is off rather than hiding, so it only queries when a student
+asks for it.
+
 Movement through the lesson is not left to the model. `src/lib/tutor/guard.ts` answers the
 messages that can be judged by rule, before any provider is chosen, so they cost no network
 call:
