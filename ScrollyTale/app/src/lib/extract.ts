@@ -44,6 +44,63 @@ const BLOCKS: Record<ReaderBlock, { open: RegExp; tag: string }> = {
 /** Left out unless the step asks for it. */
 export const DEFAULT_OMIT: ReaderBlock[] = ["prompts", "check"];
 
+const VOID = new Set(["img", "br", "hr", "input", "source", "embed", "wbr", "col"]);
+
+export type BlockKind =
+  | "heading" | "text" | "callout" | "figure" | "table" | "list" | "details" | "other";
+
+export interface Block {
+  kind: BlockKind;
+  html: string;
+}
+
+/**
+ * Split a section into the pieces it is written in, so a step can show one at a
+ * time instead of 500 words at once.
+ */
+export function splitBlocks(html: string): Block[] {
+  const out: Block[] = [];
+  const tagRe = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi;
+  let depth = 0;
+  let start = -1;
+  let m: RegExpExecArray | null;
+
+  while ((m = tagRe.exec(html))) {
+    const name = m[1].toLowerCase();
+    const closing = m[0].startsWith("</");
+    const selfClosing = /\/>$/.test(m[0]) || VOID.has(name);
+
+    if (!closing && !selfClosing) {
+      if (depth === 0) start = m.index;
+      depth++;
+    } else if (closing) {
+      depth--;
+      if (depth === 0 && start >= 0) {
+        out.push(describe(html.slice(start, m.index + m[0].length)));
+        start = -1;
+      }
+    }
+    if (depth < 0) depth = 0;
+  }
+
+  if (start >= 0) out.push(describe(html.slice(start)));
+
+  return out.filter((b) => b.html.replace(/<[^>]+>/g, "").trim().length > 20);
+}
+
+function describe(html: string): Block {
+  const open = /^\s*<([a-z][a-z0-9]*)/i.exec(html)?.[1]?.toLowerCase() ?? "";
+  const before = html.slice(0, html.indexOf(">") + 1);
+  if (/^h[2-4]$/.test(open)) return { kind: "heading", html };
+  if (open === "figure") return { kind: "figure", html };
+  if (open === "table") return { kind: "table", html };
+  if (open === "ul" || open === "ol") return { kind: "list", html };
+  if (open === "details") return { kind: "details", html };
+  if (open === "div" && /callout/.test(before)) return { kind: "callout", html };
+  if (open === "p") return { kind: "text", html };
+  return { kind: "other", html };
+}
+
 export interface ExtractedSection {
   html: string;
   heading: string;

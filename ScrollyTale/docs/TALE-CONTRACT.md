@@ -237,61 +237,62 @@ The key is read in `deepseek.ts`, travels as an `authorization` header, is never
 a prompt, never logged, and is never sent to the browser. With no key the provider reports
 itself unavailable and the bank answers.
 
-## 12. Explore: one thing at a time
+## 12. Explore: start simple, build up
 
-Explore is curiosity-led traversal, next to the guided tale. `#mode=explore` opens it.
+Explore is curiosity-led traversal, next to the guided tale. `#mode=explore` opens it, and
+it is the landing surface.
 
-The student never sees what is coming. There is no chapter list, no step count and no
-menu of related ideas. Each screen shows:
+A student never sees a section whole. The material arrives in the order a student can
+actually take it:
 
-1. one concept and its definition,
-2. the reader section that teaches it, pulled inline,
-3. **one** thing revealed next, with a single `Open it` and a `Not that one`.
+1. **The foundation first.** Every concept has `builtOn` words. The most connected one that
+   the student has not seen becomes the opening step, shown in the reveal box with its own
+   one-sentence definition and a question: *say what it means, in your own words*. Two ways
+   forward: answer and continue, or `Go deeper on this first` to descend into that concept's
+   own ladder.
+2. **One piece at a time.** The teaching section is split into its written blocks (a
+   paragraph, a callout, a figure). One block appears, with one question. The answer is what
+   unlocks the next block. No count, no preview, no list of what is coming.
+3. **One thing revealed.** At the end, the same box offers exactly one next concept, with
+   `Open it` and `Not that one`.
 
-`Not that one` swaps the reveal for a different one. It never grows into a list.
+All three use the same blue reveal box, so the pattern reads as one voice.
 
-### Where the graph comes from
+### Where the pieces come from
 
-Nothing is written by hand and nothing calls a model. `npm run toc` reads
-`assets/toc.js` and the chapter files and writes `src/data/concepts.generated.json`:
+`npm run toc` reads `assets/toc.js` and the chapter files and writes
+`src/data/concepts.generated.json`:
 
 - every glossary term with its definition,
-- `builtOn` (words its definition uses) and `leadsTo` (words whose definitions use it),
-  derived with the same plural and exclusion rules as `assets/glossary-map.js`,
-- the section that first teaches it, taken from the chapter HTML.
+- `builtOn` and `leadsTo`, derived with the same plural and exclusion rules as
+  `assets/glossary-map.js`,
+- the section that first teaches it.
 
-The reader's own word map already does this in the browser. The generated file is the same
-derivation, precomputed, so the player and the book cannot disagree about what is related.
+`/api/ladder?term=` returns the concept, its prerequisite, that section split into ordered
+blocks, and the single next concept. Blocks come from `splitBlocks` in `extract.ts`, which
+walks top-level elements rather than guessing at paragraph boundaries.
 
-Two rules keep a term from pointing at the wrong place:
+Two rules keep a word from pointing at the wrong place: sections that list or check ideas
+(`overview`, `standards`, `targets`, `check`, `do-it`) are only used when no teaching section
+mentions the word, and a heading that names the word beats body text. Before that rule,
+"Food web" opened a page of "I can" statements.
 
-- Sections that list or check ideas (`overview`, `standards`, `targets`, `what-you-do`,
-  `check`, `do-it`) are only used when no teaching section mentions the word. A word in a
-  unit's learning targets has not been taught there.
-- A heading that names the word beats body text, which beats a listing section.
+### What is not judged yet
 
-### How the next thing is chosen
+`submitAnswer` checks only that the answer has a few content words. It does not judge
+whether the answer is *right*, so it cannot yet decide to re-explain instead of advancing.
 
-`chooseNext` scores the neighbours of the current word:
-
-- a word this definition leads to outranks one it is built on,
-- a word with a teaching section outranks one without, because a reveal should open
-  content rather than a bare definition,
-- words the student's own question touched outrank both.
-
-Visited words are never offered again.
+That is the next honest gap, and the tutor is the thing that closes it: classify the answer
+against the concept, and either advance, ask narrower, or drop to a prerequisite. Until then
+Explore is a ladder that respects pace but not correctness.
 
 ### Asking in your own words
 
-The curiosity box routes free text to a concept. Today that is deterministic: term-name
-matches weigh most, definition overlap only counts with two or more distinct words, and
-when no word matches at all the question is routed to the **section** it is about and the
-most central concept in that section is opened.
-
-It is honest about missing: a question about the sky returns nothing rather than a wrong
-answer. It is also the weakest part of Explore, and the clearest place for a model. The
-fixtures that will measure that do not exist yet; when they do, the model competes against
-this baseline rather than replacing it blind.
+The curiosity box routes free text deterministically: term-name matches weigh most,
+definition overlap needs two distinct words, and a question naming no term opens the section
+it is about. It returns nothing rather than a wrong answer. That routing is the weakest part
+and the clearest place for a model, to be measured against this baseline rather than
+replaced blind.
 
 ## 13. Reading is pulled, never linked out
 

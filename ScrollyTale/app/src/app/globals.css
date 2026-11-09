@@ -758,3 +758,86 @@ body {
 }
 
 .st-main.is-explore { grid-template-columns: minmax(0, 1fr); max-width: 900px; }
+
+/* ---------------- micro-steps ---------------- */
+.st-micro-lead {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin-bottom: 1rem !important;
+}
+
+.st-micro-bar {
+  display: block;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--border);
+  margin-bottom: 1.1rem;
+  overflow: hidden;
+}
+
+.st-micro-bar > span {
+  display: block;
+  height: 100%;
+  background: var(--border-guidance);
+  border-radius: 2px;
+  transition: width 220ms ease;
+}
+
+.st-micro {
+  border-left: 3px solid var(--border);
+  padding-left: 1rem;
+  margin-bottom: 1.4rem;
+}
+
+.st-micro p:last-child { margin-bottom: 0; }
+
+.st-micro-ask {
+  border: 1px solid var(--border-guidance);
+  background: var(--bg-guidance);
+  border-radius: 10px;
+  padding: 1rem 1.1rem 1.1rem;
+}
+
+.st-micro-ask label {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+}
+
+.st-micro-ask textarea {
+  width: 100%;
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  padding: 0.6rem 0.8rem;
+  resize: vertical;
+}
+
+.st-micro-ask textarea:focus { outline: 2px solid var(--border-guidance); outline-offset: 1px; }
+
+.st-micro-nudge {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-top: 0.5rem !important;
+}
+
+.st-micro-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-top: 0.8rem;
+}
+
+.st-micro-actions button {
+  font: inherit;
+  font-size: 0.9rem;
+  border-radius: 8px;
+  padding: 0.5rem 1.1rem;
+  cursor: pointer;
+  border: 1px solid transparent;
+}

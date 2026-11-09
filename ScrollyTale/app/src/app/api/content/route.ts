@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { DEFAULT_OMIT, loadSection, type ReaderBlock } from "../../../lib/extract";
+import { DEFAULT_OMIT, loadSection, splitBlocks, type ReaderBlock } from "../../../lib/extract";
 import { CHAPTERS } from "../../../data/toc.generated";
 
 /** Only chapters the reader's own table of contents already lists may be read. */
@@ -28,6 +28,14 @@ export async function GET(request: Request) {
 
   try {
     const section = await loadSection(chapter.file, sectionId, omit);
+    if (searchParams.get("blocks") === "1") {
+      return NextResponse.json({
+        chapter: chapter.title,
+        sectionId,
+        heading: section.heading,
+        blocks: splitBlocks(section.html),
+      });
+    }
     return NextResponse.json({ chapter: chapter.title, sectionId, ...section });
   } catch (error) {
     return NextResponse.json(

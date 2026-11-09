@@ -225,6 +225,32 @@ function matchSection(words: string[], joined: string): SectionRecord | null {
   return best.section;
 }
 
+/**
+ * The one word this concept rests on that a student most likely does not have
+ * yet. Chosen by how connected it is, so the foundation comes before the detail.
+ */
+export function prerequisiteOf(term: string, seen: string[] = []): ConceptNode | null {
+  const key = LOWER.get(term.toLowerCase());
+  if (!key) return null;
+  const rec = TERMS[key];
+
+  const candidates = rec.builtOn
+    .filter((c) => c.toLowerCase() !== key.toLowerCase())
+    .filter((c) => !seen.some((s) => s.toLowerCase() === c.toLowerCase()))
+    .filter((c) => TERMS[c]?.teaches);
+
+  if (candidates.length === 0) return null;
+
+  const ranked = candidates
+    .map((c) => {
+      const r = TERMS[c];
+      return { c, degree: r.builtOn.length + r.leadsTo.length };
+    })
+    .sort((a, b) => b.degree - a.degree || a.c.localeCompare(b.c));
+
+  return node(ranked[0].c);
+}
+
 export function termCount(): number {
   return KEYS.length;
 }
