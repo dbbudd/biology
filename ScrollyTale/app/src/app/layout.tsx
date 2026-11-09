@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
+// The reading position bars, the reference routes and the translate panel each
+// keep their own stylesheet, so the shell is one import list, not one long file.
+import "./globals-reading.css";
+import "./globals-reference.css";
+import "./globals-translate.css";
 
 export const metadata: Metadata = {
   title: "ScrollyTale · The Sealed Garden",

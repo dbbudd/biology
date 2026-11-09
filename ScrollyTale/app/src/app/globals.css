@@ -944,7 +944,10 @@ body {
 
 .st-composer {
   position: sticky;
-  bottom: 0.75rem;
+  /* The reading bar is fixed at the foot of the viewport and is 2rem tall, so
+     the composer's own inset has to clear it. Measured: at 0.75rem the bar cut
+     20px off the bottom of the box while the student was mid-scroll. */
+  bottom: calc(0.75rem + 2rem);
   background: var(--bg);
   border: 1px solid var(--border);
   border-radius: 12px;
@@ -1283,3 +1286,209 @@ body {
 .st-depth-term { font-size: 0.9rem; font-weight: 600; line-height: 1.4; }
 
 .st-depth-where { font-size: 0.75rem; line-height: 1.45; color: var(--text-secondary); }
+
+/* ---------------- site chrome: toolbar, menu, footer ----------------
+   Ported from the reader's own chrome (assets/course.js, assets/course.css):
+   the menu toggle, the logo and the brand on the left, the working controls on
+   the right, the unit and reference routes in a slide-over, the reference
+   routes again at the foot. Same structure, same tokens; no second palette. */
+
+.st-toolbar-left { display: flex; align-items: center; gap: 0.7rem; min-width: 0; }
+
+.st-menu-toggle {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 2rem; height: 2rem; flex-shrink: 0; padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 6px;
+  background: transparent; color: #fff;
+  font: inherit; font-size: 1rem; line-height: 1; cursor: pointer;
+}
+
+.st-menu-toggle:hover { background: rgba(255, 255, 255, 0.14); }
+
+/* The logo keeps its 32px box before the image arrives, so nothing jumps. */
+.st-toolbar-logo {
+  display: block; width: 32px; height: 32px; flex-shrink: 0;
+  border-radius: 50%; background: #fff;
+}
+
+.st-menu-toggle:focus-visible,
+.st-text-toggle:focus-visible {
+  outline: 2px solid var(--yellow); outline-offset: 2px;
+}
+
+/* The reader's Text button holds size, font and theme in one panel. */
+.st-text-wrap { position: relative; }
+
+.st-text-toggle { font-weight: 600; }
+
+.st-aa-popover {
+  position: absolute; top: calc(100% + 0.5rem); right: 0; z-index: 40;
+  width: 262px; padding: 0.85rem; display: grid; gap: 0.7rem;
+  background: var(--bg-surface); color: var(--text);
+  border: 1px solid var(--border-strong); border-radius: 10px;
+  box-shadow: 0 12px 28px -14px rgba(0, 0, 0, 0.5);
+  text-align: left;
+}
+
+.st-aa-section { display: grid; gap: 0.35rem; }
+
+.st-aa-label {
+  font-size: 0.62rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.09em; color: var(--text-secondary);
+}
+
+.st-aa-row { display: flex; align-items: center; gap: 0.3rem; flex-wrap: wrap; }
+
+.st-aa-opt {
+  font: inherit; font-size: 0.78rem; line-height: 1.2;
+  padding: 0.28rem 0.55rem; border-radius: 6px; cursor: pointer;
+  border: 1px solid var(--border-strong); background: var(--bg); color: var(--text);
+  text-transform: capitalize;
+}
+
+.st-aa-opt:hover { background: var(--bg-sunken); }
+
+.st-aa-opt.is-on {
+  background: var(--navy); border-color: var(--navy); color: #fff; font-weight: 600;
+}
+
+.st-aa-opt:focus-visible {
+  outline: 2px solid var(--border-guidance); outline-offset: 2px;
+}
+
+.st-aa-size {
+  min-width: 2.6rem; text-align: center;
+  font-size: 0.75rem; color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------------- course menu (slide-over) ---------------- */
+
+.st-scrim {
+  position: fixed; inset: 0; z-index: 45;
+  padding: 0; border: 0;
+  background: rgba(0, 0, 0, 0.45);
+  cursor: pointer;
+}
+
+.st-menu {
+  position: fixed; top: 0; left: 0; bottom: 0; z-index: 46;
+  width: min(19rem, 84vw);
+  display: flex; flex-direction: column;
+  padding: 1rem 0 0;
+  background: var(--bg-surface); color: var(--text);
+  border-right: 1px solid var(--border-strong);
+  box-shadow: 0 0 40px -12px rgba(0, 0, 0, 0.5);
+  overflow-y: auto;
+  transform: translateX(-100%);
+  visibility: hidden;
+  transition: transform 0.25s ease, visibility 0s linear 0.25s;
+}
+
+.st-menu.is-open {
+  transform: translateX(0);
+  visibility: visible;
+  transition: transform 0.25s ease;
+}
+
+.st-menu-head {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 0.75rem; padding: 0.35rem 1rem 0.6rem;
+}
+
+.st-menu-head .st-menu-label { padding: 0; }
+
+.st-menu-label {
+  padding: 0 1rem 0.3rem;
+  font-size: 0.62rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.09em; color: var(--text-secondary);
+}
+
+.st-menu-close {
+  flex-shrink: 0; width: 1.75rem; height: 1.75rem; padding: 0;
+  border: 1px solid var(--border-strong); border-radius: 6px;
+  background: var(--bg); color: var(--text);
+  font: inherit; font-size: 1rem; line-height: 1; cursor: pointer;
+}
+
+.st-menu-close:hover { background: var(--bg-sunken); }
+
+.st-menu-list { list-style: none; margin: 0; padding: 0; display: grid; }
+
+/* `.st-root a` sets the guidance colour on every anchor; a menu row is a label
+   first, so the panel states its own colour and keeps 4.5 : 1 in sepia, where
+   the guidance green does not. */
+.st-menu .st-menu-link {
+  display: block; width: 100%;
+  padding: 0.45rem 1rem 0.45rem calc(1rem - 3px);
+  border-left: 3px solid transparent;
+  color: var(--text); text-decoration: none;
+  font-size: 0.92rem; line-height: 1.35;
+}
+
+.st-menu .st-menu-link:hover { background: var(--bg-sunken); text-decoration: none; }
+
+.st-menu .st-menu-link.is-current {
+  border-left-color: var(--border-guidance);
+  background: var(--bg-guidance);
+  font-weight: 650;
+}
+
+.st-menu-link:focus-visible,
+.st-menu-close:focus-visible {
+  outline: 2px solid var(--border-guidance); outline-offset: -2px;
+}
+
+/* Pinned to the foot, as the reader pins its lookup tools. */
+.st-menu-reference {
+  margin-top: auto; padding-bottom: 0.9rem;
+  border-top: 1px solid var(--border);
+}
+
+.st-menu-reference .st-menu-label { margin-top: 0.75rem; }
+
+/* ---------------- footer ---------------- */
+
+/* The reading-position bar is fixed at the foot of the screen, so the last
+   line of the page clears it instead of hiding behind it. */
+.st-page { padding-bottom: 2.5rem; }
+
+.st-footer {
+  margin-top: 3rem;
+  border-top: 1px solid var(--border);
+  background: var(--bg-surface);
+}
+
+.st-footer-inner {
+  max-width: 1240px; margin: 0 auto;
+  padding: 1rem 1.5rem 1.35rem;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1rem; flex-wrap: wrap;
+}
+
+.st-footer-unit { font-size: 0.78rem; color: var(--text-secondary); }
+
+.st-footer-nav { display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap; }
+
+.st-footer-nav a {
+  color: var(--text);
+  font-size: 0.78rem; font-weight: 600;
+  text-decoration: underline; text-underline-offset: 2px;
+}
+
+.st-footer-nav a:hover { color: var(--text); }
+
+.st-footer-nav a:focus-visible {
+  outline: 2px solid var(--border-guidance); outline-offset: 2px;
+}
+
+@media (max-width: 700px) {
+  .st-header { padding: 0.5rem 1rem; }
+  .st-toolbar-left { flex: 1 1 auto; overflow: hidden; }
+  .st-aa-popover { width: 250px; right: -0.5rem; }
+  .st-footer-inner { padding: 0.9rem 1rem 1.1rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .st-menu, .st-menu.is-open { transition: none; }
+}

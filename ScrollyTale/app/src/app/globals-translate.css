@@ -1,0 +1,142 @@
+/* Translate control and its popover.
+
+   The trigger reuses the app's own `.st-tool` class for colour, shape and size,
+   so it sits in the toolbar exactly like Focus and Listen do; the toolbar is
+   always navy in all three themes, so those colours are not theme-dependent.
+   Everything new below is themed with the existing custom properties.
+
+   The one value that is not a token is the popover shadow, which DESIGN.md
+   specifies as `0 8px 24px rgba(0, 0, 0, 0.25)` for floating panels. It is
+   decoration, not text, so it carries no contrast requirement. */
+
+.st-tr-root {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.st-tr-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+/* Yellow, because the trigger sits on the navy toolbar where the reader's own
+   controls use a yellow focus ring. */
+.st-tr-trigger:focus-visible {
+  outline: 2px solid var(--yellow);
+  outline-offset: 2px;
+}
+
+.st-tr-icon { display: inline-flex; }
+.st-tr-icon svg { display: block; }
+
+.st-tr-panel {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  z-index: 30;
+  width: 20rem;
+  max-width: calc(100vw - 2rem);
+  display: grid;
+  gap: 0.6rem;
+  padding: 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg-surface);
+  color: var(--text);
+  text-align: left;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.st-tr-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.st-tr-field {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.st-tr-row {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+}
+
+.st-tr-select {
+  flex: 1 1 9rem;
+  min-width: 0;
+  font: inherit;
+  font-size: 0.85rem;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  padding: 0.35rem 0.5rem;
+}
+
+.st-tr-select:focus-visible {
+  outline: 2px solid var(--border-guidance);
+  outline-offset: 2px;
+}
+
+.st-tr-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font: inherit;
+  font-size: 0.82rem;
+  padding: 0.4rem 0.85rem;
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.st-tr-btn:focus-visible {
+  outline: 2px solid var(--border-guidance);
+  outline-offset: 2px;
+}
+
+.st-tr-back { justify-self: start; }
+
+/* Three classes plus the element beat the dark theme's `.st-primary` rule, so
+   an inactive button keeps the app's own disabled pair in every theme. */
+.st-tr-root button.st-tr-btn:disabled {
+  background: var(--disabled-bg);
+  color: var(--disabled-text);
+  border-color: var(--border);
+  cursor: default;
+}
+
+.st-tr-status {
+  font-size: 0.8rem;
+  line-height: 1.5;
+  min-height: 1.5em;
+  color: var(--text-secondary);
+}
+
+.st-tr-note {
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+/* On a phone the toolbar wraps, so an anchored popover would run off the edge.
+   Pin it under the toolbar and let it use the width instead. */
+@media (max-width: 640px) {
+  .st-tr-panel {
+    position: fixed;
+    top: 3.8rem;
+    left: 1rem;
+    right: 1rem;
+    width: auto;
+    max-width: none;
+  }
+}

@@ -1,0 +1,198 @@
+/* The reader's two progress indicators, drawn for the tale.
+   The thin page bar sits under the header; the position bar sits at the foot of
+   the page. Both are fixed, so neither takes a place in the page's layout.
+
+   Every colour comes from the app's own tokens, with the DESIGN.md value as a
+   fallback so the bars are still themed if they are mounted outside .st-root.
+   Contrast for every pair is checked in all three themes; the numbers are in
+   the component's report. */
+
+.st-readbar,
+.st-progress-bar.st-read-progress {
+  --rb-bg: var(--bg, #ffffff);
+  --rb-text: var(--text, #1a1a1a);
+  --rb-text-2: var(--text-secondary, #555555);
+  --rb-line: var(--border, #e0e0e0);
+  --rb-fill: var(--border-accent, #aa272f);
+  --rb-sunken: var(--bg-sunken, #f2f2f2);
+  --rb-guide: var(--border-guidance, #14509e);
+}
+
+.st-readbar[data-theme="sepia"],
+.st-progress-bar.st-read-progress[data-theme="sepia"] {
+  --rb-bg: var(--bg, #f5edd6);
+  --rb-text: var(--text, #3e2f1c);
+  --rb-text-2: var(--text-secondary, #6b5b45);
+  --rb-line: var(--border, #d4c6a8);
+  --rb-fill: var(--border-accent, #a04040);
+  --rb-sunken: var(--bg-sunken, #e8dfca);
+}
+
+.st-readbar[data-theme="dark"],
+.st-progress-bar.st-read-progress[data-theme="dark"] {
+  --rb-bg: var(--bg, #121212);
+  --rb-text: var(--text, #e0e0e0);
+  --rb-text-2: var(--text-secondary, #a0a0a0);
+  --rb-line: var(--border, #333333);
+  --rb-fill: var(--border-accent, #e08b90);
+  --rb-sunken: var(--bg-sunken, #1a1a1a);
+}
+
+/* ---------------- page bar ---------------- */
+/* The app already has a .st-progress-bar, the toolbar's small course meter, so
+   every rule here is doubled up on .st-read-progress to outrank it whatever
+   order the two stylesheets load in. */
+.st-progress-bar.st-read-progress {
+  position: fixed;
+  left: 0;
+  right: 0;
+  /* Replaced with the measured header edge as soon as the header exists. */
+  top: 48px;
+  z-index: 25;
+  display: block;
+  width: auto;
+  height: 3px;
+  border-radius: 0;
+  background: var(--rb-line);
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.st-read-progress-fill {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: var(--rb-fill);
+  transition: width 0.1s linear;
+}
+
+/* ---------------- position bar ---------------- */
+.st-readbar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 25;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  height: 2rem;
+  padding: 0 1rem;
+  background: var(--rb-bg);
+  border-top: 1px solid var(--rb-line);
+  color: var(--rb-text-2);
+  font-family: var(--body-font, 'Segoe UI', system-ui, -apple-system, sans-serif);
+  font-size: 0.72rem;
+  line-height: 1.4;
+}
+
+/* The concept being read, on the left, as the reader puts the section there. */
+.st-readbar-section {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 600;
+  color: var(--rb-text);
+}
+
+.st-readbar-progress {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.st-readbar-label,
+.st-readbar-pct {
+  white-space: nowrap;
+}
+
+.st-readbar-pct {
+  min-width: 2.2em;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.st-readbar-track {
+  display: block;
+  width: 80px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--rb-line);
+  overflow: hidden;
+}
+
+.st-readbar-fill {
+  display: block;
+  width: 0;
+  height: 100%;
+  border-radius: 2px;
+  background: var(--rb-fill);
+  transition: width 0.15s linear;
+}
+
+/* The one way out of the tale, in the reader's own place for it. */
+.st-readbar-link {
+  color: var(--rb-text);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  white-space: nowrap;
+  padding: 0.1rem 0.45rem;
+  border-radius: 9999px;
+}
+
+.st-readbar-link:hover {
+  background: var(--rb-sunken);
+}
+
+.st-readbar-link:focus-visible {
+  outline: 2px solid var(--rb-guide);
+  outline-offset: 2px;
+}
+
+/* Read aloud, never shown. */
+.st-readbar-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* The reader drops its bar and its label on a phone rather than the reading
+   position itself; the page bar above still carries the number. */
+@media (max-width: 640px) {
+  .st-readbar {
+    padding: 0 0.7rem;
+    font-size: 0.68rem;
+  }
+
+  .st-readbar-label,
+  .st-readbar-track {
+    display: none;
+  }
+
+  .st-readbar-section {
+    max-width: 45%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .st-read-progress-fill,
+  .st-readbar-fill {
+    transition: none;
+  }
+}
+
+@media print {
+  .st-readbar,
+  .st-progress-bar.st-read-progress {
+    display: none !important;
+  }
+}

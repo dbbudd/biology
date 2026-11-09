@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { Bridge, Commit, Move, Tale, TaleState } from "../lib/types";
 import { bandFor, budgetFor, evaluate, pickBridge, pickMove } from "../lib/pacing";
 import { loadState, latestCommit, saveState } from "../lib/notebook";
@@ -21,6 +21,9 @@ import {
 } from "../lib/prefs";
 import { speak, speakSupported, stopSpeaking } from "../lib/speak";
 import Toolbar, { type Mode } from "./Toolbar";
+import SiteMenu from "./SiteMenu";
+import SiteFooter from "./SiteFooter";
+import ReadingBar from "./ReadingBar";
 import Explore from "./Explore";
 import DepthPanel from "./DepthPanel";
 import BridgeCard from "./BridgeCard";
@@ -58,6 +61,13 @@ export default function TaleWorkspace({ tale, chapters }: Props) {
   } | null>(null);
   const [progress, setProgress] = useState({ done: 0, total: 0, chaptersStarted: 0, chapters: 0 });
   const [done, setDone] = useState<Record<string, Record<string, boolean>>>({});
+  // The course menu is the reader's sidebar as a slide-over: one panel, opened
+  // from the header, holding the unit and the reference routes.
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement | null>(null);
+
+  const toggleMenu = useCallback(() => setMenuOpen((open) => !open), []);
+  const closeMenu = useCallback(() => setMenuOpen(false), []);
 
   const refreshProgress = useCallback(() => {
     setProgress(unitProgress(chapters));
@@ -370,11 +380,25 @@ export default function TaleWorkspace({ tale, chapters }: Props) {
         listening={listening}
         listenAvailable={speakSupported()}
         progress={progress}
+        menuOpen={menuOpen}
+        onMenuToggle={toggleMenu}
+        menuButtonRef={menuButtonRef}
         onTheme={chooseTheme}
         onFont={chooseFont}
         onScale={chooseScale}
         onFocus={toggleFocus}
         onListen={toggleListen}
+      />
+
+      {/* The reader's page bar and reading-position bar, drawn once for the
+          whole shell and measured from this page's own scroll. */}
+      <ReadingBar />
+
+      <SiteMenu
+        open={menuOpen}
+        onClose={closeMenu}
+        unit={tale.subtitle}
+        toggleRef={menuButtonRef}
       />
 
       <div className="st-progress" aria-hidden="true">
@@ -388,6 +412,9 @@ export default function TaleWorkspace({ tale, chapters }: Props) {
         ))}
       </div>
 
+      {/* The menu is modal while it is open, so everything it covers is inert:
+          nothing behind the scrim takes a tab stop or a screen reader. */}
+      <div className="st-page" inert={menuOpen}>
       <main className={`st-main${mode === "explore" ? " is-explore" : ""}`}>
         {mode === "explore" ? (
           <section className="st-stage" id="st-stage">
@@ -530,6 +557,9 @@ export default function TaleWorkspace({ tale, chapters }: Props) {
           </div>
         )}
       </main>
+
+      <SiteFooter unit={tale.subtitle} />
+      </div>
     </div>
   );
 }
