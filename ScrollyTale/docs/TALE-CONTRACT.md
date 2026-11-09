@@ -237,10 +237,10 @@ The key is read in `deepseek.ts`, travels as an `authorization` header, is never
 a prompt, never logged, and is never sent to the browser. With no key the provider reports
 itself unavailable and the bank answers.
 
-## 12. Explore: one box, content that follows the student
+## 12. Explore: the whole interface
 
-Explore is curiosity-led traversal, next to the guided tale. `#mode=explore` opens it, and it
-is the landing surface.
+Explore is the interface, not a surface beside one. A session opens on the unit's phenomenon,
+and the guided tale is no longer a second mode a student chooses.
 
 There is **one** input. It takes a guess, a question, a half-thought or a complaint. It is the
 response box and the curiosity box at the same time, because for a student they are the same
@@ -258,6 +258,46 @@ What happens after they write:
 3. The reply is one short sentence. It never states the explanation and never praises. The
    model may answer a substantive guess with a question instead of new content, which is
    often the better move.
+
+### Opening on the phenomenon
+
+The phenomenon is fetched, not retyped. Explore reads the beat-0 `source` section through
+`/api/content?chapter=u2-overview&section=anchor&blocks=1&omit=…` and prints the driving
+question as the page headline above it. A failed fetch falls back to the phenomenon paragraph
+in the tale, so the case is never missing.
+
+Only the **story** is shown before the first answer: the first two text blocks. The section
+also carries a summary figure whose caption states the answer outright ("the glass is a wall
+to matter and a window to energy"), and whose labels name the same conclusion. A student is
+being asked what they think before any of that is taught, so the figure would answer the
+question they have not been asked yet. It sits one click away in the closed `The bottle`
+panel once they have answered. The beat's `helper` is withheld for the same reason: it ends
+by stating the answer. The opening asks only "Write what you think now. You will change it
+later."
+
+The first answer calls `/api/ladder?q=<their words>&candidates=<the phenomenon's concepts>`.
+`routeWithin` scores only that candidate list, never the whole glossary, because the door is one
+the author chose. Of the phenomenon's thirteen words, exactly two — `Energy` and `Matter` — are
+glossary nodes; the other eleven have none.
+
+A single word of definition overlap counts, so "water and air get recycled inside the bottle"
+opens `Matter` on the strength of `air` alone. An answer that overlaps neither definition
+opens `Energy`, the first candidate with teaching content, rather than inventing an inference
+the glossary cannot support.
+
+Both of those terms teach the same reader section, `u1-molecules` / `energy`, headed "Energy and
+matter, into and out of a body". So the first answer does not choose what the student reads
+first. It sets the idea the session is holding: the concept label, the strand offered next
+(`Anabolic` under `Energy`, `Biosphere` under `Matter`), and the vocabulary the guard and the
+tutor use afterwards. The reading they get is the one that separates the two ideas, which is a
+fair landing place after a first thought like "the soil feeds it".
+
+Scoring puts the concept's name above definition overlap, and one word of overlap is enough, so
+"water and air get recycled" opens `Matter`. An answer that matches nothing opens the first
+strand with teaching content, which is `Energy` — the fallback for "the soil feeds it". The
+restriction is still the point: unrestricted routing was measured sending "the sun shines in and
+the plant grows" to `Cell`, because a generic biology word outscored the idea the unit means to
+open first.
 
 ### How the decision is made
 
@@ -286,6 +326,27 @@ cannot reload the page under the student and erase the conversation.
 `stay` exists because an acknowledgement is not evidence. Before it, `ok` returned `next` and
 advanced the lesson on a non-answer.
 
+### The arc without a menu
+
+The seven authored beats are no longer a sequence a student walks. Their moves are what the tutor
+says when the student stalls, so the teaching arc survives without being a second interface.
+
+The drop point is a checkpoint into that arc:
+
+```
+checkpoint = min(distinct concepts visited - 1, beats - 1)   # floored at 0
+```
+
+A `stay` or `none` reply draws its line from that beat's `moves`: the `empty` move when nothing
+was written, then the `thin` move, then the first usable one. A student who has opened two
+strands is nudged the way step 3 would have nudged them.
+
+Those moves were written for the guided steps, and two assume that step's own widget is on the
+page: the tracker move on beat 1 ("Complete one row first, then answer.") and the arrows move on
+beat 2 ("Name the four arrows before you answer."). `Move` carries `needsWidget?: boolean` for
+exactly those two, and Explore skips any move that sets it, because one box has no table or
+diagram to point at. A future pass should either rewrite those two moves so they stand alone or
+give Explore its own move set.
 
 ### Starting simple
 
@@ -321,9 +382,23 @@ worth its two seconds here is not yet measured — that is the next fixture set.
   `src/data/concepts.generated.json`, so `what is photosynthesis` reaches the model and any
   `switch` to it would be coerced back to `stay`. That is a data gap in `assets/toc.js`, not a
   guard bug.
+- The phenomenon's authored vocabulary and the glossary disagree. Of `light`, `energy`, `matter`,
+  `carbon`, `water`, `air`, `cycle`, `recycl`, `photosynthesis`, `respiration`, `atom`, `oxygen`
+  and `heat`, only `Energy` and `Matter` are glossary terms, so a student cannot be routed to
+  photosynthesis, carbon, water, oxygen, atom or heat. Those two also teach the same section, so
+  the authored two-strand vocabulary still yields one reading. That is a data gap in
+  `assets/toc.js`.
+- The checkpoint advances on distinct concepts visited. That is a heuristic about the shape of
+  the conversation, not a measurement of understanding: a student can visit three terms and
+  explain none of them.
 - Nothing measures these yet. They belong in the fixture harness alongside the tutor.
 - Explore announces guide replies through a polite live region, but newly revealed content
   blocks are not announced.
+- The authored step-1 figure gives away the answer the step asks for. Its caption states that
+  the glass is a wall to matter and a window to energy, and the diagram labels the same
+  conclusion. Explore now withholds it until the student has answered, and withholds the beat's
+  `helper` for the same reason. The guided path still renders both at step 1, so the same
+  giveaway is unaddressed there, and the fix belongs in the content, not in the player.
 
 
 ## 13. Reading is pulled, never linked out

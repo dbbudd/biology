@@ -107,6 +107,7 @@ export const sealedGardenTale: Tale = {
           id: "ask-mass-test",
           when: "empty",
           say: "Complete one row first, then answer. Matter has mass. Energy has no mass.",
+          needsWidget: true,
         },
         {
           id: "ask-bond",
@@ -176,6 +177,7 @@ export const sealedGardenTale: Tale = {
           id: "ask-direction",
           when: "empty",
           say: "Name the four arrows before you answer. The direction of an arrow shows which way the material or the energy travels.",
+          needsWidget: true,
         },
         {
           id: "ask-carrier",

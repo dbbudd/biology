@@ -45,9 +45,10 @@ export default function TaleWorkspace({ tale, chapters }: Props) {
   const [bridge, setBridge] = useState<Bridge | null>(null);
   const [bridgeCovered, setBridgeCovered] = useState<string[]>([]);
   const [tutorMove, setTutorMove] = useState<Move | null>(null);
-  // Explore first: a student should meet ideas before a structure. The guided
-  // path stays one click away, and a shared #mode=guided or #beat= link still
-  // lands on the assessed steps.
+  // One surface: uncovering through questioning is the product, and the guided
+  // arc now lives inside Explore as the tutor's nudges. `mode` survives only as
+  // a URL escape hatch, so a shared #mode=guided or #beat= link still lands on
+  // the assessed steps for comparison during this experiment.
   const [mode, setMode] = useState<Mode>("explore");
   const [tutor, setTutor] = useState<{
     provider: string;
@@ -321,6 +322,16 @@ export default function TaleWorkspace({ tale, chapters }: Props) {
     setListening(false);
   }
 
+  /**
+   * Leave the comparison view. The guided steps are only reachable by URL now,
+   * so a student who lands on one needs one quiet way back: clear the #mode and
+   * #beat hash without a reload and hand them the single interface.
+   */
+  function backToExplore() {
+    setMode("explore");
+    window.history.replaceState(null, "", window.location.pathname + window.location.search);
+  }
+
   if (!state) {
     return (
       <div className="st-root" data-theme="light">
@@ -346,9 +357,11 @@ export default function TaleWorkspace({ tale, chapters }: Props) {
         Skip to the step
       </a>
 
+      {/* The Guided/Explore toggle used to sit here. One surface, because
+          uncovering through questioning is the product, and the guided arc
+          now lives inside Explore as the tutor's nudges. #mode=guided stays
+          as an escape hatch for comparison, never as a mode a student picks. */}
       <Toolbar
-        mode={mode}
-        onMode={setMode}
         theme={prefs.theme}
         font={prefs.font}
         scale={prefs.scale}
@@ -377,10 +390,13 @@ export default function TaleWorkspace({ tale, chapters }: Props) {
       <main className={`st-main${mode === "explore" ? " is-explore" : ""}`}>
         {mode === "explore" ? (
           <section className="st-stage" id="st-stage">
-            <Explore />
+            <Explore tale={tale} />
           </section>
         ) : (
         <section className="st-stage" id="st-stage">
+          <button type="button" className="st-composer-alt" onClick={backToExplore}>
+            Back to Explore
+          </button>
           {finished ? (
             <div className="st-finish">
               <h1>{tale.title}</h1>

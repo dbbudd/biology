@@ -762,6 +762,70 @@ body {
   font: inherit; font-size: 0.78rem; padding: 0.2rem 0.6rem; border-radius: 999px; cursor: pointer;
 }
 
+/* ---------------- explore: the origin ---------------- */
+/* The opening screen reads as the start of a story: the question, the case,
+   then the box. No panel and no form frame around the phenomenon. */
+.st-origin { margin-bottom: 1.6rem; }
+
+.st-origin .st-loading,
+.st-case .st-loading {
+  padding: 0.6rem 0;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+/* The plain-text case, shown only when the reader blocks cannot load. */
+.st-origin .st-origin-lead {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--text);
+  max-width: 66ch;
+}
+
+.st-origin-block { margin-bottom: 1rem; }
+.st-origin-block:last-child { margin-bottom: 0; }
+
+/* The case study stays on the page after a concept opens, closed by default.
+   The guidance border matches the reading blocks in the thread below it. */
+.st-case {
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--border-guidance);
+  border-radius: 8px;
+  background: var(--bg-surface);
+  padding: 0.6rem 0.95rem;
+  margin-bottom: 1.5rem;
+}
+
+.st-case summary {
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.st-case summary:hover { color: var(--text); }
+
+.st-case summary:focus-visible {
+  outline: 2px solid var(--border-guidance);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.st-case[open] summary { margin-bottom: 0.8rem; }
+.st-case .st-origin-block { margin-bottom: 0.9rem; }
+
+/* The driving question, kept small under the concept heading. The heading has
+   no margin of its own (`.st-root h1` wins over `.st-title`), so the gap is set
+   here instead of by a negative pull. */
+.st-explore .st-origin-question {
+  margin-top: 0.4rem;
+  margin-bottom: 1.3rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  max-width: 66ch;
+}
+
 .st-main.is-explore { grid-template-columns: minmax(0, 1fr); max-width: 900px; }
 
 /* ---------------- micro-steps ---------------- */

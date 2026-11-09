@@ -2,11 +2,10 @@
 
 import type { ReaderFont, ReaderTheme, UnitProgress } from "../lib/prefs";
 
+/** The two surfaces. The guided one is a URL escape hatch now, not a choice. */
 export type Mode = "guided" | "explore";
 
 interface Props {
-  mode: Mode;
-  onMode: (m: Mode) => void;
   theme: ReaderTheme;
   font: ReaderFont;
   scale: number;
@@ -29,8 +28,6 @@ const FONTS: { id: ReaderFont; label: string }[] = [
 ];
 
 export default function Toolbar({
-  mode,
-  onMode,
   theme,
   font,
   scale,
@@ -54,24 +51,6 @@ export default function Toolbar({
       </div>
 
       <div className="st-tools">
-        <div className="st-group" role="group" aria-label="Mode">
-          <button
-            type="button"
-            className={mode === "guided" ? "is-on" : undefined}
-            aria-pressed={mode === "guided"}
-            onClick={() => onMode("guided")}
-          >
-            Guided
-          </button>
-          <button
-            type="button"
-            className={mode === "explore" ? "is-on" : undefined}
-            aria-pressed={mode === "explore"}
-            onClick={() => onMode("explore")}
-          >
-            Explore
-          </button>
-        </div>
         <div className="st-progress-meter" title={`${progress.done} of ${progress.total} tracked sections in Unit 2`}>
           <span className="st-progress-bar">
             <span style={{ width: `${pct}%` }} />

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { chooseNext, node, prerequisiteOf, routeText } from "../../../lib/explore";
+import { chooseNext, node, prerequisiteOf, routeText, routeWithin } from "../../../lib/explore";
 import { DEFAULT_OMIT, loadSection, splitBlocks } from "../../../lib/extract";
 import { CHAPTERS } from "../../../data/toc.generated";
 
@@ -18,8 +18,20 @@ export async function GET(request: Request) {
     .map((s) => s.trim())
     .filter(Boolean)
     .slice(0, 40);
+  const candidates = (searchParams.get("candidates") ?? "")
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean);
 
-  const start = term ? node(term) : query ? routeText(query) : null;
+  // A first answer is routed inside the phenomenon's own vocabulary when the
+  // caller names it, so the door is one the author chose.
+  const start = term
+    ? node(term)
+    : query
+      ? candidates.length > 0
+        ? routeWithin(query, candidates)
+        : routeText(query)
+      : null;
   if (!start) {
     return NextResponse.json({ error: "No concept found" }, { status: 404 });
   }

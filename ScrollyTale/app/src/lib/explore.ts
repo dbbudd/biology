@@ -201,6 +201,69 @@ export function routeText(text: string): ConceptNode | null {
   return best ? node(best.key) : null;
 }
 
+/**
+ * One concept from a phenomenon's own vocabulary, for a student's first
+ * thought.
+ *
+ * The search is restricted to the authored candidate list on purpose. Measured
+ * against the live glossary, "the sun shines in and the plant grows" and "water
+ * and air get recycled inside the bottle" both routed to `Cell`, because a
+ * generic biology word outscored the idea the author meant to open first. A
+ * door the author did not choose is worse than no door, so an answer that
+ * matches nothing opens the first strand that has teaching content.
+ *
+ * Scoring mirrors routeText: naming the concept outranks overlapping its
+ * definition. Ties keep the earlier candidate, because the authored order is
+ * the teaching order.
+ */
+export function routeWithin(text: string, candidates: string[]): ConceptNode | null {
+  const list = [
+    ...new Set(
+      candidates
+        .map((c) => LOWER.get(c.trim().toLowerCase()))
+        .filter((c): c is string => Boolean(c)),
+    ),
+  ];
+  if (list.length === 0) return null;
+
+  const words = text
+    .toLowerCase()
+    .replace(/[^a-z0-9\s'-]/g, " ")
+    .split(/\s+/)
+    .filter((w) => w.length > 2 && !STOP.has(w));
+
+  let best: { key: string; score: number } | null = null;
+
+  if (words.length > 0) {
+    const joined = words.join(" ");
+
+    for (const key of list) {
+      const lower = key.toLowerCase();
+      let score = 0;
+
+      if (joined.includes(lower)) score += 12;
+
+      const nameWords = lower.split(/\s+/).filter((w) => w.length > 2 && !STOP.has(w));
+      score += nameWords.filter((w) => words.includes(w)).length * 6;
+
+      // A single distinctive word from the definition is real evidence, so the
+      // first overlap scores 2 and each further word 1. No stemming: a word the
+      // definition does not contain does not count.
+      const defWords = new Set(TERMS[key].definition.toLowerCase().split(/[^a-z]+/));
+      const overlap = words.filter((w) => defWords.has(w));
+      if (overlap.length > 0) score += overlap.length + 1;
+
+      // Strictly greater, so the earlier candidate wins a tie.
+      if (score > 0 && (!best || score > best.score)) best = { key, score };
+    }
+  }
+
+  if (best) return node(best.key);
+
+  const fallback = list.find((key) => TERMS[key]?.teaches) ?? list[0];
+  return node(fallback);
+}
+
 function matchSection(words: string[], joined: string): SectionRecord | null {
   let best: { section: SectionRecord; score: number } | null = null;
 

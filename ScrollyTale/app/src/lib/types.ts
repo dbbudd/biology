@@ -22,6 +22,12 @@ export interface Move {
   id: string;
   when: MoveWhen;
   say: string;
+  /**
+   * The move assumes this step's own widget is on the page, for example the
+   * tracker table or the arrows diagram. Explore has one box and no widgets, so
+   * it must not say "complete one row first" to a student who cannot see a row.
+   */
+  needsWidget?: boolean;
 }
 
 export interface SimRef {

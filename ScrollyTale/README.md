@@ -41,9 +41,24 @@ showing one beat in a demo.
 
 ## Explore
 
-Curiosity-led traversal beside the guided tale. One box takes any thought, and the reader
-content is revealed a piece at a time in the order the student discovers it. No chapter list,
-no step count, no menu of what is coming, and no minimum length on what they write.
+The interface. A session opens on the unit's phenomenon: the sealed bottle from 1960, with the
+question of what keeps the plant alive inside it. One box takes any thought the student has
+about it. No chapter list, no step count, no menu of what is coming, and no minimum length on
+what they write.
+
+Their first written thought sets which idea the session holds. The router is restricted to the
+phenomenon's own concept list rather than all 297 glossary terms, because that is the vocabulary
+the unit was written in: of `light`, `energy`, `matter`, `carbon`, `water`, `air`, `cycle`,
+`recycl`, `photosynthesis`, `respiration`, `atom`, `oxygen` and `heat`, only `Energy` and
+`Matter` are glossary terms, and both teach the same section, "Energy and matter, into and out
+of a body". The answer sets the label, the strand suggested next and the words the tutor uses,
+not which passage comes first. An unrestricted router was measured sending "the sun shines in
+and the plant grows" to `Cell`; a door the author did not choose is worse than no door.
+
+The case study stays available in a collapsed `The bottle` panel after that first answer.
+
+The seven authored beats are no longer a menu. Their moves are what the tutor says when the
+student stalls, so the teaching arc survives without being a second interface.
 
 Three starter chips above the box fill in a sentence, so a student who does not know how to
 begin still has somewhere to put the first word. They fill the box and stop: the student
@@ -73,7 +88,10 @@ hold, or to the concept already open, is coerced to `stay` rather than reloading
 npm run toc     # rebuilds the concept graph from assets/toc.js and chapters/
 ```
 
-Open it at `http://localhost:3000/#mode=explore`.
+Open it at `http://localhost:3000`.
+
+There is one interface. `#mode=guided` still opens the old step-by-step view for comparison, and
+a quiet `Back to Explore` link returns from it.
 
 ## The tutor
 
