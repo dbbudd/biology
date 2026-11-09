@@ -25,3 +25,9 @@ spfx/*/temp/
 spfx/*/release/
 spfx/*/sharepoint/solution/
 *.sppkg
+
+# Secrets. The tutor key is a server-only Vercel env var and must never be committed.
+# .env.example is checked in and carries names only, never values.
+.env
+.env.*
+!.env.example
