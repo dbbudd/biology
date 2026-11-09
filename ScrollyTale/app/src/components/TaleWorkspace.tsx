@@ -20,14 +20,15 @@ import {
   type ReaderTheme,
 } from "../lib/prefs";
 import { speak, speakSupported, stopSpeaking } from "../lib/speak";
-import Toolbar from "./Toolbar";
+import Toolbar, { type Mode } from "./Toolbar";
+import Explore from "./Explore";
 import BridgeCard from "./BridgeCard";
 import { Guide } from "./Guide";
 import { Notebook } from "./Notebook";
 import { ReaderTrail } from "./ReaderTrail";
 import ReaderSection from "./ReaderSection";
 import SimFrame from "./SimFrame";
-import type { TocChapter } from "../data/toc.u2.generated";
+import type { TocChapter } from "../data/toc.generated";
 
 interface Props {
   tale: Tale;
@@ -44,6 +45,7 @@ export default function TaleWorkspace({ tale, chapters }: Props) {
   const [bridge, setBridge] = useState<Bridge | null>(null);
   const [bridgeCovered, setBridgeCovered] = useState<string[]>([]);
   const [tutorMove, setTutorMove] = useState<Move | null>(null);
+  const [mode, setMode] = useState<Mode>("guided");
   const [tutor, setTutor] = useState<{
     provider: string;
     label: string;
@@ -60,6 +62,8 @@ export default function TaleWorkspace({ tale, chapters }: Props) {
   useEffect(() => {
     const loaded = loadState(tale.id);
     const params = new URLSearchParams(window.location.hash.slice(1));
+    // #explore opens the curiosity surface directly; a link a teacher can share.
+    if (params.get("mode") === "explore") setMode("explore");
     if (params.has("beat")) {
       const jump = Number(params.get("beat"));
       if (Number.isInteger(jump) && jump >= 0 && jump < tale.beats.length) {
@@ -340,6 +344,8 @@ export default function TaleWorkspace({ tale, chapters }: Props) {
       </a>
 
       <Toolbar
+        mode={mode}
+        onMode={setMode}
         theme={prefs.theme}
         font={prefs.font}
         scale={prefs.scale}
@@ -355,7 +361,7 @@ export default function TaleWorkspace({ tale, chapters }: Props) {
       />
 
       <div className="st-progress" aria-hidden="true">
-        {tale.beats.map((b, i) => (
+        {mode === "guided" && tale.beats.map((b, i) => (
           <span
             key={b.id}
             className={
@@ -365,7 +371,12 @@ export default function TaleWorkspace({ tale, chapters }: Props) {
         ))}
       </div>
 
-      <main className="st-main">
+      <main className={`st-main${mode === "explore" ? " is-explore" : ""}`}>
+        {mode === "explore" ? (
+          <section className="st-stage" id="st-stage">
+            <Explore />
+          </section>
+        ) : (
         <section className="st-stage" id="st-stage">
           {finished ? (
             <div className="st-finish">
@@ -485,8 +496,9 @@ export default function TaleWorkspace({ tale, chapters }: Props) {
 
           <ReaderTrail chapters={chapters} activeId={beat.source?.chapter} done={done} />
         </section>
+        )}
 
-        <Notebook state={state} onUnpark={unpark} onReset={reset} />
+        {mode === "guided" && <Notebook state={state} onUnpark={unpark} onReset={reset} />}
       </main>
     </div>
   );

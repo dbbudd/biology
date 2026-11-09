@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { DEFAULT_OMIT, loadSection, type ReaderBlock } from "../../../lib/extract";
-import { UNIT_2_CHAPTERS } from "../../../data/toc.u2.generated";
+import { CHAPTERS } from "../../../data/toc.generated";
 
 /** Only chapters the reader's own table of contents already lists may be read. */
 export async function GET(request: Request) {
@@ -8,7 +8,7 @@ export async function GET(request: Request) {
   const chapterId = searchParams.get("chapter") ?? "";
   const sectionId = searchParams.get("section") ?? "";
 
-  const chapter = UNIT_2_CHAPTERS.find((c) => c.id === chapterId);
+  const chapter = CHAPTERS.find((c) => c.id === chapterId);
   if (!chapter) {
     return NextResponse.json({ error: "Unknown chapter" }, { status: 404 });
   }

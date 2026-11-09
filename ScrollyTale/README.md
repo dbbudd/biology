@@ -39,6 +39,17 @@ showing one beat in a demo.
 - Course progress: a tracked section is ticked in `bio_progress` when the student works it,
   so the reader and the tale agree.
 
+## Explore
+
+Curiosity-led traversal beside the guided tale. One concept, the section that teaches it,
+and exactly one thing revealed next. No chapter list, no step count, no menu.
+
+```bash
+npm run toc     # rebuilds the concept graph from assets/toc.js and chapters/
+```
+
+Open it at `http://localhost:3000/#mode=explore`.
+
 ## The tutor
 
 Three providers behind one contract, chosen by `TUTOR_PROVIDER`:

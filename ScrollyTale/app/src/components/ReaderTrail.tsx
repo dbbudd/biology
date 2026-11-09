@@ -1,6 +1,6 @@
 "use client";
 
-import type { TocChapter } from "../data/toc.u2.generated";
+import type { TocChapter } from "../data/toc.generated";
 
 interface Props {
   chapters: TocChapter[];

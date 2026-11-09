@@ -237,7 +237,63 @@ The key is read in `deepseek.ts`, travels as an `authorization` header, is never
 a prompt, never logged, and is never sent to the browser. With no key the provider reports
 itself unavailable and the bank answers.
 
-## 12. Reading is pulled, never linked out
+## 12. Explore: one thing at a time
+
+Explore is curiosity-led traversal, next to the guided tale. `#mode=explore` opens it.
+
+The student never sees what is coming. There is no chapter list, no step count and no
+menu of related ideas. Each screen shows:
+
+1. one concept and its definition,
+2. the reader section that teaches it, pulled inline,
+3. **one** thing revealed next, with a single `Open it` and a `Not that one`.
+
+`Not that one` swaps the reveal for a different one. It never grows into a list.
+
+### Where the graph comes from
+
+Nothing is written by hand and nothing calls a model. `npm run toc` reads
+`assets/toc.js` and the chapter files and writes `src/data/concepts.generated.json`:
+
+- every glossary term with its definition,
+- `builtOn` (words its definition uses) and `leadsTo` (words whose definitions use it),
+  derived with the same plural and exclusion rules as `assets/glossary-map.js`,
+- the section that first teaches it, taken from the chapter HTML.
+
+The reader's own word map already does this in the browser. The generated file is the same
+derivation, precomputed, so the player and the book cannot disagree about what is related.
+
+Two rules keep a term from pointing at the wrong place:
+
+- Sections that list or check ideas (`overview`, `standards`, `targets`, `what-you-do`,
+  `check`, `do-it`) are only used when no teaching section mentions the word. A word in a
+  unit's learning targets has not been taught there.
+- A heading that names the word beats body text, which beats a listing section.
+
+### How the next thing is chosen
+
+`chooseNext` scores the neighbours of the current word:
+
+- a word this definition leads to outranks one it is built on,
+- a word with a teaching section outranks one without, because a reveal should open
+  content rather than a bare definition,
+- words the student's own question touched outrank both.
+
+Visited words are never offered again.
+
+### Asking in your own words
+
+The curiosity box routes free text to a concept. Today that is deterministic: term-name
+matches weigh most, definition overlap only counts with two or more distinct words, and
+when no word matches at all the question is routed to the **section** it is about and the
+most central concept in that section is opened.
+
+It is honest about missing: a question about the sky returns nothing rather than a wrong
+answer. It is also the weakest part of Explore, and the clearest place for a model. The
+fixtures that will measure that do not exist yet; when they do, the model competes against
+this baseline rather than replacing it blind.
+
+## 13. Reading is pulled, never linked out
 
 A student who leaves the tale to browse the reader leaves the inquiry. So the player never
 sends them there.
@@ -255,7 +311,7 @@ sends them there.
 
 Adding a new chapter to a tale does not add a copy of its text here. It adds a pointer.
 
-## 13. Branding and accessibility
+## 14. Branding and accessibility
 
 The tale is the same product as the reader, so it borrows rather than redraws.
 
@@ -277,7 +333,7 @@ declares the same tokens), rewrites `[data-theme]` rules to the player's root, a
 Not yet: Translate. The reader sends sentences to the on-device translator; the tale does
 not, so a translated step is a gap to close, not a claim to make.
 
-## 14. Course progress
+## 15. Course progress
 
 The reader stores progress as `bio_progress`, keyed chapter then section, for sections that
 opt in with `data-track`.
@@ -291,14 +347,14 @@ This is a deliberate reading of "do not overload `bio_progress`": tale state sta
 Nothing else is added to it. If that is the wrong call, the switch is one function in
 `src/lib/prefs.ts`.
 
-## 15. Not in this build
+## 16. Not in this build
 
 - No LLM call, no key, no `/api/tutor`.
 - No accounts, no server storage, no analytics.
 - No standards inference beyond the local word check, and no claim that a band is a grade.
 - No deployment. Both servers are local.
 
-## 16. Reader base URL
+## 17. Reader base URL
 
 `NEXT_PUBLIC_READER_BASE`, default `http://localhost:4321`.
 
