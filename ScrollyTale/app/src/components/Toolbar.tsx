@@ -110,7 +110,7 @@ export default function Toolbar({
           height={32}
         />
         <span className="st-brand">
-          <span className="st-mark">ScrollyTale</span>
+          <span className="st-mark">Biology</span>
           <span className="st-sub">Unit 2 · Energy flows and matter cycles</span>
         </span>
       </div>

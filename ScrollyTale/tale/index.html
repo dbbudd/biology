@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>What is a molecule? — Biology</title>
+  <meta name="description" content="Start with one molecule. Ask a question. Watch the Biology Reader assemble an answer." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip" href="#inquiry">Skip to the question</a>
+
+  <header class="top">
+    <p class="mark">Biology</p>
+    <p class="journey" id="journey">One molecule</p>
+    <div class="top-actions">
+      <button type="button" id="motion" aria-pressed="false">Pause motion</button>
+      <div class="themes" role="group" aria-label="Theme">
+        <button type="button" data-theme="light" aria-pressed="false">Light</button>
+        <button type="button" data-theme="sepia" aria-pressed="false">Sepia</button>
+        <button type="button" data-theme="dark" aria-pressed="true">Dark</button>
+      </div>
+    </div>
+  </header>
+
+  <canvas id="field" aria-hidden="true"></canvas>
+  <p class="fallback" id="fallback" hidden>This browser is not drawing the particle field. The question and the reader links below are the full story.</p>
+
+  <main class="inquiry" id="inquiry">
+    <form id="ask" autocomplete="off">
+      <label class="sr" for="prompt">Your question</label>
+      <input id="prompt" name="prompt" type="text" value="What is a molecule?" />
+      <button type="submit">Begin</button>
+    </form>
+    <p class="hint" id="hint">Press Enter. One molecule breaks open into the idea the reader already teaches.</p>
+
+    <section class="answer" id="answer" hidden aria-live="polite">
+      <p class="eyebrow" id="phase">From the reader</p>
+      <h1 id="title"></h1>
+      <p class="lead" id="lead"></p>
+      <p class="source">Source: <a id="source" href=""></a></p>
+      <div class="steps">
+        <button type="button" id="prev">Previous idea</button>
+        <p class="count" id="count"></p>
+        <button type="button" id="next">Next idea</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="note">
+    <p>Prototype. The words come from the Biology Reader. This page does not replace it, and it does not grade the question.</p>
+  </footer>
+
+  <script type="module" src="main.js"></script>
+</body>
+</html>
